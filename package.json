@@ -13,6 +13,11 @@
     "typescript:add": "sh typescript.sh"
   },
   "dependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/react": "^16.9.11",
+    "@types/react-native": "^0.60.22",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-test-renderer": "^16.9.1",
     "react": "16.8.1",
     "react-native": "0.61.3",
     "react-native-gesture-handler": "^1.5.0",
@@ -20,7 +25,8 @@
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-hooks": "^1.1.0",
-    "react-navigation-stack": "^1.10.3"
+    "react-navigation-stack": "^1.10.3",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
