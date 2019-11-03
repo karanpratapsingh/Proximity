@@ -20,10 +20,7 @@
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-hooks": "^1.1.0",
-    "react-navigation-stack": "^1.10.3",
-    "react-redux": "^7.1.1",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
