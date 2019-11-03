@@ -4,47 +4,56 @@ import { MaterialColors, Typography } from '../../theme';
 
 const IntroScreen = () => {
 
-    return (
-        <View style={styles.container}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.heading}>React Native Boilerplate</Text>
-                    <Text style={styles.body}>Robust boilerplate to kickstart your next app</Text>
-                </View>
-            </View>
-            <Text style={styles.item}>Redux <Text style={{ color: MaterialColors.green[400] }}>added</Text></Text>
-            <Text style={styles.item}>TypeScript <Text style={{ color: MaterialColors.blue[800] }}>Added</Text></Text>
+  const { FontWeights, FontSizes } = Typography;
+  return (
+    <View style={styles.container}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+        <View style={styles.headerContainer}>
+          <Text style={{ ...FontWeights.Bold, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Bold, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Bold, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Bold, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
+
+          <Text style={{ ...FontWeights.Regular, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Regular, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Regular, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Regular, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
+
+          <Text style={{ ...FontWeights.Light, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Light, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Light, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
+          <Text style={{ ...FontWeights.Light, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
         </View>
-    );
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    headerContainer: {
-        marginLeft: 10
-    },
-    logo: {
-        height: 64,
-        width: 64
-    },
-    heading: {
-        ...Typography.Body.light,
-        fontSize: 24
-    },
-    body: {
-        ...Typography.Body.light,
-        color: MaterialColors.grey[500],
-        fontSize: 16
-    },
-    item: {
-        ...Typography.Body.light,
-        marginTop: 10,
-        fontSize: 16
-    }
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  headerContainer: {
+    marginLeft: 10
+  },
+  logo: {
+    height: 64,
+    width: 64
+  },
+  heading: {
+    fontSize: 24,
+
+  },
+  body: {
+    color: MaterialColors.grey[600],
+    fontSize: 16,
+  },
+  item: {
+    marginTop: 10,
+    fontSize: 16
+  }
 });
 
 export default IntroScreen;

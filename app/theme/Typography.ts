@@ -5,38 +5,36 @@
  *        as required.
  */
 
-const Typography = {
-    Heading: {
-        bold: {
-            fontSize: 24,
-            fontFamily: 'SFProDisplay-Bold',
-            color: '#000'
-        },
-        semiBold: {
-            fontSize: 24,
-            fontFamily: 'SFProDisplay-SemiBold',
-            color: '#000'
-        }
-    },
-    Body: {
-        regular: {
-            fontSize: 20,
-            fontFamily: 'SFProDisplay-Regular',
-            color: '#000'
-        },
-        light: {
-            fontSize: 16,
-            fontFamily: 'SFProDisplay-Light',
-            color: '#000'
-        }
-    },
-    Caption: {
-        thin: {
-            fontSize: 12,
-            fontFamily: 'SFProDisplay-Thin',
-            color: '#000'
-        }
-    }
+const FontWeights = {
+  Bold: {
+    fontFamily: 'SFProDisplay-Bold',
+    color: '#000'
+  },
+  Regular: {
+    fontFamily: 'SFProDisplay-Regular',
+    color: '#000'
+  },
+  Light: {
+    fontFamily: 'SFProDisplay-Light',
+    color: '#000'
+  }
 };
+
+const FontSizes = {
+  Heading: {
+    fontSize: 32
+  },
+  SubHeading: {
+    fontSize: 24
+  },
+  Body: {
+    fontSize: 16
+  },
+  Caption: {
+    fontSize: 14
+  }
+};
+
+const Typography = { FontWeights, FontSizes };
 
 export default Typography;
