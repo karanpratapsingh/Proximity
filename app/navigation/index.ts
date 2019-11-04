@@ -1,12 +1,13 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { ProfileScreen } from '../screens';
 
-const StackNavigator = createStackNavigator({
+const StackNavigator = createBottomTabNavigator({
     ProfileScreen: {
         screen: ProfileScreen
     }
-}, { headerMode: 'none' });
+}, { });
 
 const AppNavigator = createAppContainer(StackNavigator);
 
