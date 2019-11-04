@@ -1,7 +1,13 @@
 import React, { useState, createContext, } from 'react';
 import { Theme } from '../../theme';
+import { ThemeColors } from '../../types';
 
-export const ThemeContext = createContext({} as any);
+type ThemeContextType = {
+  theme: ThemeColors,
+  toggleTheme: (type: string) => void
+};
+
+export const ThemeContext = createContext({} as ThemeContextType);
 
 export const ThemeContextProvider = props => {
   const [theme, setTheme] = useState(Theme.light.colors);

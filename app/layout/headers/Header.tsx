@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialColors, Typography } from '../../theme';
+import { ThemeContext } from '../../context/ThemeContext';
 
-const IntroScreen = () => {
+const { FontWeights, FontSizes } = Typography;
 
-  const { FontWeights, FontSizes } = Typography;
+const ProfileScreen: React.FC = () => {
+
+  const { theme } = useContext(ThemeContext);
   return (
-    <View style={styles.container}>
+    <View style={styles({}).headerContainer}>
       <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-        <View style={styles.headerContainer}>
-          <Text style={{ ...FontWeights.Bold, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Bold, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Bold, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Bold, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
+        <View style={styles({}).headerContainer}>
+          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
+          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
+          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
+          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
 
           <Text style={{ ...FontWeights.Regular, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
           <Text style={{ ...FontWeights.Regular, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
@@ -29,7 +32,7 @@ const IntroScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme = {}) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -56,4 +59,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IntroScreen;
+export default ProfileScreen;

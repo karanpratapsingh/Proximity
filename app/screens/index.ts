@@ -1,3 +1,3 @@
-import IntroScreen from './IntroScreen';
+import ProfileScreen from './ProfileScreen';
 
-export { IntroScreen };
+export { ProfileScreen };

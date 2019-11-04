@@ -2,6 +2,7 @@
  * App Colors:
  * This contains all the color config for the application
  */
+import { ThemeType } from '../types';
 
 export const Theme = {
   light: {
@@ -13,7 +14,7 @@ export const Theme = {
       text02: '#BBBBBB',
       search: '#F4F4F4'
     }
-  },
+  } as ThemeType,
   dark: {
     type: 'dark',
     colors: {
@@ -23,7 +24,7 @@ export const Theme = {
       text02: '#BBBBBB',
       search: '#F4F4F4'
     }
-  },
+  } as ThemeType,
 };
 
 /**
