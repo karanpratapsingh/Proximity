@@ -1,13 +1,30 @@
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { ProfileScreen } from '../screens';
+import {
+  HomeScreen,
+  ExploreScreen,
+  UploadScreen,
+  NotificationScreen,
+  ProfileScreen
+} from '../screens';
 
 const StackNavigator = createBottomTabNavigator({
-    ProfileScreen: {
-        screen: ProfileScreen
-    }
-}, { });
+  HomeScreen: {
+    screen: HomeScreen
+  },
+  ExploreScreen: {
+    screen: ExploreScreen
+  },
+  UploadScreen: {
+    screen: UploadScreen
+  },
+  NotificationScreen: {
+    screen: NotificationScreen
+  },
+  ProfileScreen: {
+    screen: ProfileScreen
+  },
+}, {});
 
 const AppNavigator = createAppContainer(StackNavigator);
 
