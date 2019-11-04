@@ -8,21 +8,23 @@ export const Theme = {
   light: {
     type: 'light',
     colors: {
-      accent: '#E24359',
+      accent: '#846BE2',
       base: '#FFFFFF',
       text01: '#000000',
       text02: '#BBBBBB',
-      search: '#F4F4F4'
+      search: '#F4F4F4',
+      white: '#FFFFFF'
     }
   } as ThemeType,
   dark: {
     type: 'dark',
     colors: {
-      accent: '#E24359',
+      accent: '#846BE2',
       base: '#111111',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
-      search: '#F4F4F4'
+      search: '#F4F4F4',
+      white: '#FFFFFF'
     }
   } as ThemeType,
 };

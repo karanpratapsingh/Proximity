@@ -3,7 +3,8 @@ export type ThemeColors = {
   base: string,
   text01: string,
   text02: string,
-  search: string
+  search: string,
+  white: string
 };
 
 export type ThemeType = {

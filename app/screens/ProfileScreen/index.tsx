@@ -5,6 +5,7 @@ import { Header } from '../../layout';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import Feather from 'react-native-vector-icons/Feather';
+import ProfileCard from './components/ProfileCard';
 
 const { IconSizes } = Typography;
 
@@ -17,7 +18,7 @@ const ProfileScreen: React.FC = () => {
         title='My Profile'
         IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
       />
-      
+      <ProfileCard />
     </View>
   );
 };
