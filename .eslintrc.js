@@ -17,7 +17,7 @@ module.exports = {
     'comma-dangle': 'off',
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
-    'indent': ['error', 4]
+    'indent': ['error', 2]
   },
   'globals': {
     'fetch': false
