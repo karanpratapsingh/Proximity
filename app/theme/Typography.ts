@@ -35,6 +35,17 @@ const FontSizes = {
   }
 };
 
-const Typography = { FontWeights, FontSizes };
+const IconSizes = {
+  x1: 10,
+  x2: 12,
+  x3: 14,
+  x4: 16,
+  x5: 20,
+  x6: 24,
+  x7: 32,
+  x8: 40,
+};
+
+const Typography = { FontWeights, FontSizes, IconSizes };
 
 export default Typography;

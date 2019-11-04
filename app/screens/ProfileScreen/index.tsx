@@ -1,17 +1,23 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { MaterialColors, Typography } from '../../theme';
+import { StyleSheet, View } from 'react-native';
 import { ThemeContext } from '../../context/ThemeContext';
+import { Header } from '../../layout';
 import { ThemeColors } from '../../types';
+import { Typography } from '../../theme';
+import Feather from 'react-native-vector-icons/Feather';
 
-const { FontWeights, FontSizes } = Typography;
+const { IconSizes } = Typography;
 
 const ProfileScreen: React.FC = () => {
 
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles(theme).container}>
-
+      <Header
+        title='My Profile'
+        IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
+      />
+      
     </View>
   );
 };

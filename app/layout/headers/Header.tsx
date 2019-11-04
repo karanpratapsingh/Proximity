@@ -1,62 +1,52 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { MaterialColors, Typography } from '../../theme';
+import { Typography } from '../../theme';
 import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeColors } from '../../types';
 
-const { FontWeights, FontSizes } = Typography;
+const { FontWeights, FontSizes, IconSizes } = Typography;
 
-const ProfileScreen: React.FC = () => {
+interface HeaderType {
+  title: string,
+  IconRight?: React.FC
+};
+
+const Header: React.FC<HeaderType> = ({ title, IconRight }) => {
 
   const { theme } = useContext(ThemeContext);
   return (
-    <View style={styles({}).headerContainer}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-        <View style={styles({}).headerContainer}>
-          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
-          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
-          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
-          <Text style={{ color: theme.accent, ...FontWeights.Bold, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
-
-          <Text style={{ ...FontWeights.Regular, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Regular, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Regular, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Regular, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
-
-          <Text style={{ ...FontWeights.Light, ...FontSizes.Heading, marginTop: 20 }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Light, ...FontSizes.SubHeading, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Light, ...FontSizes.Body, }}>Charlotte Jefferson</Text>
-          <Text style={{ ...FontWeights.Light, ...FontSizes.Caption, }}>Charlotte Jefferson</Text>
-        </View>
+    <View style={styles(theme).container}>
+      <View>
+        <Text style={styles(theme).label}>{title}</Text>
+        <View style={[styles(theme).underline, { width: title.length * 10 }]} />
       </View>
+
+      {IconRight && <IconRight />}
     </View>
   );
 };
 
-const styles = (theme = {}) => StyleSheet.create({
+const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    paddingTop: 24,
+    paddingBottom: 10,
+    paddingHorizontal: 24
   },
-  headerContainer: {
-    marginLeft: 10
+  label: {
+    ...FontWeights.Bold,
+    ...FontSizes.Heading,
+    color: theme.text01
   },
-  logo: {
-    height: 64,
-    width: 64
-  },
-  heading: {
-    fontSize: 24,
-
-  },
-  body: {
-    color: MaterialColors.grey[600],
-    fontSize: 16,
-  },
-  item: {
-    marginTop: 10,
-    fontSize: 16
+  underline: {
+    marginTop: 16,
+    height: 2,
+    width: 20,
+    borderRadius: 10,
+    backgroundColor: theme.text01
   }
 });
 
-export default ProfileScreen;
+export default Header;
