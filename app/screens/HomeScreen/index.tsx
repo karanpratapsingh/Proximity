@@ -11,6 +11,7 @@ const { IconSizes } = Typography;
 const HomeScreen: React.FC = () => {
 
   const { theme } = useContext(ThemeContext);
+  
   return (
     <View style={styles(theme).container}>
       <Header
