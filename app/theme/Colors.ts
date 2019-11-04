@@ -11,15 +11,17 @@ export const Theme = {
       base: '#FFFFFF',
       text01: '#000000',
       text02: '#BBBBBB',
+      search: '#F4F4F4'
     }
   },
   dark: {
-    type: 'light',
+    type: 'dark',
     colors: {
       accent: '#E24359',
       base: '#111111',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
+      search: '#F4F4F4'
     }
   },
 };
