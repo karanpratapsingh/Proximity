@@ -29,7 +29,7 @@ const ProfileCard: React.FC = () => {
         <Connections total='245' type='FOLLOWING' />
         <Image
           source={{ uri: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' }}
-          style={styles().avatarImage}
+          style={styles(theme).avatarImage}
         />
         <Connections total='24K' type='FOLLOWERS' />
       </View>
@@ -66,6 +66,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     height: 120,
     width: 120,
     borderRadius: 120,
+    backgroundColor: theme.placeholder
   },
   connections: {
     alignItems: 'center',

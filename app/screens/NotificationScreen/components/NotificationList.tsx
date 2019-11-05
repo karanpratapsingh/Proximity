@@ -3,13 +3,15 @@ import { StyleSheet } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import NotificationCard from './NotificationCard';
+import { ListEmptyComponent } from '../../../layout';
 
 const NotificationList = () => {
   return (
     <FlatGrid
       itemDimension={responsiveWidth(85)}
       showsVerticalScrollIndicator={false}
-      items={new Array(20).fill({})}
+      items={new Array(10).fill({})}
+      ListEmptyComponent={() => <ListEmptyComponent listType='notifications' spacing={60} />}
       style={styles.container}
       spacing={20}
       renderItem={({ item, index }) => (

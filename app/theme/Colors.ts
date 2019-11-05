@@ -12,7 +12,7 @@ export const Theme = {
       base: '#FFFFFF',
       text01: '#000000',
       text02: '#BBBBBB',
-      search: '#F4F4F4',
+      placeholder: '#F4F4F4',
       white: '#FFFFFF'
     }
   } as ThemeType,
@@ -23,7 +23,7 @@ export const Theme = {
       base: '#111111',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
-      search: '#F4F4F4',
+      placeholder: '#F4F4F4',
       white: '#FFFFFF'
     }
   } as ThemeType,

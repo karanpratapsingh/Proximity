@@ -3,7 +3,7 @@ export type ThemeColors = {
   base: string,
   text01: string,
   text02: string,
-  search: string,
+  placeholder: string,
   white: string
 };
 

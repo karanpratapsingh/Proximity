@@ -19,7 +19,7 @@ const PostThumbnail = ({ id, uri }) => {
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     height: 150,
-    backgroundColor: theme.search,
+    backgroundColor: theme.placeholder,
     overflow: 'hidden',
     borderRadius: 5,
   },

@@ -7,10 +7,10 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const { FontWeights, FontSizes } = Typography;
 
-const ListEmptyComponent = ({ listType }) => {
+const ListEmptyComponent = ({ listType, spacing }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <View style={styles().container}>
+    <View style={[styles().container, { height: responsiveHeight(spacing) }]}>
       <Text style={styles(theme).emptyText}>No {listType} yet</Text>
     </View>
   );
@@ -19,7 +19,6 @@ const ListEmptyComponent = ({ listType }) => {
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
-    height: responsiveHeight(20),
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,

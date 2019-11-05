@@ -13,10 +13,10 @@ const NotificationCard = ({ avatar, handle, type, time }) => {
   const notificationText = `has started following you!`;
 
   return (
-    <View style={[styles().container]}>
+    <View style={styles().container}>
       <Image
         source={{ uri: avatar }}
-        style={styles().avatarImage}
+        style={styles(theme).avatarImage}
       />
       <View style={styles().info}>
         <Text style={styles(theme).notificationText}>
@@ -37,7 +37,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   avatarImage: {
     height: 50,
     width: 50,
-    borderRadius: 50
+    borderRadius: 50,
+    backgroundColor: theme.placeholder
   },
   info: {
     flex: 1,
