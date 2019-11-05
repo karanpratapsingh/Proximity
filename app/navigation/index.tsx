@@ -1,52 +1,31 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {
-  HomeScreen,
-  ExploreScreen,
-  UploadScreen,
-  NotificationScreen,
-  ProfileScreen
-} from '../screens';
-
-import TabIcon from './TabIcon';
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+import { TabBarRoutes } from './Routes'
+import TabBarComponent from './TabBarComponent';
 
 const StackNavigator = createBottomTabNavigator({
   HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarIcon: <TabIcon route='HomeScreen' />
-    }
+    screen: TabBarRoutes.HomeScreen
   },
   ExploreScreen: {
-    screen: ExploreScreen,
-    navigationOptions: {
-      tabBarIcon: <TabIcon route='ExploreScreen' />
-    }
+    screen: TabBarRoutes.ExploreScreen
   },
   UploadScreen: {
-    screen: UploadScreen,
-    navigationOptions: {
-      tabBarIcon: <TabIcon route='UploadScreen' />
-    }
+    screen: TabBarRoutes.UploadScreen
   },
   NotificationScreen: {
-    screen: NotificationScreen,
-    navigationOptions: {
-      tabBarIcon: <TabIcon route='NotificationScreen' />
-    }
+    screen: TabBarRoutes.NotificationScreen
   },
   ProfileScreen: {
-    screen: ProfileScreen,
-    navigationOptions: {
-      tabBarIcon: <TabIcon route='ProfileScreen' />
-    }
+    screen: TabBarRoutes.ProfileScreen
   },
 }, {
   lazy: true,
   tabBarOptions: {
     showLabel: false,
-  }
+  },
+  tabBarComponent: props => <TabBarComponent  {...props} />
 });
 
 const AppNavigator = createAppContainer(StackNavigator);
