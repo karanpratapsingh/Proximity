@@ -35,8 +35,8 @@ const ProfileCard: React.FC = () => {
       </View>
 
       <View style={styles(theme).name}>
-        <Text style={styles(theme).fullNameText}>Charlotte Jefferson</Text>
-        <Text style={styles(theme).usernameText}>@charlotte_jeff</Text>
+        <Text style={styles(theme).usernameText}>Charlotte Jefferson</Text>
+        <Text style={styles(theme).handleText}>@charlotte_jeff</Text>
       </View>
 
       <View style={styles(theme).about}>
@@ -72,7 +72,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   connectionsText: {
     ...FontWeights.Bold,
-    ...FontSizes.SubHeading
+    ...FontSizes.SubHeading,
+    color: theme.text01
   },
   connectionsType: {
     ...FontWeights.Bold,
@@ -85,11 +86,12 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'center',
     marginTop: 16
   },
-  fullNameText: {
+  usernameText: {
     ...FontWeights.Bold,
     ...FontSizes.SubHeading,
+    color: theme.text01
   },
-  usernameText: {
+  handleText: {
     ...FontWeights.Bold,
     ...FontSizes.Body,
     color: theme.text02,
