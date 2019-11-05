@@ -55,7 +55,7 @@ const ProfileCard: React.FC = () => {
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     paddingTop: 20,
-    paddingHorizontal: 20
+    paddingHorizontal: 10
   },
   info: {
     flexDirection: 'row',
