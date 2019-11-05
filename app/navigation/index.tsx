@@ -21,7 +21,7 @@ const StackNavigator = createBottomTabNavigator({
     screen: TabBarRoutes.ProfileScreen
   },
 }, {
-  initialRouteName: 'NotificationScreen',
+  initialRouteName: 'ProfileScreen',
   lazy: true,
   tabBarOptions: {
     showLabel: false,

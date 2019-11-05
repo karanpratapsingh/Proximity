@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import NotificationCard from '../NotificationCard';
+import NotificationCard from './NotificationCard';
 
 const NotificationList = () => {
   return (

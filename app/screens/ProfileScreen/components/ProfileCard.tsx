@@ -54,7 +54,8 @@ const ProfileCard: React.FC = () => {
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    padding: 20,
+    paddingTop: 20,
+    paddingHorizontal: 20
   },
   info: {
     flexDirection: 'row',
@@ -98,10 +99,11 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginTop: 5
   },
   about: {
-    padding: 20,
-    marginVertical: 16,
+    padding: 16,
+    marginTop: 16,
     backgroundColor: theme.accent,
-    borderRadius: 10
+    borderRadius: 5,
+    marginBottom: 10
   },
   aboutTitle: {
     ...FontWeights.Regular,
