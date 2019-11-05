@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { ThemeContext } from '../../context/ThemeContext';
 import { Header } from '../../layout';
 import { ThemeColors } from '../../types';
+import NotificationList from './components/NotificationList';
 
 const NotificationScreen: React.FC = () => {
 
@@ -11,6 +12,7 @@ const NotificationScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       <Header title='Notifications' />
+      <NotificationList />
     </View>
   );
 };
