@@ -25,14 +25,14 @@ const ProfileScreen: React.FC = () => {
       <FlatGrid
         ListHeaderComponent={() => <ProfileCard />}
         itemDimension={150}
-        items={new Array(2).fill({})}
+        items={new Array(9).fill({})}
         ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
         style={styles().postGrid}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) =>
           <PostThumbnail
             id={null}
-            uri='https://images.unsplash.com/photo-1445358952072-12e33523825c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1600'
+            uri='https://source.unsplash.com/random'
           />
         }
       />
