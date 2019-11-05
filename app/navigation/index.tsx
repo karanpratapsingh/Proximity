@@ -1,10 +1,11 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
-import { TabBarRoutes } from './Routes'
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { TabBarRoutes, StackRoutes } from './Routes'
 import TabBarComponent from './TabBarComponent';
 
-const StackNavigator = createBottomTabNavigator({
+const TabNavigator = createBottomTabNavigator({
   HomeScreen: {
     screen: TabBarRoutes.HomeScreen
   },
@@ -21,13 +22,22 @@ const StackNavigator = createBottomTabNavigator({
     screen: TabBarRoutes.ProfileScreen
   },
 }, {
-  initialRouteName: 'ProfileScreen',
+  initialRouteName: 'HomeScreen',
   lazy: true,
   tabBarOptions: {
     showLabel: false,
   },
   tabBarComponent: props => <TabBarComponent  {...props} />
 });
+
+const StackNavigator = createStackNavigator({
+  TabNavigator: {
+    screen: TabNavigator
+  },
+  MessageScreen: {
+    screen: StackRoutes.MessageScreen
+  }
+}, { headerMode: 'none' });
 
 const AppNavigator = createAppContainer(StackNavigator);
 

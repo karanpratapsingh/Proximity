@@ -19,7 +19,7 @@ const NotificationList = () => {
           avatar='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
           handle='@amy_234'
           type={null}
-          time={'12hrs'}
+          time='12hrs'
         />
       )}
     />

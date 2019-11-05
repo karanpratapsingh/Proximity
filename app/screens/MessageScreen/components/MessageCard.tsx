@@ -6,12 +6,10 @@ import { ThemeColors } from '../../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
-const NotificationCard = ({ avatar, handle, type, time }) => {
+const MessageCard = ({ avatar, handle, lastMessage, time }) => {
 
   const { theme } = useContext(ThemeContext);
-  // type can be follow like comment maybe???
-  const notificationText = `has started following you!`;
-
+  
   return (
     <View style={styles().container}>
       <Image
@@ -19,11 +17,9 @@ const NotificationCard = ({ avatar, handle, type, time }) => {
         style={styles(theme).avatarImage}
       />
       <View style={styles().info}>
-        <Text style={styles(theme).notificationText}>
-          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-          {notificationText}
-        </Text>
-        <Text style={styles(theme).timeText}>{time}</Text>
+        <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+        <Text style={styles(theme).timeText}>
+          hey this is awesome · {time}</Text>
       </View>
     </View>
   );
@@ -50,11 +46,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     color: theme.text01
   },
-  notificationText: {
-    ...FontWeights.Light,
-    ...FontSizes.Body,
-    color: theme.text01
-  },
   timeText: {
     ...FontWeights.Light,
     ...FontSizes.Caption,
@@ -63,4 +54,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default NotificationCard;
+export default MessageCard;
