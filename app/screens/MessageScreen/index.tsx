@@ -28,7 +28,7 @@ const MessageScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={chats}
+        items={chats.reverse()}
         ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
         style={styles().messagesList}
         spacing={20}
