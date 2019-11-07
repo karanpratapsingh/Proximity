@@ -21,6 +21,7 @@
     "@types/react-test-renderer": "^16.9.1",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
+    "graphql": "^14.5.8",
     "react": "16.8.1",
     "react-native": "0.61.3",
     "react-native-gesture-handler": "^1.5.0",
