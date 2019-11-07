@@ -16,7 +16,6 @@ const NotificationText = {
 const NotificationCard = ({ avatar, handle, type, time }) => {
 
   const { theme } = useContext(ThemeContext);
-  // type can be follow like comment maybe???
   const notificationText = NotificationText[type];
   const timeElapsed = parseTimeElapsed(time);
 
@@ -31,7 +30,7 @@ const NotificationCard = ({ avatar, handle, type, time }) => {
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {notificationText}
         </Text>
-        <Text style={styles(theme).timeText}>{timeElapsed} ago</Text>
+        <Text style={styles(theme).timeText}>{timeElapsed}</Text>
       </View>
     </View>
   );
