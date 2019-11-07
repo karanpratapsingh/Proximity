@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import { ThemeContext } from '../../context/ThemeContext';
-import { Header, ListEmptyComponent, NotificationPlaceholder } from '../../layout';
+import { Header, ListEmptyComponent, NotificationScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import NotificationCard from './components/NotificationCard';
 import { QUERY_NOTIFICATION } from '../../graphql/query';
@@ -17,7 +17,7 @@ const NotificationScreen: React.FC = () => {
 
   const { theme } = useContext(ThemeContext);
 
-  let content = <NotificationPlaceholder />;
+  let content = <NotificationScreenPlaceholder />;
 
   if (!loading) {
     content = (

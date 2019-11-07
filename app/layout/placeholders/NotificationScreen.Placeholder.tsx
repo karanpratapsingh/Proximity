@@ -3,10 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
 import { generateUUID } from '../../utils';
 
-const ProfileScreenPlaceholder: React.FC = () => (
+const NotificationScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
     <Placeholder Animation={Fade}>
-      {new Array(10)
+      {new Array(20)
         .fill(generateUUID())
         .map(placeholderKey =>
           <View key={placeholderKey} style={styles.cardContainer}>
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreenPlaceholder;
+export default NotificationScreenPlaceholder;
