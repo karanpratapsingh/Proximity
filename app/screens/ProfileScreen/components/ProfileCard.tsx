@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { ThemeColors } from '../../../types';
 import { Typography } from '../../../theme';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { parseConnectionsCount } from '../../../utils';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -21,31 +22,36 @@ const Connections: React.FC<ConnectionsType> = ({ total, type }) => {
   );
 };
 
-const ProfileCard: React.FC = () => {
+interface ProfileCardType {
+  avatar: string,
+  following: number,
+  followers: number,
+  name: string,
+  handle: string,
+  about: string
+};
+
+const ProfileCard: React.FC<ProfileCardType> = ({ avatar, following, followers, name, handle, about }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles(theme).container}>
       <View style={styles(theme).info}>
-        <Connections total='245' type='FOLLOWING' />
+        <Connections total={parseConnectionsCount(following)} type='FOLLOWING' />
         <Image
-          source={{ uri: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' }}
+          source={{ uri: avatar }}
           style={styles(theme).avatarImage}
         />
-        <Connections total='24K' type='FOLLOWERS' />
+        <Connections total={parseConnectionsCount(followers)} type='FOLLOWERS' />
       </View>
 
       <View style={styles(theme).name}>
-        <Text style={styles(theme).usernameText}>Charlotte Jefferson</Text>
-        <Text style={styles(theme).handleText}>@charlotte_jeff</Text>
+        <Text style={styles(theme).usernameText}>{name}</Text>
+        <Text style={styles(theme).handleText}>{handle}</Text>
       </View>
 
       <View style={styles(theme).about}>
         <Text style={styles(theme).aboutTitle}>About</Text>
-        <Text style={styles(theme).aboutText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua.
-        </Text>
+        <Text style={styles(theme).aboutText}>{about}</Text>
       </View>
 
     </View>

@@ -22,7 +22,7 @@ const TabNavigator = createBottomTabNavigator({
     screen: TabBarRoutes.ProfileScreen
   },
 }, {
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ProfileScreen',
   lazy: true,
   tabBarOptions: {
     showLabel: false,

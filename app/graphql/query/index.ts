@@ -8,6 +8,15 @@ export const QUERY_USER = gql`
       name
       handle
       about
+      following {
+        id
+      }
+      followers {
+        id
+      }
+      posts {
+        uri
+      }
     }
 }
 `;

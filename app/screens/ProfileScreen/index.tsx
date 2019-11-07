@@ -5,7 +5,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import Feather from 'react-native-vector-icons/Feather';
 import { ThemeContext } from '../../context/ThemeContext';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent } from '../../layout';
+import { Header, ListEmptyComponent, ProfileScreenPlaceholder } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import PostThumbnail from './components/PostThumbnail';
@@ -19,19 +19,25 @@ const ProfileScreen: React.FC = () => {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
   });
   console.log(data);
-
   const { theme } = useContext(ThemeContext);
 
-  return (
-    <View style={styles(theme).container}>
-      <Header
-        title='My Profile'
-        IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
-      />
+  let content = <ProfileScreenPlaceholder />;
+
+  if (!loading) {
+    const { user: { avatar, following, followers, name, handle, about, posts } } = data;
+    content = (
       <FlatGrid
-        ListHeaderComponent={() => <ProfileCard />}
+        ListHeaderComponent={() =>
+          <ProfileCard
+            avatar={avatar}
+            following={following.length}
+            followers={followers.length}
+            name={name}
+            handle={handle}
+            about={about}
+          />}
         itemDimension={150}
-        items={new Array(9).fill({})}
+        items={posts}
         ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
         style={styles().postGrid}
         showsVerticalScrollIndicator={false}
@@ -42,6 +48,16 @@ const ProfileScreen: React.FC = () => {
           />
         }
       />
+    );
+  }
+
+  return (
+    <View style={styles(theme).container}>
+      <Header
+        title='My Profile'
+        IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
+      />
+      {content}
     </View>
   );
 };
