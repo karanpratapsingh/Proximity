@@ -3,13 +3,15 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { parseTimeElapsed } from '../../../utils';
 
 const { FontWeights, FontSizes } = Typography;
 
 const MessageCard = ({ avatar, handle, lastMessage, time }) => {
 
   const { theme } = useContext(ThemeContext);
-  
+  const timeElapsed = parseTimeElapsed(time);
+
   return (
     <View style={styles().container}>
       <Image
@@ -19,7 +21,7 @@ const MessageCard = ({ avatar, handle, lastMessage, time }) => {
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
         <Text style={styles(theme).timeText}>
-          hey this is awesome · {time}</Text>
+          {lastMessage} · {timeElapsed}</Text>
       </View>
     </View>
   );
