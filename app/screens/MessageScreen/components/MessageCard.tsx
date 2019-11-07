@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../../navigation/Routes';
 
 const { FontWeights, FontSizes } = Typography;
 
-const MessageCard = ({ avatar, handle, lastMessage, time }) => {
+const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
 
   const { theme } = useContext(ThemeContext);
   const timeElapsed = parseTimeElapsed(time);
+  const { navigate } = useNavigation();
 
   return (
-    <View style={styles().container}>
+    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ConversationScreen, { chatId })} style={styles().container}>
       <Image
         source={{ uri: avatar }}
         style={styles(theme).avatarImage}
@@ -23,7 +26,7 @@ const MessageCard = ({ avatar, handle, lastMessage, time }) => {
         <Text style={styles(theme).timeText}>
           {lastMessage} · {timeElapsed}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
