@@ -34,12 +34,13 @@ const MessageScreen: React.FC = () => {
         spacing={20}
         renderItem={({ item }) => {
 
-          const { participants, messages, updatedAt } = item;
+          const { id, participants, messages, updatedAt } = item;
           const [participant] = participants.filter(({ id }) => userId !== id);
           const [lastMessage] = messages;
 
           return (
             <MessageCard
+              chatId={id}
               avatar={participant.avatar}
               handle={participant.handle}
               lastMessage={lastMessage.body}

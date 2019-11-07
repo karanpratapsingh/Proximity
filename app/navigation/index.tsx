@@ -36,6 +36,9 @@ const StackNavigator = createStackNavigator({
   },
   MessageScreen: {
     screen: StackRoutes.MessageScreen
+  },
+  ConversationScreen: {
+    screen: StackRoutes.ConversationScreen
   }
 }, { headerMode: 'none' });
 

@@ -4,6 +4,7 @@ import UploadScreen from './UploadScreen';
 import NotificationScreen from './NotificationScreen';
 import ProfileScreen from './ProfileScreen';
 import MessageScreen from './MessageScreen';
+import ConversationScreen from './ConversationScreen';
 
 export {
   HomeScreen,
@@ -11,5 +12,6 @@ export {
   UploadScreen,
   NotificationScreen,
   ProfileScreen,
-  MessageScreen
+  MessageScreen,
+  ConversationScreen
 };
