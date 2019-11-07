@@ -4,38 +4,58 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { Header, SearchBar } from '../../layout';
 import { ThemeColors } from '../../types';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '../../layout';
+import { ListEmptyComponent, MessageScreenPlaceholder } from '../../layout';
 import MessageCard from './components/MessageCard';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { Typography } from '../../theme';
-
-const { FontWeights, FontSizes } = Typography;
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_CHATS } from '../../graphql/query';
 
 const MessageScreen: React.FC = () => {
 
+  const userId = 'ck2oj3x2n001w0765e34k94w1';
+  const { data, loading } = useQuery(QUERY_CHATS, {
+    variables: { userId }
+  });
   const { theme } = useContext(ThemeContext);
   const [chatSearch, setChatSearch] = useState('');
+  console.log(data);
+
+  let content = <MessageScreenPlaceholder />;
+
+  if (!loading) {
+    const { chats } = data;
+    content = (
+      <FlatGrid
+        itemDimension={responsiveWidth(85)}
+        showsVerticalScrollIndicator={false}
+        items={chats}
+        ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
+        style={styles().messagesList}
+        spacing={20}
+        renderItem={({ item }) => {
+
+          const { participants, messages, updatedAt } = item;
+          const [participant] = participants.filter(({ id }) => userId !== id);
+          const [lastMessage] = messages;
+
+          return (
+            <MessageCard
+              avatar={participant.avatar}
+              handle={participant.handle}
+              lastMessage={lastMessage.body}
+              time={updatedAt}
+            />
+          )
+        }}
+      />
+    );
+  }
 
   return (
     <View style={styles(theme).container}>
       <Header title='Messages' />
       <SearchBar value={chatSearch} onChangeText={setChatSearch} style={styles().chatSearchBar} />
-      <FlatGrid
-        itemDimension={responsiveWidth(85)}
-        showsVerticalScrollIndicator={false}
-        items={new Array(10).fill({})}
-        ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
-        style={styles().messagesList}
-        spacing={20}
-        renderItem={({ item, index }) => (
-          <MessageCard
-            avatar='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            handle='@amy_234'
-            lastMessage='hey wassup bruh'
-            time='now'
-          />
-        )}
-      />
+      {content}
     </View>
   );
 };
@@ -46,8 +66,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   chatSearchBar: {
-    marginTop: 5,
-    marginBottom: 10
+    marginTop: 5
   },
   messagesList: {
     flex: 1,

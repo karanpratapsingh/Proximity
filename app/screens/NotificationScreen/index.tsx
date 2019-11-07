@@ -20,22 +20,27 @@ const NotificationScreen: React.FC = () => {
   let content = <NotificationScreenPlaceholder />;
 
   if (!loading) {
+    const { notifications } = data;
     content = (
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={data.notifications}
+        items={notifications}
         ListEmptyComponent={() => <ListEmptyComponent listType='notifications' spacing={60} />}
         style={styles().notificationList}
         spacing={20}
-        renderItem={({ item, index }) => (
-          <NotificationCard
-            avatar={item.actionUser.avatar}
-            handle={item.actionUser.handle}
-            type={item.type}
-            time={item.createdAt}
-          />
-        )}
+        renderItem={({ item }) => {
+          const { actionUser, type, createdAt } = item;
+
+          return (
+            <NotificationCard
+              avatar={actionUser.avatar}
+              handle={actionUser.handle}
+              type={type}
+              time={createdAt}
+            />
+          )
+        }}
       />
     );
   }
