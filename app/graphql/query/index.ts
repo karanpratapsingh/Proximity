@@ -33,3 +33,19 @@ export const QUERY_NOTIFICATION = gql`
     }
   }
 `;
+
+export const QUERY_CHATS = gql`
+  query Chats($userId: String!) {
+    chats(userId: $userId) {
+      participants {
+        id
+        avatar
+        handle
+      }
+      updatedAt
+      messages(last: 1) {
+        body
+      }
+    }
+  }
+`;
