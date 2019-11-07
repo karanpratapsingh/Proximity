@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { placeholder } from '@babel/types';
+import { generateUUID } from '../../utils';
 
 const ProfileScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
@@ -15,14 +17,14 @@ const ProfileScreenPlaceholder: React.FC = () => (
         <PlaceholderLine style={styles.handlePlaceholder} noMargin width={50} height={16} />
         <PlaceholderLine style={styles.aboutPlaceholder} noMargin width={100} height={110} />
       </View>
-      <View style={styles.postContainer}>
-        <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-        <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-      </View>
-      <View style={[styles.postContainer, { marginTop: 10 }]}>
-        <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-        <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-      </View>
+      {new Array(4)
+        .fill(generateUUID())
+        .map(placeholderKey =>
+          <View key={placeholderKey} style={styles.postContainer}>
+            <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
+            <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
+          </View>
+        )}
     </Placeholder>
   </View>
 );
@@ -43,9 +45,10 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   infoPlaceholder: {
-    marginTop: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 10
   },
   namePlaceholder: {
     borderRadius: 5
@@ -59,10 +62,10 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   postContainer: {
-    marginTop: 10,
-    flexDirection: 'row',    
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: 10
   },
   postPlaceholder: {
     borderRadius: 5

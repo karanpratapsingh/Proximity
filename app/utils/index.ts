@@ -31,10 +31,8 @@ export const parseTimeElapsed = utcTime => {
 
   if (elapsedDays >= 1) return `${elapsedDays} days ago`;
   if (elapsedHours >= 1) return `${elapsedHours} hrs ago`;
-  if (elapsedMinutes >= 1) return `${elapsedMinutes} hrs ago`;
+  if (elapsedMinutes >= 1) return `${elapsedMinutes} mins ago`;
   if (elapsedMinutes < 1) return 'just now';
-
-  console.log(elapsedDays, elapsedHours, elapsedMinutes);
 
   return timeElapsedFormatted;
 };
