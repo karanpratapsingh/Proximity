@@ -18,7 +18,7 @@ const ProfileScreen: React.FC = () => {
   const { data, loading } = useQuery(QUERY_USER, {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
   });
-  console.log(data);
+    
   const { theme } = useContext(ThemeContext);
 
   let content = <ProfileScreenPlaceholder />;
