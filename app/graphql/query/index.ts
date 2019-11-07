@@ -20,3 +20,16 @@ export const QUERY_USER = gql`
     }
 }
 `;
+
+export const QUERY_NOTIFICATION = gql`
+  query Notifications($userId: String!) {
+    notifications(userId: $userId) {
+      actionUser {
+        avatar
+        handle
+      }
+      type
+      createdAt
+    }
+  }
+`;

@@ -3,33 +3,47 @@ import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import { ThemeContext } from '../../context/ThemeContext';
-import { Header, ListEmptyComponent } from '../../layout';
+import { Header, ListEmptyComponent, NotificationPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import NotificationCard from './components/NotificationCard';
+import { QUERY_NOTIFICATION } from '../../graphql/query';
+import { useQuery } from '@apollo/react-hooks';
 
 const NotificationScreen: React.FC = () => {
 
+  const { data, loading } = useQuery(QUERY_NOTIFICATION, {
+    variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
+  });
+  console.log(data);
   const { theme } = useContext(ThemeContext);
 
-  return (
-    <View style={styles(theme).container}>
-      <Header title='Notifications' />
+  let content = <NotificationPlaceholder />;
+
+  if (!loading) {
+    content = (
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={new Array(10).fill({})}
+        items={data.notifications}
         ListEmptyComponent={() => <ListEmptyComponent listType='notifications' spacing={60} />}
         style={styles().notificationList}
         spacing={20}
         renderItem={({ item, index }) => (
           <NotificationCard
-            avatar='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            handle='@amy_234'
-            type={null}
-            time='12hrs'
+            avatar={item.actionUser.avatar}
+            handle={item.actionUser.handle}
+            type={item.type}
+            time={item.createdAt}
           />
         )}
       />
+    );
+  }
+
+  return (
+    <View style={styles(theme).container}>
+      <Header title='Notifications' />
+      {content}
     </View>
   );
 };
