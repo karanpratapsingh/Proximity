@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { StyleSheet, View, TextInput, Text } from 'react-native';
-import { ThemeContext } from '../../context/ThemeContext';
-import { Header, SearchBar } from '../../layout';
-import { ThemeColors } from '../../types';
-import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent, MessageScreenPlaceholder } from '../../layout';
-import MessageCard from './components/MessageCard';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { useQuery } from '@apollo/react-hooks';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { FlatGrid } from 'react-native-super-grid';
+import { ThemeContext } from '../../context/ThemeContext';
 import { QUERY_CHATS } from '../../graphql/query';
+import { Header, ListEmptyComponent, MessageScreenPlaceholder, SearchBar } from '../../layout';
+import { ThemeColors } from '../../types';
+import MessageCard from './components/MessageCard';
 
 const MessageScreen: React.FC = () => {
 
@@ -17,7 +16,7 @@ const MessageScreen: React.FC = () => {
     variables: { userId }
   });
   const { theme } = useContext(ThemeContext);
-  const [chatSearch, setChatSearch] = useState(''); 
+  const [chatSearch, setChatSearch] = useState('');
 
   let content = <MessageScreenPlaceholder />;
 
@@ -33,7 +32,7 @@ const MessageScreen: React.FC = () => {
         spacing={20}
         renderItem={({ item }) => {
 
-          const { id, participants, messages, updatedAt } = item;
+          const { id, participants, messages } = item;
           const [participant] = participants.filter(({ id }) => userId !== id);
           const [lastMessage] = messages;
 
@@ -43,7 +42,7 @@ const MessageScreen: React.FC = () => {
               avatar={participant.avatar}
               handle={participant.handle}
               lastMessage={lastMessage.body}
-              time={updatedAt}
+              time={lastMessage.createdAt}
             />
           )
         }}

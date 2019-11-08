@@ -43,9 +43,9 @@ export const QUERY_CHATS = gql`
         avatar
         handle
       }
-      updatedAt
       messages(last: 1) {
         body
+        createdAt
       }
     }
   }

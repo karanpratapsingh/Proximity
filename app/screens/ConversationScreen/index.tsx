@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Text } from 'react-native';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, MessageText } from 'react-native-gifted-chat';
 import { useQuery, useMutation, useSubscription, useLazyQuery } from '@apollo/react-hooks';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { ConversationScreenPlaceholder } from '../../layout';
+import CustomMessageText from './components/CustomMessageText';
 
 const userId = 'ck2oj3x2n001w0765e34k94w1';
 
@@ -23,10 +24,10 @@ const ConversationScreen = () => {
 
   useEffect(() => {
     if (!chatSubscriptionLoading) {
-      setMessages(chatSubscriptionData.chat.messages.reverse());
+      setMessages(chatSubscriptionData.chat.messages);
     } else if (chatSubscriptionLoading) {
       if (chatQueryCalled && !chatQueryLoading)
-        setMessages(chatQueryData.chat.messages.reverse());
+        setMessages(chatQueryData.chat.messages);
       else if (!chatQueryCalled)
         queryChat();
     }
@@ -64,7 +65,9 @@ const ConversationScreen = () => {
 
     content = (
       <GiftedChat
+        inverted={false}
         messages={transform}
+        renderMessageText={CustomMessageText}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: userId }}
       />
