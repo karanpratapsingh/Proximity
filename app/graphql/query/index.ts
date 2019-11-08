@@ -54,6 +54,10 @@ export const QUERY_CHATS = gql`
 export const QUERY_CHAT = gql`
   query Chat($chatId: String!) {
     chat(chatId: $chatId) {
+      participants {
+        id
+        handle
+      }
       messages {
         id
         body

@@ -63,3 +63,6 @@ export const transformMessages = messages =>
       }
     };
   });
+
+export const filterChatParticipants = (userId, participants) =>
+  participants.filter(participant => userId !== participant.id);
