@@ -4,6 +4,12 @@
  */
 import { ThemeType } from '../types';
 
+export const ThemeStatic = {
+  accent: '#846BE2',
+  white: '#FFFFFF',
+  black: '#000000'
+};
+
 export const Theme = {
   light: {
     type: 'light',

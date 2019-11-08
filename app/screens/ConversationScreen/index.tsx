@@ -8,6 +8,7 @@ import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { ConversationScreenPlaceholder } from '../../layout';
 import CustomMessageText from './components/CustomMessageText';
+import CustomSend from './components/CustomSend';
 
 const userId = 'ck2oj3x2n001w0765e34k94w1';
 
@@ -65,11 +66,14 @@ const ConversationScreen = () => {
 
     content = (
       <GiftedChat
+        isAnimated
         inverted={false}
         messages={transform}
         renderMessageText={CustomMessageText}
+        renderSend={CustomSend}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: userId }}
+        placeholder='Message...'
       />
     );
   }
