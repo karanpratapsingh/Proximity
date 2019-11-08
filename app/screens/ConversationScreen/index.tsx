@@ -10,6 +10,7 @@ import { ConversationScreenPlaceholder } from '../../layout';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 import CustomComposer from './components/CustomComposer';
+import CustomBubble from './components/CustomBubble';
 
 const userId = 'ck2oj3x2n001w0765e34k94w1';
 
@@ -72,6 +73,7 @@ const ConversationScreen = () => {
         messages={transform}
         renderComposer={CustomComposer}
         renderMessageText={CustomMessageText}
+        renderBubble={CustomBubble}
         renderSend={CustomSend}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: userId }}

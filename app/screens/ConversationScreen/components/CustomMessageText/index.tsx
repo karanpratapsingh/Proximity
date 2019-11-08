@@ -6,9 +6,9 @@ import { ThemeStatic } from '../../../../theme/Colors';
 
 const { FontWeights, FontSizes } = Typography;
 
-const CustomMessageText = textProps => (
+const CustomMessageText = messageTextProps => (
   <MessageText
-    {...textProps}
+    {...messageTextProps}
     textStyle={{
       left: styles.left,
       right: styles.right
