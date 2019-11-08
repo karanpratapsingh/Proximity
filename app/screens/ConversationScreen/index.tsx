@@ -6,7 +6,7 @@ import { useNavigationParam } from 'react-navigation-hooks';
 import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
-import { ConversationScreenPlaceholder } from '../../layout';
+import { ConversationScreenPlaceholder, ChatHeader } from '../../layout';
 import { transformMessages } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
@@ -50,17 +50,20 @@ const ConversationScreen = () => {
   if (chatQueryCalled && !chatQueryLoading) {
     const transform = transformMessages(messages);
     content = (
-      <GiftedChat
-        isAnimated
-        inverted={false}
-        messages={transform}
-        renderComposer={CustomComposer}
-        renderMessageText={CustomMessageText}
-        renderBubble={CustomBubble}
-        renderSend={CustomSend}
-        onSend={updatedMessages => onSend(updatedMessages)}
-        user={{ _id: userId }}
-      />
+      <>
+        <ChatHeader handle='@occult_686' />
+        <GiftedChat
+          isAnimated
+          inverted={false}
+          messages={transform}
+          renderComposer={CustomComposer}
+          renderMessageText={CustomMessageText}
+          renderBubble={CustomBubble}
+          renderSend={CustomSend}
+          onSend={updatedMessages => onSend(updatedMessages)}
+          user={{ _id: userId }}
+        />
+      </>
     );
   }
 
