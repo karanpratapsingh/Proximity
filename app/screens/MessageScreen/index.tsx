@@ -17,8 +17,7 @@ const MessageScreen: React.FC = () => {
     variables: { userId }
   });
   const { theme } = useContext(ThemeContext);
-  const [chatSearch, setChatSearch] = useState('');
-  console.log(data);
+  const [chatSearch, setChatSearch] = useState(''); 
 
   let content = <MessageScreenPlaceholder />;
 
