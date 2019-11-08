@@ -1,17 +1,11 @@
+import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
 import { YellowBox } from 'react-native';
-import AppNavigator from './app/navigation';
 import { ThemeContextProvider } from './app/context/ThemeContext';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import client from './app/graphql/client';
+import AppNavigator from './app/navigation';
 
 YellowBox.ignoreWarnings(['Warning: Encountered two children with the same key']);
-
-const client = new ApolloClient({
-  uri: 'https://social-app-node-graphql.herokuapp.com/',
-  cache: new InMemoryCache()
-});
 
 const App = () => (
   <ApolloProvider client={client}>
