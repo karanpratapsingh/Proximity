@@ -7,7 +7,7 @@ import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, ChatHeader } from '../../layout';
-import { transformMessages } from '../../utils';
+import { transformMessages, filterChatParticipants } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
@@ -49,9 +49,11 @@ const ConversationScreen = () => {
 
   if (chatQueryCalled && !chatQueryLoading) {
     const transform = transformMessages(messages);
+    const [participant] = filterChatParticipants(userId, chatQueryData.chat.participants);
+
     content = (
       <>
-        <ChatHeader handle='@occult_686' />
+        <ChatHeader handle={participant.handle} />
         <GiftedChat
           isAnimated
           inverted={false}

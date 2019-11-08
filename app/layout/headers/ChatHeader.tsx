@@ -26,7 +26,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   label: {
     ...FontWeights.Bold,
-    ...FontSizes.SubHeading,
+    ...FontSizes.Heading,
     color: theme.text01
   }
 });
