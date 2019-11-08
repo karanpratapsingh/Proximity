@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Send } from 'react-native-gifted-chat';
-import { Typography } from '../../../../theme';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Typography } from '../../../../theme';
 import { ThemeStatic } from '../../../../theme/Colors';
 
 const { IconSizes } = Typography;
