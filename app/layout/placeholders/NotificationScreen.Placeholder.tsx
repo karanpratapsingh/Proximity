@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
 import { generateUUID } from '../../utils';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const NotificationScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
@@ -16,13 +17,13 @@ const NotificationScreenPlaceholder: React.FC = () => (
                 noMargin
                 style={styles.notificationCardPlaceholder}
                 height={14}
-                width={'90%' as any}
+                width={responsiveWidth(25)}
               />
               <PlaceholderLine
                 noMargin
                 style={styles.notificationCardPlaceholder}
                 height={10}
-                width={'25%' as any}
+                width={20}
               />
             </View>
           </View>

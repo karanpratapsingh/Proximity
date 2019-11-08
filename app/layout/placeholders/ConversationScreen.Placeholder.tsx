@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ConversationScreenPlaceholder = () => (
   <View style={styles.container}>
@@ -9,7 +10,7 @@ const ConversationScreenPlaceholder = () => (
         noMargin
         style={styles.placeholderLine}
         height={30}
-        width={'50%' as any}
+        width={responsiveWidth(50)}
       />
     </Placeholder> */}
     <View style={styles.loaderContainer}>

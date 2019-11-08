@@ -13,7 +13,11 @@ import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 
-const userId = 'ck2oj3x2n001w0765e34k94w1';
+const userId = {
+  '@occult_686': 'ck2oj3x2n001w0765e34k94w1',
+  '@ayushieee': 'ck2oj8o2m00290765ckrg3ozy',
+  '@doggo': 'ck2ojhiw1002v0765ou6bdsl8'
+}['@occult_686'];
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
