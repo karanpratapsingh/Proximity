@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { useNavigationParam } from 'react-navigation-hooks';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation, useSubscription, useLazyQuery } from '@apollo/react-hooks';
 import { QUERY_CHAT } from '../../graphql/query';
+import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
+import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
+import { ConversationScreenPlaceholder } from '../../layout';
 
 const userId = 'ck2oj3x2n001w0765e34k94w1';
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
-  const { data, loading } = useQuery(QUERY_CHAT, {
+  const [messages, setMessages] = useState([]);
+  const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId }
   });
+  const { data: chatSubscriptionData, loading: chatSubscriptionLoading } = useSubscription(SUBSCRIPTION_CHAT, {
+    variables: { chatId }
+  });
+  const [addMessage] = useMutation(MUTATION_ADD_MESSAGE);
 
-  const [messages, setMessages] = useState([]);
-  const onSend = updateMessages => {
-    setMessages([...GiftedChat.append(messages, updateMessages)]);
+  useEffect(() => {
+    if (!chatSubscriptionLoading) {
+      setMessages(chatSubscriptionData.chat.messages.reverse());
+    } else if (chatSubscriptionLoading) {
+      if (chatQueryCalled && !chatQueryLoading)
+        setMessages(chatQueryData.chat.messages.reverse());
+      else if (!chatQueryCalled)
+        queryChat();
+    }
+  }, [chatQueryData, chatQueryCalled, chatQueryLoading, chatSubscriptionData, chatSubscriptionLoading]);
+
+  const onSend = updatedMessages => {
+    const [updatedMessage] = updatedMessages;
+    addMessage({
+      variables:
+        { chatId, authorId: userId, body: updatedMessage.text }
+    });
   };
 
-  let content = <ActivityIndicator />;
+  let content = <ConversationScreenPlaceholder />
 
-  if (!loading) {
-
-    const { chat: {
-      messages
-    } } = data;
-
+  if (chatQueryCalled && !chatQueryLoading) {
     const transform = messages.map(message => {
       const { id, body, createdAt, author: {
         id: authorId,
@@ -48,7 +65,7 @@ const ConversationScreen = () => {
     content = (
       <GiftedChat
         messages={transform}
-        onSend={updateMessages => onSend(updateMessages)}
+        onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: userId }}
       />
     );
@@ -63,9 +80,7 @@ const ConversationScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center'
+    flex: 1
   }
 });
 
