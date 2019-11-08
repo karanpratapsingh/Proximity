@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, StyleSheet, Text } from 'react-native';
+import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { GiftedChat, MessageText } from 'react-native-gifted-chat';
-import { useQuery, useMutation, useSubscription, useLazyQuery } from '@apollo/react-hooks';
+import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
-import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { ConversationScreenPlaceholder } from '../../layout';
+import { transformMessages } from '../../utils';
+import CustomBubble from './components/CustomBubble';
+import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
-import CustomComposer from './components/CustomComposer';
-import CustomBubble from './components/CustomBubble';
 
 const userId = 'ck2oj3x2n001w0765e34k94w1';
 
@@ -47,25 +48,7 @@ const ConversationScreen = () => {
   let content = <ConversationScreenPlaceholder />
 
   if (chatQueryCalled && !chatQueryLoading) {
-    const transform = messages.map(message => {
-      const { id, body, createdAt, author: {
-        id: authorId,
-        name,
-        avatar
-      } } = message;
-
-      return {
-        _id: id,
-        text: body,
-        createdAt: new Date(createdAt),
-        user: {
-          _id: authorId,
-          name,
-          avatar
-        }
-      };
-    });
-
+    const transform = transformMessages(messages);
     content = (
       <GiftedChat
         isAnimated

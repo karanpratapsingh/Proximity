@@ -43,3 +43,23 @@ export const generateUUID = () => {
     return v.toString(16);
   });
 };
+
+export const transformMessages = messages =>
+  messages.map(message => {
+    const { id, body, createdAt, author: {
+      id: authorId,
+      name,
+      avatar
+    } } = message;
+
+    return {
+      _id: id,
+      text: body,
+      createdAt: new Date(createdAt),
+      user: {
+        _id: authorId,
+        name,
+        avatar
+      }
+    };
+  });
