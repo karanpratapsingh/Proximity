@@ -1,15 +1,22 @@
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 
-export const MUTATION_CREATE_NOTIFICATION = gql`
- mutation CreateNotification($user: String!, $actionUser: String!, $type: String!) {
-  createNotification(
-      data: {
-        user: { connect: { id: $user } }
-        actionUser: { connect: { id: $actionUser } }
-        type: $type
+export const MUTATION_ADD_MESSAGE = gql`
+  mutation AddChatMessage($chatId: String!, $authorId: String!, $body: String!) {
+    addChatMessage(
+      chatId: $chatId
+      authorId: $authorId
+      body: $body
+    ) {
+      messages {
+        id
+        body
+        createdAt
+        author {
+          id
+          name
+          avatar
+        }
       }
-  ) {
-    id
+    }
   }
- }
 `;
