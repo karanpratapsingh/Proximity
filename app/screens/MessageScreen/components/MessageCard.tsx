@@ -16,7 +16,7 @@ const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
   const { navigate } = useNavigation();
 
   return (
-    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ConversationScreen, { chatId })} style={styles().container}>
+    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ConversationScreen, { chatId, handle })} style={styles().container}>
       <Image
         source={{ uri: avatar }}
         style={styles(theme).avatarImage}

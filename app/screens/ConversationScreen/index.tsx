@@ -7,7 +7,7 @@ import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ChatHeader, ConversationScreenPlaceholder } from '../../layout';
-import { filterChatParticipants, transformMessages } from '../../utils';
+import { transformMessages } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
@@ -21,8 +21,9 @@ const userId = {
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
+  const handle = useNavigationParam('handle');
   const [messages, setMessages] = useState([]);
-  const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading }] = useLazyQuery(QUERY_CHAT, {
+  const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
     fetchPolicy: 'network-only'
   });
@@ -53,30 +54,27 @@ const ConversationScreen = () => {
 
   let content = <ConversationScreenPlaceholder />
 
-  if (chatQueryCalled && !chatQueryLoading) {
+  if (chatQueryCalled && !chatQueryLoading && !chatQueryError) {
     const transform = transformMessages(messages);
-    const [participant] = filterChatParticipants(userId, chatQueryData.chat.participants);
 
     content = (
-      <>
-        <ChatHeader handle={participant.handle} />
-        <GiftedChat
-          isAnimated
-          inverted={false}
-          messages={transform}
-          renderComposer={CustomComposer}
-          renderMessageText={CustomMessageText}
-          renderBubble={CustomBubble}
-          renderSend={CustomSend}
-          onSend={updatedMessages => onSend(updatedMessages)}
-          user={{ _id: userId }}
-        />
-      </>
+      <GiftedChat
+        isAnimated
+        inverted={false}
+        messages={transform}
+        renderComposer={CustomComposer}
+        renderMessageText={CustomMessageText}
+        renderBubble={CustomBubble}
+        renderSend={CustomSend}
+        onSend={updatedMessages => onSend(updatedMessages)}
+        user={{ _id: userId }}
+      />
     );
   }
 
   return (
     <View style={styles.container}>
+      <ChatHeader handle={handle} />
       {content}
     </View>
   );
