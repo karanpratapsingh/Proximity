@@ -1,13 +1,13 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
 import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
-import { ConversationScreenPlaceholder, ChatHeader } from '../../layout';
-import { transformMessages, filterChatParticipants } from '../../utils';
+import { ChatHeader, ConversationScreenPlaceholder } from '../../layout';
+import { filterChatParticipants, transformMessages } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
@@ -23,7 +23,8 @@ const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading }] = useLazyQuery(QUERY_CHAT, {
-    variables: { chatId }
+    variables: { chatId },
+    fetchPolicy: 'network-only'
   });
   const { data: chatSubscriptionData, loading: chatSubscriptionLoading } = useSubscription(SUBSCRIPTION_CHAT, {
     variables: { chatId }
@@ -34,10 +35,11 @@ const ConversationScreen = () => {
     if (!chatSubscriptionLoading) {
       setMessages(chatSubscriptionData.chat.messages);
     } else if (chatSubscriptionLoading) {
-      if (chatQueryCalled && !chatQueryLoading)
+      if (chatQueryCalled && !chatQueryLoading) {
         setMessages(chatQueryData.chat.messages);
-      else if (!chatQueryCalled)
+      } else if (!chatQueryCalled) {
         queryChat();
+      }
     }
   }, [chatQueryData, chatQueryCalled, chatQueryLoading, chatSubscriptionData, chatSubscriptionLoading]);
 

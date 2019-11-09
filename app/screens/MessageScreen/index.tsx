@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks';
-import React, { useContext, useState } from 'react';
+import { useLazyQuery } from '@apollo/react-hooks';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
@@ -17,15 +17,21 @@ const userId = {
 
 const MessageScreen: React.FC = () => {
 
-  const { data, loading } = useQuery(QUERY_CHATS, {
-    variables: { userId }
+  const [queryChats, { called, data, loading }] = useLazyQuery(QUERY_CHATS, {
+    variables: { userId },
+    fetchPolicy: 'network-only',
+    pollInterval: 10000
   });
   const { theme } = useContext(ThemeContext);
   const [chatSearch, setChatSearch] = useState('');
 
+  useEffect(() => {
+    queryChats();
+  }, []);
+
   let content = <MessageScreenPlaceholder />;
 
-  if (!loading) {
+  if (called && !loading) {
     const { chats } = data;
     content = (
       <FlatGrid
