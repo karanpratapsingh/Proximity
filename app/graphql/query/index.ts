@@ -58,7 +58,7 @@ export const QUERY_CHAT = gql`
         id
         handle
       }
-      messages {
+      messages(last: 20) {
         id
         body
         createdAt
