@@ -17,7 +17,7 @@ const userId = {
 
 const MessageScreen: React.FC = () => {
 
-  const [queryChats, { called, data, loading }] = useLazyQuery(QUERY_CHATS, {
+  const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
     variables: { userId },
     fetchPolicy: 'network-only',
     pollInterval: 10000
@@ -31,7 +31,7 @@ const MessageScreen: React.FC = () => {
 
   let content = <MessageScreenPlaceholder />;
 
-  if (called && !loading) {
+  if (called && !loading && !error) {
     const { chats } = data;
     content = (
       <FlatGrid

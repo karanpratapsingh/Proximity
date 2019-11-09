@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 const NotificationScreen: React.FC = () => {
 
-  const { data, loading } = useQuery(QUERY_NOTIFICATION, {
+  const { data, loading, error } = useQuery(QUERY_NOTIFICATION, {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
   });
 
@@ -19,7 +19,7 @@ const NotificationScreen: React.FC = () => {
 
   let content = <NotificationScreenPlaceholder />;
 
-  if (!loading) {
+  if (!loading && !error) {
     const { notifications } = data;
     content = (
       <FlatGrid
