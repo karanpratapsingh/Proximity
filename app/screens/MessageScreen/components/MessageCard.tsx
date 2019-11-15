@@ -23,8 +23,14 @@ const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
       />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-        <Text style={styles(theme).timeText}>
-          {lastMessage} · {timeElapsed}</Text>
+        <View style={styles(theme).time}>
+          <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles(theme).messageText}>
+            {lastMessage}
+          </Text>
+          <Text style={styles(theme).timeText}>
+            {` · ${timeElapsed}`}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -51,11 +57,20 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     color: theme.text01
   },
+  time: {
+    flexDirection: 'row',
+    paddingTop: 5,
+  },
+  messageText: {
+    ...FontWeights.Light,
+    ...FontSizes.Caption,
+    maxWidth: '70%',
+    color: theme.text02
+  },
   timeText: {
     ...FontWeights.Light,
     ...FontSizes.Caption,
-    color: theme.text02,
-    paddingTop: 5
+    color: theme.text02
   }
 });
 

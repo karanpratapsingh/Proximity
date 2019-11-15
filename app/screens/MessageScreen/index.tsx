@@ -20,7 +20,7 @@ const MessageScreen: React.FC = () => {
   const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
     variables: { userId },
     fetchPolicy: 'network-only',
-    pollInterval: 10000
+    pollInterval: 4000
   });
   const { theme } = useContext(ThemeContext);
   const [chatSearch, setChatSearch] = useState('');
@@ -55,7 +55,7 @@ const MessageScreen: React.FC = () => {
               lastMessage={lastMessage.body}
               time={lastMessage.createdAt}
             />
-          )
+          );
         }}
       />
     );
