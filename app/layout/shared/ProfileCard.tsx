@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { ThemeColors } from '../../../types';
-import { Typography } from '../../../theme';
-import { ThemeContext } from '../../../context/ThemeContext';
-import { parseConnectionsCount } from '../../../utils';
+import { ThemeColors } from '../../types';
+import { Typography } from '../../theme';
+import { ThemeContext } from '../../context/ThemeContext';
+import { parseConnectionsCount } from '../../utils';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -60,7 +60,7 @@ const ProfileCard: React.FC<ProfileCardType> = ({ avatar, following, followers, 
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 10,
     paddingHorizontal: 10
   },
   info: {

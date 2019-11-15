@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { ThemeColors } from '../../../types';
-import { ThemeContext } from '../../../context/ThemeContext';
+import { ThemeColors } from '../../types';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const PostThumbnail = ({ id, uri }) => {
   const { theme } = useContext(ThemeContext);
