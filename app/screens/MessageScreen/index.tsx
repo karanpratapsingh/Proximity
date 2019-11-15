@@ -37,7 +37,7 @@ const MessageScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={chats.reverse()}
+        items={chats}
         ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
         style={styles().messagesList}
         spacing={20}
@@ -76,7 +76,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   chatSearchBar: {
-    marginTop: 5
+    marginVertical: 5
   },
   messagesList: {
     flex: 1,

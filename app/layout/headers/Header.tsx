@@ -18,7 +18,7 @@ const Header: React.FC<HeaderType> = ({ title, IconRight }) => {
     <View style={styles(theme).container}>
       <View>
         <Text style={styles(theme).label}>{title}</Text>
-        <View style={[styles(theme).underline, { width: title.length * 10 }]} />
+        {/* <View style={[styles(theme).underline, { width: title.length * 10 }]} /> */}
       </View>
 
       {IconRight && <IconRight />}
