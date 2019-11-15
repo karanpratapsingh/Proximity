@@ -12,7 +12,9 @@ import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
+import { Typography } from '../../theme';
 
+const { IconSizes } = Typography;
 const userId = {
   '@occult_686': 'ck2oj3x2n001w0765e34k94w1',
   '@ayushieee': 'ck2oj8o2m00290765ckrg3ozy',
@@ -74,7 +76,7 @@ const ConversationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <GoBackHeader title={handle} />
+      <GoBackHeader title={handle} iconSize={IconSizes.x6} />
       {content}
     </View>
   );

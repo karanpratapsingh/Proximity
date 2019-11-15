@@ -4,7 +4,7 @@ import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeho
 import { placeholder } from '@babel/types';
 import { generateUUID } from '../../utils';
 
-const ProfileScreenPlaceholder: React.FC = () => (
+const ProfileViewScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
     <Placeholder Animation={Fade}>
       <View style={styles.avatarPlaceholder}>
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreenPlaceholder;
+export default ProfileViewScreenPlaceholder;

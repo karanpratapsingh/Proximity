@@ -39,6 +39,9 @@ const StackNavigator = createStackNavigator({
   },
   ConversationScreen: {
     screen: StackRoutes.ConversationScreen
+  },
+  ProfileViewScreen: {
+    screen: StackRoutes.ProfileViewScreen
   }
 }, { headerMode: 'none' });
 

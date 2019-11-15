@@ -2,18 +2,15 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import Feather from 'react-native-vector-icons/Feather';
 import { ThemeContext } from '../../context/ThemeContext';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent, ProfileScreenPlaceholder } from '../../layout';
+import { GoBackHeader, ListEmptyComponent, ProfileViewScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
-import PostThumbnail from './components/PostThumbnail';
-import ProfileCard from './components/ProfileCard';
 
 const { IconSizes } = Typography;
 
-const ProfileScreen: React.FC = () => {
+const ProfileViewScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
@@ -21,7 +18,7 @@ const ProfileScreen: React.FC = () => {
 
   const { theme } = useContext(ThemeContext);
 
-  let content = <ProfileScreenPlaceholder />;
+  let content = <ProfileViewScreenPlaceholder />;
 
   if (!loading && !error) {
     const { user: { avatar, following, followers, name, handle, about, posts } } = data;
@@ -53,10 +50,7 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <View style={styles(theme).container}>
-      <Header
-        title='My Profile'
-        IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
-      />
+      <GoBackHeader iconSize={IconSizes.x7} />
       {content}
     </View>
   );
@@ -73,4 +67,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default ProfileViewScreen;

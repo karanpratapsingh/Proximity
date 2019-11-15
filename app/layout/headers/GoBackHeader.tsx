@@ -6,21 +6,22 @@ import { ThemeColors } from '../../types';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from 'react-navigation-hooks';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 interface GoBackHeaderType {
-  title?: string
+  title?: string,
+  iconSize: number
 };
 
-const GoBackHeader: React.FC<GoBackHeaderType> = ({ title }) => {
+const GoBackHeader: React.FC<GoBackHeaderType> = ({ title, iconSize }) => {
 
   const { theme } = useContext(ThemeContext);
   const { goBack } = useNavigation();
   const navigateBack = () => goBack();
   return (
     <View style={styles(theme).container}>
-      <Entypo onPress={navigateBack} name='chevron-thin-left' size={IconSizes.x6} color={theme.text01} />
-      <Text style={styles(theme).title}>{title}</Text>
+      <Entypo onPress={navigateBack} name='chevron-thin-left' size={iconSize} color={theme.text01} />
+      {title && <Text style={styles(theme).title}>{title}</Text>}
     </View>
   );
 };

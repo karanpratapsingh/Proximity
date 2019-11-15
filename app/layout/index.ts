@@ -6,7 +6,10 @@ import MessageScreenPlaceholder from './placeholders/MessageScreen.Placeholder';
 import ConversationScreenPlaceholder from './placeholders/ConversationScreen.Placeholder';
 import NotificationScreenPlaceholder from './placeholders/NotificationScreen.Placeholder';
 import ProfileScreenPlaceholder from './placeholders/ProfileScreen.Placeholder';
+import ProfileViewScreenPlaceholder from './placeholders/ProfileViewScreen.Placeholder';
 
+import PostThumbnail from './shared/PostThumbnail';
+import ProfileCard from './shared/ProfileCard';
 
 export {
   Header,
@@ -16,5 +19,8 @@ export {
   MessageScreenPlaceholder,
   ConversationScreenPlaceholder,
   NotificationScreenPlaceholder,
-  ProfileScreenPlaceholder
+  ProfileScreenPlaceholder,
+  ProfileViewScreenPlaceholder,
+  PostThumbnail,
+  ProfileCard,
 };

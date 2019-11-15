@@ -5,11 +5,9 @@ import { FlatGrid } from 'react-native-super-grid';
 import Feather from 'react-native-vector-icons/Feather';
 import { ThemeContext } from '../../context/ThemeContext';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent, ProfileScreenPlaceholder } from '../../layout';
+import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
-import PostThumbnail from './components/PostThumbnail';
-import ProfileCard from './components/ProfileCard';
 
 const { IconSizes } = Typography;
 

@@ -15,7 +15,7 @@ const HomeScreen: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { navigate } = useNavigation();
 
-  const navigateToMessages = () => navigate(Routes.MessageScreen);
+  const navigateToMessages = () => navigate(Routes.ProfileViewScreen);
   return (
     <View style={styles(theme).container}>
       <Header
