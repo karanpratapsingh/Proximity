@@ -4,21 +4,21 @@ import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ThemeContext } from '../../context/ThemeContext';
 import { QUERY_USER } from '../../graphql/query';
-import { GoBackHeader, ListEmptyComponent, ProfileViewScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
+import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 
 const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
-
+  const userId = 'ck2ojhiw1002v0765ou6bdsl8';
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
+    variables: { userId }
   });
 
   const { theme } = useContext(ThemeContext);
 
-  let content = <ProfileViewScreenPlaceholder />;
+  let content = <ProfileScreenPlaceholder viewMode />;
 
   if (!loading && !error) {
     const { user: { avatar, following, followers, name, handle, about, posts } } = data;
@@ -26,6 +26,7 @@ const ProfileViewScreen: React.FC = () => {
       <FlatGrid
         ListHeaderComponent={() =>
           <ProfileCard
+            viewMode
             avatar={avatar}
             following={following.length}
             followers={followers.length}

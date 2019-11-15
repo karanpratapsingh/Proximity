@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
-import { placeholder } from '@babel/types';
 import { generateUUID } from '../../utils';
 
-const ProfileScreenPlaceholder: React.FC = () => (
+interface ProfileScreenPlaceholderType {
+  viewMode?: boolean
+};
+
+const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => (
   <View style={styles.container}>
     <Placeholder Animation={Fade}>
       <View style={styles.avatarPlaceholder}>
@@ -12,9 +15,15 @@ const ProfileScreenPlaceholder: React.FC = () => (
         <PlaceholderMedia size={120} isRound />
         <PlaceholderLine style={styles.connectionsPlaceholder} noMargin width={24} height={40} />
       </View>
+
       <View style={styles.infoPlaceholder}>
         <PlaceholderLine style={styles.namePlaceholder} noMargin width={70} height={20} />
         <PlaceholderLine style={styles.handlePlaceholder} noMargin width={50} height={16} />
+        {viewMode &&
+          <View style={styles.interact}>
+            <PlaceholderLine style={styles.interaction} noMargin width={48} height={32} />
+            <PlaceholderLine style={styles.interaction} noMargin width={48} height={32} />
+          </View>}
         <PlaceholderLine style={styles.aboutPlaceholder} noMargin width={100} height={110} />
       </View>
       {new Array(4)
@@ -58,8 +67,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5
   },
+  interact: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: 20
+  },
+  interaction: {
+    borderRadius: 50
+  },
   aboutPlaceholder: {
-    marginTop: 20,
+    marginTop: 16,
     borderRadius: 5
   },
   postContainer: {
