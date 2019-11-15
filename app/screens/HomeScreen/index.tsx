@@ -15,11 +15,12 @@ const HomeScreen: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { navigate } = useNavigation();
 
+  const navigateToMessages = () => navigate(Routes.MessageScreen);
   return (
     <View style={styles(theme).container}>
       <Header
         title='Home'
-        IconRight={() => <FontAwesome onPress={() => navigate(Routes.MessageScreen)} name='send' size={IconSizes.x6} color={theme.text01} />}
+        IconRight={() => <FontAwesome onPress={navigateToMessages} name='send' size={IconSizes.x5} color={theme.text01} />}
       />
     </View>
   );
