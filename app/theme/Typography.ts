@@ -42,8 +42,9 @@ const IconSizes = {
   x4: 16,
   x5: 20,
   x6: 24,
-  x7: 32,
-  x8: 40,
+  x7: 28,
+  x8: 32,
+  x9: 40,
 };
 
 const Typography = { FontWeights, FontSizes, IconSizes };

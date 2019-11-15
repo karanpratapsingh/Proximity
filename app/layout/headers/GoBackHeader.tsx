@@ -3,21 +3,24 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Typography } from '../../theme';
 import { ThemeContext } from '../../context/ThemeContext';
 import { ThemeColors } from '../../types';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
-interface HeaderType {
-  title: string,
-  IconRight?: React.FC
+interface GoBackHeaderType {
+  title?: string
 };
 
-const Header: React.FC<HeaderType> = ({ title, IconRight }) => {
+const GoBackHeader: React.FC<GoBackHeaderType> = ({ title }) => {
 
   const { theme } = useContext(ThemeContext);
+  const { goBack } = useNavigation();
+  const navigateBack = () => goBack();
   return (
     <View style={styles(theme).container}>
+      <Entypo onPress={navigateBack} name='chevron-thin-left' size={IconSizes.x6} color={theme.text01} />
       <Text style={styles(theme).title}>{title}</Text>
-      {IconRight && <IconRight />}
     </View>
   );
 };
@@ -26,15 +29,15 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingTop: 24,
     paddingBottom: 10,
-    paddingHorizontal: 24
+    paddingHorizontal: 10
   },
   title: {
     ...FontWeights.Bold,
-    ...FontSizes.Heading,
-    color: theme.text01
+    ...FontSizes.SubHeading,
+    color: theme.text01,
+    marginLeft: 20
   },
   underline: {
     marginTop: 16,
@@ -45,4 +48,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default Header;
+export default GoBackHeader;

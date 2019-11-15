@@ -6,7 +6,7 @@ import { useNavigationParam } from 'react-navigation-hooks';
 import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
-import { ChatHeader, ConversationScreenPlaceholder } from '../../layout';
+import { GoBackHeader, ConversationScreenPlaceholder } from '../../layout';
 import { transformMessages } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
@@ -74,7 +74,7 @@ const ConversationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ChatHeader handle={handle} />
+      <GoBackHeader title={handle} />
       {content}
     </View>
   );
