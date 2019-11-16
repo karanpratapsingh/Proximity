@@ -7,6 +7,7 @@ import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
+import UserInteractions from './components/UserInteractions';
 
 const { IconSizes } = Typography;
 
@@ -26,12 +27,12 @@ const ProfileViewScreen: React.FC = () => {
       <FlatGrid
         ListHeaderComponent={() =>
           <ProfileCard
-            viewMode
             avatar={avatar}
             following={following.length}
             followers={followers.length}
             name={name}
             handle={handle}
+            renderInteractions={UserInteractions}
             about={about}
           />}
         itemDimension={150}

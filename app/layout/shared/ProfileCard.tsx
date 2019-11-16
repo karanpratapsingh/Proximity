@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -23,16 +23,16 @@ const Connections: React.FC<ConnectionsType> = ({ total, type }) => {
 };
 
 interface ProfileCardType {
-  viewMode?: boolean,
   avatar: string,
   following: number,
   followers: number,
   name: string,
   handle: string,
+  renderInteractions?: any,
   about: string
 };
 
-const ProfileCard: React.FC<ProfileCardType> = ({ viewMode, avatar, following, followers, name, handle, about }) => {
+const ProfileCard: React.FC<ProfileCardType> = ({ avatar, following, followers, name, handle, renderInteractions, about }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles(theme).container}>
@@ -48,15 +48,7 @@ const ProfileCard: React.FC<ProfileCardType> = ({ viewMode, avatar, following, f
         <Text style={styles(theme).usernameText}>{name}</Text>
         <Text style={styles(theme).handleText}>{handle}</Text>
       </View>
-      {viewMode && <View style={styles().interact}>
-        <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).followInteraction}>
-          <Text style={styles(theme).followInteractionText}>FOLLOW</Text>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).messageInteraction}>
-          <Text style={styles(theme).messageInteractionText}>MESSAGE</Text>
-        </TouchableOpacity>
-      </View>}
-
+      {renderInteractions && renderInteractions()}
       <View style={styles(theme).about}>
         <Text style={styles(theme).aboutTitle}>About</Text>
         <Text style={styles(theme).aboutText}>{about}</Text>
@@ -112,41 +104,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     color: theme.text02,
     marginTop: 5
-  },
-  interact: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 20
-  },
-  followInteraction: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 5,
-    paddingVertical: 7,
-    borderRadius: 40,
-    backgroundColor: theme.accent
-  },
-  messageInteraction: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 5,
-    paddingVertical: 7,
-    borderRadius: 40,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.accent
-  },
-  followInteractionText: {
-    ...FontWeights.Light,
-    ...FontSizes.Caption,
-    color: theme.white
-  },
-  messageInteractionText: {
-    ...FontWeights.Light,
-    ...FontSizes.Caption,
-    color: theme.accent
   },
   about: {
     padding: 16,

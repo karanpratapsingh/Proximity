@@ -18,7 +18,7 @@ export {
   MessageScreenPlaceholder,
   ConversationScreenPlaceholder,
   NotificationScreenPlaceholder,
-  ProfileScreenPlaceholder,  
+  ProfileScreenPlaceholder,
   PostThumbnail,
-  ProfileCard,
+  ProfileCard
 };
