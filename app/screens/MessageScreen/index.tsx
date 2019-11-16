@@ -59,7 +59,11 @@ const MessageScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       <Header title='Messages' />
-      <SearchBar value={chatSearch} onChangeText={setChatSearch} style={styles().chatSearchBar} />
+      <SearchBar
+        value={chatSearch}
+        onChangeText={setChatSearch}
+        placeholder='Search for chats...'
+      />
       {content}
     </View>
   );
@@ -69,9 +73,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.base
-  },
-  chatSearchBar: {
-    marginVertical: 5
   },
   messagesList: {
     flex: 1,

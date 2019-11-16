@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { AppContext } from '../../context';
-import { Header } from '../../layout';
+import { Header, SearchBar } from '../../layout';
 import { ThemeColors } from '../../types';
 
 const ExploreScreen: React.FC = () => {
 
   const { theme } = useContext(AppContext);
+  const [userSearch, setUserSearch] = useState('');
 
   return (
     <View style={styles(theme).container}>
       <Header title='Explore' />
+      <SearchBar
+        value={userSearch}
+        onChangeText={setUserSearch}
+        placeholder='Search for users...'
+      />
     </View>
   );
 };

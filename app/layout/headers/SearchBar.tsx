@@ -6,14 +6,21 @@ import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
-const SearchBar = ({ value, onChangeText, style }) => {
+interface SearchBarType {
+  value: string,
+  onChangeText: any,
+  placeholder: string,
+  style?: object
+};
+
+const SearchBar:React.FC<SearchBarType> = ({ value, onChangeText, placeholder, style }) => {
   const { theme } = useContext(AppContext);
 
   return (
     <TextInput
       style={[styles(theme).container, style]}
       value={value}
-      placeholder={'Search for chats...'}
+      placeholder={placeholder}
       onChangeText={onChangeText}
     />
   );
@@ -29,7 +36,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
     color: theme.text02,
-    borderRadius: 20
+    borderRadius: 20,
+    marginVertical: 5
   }
 });
 

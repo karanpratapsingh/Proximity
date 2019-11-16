@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
@@ -18,7 +18,6 @@ const ProfileScreen: React.FC = () => {
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId }
   });
-
 
   let content = <ProfileScreenPlaceholder />;
 
@@ -54,7 +53,7 @@ const ProfileScreen: React.FC = () => {
     <View style={styles(theme).container}>
       <Header
         title='My Profile'
-        IconRight={() => <Feather name='settings' size={IconSizes.x7} color={theme.text01} />}
+        IconRight={() => <Entypo name='dots-three-vertical' size={IconSizes.x5} color={theme.text01} />}
       />
       {content}
     </View>
