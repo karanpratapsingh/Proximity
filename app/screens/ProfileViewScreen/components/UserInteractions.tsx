@@ -3,8 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemeColors } from '../../../types';
 import { Typography } from '../../../theme';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { LoadingIndicator } from '../../../layout';
 
-const { FontWeights, FontSizes } = Typography;
+const { FontWeights, FontSizes, IconSizes } = Typography;
 
 const UserInteractions = () => {
   const { theme } = useContext(ThemeContext);
@@ -12,7 +13,8 @@ const UserInteractions = () => {
   return (
     <View style={styles().container}>
       <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).followInteraction}>
-        <Text style={styles(theme).followInteractionText}>FOLLOW</Text>
+        <LoadingIndicator size={IconSizes.x0} color={theme.white} />
+        {/* <Text style={styles(theme).followInteractionText}>FOLLOW</Text> */}
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).messageInteraction}>
         <Text style={styles(theme).messageInteractionText}>MESSAGE</Text>

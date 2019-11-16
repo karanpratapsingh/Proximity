@@ -2,6 +2,7 @@ import Header from './headers/Header';
 import SearchBar from './headers/SearchBar';
 import GoBackHeader from './headers/GoBackHeader';
 import ListEmptyComponent from './misc/ListEmptyComponent';
+import LoadingIndicator from './misc/LoadingIndicator';
 import MessageScreenPlaceholder from './placeholders/MessageScreen.Placeholder';
 import ConversationScreenPlaceholder from './placeholders/ConversationScreen.Placeholder';
 import NotificationScreenPlaceholder from './placeholders/NotificationScreen.Placeholder';
@@ -15,6 +16,7 @@ export {
   SearchBar,
   GoBackHeader,
   ListEmptyComponent,
+  LoadingIndicator,
   MessageScreenPlaceholder,
   ConversationScreenPlaceholder,
   NotificationScreenPlaceholder,

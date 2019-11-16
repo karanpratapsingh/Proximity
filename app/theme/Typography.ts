@@ -36,6 +36,7 @@ const FontSizes = {
 };
 
 const IconSizes = {
+  x0: 6,
   x1: 10,
   x2: 12,
   x3: 14,
