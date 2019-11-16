@@ -7,11 +7,14 @@ import { LoadingIndicator } from '../../../layout';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_DOES_FOLLOW } from '../../../graphql/query';
 import { MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../../navigation/Routes';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
-const UserInteractions = ({ targetId }) => {
+const UserInteractions = ({ targetId, handle }) => {
 
+  const { navigate } = useNavigation();
   const { userId, theme } = useContext(ThemeContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
     variables: { userId, targetId },
@@ -41,7 +44,6 @@ const UserInteractions = ({ targetId }) => {
     const { doesFollow } = doesFollowData;
     const updateFollowingArgs = { userId, targetId };
     if (doesFollow) {
-      //unfollow mutation
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
@@ -49,7 +51,6 @@ const UserInteractions = ({ targetId }) => {
         }
       });
     } else {
-      // follow mutation
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
@@ -59,12 +60,16 @@ const UserInteractions = ({ targetId }) => {
     }
   };
 
+  const messageInteraction = () => {
+    navigate(Routes.ConversationScreen, { chatId: null, handle });
+  };
+
   return (
     <View style={styles().container}>
       <TouchableOpacity activeOpacity={0.90} onPress={followInteraction} style={styles(theme).followInteraction}>
         {content}
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).messageInteraction}>
+      <TouchableOpacity activeOpacity={0.90} onPress={messageInteraction} style={styles(theme).messageInteraction}>
         <Text style={styles(theme).messageInteractionText}>MESSAGE</Text>
       </TouchableOpacity>
     </View>
