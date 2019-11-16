@@ -4,14 +4,9 @@ import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
+import { NotificationText } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
-
-const NotificationText = {
-  'FOLLOW': 'has started following you!',
-  'COMMENT': 'commented on your post!!',
-  'LIKE': 'liked your post!',
-};
 
 const NotificationCard = ({ avatar, handle, type, time }) => {
 

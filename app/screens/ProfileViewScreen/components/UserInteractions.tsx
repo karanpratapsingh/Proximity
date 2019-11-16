@@ -8,7 +8,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
 import { MUTATION_UPDATE_FOLLOWING, MUTATION_CREATE_TEMPORARY_CHAT } from '../../../graphql/mutation';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../constants';
+import { Routes, FollowInteractionType } from '../../../constants';
 import client from '../../../graphql/client';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
@@ -36,10 +36,6 @@ const UserInteractions = ({ targetId, handle }) => {
   }
 
   const followInteraction = () => {
-    const followInteractionType = {
-      FOLLOW: 'FOLLOW',
-      UNFOLLOW: 'UNFOLLOW'
-    };
     if (doesFollowLoading) return;
 
     const { doesFollow } = doesFollowData;
@@ -48,14 +44,14 @@ const UserInteractions = ({ targetId, handle }) => {
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: followInteractionType.UNFOLLOW
+          action: FollowInteractionType.UNFOLLOW
         }
       });
     } else {
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: followInteractionType.FOLLOW
+          action: FollowInteractionType.FOLLOW
         }
       });
     }
@@ -64,8 +60,8 @@ const UserInteractions = ({ targetId, handle }) => {
   const messageInteraction = async () => {
     try {
       const { data: { chatExists } } = await client.query({
-        query: QUERY_CHAT_EXISTS, // my user id from state, target or viewed user id
-        variables: { userId: 'ck2oj3x2n001w0765e34k94w1', targetId }
+        query: QUERY_CHAT_EXISTS,
+        variables: { userId, targetId }
       });
 
       if (chatExists) {
@@ -79,7 +75,6 @@ const UserInteractions = ({ targetId, handle }) => {
     } catch {
       // do something or show error
     }
-
   };
 
   return (

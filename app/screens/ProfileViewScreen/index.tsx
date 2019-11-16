@@ -8,6 +8,7 @@ import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbna
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
+import { DummyUsers } from '../../constants';
 
 const { IconSizes } = Typography;
 
@@ -15,10 +16,10 @@ const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);
 
   //?ROUTING: {userId of target}: from props
-  const userId = 'ck31eyhnp0dur0723jkme9dyn'; //@catto
+  const userId = DummyUsers['@catto'];
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId }, //catto
+    variables: { userId },
     pollInterval: 1000
   });
 

@@ -13,11 +13,12 @@ const { IconSizes } = Typography;
 
 const ProfileScreen: React.FC = () => {
 
+  const { userId, theme } = useContext(AppContext);
+
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
+    variables: { userId }
   });
 
-  const { theme } = useContext(AppContext);
 
   let content = <ProfileScreenPlaceholder />;
 

@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
@@ -14,18 +14,15 @@ import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 import { Typography } from '../../theme';
 import client from '../../graphql/client';
+import { AppContext } from '../../context';
 
 const { IconSizes } = Typography;
-const userId = {
-  '@occult_686': 'ck2oj3x2n001w0765e34k94w1',
-  '@ayushieee': 'ck2oj8o2m00290765ckrg3ozy',
-  '@doggo': 'ck2ojhiw1002v0765ou6bdsl8'
-}['@occult_686'];
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
+  const { userId } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
@@ -52,10 +49,9 @@ const ConversationScreen = () => {
     const isFirstMessage = messages.length === 0;
     const [updatedMessage] = updatedMessages;
     if (isFirstMessage) {
-      // userId::global from the global state
       await client.mutate({
-        mutation: MUTATION_CONNECT_CHAT_TO_USERS, // from state
-        variables: { chatId, userId: 'ck2oj3x2n001w0765e34k94w1', targetId }
+        mutation: MUTATION_CONNECT_CHAT_TO_USERS,
+        variables: { chatId, userId, targetId }
       });
     }
     addMessage({
