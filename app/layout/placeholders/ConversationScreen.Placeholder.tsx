@@ -1,22 +1,13 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { StyleSheet, View } from 'react-native';
+import { Typography } from '../../theme';
+import { ThemeStatic } from '../../theme/Colors';
+import LoadingIndicator from '../misc/LoadingIndicator';
 
+const { IconSizes } = Typography;
 const ConversationScreenPlaceholder = () => (
   <View style={styles.container}>
-    {/* <Placeholder Animation={Fade}>
-      <PlaceholderLine
-        noMargin
-        style={styles.placeholderLine}
-        height={30}
-        width={responsiveWidth(50)}
-      />
-    </Placeholder> */}
-    <View style={styles.loaderContainer}>
-      <ActivityIndicator />
-
-    </View>
+    <LoadingIndicator size={IconSizes.x2} color={ThemeStatic.accent} />
   </View>
 );
 
@@ -25,14 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  placeholderLine: {
-    borderRadius: 5
-  },
-  loaderContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   }
