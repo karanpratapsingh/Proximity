@@ -4,17 +4,65 @@ import { ThemeColors } from '../../../types';
 import { Typography } from '../../../theme';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { LoadingIndicator } from '../../../layout';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { QUERY_DOES_FOLLOW } from '../../../graphql/query';
+import { MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
-const UserInteractions = () => {
-  const { theme } = useContext(ThemeContext);
+const UserInteractions = ({ targetId }) => {
+
+  const { userId, theme } = useContext(ThemeContext);
+  const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
+    variables: { userId, targetId },
+    pollInterval: 500
+  });
+
+  const [updateFollowing, { loading: updateFollowingLoading, error: updateFollowingError }] = useMutation(MUTATION_UPDATE_FOLLOWING);
+
+  let content = <LoadingIndicator size={IconSizes.x0} color={theme.white} />;
+
+  if (!doesFollowLoading && !updateFollowingLoading && !doesFollowError) {
+    const { doesFollow } = doesFollowData;
+    content = (
+      <Text style={styles(theme).followInteractionText}>
+        {`${doesFollow ? 'UNFOLLOW' : 'FOLLOW'}`}
+      </Text>
+    );
+  }
+
+  const followInteraction = () => {
+    const followInteractionType = {
+      FOLLOW: 'FOLLOW',
+      UNFOLLOW: 'UNFOLLOW'
+    };
+    if (doesFollowLoading) return;
+
+    const { doesFollow } = doesFollowData;
+    const updateFollowingArgs = { userId, targetId };
+    if (doesFollow) {
+      //unfollow mutation
+      updateFollowing({
+        variables: {
+          ...updateFollowingArgs,
+          action: followInteractionType.UNFOLLOW
+        }
+      });
+    } else {
+      // follow mutation
+      updateFollowing({
+        variables: {
+          ...updateFollowingArgs,
+          action: followInteractionType.FOLLOW
+        }
+      });
+    }
+  };
 
   return (
     <View style={styles().container}>
-      <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).followInteraction}>
-        <LoadingIndicator size={IconSizes.x0} color={theme.white} />
-        {/* <Text style={styles(theme).followInteractionText}>FOLLOW</Text> */}
+      <TouchableOpacity activeOpacity={0.90} onPress={followInteraction} style={styles(theme).followInteraction}>
+        {content}
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.90} onPress={() => null} style={styles(theme).messageInteraction}>
         <Text style={styles(theme).messageInteractionText}>MESSAGE</Text>

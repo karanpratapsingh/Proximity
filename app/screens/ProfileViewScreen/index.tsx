@@ -15,8 +15,11 @@ const ProfileViewScreen: React.FC = () => {
   const { userId, theme } = useContext(ThemeContext);
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId }
+    variables: { userId },
+    pollInterval: 1000
   });
+
+  const targetId = 'ck2ojhiw1002v0765ou6bdsl8'; //@doggo
 
   let content = <ProfileScreenPlaceholder viewMode />;
 
@@ -31,7 +34,7 @@ const ProfileViewScreen: React.FC = () => {
             followers={followers.length}
             name={name}
             handle={handle}
-            renderInteractions={UserInteractions}
+            renderInteractions={() => <UserInteractions targetId={targetId} />}
             about={about}
           />}
         itemDimension={150}
