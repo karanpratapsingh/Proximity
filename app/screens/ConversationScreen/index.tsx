@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { MUTATION_ADD_MESSAGE } from '../../graphql/mutation';
+import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { GoBackHeader, ConversationScreenPlaceholder } from '../../layout';
@@ -13,6 +13,7 @@ import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 import { Typography } from '../../theme';
+import client from '../../graphql/client';
 
 const { IconSizes } = Typography;
 const userId = {
@@ -24,6 +25,7 @@ const userId = {
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
+  const targetId = useNavigationParam('targetId');
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
@@ -46,8 +48,16 @@ const ConversationScreen = () => {
     }
   }, [chatQueryData, chatQueryCalled, chatQueryLoading, chatSubscriptionData, chatSubscriptionLoading]);
 
-  const onSend = updatedMessages => {
+  const onSend = async updatedMessages => {
+    const isFirstMessage = messages.length === 0;
     const [updatedMessage] = updatedMessages;
+    if (isFirstMessage) {
+      // userId::global from the global state
+      await client.mutate({
+        mutation: MUTATION_CONNECT_CHAT_TO_USERS, // from state
+        variables: { chatId, userId: 'ck2oj3x2n001w0765e34k94w1', targetId }
+      });
+    }
     addMessage({
       variables:
         { chatId, authorId: userId, body: updatedMessage.text }

@@ -5,10 +5,11 @@ import { Typography } from '../../../theme';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { LoadingIndicator } from '../../../layout';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { QUERY_DOES_FOLLOW } from '../../../graphql/query';
-import { MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
+import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
+import { MUTATION_UPDATE_FOLLOWING, MUTATION_CREATE_TEMPORARY_CHAT } from '../../../graphql/mutation';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../navigation/Routes';
+import client from '../../../graphql/client';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
@@ -60,8 +61,25 @@ const UserInteractions = ({ targetId, handle }) => {
     }
   };
 
-  const messageInteraction = () => {
-    navigate(Routes.ConversationScreen, { chatId: null, handle });
+  const messageInteraction = async () => {
+    try {
+      const { data: { chatExists } } = await client.query({
+        query: QUERY_CHAT_EXISTS, // my user id from state, target or viewed user id
+        variables: { userId: 'ck2oj3x2n001w0765e34k94w1', targetId }
+      });
+
+      if (chatExists) {
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, handle, targetId: null });
+      } else {
+        const { data } = await client.mutate({
+          mutation: MUTATION_CREATE_TEMPORARY_CHAT
+        });
+        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, handle, targetId });
+      }
+    } catch {
+      // do something or show error
+    }
+
   };
 
   return (

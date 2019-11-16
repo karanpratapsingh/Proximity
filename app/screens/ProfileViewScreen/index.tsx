@@ -14,12 +14,13 @@ const { IconSizes } = Typography;
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(ThemeContext);
 
+  //?ROUTING: {userId of target}: from props
+  const userId = 'ck31eyhnp0dur0723jkme9dyn'; //@catto
+
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId: 'ck2ojhiw1002v0765ou6bdsl8' }, //doggo
+    variables: { userId }, //catto
     pollInterval: 1000
   });
-
-  const targetId = 'ck2ojhiw1002v0765ou6bdsl8'; //@doggo
 
   let content = <ProfileScreenPlaceholder viewMode />;
 
@@ -34,7 +35,7 @@ const ProfileViewScreen: React.FC = () => {
             followers={followers.length}
             name={name}
             handle={handle}
-            renderInteractions={() => <UserInteractions targetId={targetId} handle={handle} />}
+            renderInteractions={() => <UserInteractions targetId={userId} handle={handle} />}
             about={about}
           />}
         itemDimension={150}
