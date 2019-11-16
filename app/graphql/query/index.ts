@@ -73,3 +73,11 @@ export const QUERY_DOES_FOLLOW = gql`
     doesFollow(userId: $userId, targetId: $targetId)
   }
 `;
+
+export const QUERY_CHAT_EXISTS = gql`
+  query ChatExists($userId: String!, $targetId: String!) {
+    chatExists(userId: $userId, targetId: $targetId) {
+      id
+    }
+  }
+`;

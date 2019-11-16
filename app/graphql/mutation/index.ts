@@ -32,3 +32,23 @@ export const MUTATION_UPDATE_FOLLOWING = gql`
     }
   }
 `;
+
+export const MUTATION_CREATE_TEMPORARY_CHAT = gql`
+  mutation CreateTemporaryChat {
+    createTemporaryChat {
+      id
+    }
+  }
+`;
+
+export const MUTATION_CONNECT_CHAT_TO_USERS = gql`
+  mutation ConnectChatToUsers($chatId: String!, $userId: String!, $targetId: String!) {
+    connectChatToUsers(
+      chatId: $chatId,
+      userId: $userId,
+      targetId: $targetId
+    ) {
+      id
+    }
+  }
+`;
