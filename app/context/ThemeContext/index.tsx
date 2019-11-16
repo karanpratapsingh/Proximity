@@ -12,7 +12,7 @@ type ThemeContextType = {
 export const ThemeContext = createContext({} as ThemeContextType);
 
 export const ThemeContextProvider = props => {
-  const [userId, setUserId] = useState('ck2ojhiw1002v0765ou6bdsl8');
+  const [userId, setUserId] = useState('ck2ojhiw1002v0765ou6bdsl8'); //@doggo
   const [theme, setTheme] = useState(Theme.light.colors);
   const [, setThemeType] = useState(Theme.light.type);
 
