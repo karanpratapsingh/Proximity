@@ -3,6 +3,8 @@ import { Theme } from '../../theme';
 import { ThemeColors } from '../../types';
 
 type ThemeContextType = {
+  userId: string,
+  updateUser: (id: string) => void
   theme: ThemeColors,
   toggleTheme: (type: string) => void
 };
@@ -10,8 +12,13 @@ type ThemeContextType = {
 export const ThemeContext = createContext({} as ThemeContextType);
 
 export const ThemeContextProvider = props => {
+  const [userId, setUserId] = useState('ck2ojhiw1002v0765ou6bdsl8');
   const [theme, setTheme] = useState(Theme.light.colors);
-  const [themeType, setThemeType] = useState(Theme.light.type);
+  const [, setThemeType] = useState(Theme.light.type);
+
+  const updateUser = id => {
+    setUserId(id);
+  };
 
   const toggleTheme = type => {
     setTheme(Theme[type].colors);
@@ -20,7 +27,7 @@ export const ThemeContextProvider = props => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ userId, updateUser, theme, toggleTheme }}>
       {props.children}
     </ThemeContext.Provider>
   );

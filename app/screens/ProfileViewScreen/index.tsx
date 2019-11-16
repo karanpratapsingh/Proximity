@@ -12,12 +12,11 @@ import UserInteractions from './components/UserInteractions';
 const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
-  const userId = 'ck2ojhiw1002v0765ou6bdsl8';
+  const { userId, theme } = useContext(ThemeContext);
+
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId }
   });
-
-  const { theme } = useContext(ThemeContext);
 
   let content = <ProfileScreenPlaceholder viewMode />;
 
