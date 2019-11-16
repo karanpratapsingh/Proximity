@@ -67,3 +67,9 @@ export const QUERY_CHAT = gql`
     }
   }
 `;
+
+export const QUERY_DOES_FOLLOW = gql`
+  query DoesFollow($userId: String!, $targetId: String!) {
+    doesFollow(userId: $userId, targetId: $targetId)
+  }
+`;

@@ -20,3 +20,15 @@ export const MUTATION_ADD_MESSAGE = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_FOLLOWING = gql`
+  mutation UpdateFollowing($userId: String!, $targetId: String!, $action: UpdateFollowingAction!) {
+    updateFollowing(
+      userId: $userId
+      targetId: $targetId
+      action: $action
+    ) {
+      id
+    }
+  }
+`;
