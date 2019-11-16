@@ -12,13 +12,13 @@ import UserInteractions from './components/UserInteractions';
 const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
-  const { userId, theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId },
+    variables: { userId: 'ck2ojhiw1002v0765ou6bdsl8' }, //doggo
     pollInterval: 1000
   });
-
+ 
   const targetId = 'ck2ojhiw1002v0765ou6bdsl8'; //@doggo
 
   let content = <ProfileScreenPlaceholder viewMode />;

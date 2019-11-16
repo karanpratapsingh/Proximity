@@ -79,7 +79,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'center',
   },
   connectionsText: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.SubHeading,
     color: theme.text01
   },
