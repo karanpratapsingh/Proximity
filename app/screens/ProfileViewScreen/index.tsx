@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
@@ -12,7 +12,7 @@ import UserInteractions from './components/UserInteractions';
 const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   //?ROUTING: {userId of target}: from props
   const userId = 'ck31eyhnp0dur0723jkme9dyn'; //@catto

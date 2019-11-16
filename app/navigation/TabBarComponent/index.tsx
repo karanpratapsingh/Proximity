@@ -3,10 +3,10 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { ThemeColors } from '../../types';
 import TabIcon from './TabIcon';
 import { TabBarRoutes } from '../Routes';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 
 const TabBarComponent = ({ navigation, ...data }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const currentRouteName = navigation.state.routes[navigation.state.index].key;
   return (
     <View style={styles(theme).container}>

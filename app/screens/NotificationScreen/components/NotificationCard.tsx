@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { ThemeContext } from '../../../context/ThemeContext';
+import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
@@ -15,7 +15,7 @@ const NotificationText = {
 
 const NotificationCard = ({ avatar, handle, type, time }) => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const notificationText = NotificationText[type];
   const timeElapsed = parseTimeElapsed(time);
 

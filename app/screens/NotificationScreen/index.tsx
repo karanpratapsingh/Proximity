@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { Header, ListEmptyComponent, NotificationScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import NotificationCard from './components/NotificationCard';
@@ -15,7 +15,7 @@ const NotificationScreen: React.FC = () => {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
   });
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   let content = <NotificationScreenPlaceholder />;
 

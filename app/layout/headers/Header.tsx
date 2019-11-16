@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Typography } from '../../theme';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
@@ -13,7 +13,7 @@ interface HeaderType {
 
 const Header: React.FC<HeaderType> = ({ title, IconRight }) => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
       <Text style={styles(theme).title}>{title}</Text>

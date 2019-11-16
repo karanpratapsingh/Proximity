@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
@@ -8,7 +8,7 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 const { FontWeights, FontSizes } = Typography;
 
 const ListEmptyComponent = ({ listType, spacing }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   return (
     <View style={[styles().container, { height: responsiveHeight(spacing) }]}>
       <Text style={styles(theme).emptyText}>No {listType} yet</Text>

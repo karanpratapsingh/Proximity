@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { ThemeColors } from '../../types';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 
 const PostThumbnail = ({ id, uri }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   return (
     <TouchableOpacity onPress={() => null} activeOpacity={0.95} style={styles(theme).container}>
       <Image

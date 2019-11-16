@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { Header } from '../../layout';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
@@ -12,7 +12,7 @@ const { IconSizes } = Typography;
 
 const HomeScreen: React.FC = () => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
 
   const navigateToMessages = () => navigate(Routes.MessageScreen);

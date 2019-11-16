@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { parseConnectionsCount } from '../../utils';
 
 const { FontWeights, FontSizes } = Typography;
@@ -13,7 +13,7 @@ interface ConnectionsType {
 };
 
 const Connections: React.FC<ConnectionsType> = ({ total, type }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).connections}>
       <Text style={styles(theme).connectionsText}>{total}</Text>
@@ -33,7 +33,7 @@ interface ProfileCardType {
 };
 
 const ProfileCard: React.FC<ProfileCardType> = ({ avatar, following, followers, name, handle, renderInteractions, about }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
       <View style={styles(theme).info}>

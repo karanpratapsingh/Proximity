@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Feather from 'react-native-vector-icons/Feather';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
 import { Typography } from '../../theme';
@@ -17,7 +17,7 @@ const ProfileScreen: React.FC = () => {
     variables: { userId: 'ck2oj3x2n001w0765e34k94w1' }
   });
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   let content = <ProfileScreenPlaceholder />;
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemeColors } from '../../../types';
 import { Typography } from '../../../theme';
-import { ThemeContext } from '../../../context/ThemeContext';
+import { AppContext } from '../../../context';
 import { LoadingIndicator } from '../../../layout';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
@@ -16,7 +16,7 @@ const { FontWeights, FontSizes, IconSizes } = Typography;
 const UserInteractions = ({ targetId, handle }) => {
 
   const { navigate } = useNavigation();
-  const { userId, theme } = useContext(ThemeContext);
+  const { userId, theme } = useContext(AppContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
     variables: { userId, targetId },
     pollInterval: 500

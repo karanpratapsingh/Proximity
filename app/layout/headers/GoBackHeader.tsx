@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Typography } from '../../theme';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from 'react-navigation-hooks';
@@ -15,7 +15,7 @@ interface GoBackHeaderType {
 
 const GoBackHeader: React.FC<GoBackHeaderType> = ({ title, iconSize }) => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const { goBack } = useNavigation();
   const navigateBack = () => goBack();
   return (

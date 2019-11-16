@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { Header } from '../../layout';
 import { ThemeColors } from '../../types';
 
 const UploadScreen: React.FC = () => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   return (
     <View style={styles(theme).container}>

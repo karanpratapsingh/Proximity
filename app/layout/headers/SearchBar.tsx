@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
 const SearchBar = ({ value, onChangeText, style }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   return (
     <TextInput

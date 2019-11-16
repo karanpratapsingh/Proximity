@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
 import { Header, ListEmptyComponent, MessageScreenPlaceholder, SearchBar } from '../../layout';
 import { ThemeColors } from '../../types';
@@ -22,7 +22,7 @@ const MessageScreen: React.FC = () => {
     fetchPolicy: 'network-only',
     pollInterval: 4000
   });
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const [chatSearch, setChatSearch] = useState('');
 
   useEffect(() => {

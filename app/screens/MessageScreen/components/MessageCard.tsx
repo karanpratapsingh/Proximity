@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { ThemeContext } from '../../../context/ThemeContext';
+import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
@@ -11,7 +11,7 @@ const { FontWeights, FontSizes } = Typography;
 
 const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
 

@@ -3,12 +3,12 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import { Typography } from '../../theme';
-import { ThemeContext } from '../../context/ThemeContext';
+import { AppContext } from '../../context';
 
 const { IconSizes } = Typography;
 
 const TabIcon = ({ route, isActive }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(AppContext);
 
   switch (route) {
     case 'HomeScreen':

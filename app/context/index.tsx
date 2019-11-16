@@ -1,17 +1,17 @@
 import React, { useState, createContext, } from 'react';
-import { Theme } from '../../theme';
-import { ThemeColors } from '../../types';
+import { Theme } from '../theme';
+import { ThemeColors } from '../types';
 
-type ThemeContextType = {
+type AppContextType = {
   userId: string,
   updateUser: (id: string) => void
   theme: ThemeColors,
   toggleTheme: (type: string) => void
 };
 
-export const ThemeContext = createContext({} as ThemeContextType);
+export const AppContext = createContext({} as AppContextType);
 
-export const ThemeContextProvider = props => {
+export const AppContextProvider = props => {
   const [userId, setUserId] = useState('ck2oj3x2n001w0765e34k94w1'); //@doggo
   const [theme, setTheme] = useState(Theme.light.colors);
   const [, setThemeType] = useState(Theme.light.type);
@@ -27,8 +27,8 @@ export const ThemeContextProvider = props => {
   };
 
   return (
-    <ThemeContext.Provider value={{ userId, updateUser, theme, toggleTheme }}>
+    <AppContext.Provider value={{ userId, updateUser, theme, toggleTheme }}>
       {props.children}
-    </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 };
