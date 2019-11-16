@@ -8,7 +8,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
 import { MUTATION_UPDATE_FOLLOWING, MUTATION_CREATE_TEMPORARY_CHAT } from '../../../graphql/mutation';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../navigation/Routes';
+import { Routes } from '../../../constants';
 import client from '../../../graphql/client';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;

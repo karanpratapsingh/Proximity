@@ -5,7 +5,7 @@ import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../navigation/Routes';
+import { Routes } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
 

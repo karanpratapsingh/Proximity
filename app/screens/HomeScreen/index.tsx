@@ -6,7 +6,7 @@ import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../navigation/Routes';
+import { Routes } from '../../constants';
 
 const { IconSizes } = Typography;
 
