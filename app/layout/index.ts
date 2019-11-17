@@ -8,6 +8,7 @@ import ConversationScreenPlaceholder from './placeholders/ConversationScreen.Pla
 import NotificationScreenPlaceholder from './placeholders/NotificationScreen.Placeholder';
 import ProfileScreenPlaceholder from './placeholders/ProfileScreen.Placeholder';
 import SearchUsersPlaceholder from './placeholders/SearchUsers.Placeholder';
+import ExploreScreenPlaceholder from './placeholders/ExploreScreen.Placeholder';
 
 import PostThumbnail from './shared/PostThumbnail';
 import ProfileCard from './shared/ProfileCard';
@@ -24,5 +25,6 @@ export {
   ProfileScreenPlaceholder,
   PostThumbnail,
   ProfileCard,
-  SearchUsersPlaceholder
+  SearchUsersPlaceholder,
+  ExploreScreenPlaceholder
 };

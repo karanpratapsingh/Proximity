@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { AppContext } from '../../context';
-import { Header, SearchBar, SearchUsersPlaceholder } from '../../layout';
-import { ThemeColors } from '../../types';
 import { useLazyQuery } from '@apollo/react-hooks';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { AppContext } from '../../context';
 import { QUERY_SEARCH_USERS } from '../../graphql/query';
-import UserCard from './components/UserCard';
+import { ExploreScreenPlaceholder, Header, SearchBar, SearchUsersPlaceholder } from '../../layout';
+import { ThemeColors } from '../../types';
 import UserSearchResults from './components/UserSearchResults';
 
 const ExploreScreen: React.FC = () => {
@@ -22,22 +21,17 @@ const ExploreScreen: React.FC = () => {
   }] = useLazyQuery(QUERY_SEARCH_USERS);
 
   useEffect(() => {
-    if (userSearch !== '') {
-      querySearchUsers({ variables: { name: userSearch } });
-    }
+    if (userSearch !== '') querySearchUsers({ variables: { name: userSearch } });
     if (querySearchUsersCalled && !querySearchUsersLoading) {
       const { searchUsers } = querySearchUsersData;
       setSearchResults(searchUsers);
     }
-
   }, [userSearch, querySearchUsersData, querySearchUsersCalled, querySearchUsersLoading]);
 
   const onFocus = () => setIsSearchFocused(true);
   const onBlur = () => setIsSearchFocused(false);
 
-  let content = (
-    <Text>Explore stuff</Text>
-  );
+  let content = <ExploreScreenPlaceholder />;
 
   if (isSearchFocused) {
     let subContent = <Text>Banner</Text>;
@@ -62,7 +56,7 @@ const ExploreScreen: React.FC = () => {
         onFocus={onFocus}
         onBlur={onBlur}
         value={userSearch}
-        onChangeText={setUserSearch}
+        onChangeText={searchText => setUserSearch(searchText.toLowerCase())}
         placeholder='Search for users...'
       />
       <View style={styles().content}>
