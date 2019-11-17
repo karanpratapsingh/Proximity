@@ -13,7 +13,8 @@ const NotificationScreen: React.FC = () => {
   const { userId, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_NOTIFICATION, {
-    variables: { userId }
+    variables: { userId },
+    pollInterval: 2000
   });
 
   const renderItem = ({ item }) => {
@@ -26,7 +27,7 @@ const NotificationScreen: React.FC = () => {
         type={type}
         time={createdAt}
       />
-    )
+    );
   };
 
   let content = <NotificationScreenPlaceholder />;

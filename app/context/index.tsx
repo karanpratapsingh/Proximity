@@ -1,6 +1,7 @@
 import React, { useState, createContext, } from 'react';
 import { Theme } from '../theme';
 import { ThemeColors } from '../types';
+import { DummyUsers } from '../constants';
 
 type AppContextType = {
   userId: string,
@@ -12,7 +13,7 @@ type AppContextType = {
 export const AppContext = createContext({} as AppContextType);
 
 export const AppContextProvider = props => {
-  const [userId, setUserId] = useState('ck2oj3x2n001w0765e34k94w1'); //@doggo
+  const [userId, setUserId] = useState(DummyUsers['@occult_686']);
   const [theme, setTheme] = useState(Theme.light.colors);
   const [, setThemeType] = useState(Theme.light.type);
 
