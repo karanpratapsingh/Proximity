@@ -41,6 +41,8 @@ const ExploreScreen: React.FC = () => {
     } else if (!querySearchUsersLoading && userSearch === '') {
       subContent = <SearchUsers />;
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
+
+      // const filtered = [...searchResults].filter(result => result.id !== userId);
       subContent = <UserSearchResults searchResults={searchResults} />;
     }
 
