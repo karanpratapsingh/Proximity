@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { AppContext } from '../../context';
-import { Header, SearchBar } from '../../layout';
+import { Header, SearchBar, SearchUsersPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { QUERY_SEARCH_USERS } from '../../graphql/query';
@@ -36,25 +36,22 @@ const ExploreScreen: React.FC = () => {
   const onBlur = () => setIsSearchFocused(false);
 
   let content = (
-    <View style={{ flex: 1, backgroundColor: '#FAFAFA' }}>
-
-    </View>
+    <Text>Explore stuff</Text>
   );
 
   if (isSearchFocused) {
-    let result = <Text>Banner</Text>;
+    let subContent = <Text>Banner</Text>;
     if (querySearchUsersCalled && querySearchUsersLoading) {
-      result = <Text>Loading</Text>;
+      subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      result = <Text>Banner</Text>;
+      subContent = <Text>Banner</Text>;
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
-      result = <UserSearchResults searchResults={searchResults} />;
+      subContent = <UserSearchResults searchResults={searchResults} />;
     }
-
     content = (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-        {result}
-      </View>
+      <>
+        {subContent}
+      </>
     );
   }
 
@@ -68,7 +65,9 @@ const ExploreScreen: React.FC = () => {
         onChangeText={setUserSearch}
         placeholder='Search for users...'
       />
-      {content}
+      <View style={styles().content}>
+        {content}
+      </View>
     </View>
   );
 };
@@ -77,7 +76,12 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.base
-  }
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 });
 
 export default ExploreScreen;
