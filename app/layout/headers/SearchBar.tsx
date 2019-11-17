@@ -9,15 +9,20 @@ const { FontWeights, FontSizes } = Typography;
 interface SearchBarType {
   value: string,
   onChangeText: any,
+  onFocus?: any,
+  onBlur?: any,
   placeholder: string,
   style?: object
 };
 
-const SearchBar:React.FC<SearchBarType> = ({ value, onChangeText, placeholder, style }) => {
+const SearchBar:React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
   const { theme } = useContext(AppContext);
 
   return (
     <TextInput
+      autoCorrect={false}
+      onFocus={onFocus}
+      onBlur={onBlur}
       style={[styles(theme).container, style]}
       value={value}
       placeholder={placeholder}
