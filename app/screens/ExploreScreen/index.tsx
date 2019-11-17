@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { AppContext } from '../../context';
 import { QUERY_SEARCH_USERS } from '../../graphql/query';
 import { ExploreScreenPlaceholder, Header, SearchBar, SearchUsersPlaceholder } from '../../layout';
@@ -56,7 +56,6 @@ const ExploreScreen: React.FC = () => {
       <Header title='Explore' />
       <SearchBar
         onFocus={onFocus}
-        onBlur={onBlur}
         value={userSearch}
         onChangeText={searchText => setUserSearch(searchText.toLowerCase())}
         placeholder='Search for users...'

@@ -9,14 +9,13 @@ import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
 import { DummyUsers } from '../../constants';
+import { useNavigationParam } from 'react-navigation-hooks';
 
 const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);
-
-  //?ROUTING: {userId of target}: from props
-  const userId = DummyUsers['@catto'];
+  const userId = useNavigationParam('userId');
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId },
@@ -70,7 +69,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   postGrid: {
     flex: 1,
     marginHorizontal: 10
-  },
+  }
 });
 
 export default ProfileViewScreen;
