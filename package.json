@@ -37,6 +37,7 @@
     "react-native-reanimated": "^1.4.0",
     "react-native-responsive-dimensions": "^3.0.0",
     "react-native-super-grid": "^3.1.1",
+    "react-native-svg": "^9.13.3",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-hooks": "^1.1.0",

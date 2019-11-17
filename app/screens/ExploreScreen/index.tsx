@@ -75,7 +75,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
+  }
 });
 
 export default ExploreScreen;
