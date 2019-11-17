@@ -19,32 +19,40 @@ const ProfileScreen: React.FC = () => {
     variables: { userId }
   });
 
+  const ListHeaderComponent = () => {
+    const { user: { avatar, following, followers, name, handle, about } } = data;
+    return (
+      <ProfileCard
+        avatar={avatar}
+        following={following.length}
+        followers={followers.length}
+        name={name}
+        handle={handle}
+        about={about}
+      />
+    );
+  };
+
+  const renderItem = ({ item, index }) => (
+    <PostThumbnail
+      id={null}
+      uri='https://source.unsplash.com/random'
+    />
+  );
+
   let content = <ProfileScreenPlaceholder />;
 
   if (!loading && !error) {
-    const { user: { avatar, following, followers, name, handle, about, posts } } = data;
+    const { user: { posts } } = data;
     content = (
       <FlatGrid
-        ListHeaderComponent={() =>
-          <ProfileCard
-            avatar={avatar}
-            following={following.length}
-            followers={followers.length}
-            name={name}
-            handle={handle}
-            about={about}
-          />}
+        ListHeaderComponent={ListHeaderComponent}
         itemDimension={150}
         items={posts}
         ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
         style={styles().postGrid}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item, index }) =>
-          <PostThumbnail
-            id={null}
-            uri='https://source.unsplash.com/random'
-          />
-        }
+        renderItem={renderItem}
       />
     );
   }

@@ -6,7 +6,7 @@ import { QUERY_SEARCH_USERS } from '../../graphql/query';
 import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserSearchResults from './components/UserSearchResults';
-import SearchUsers from '../../../assets/svg/search-users.svg';
+import SearchUsersBanner from '../../../assets/svg/search-users.svg';
 
 const ExploreScreen: React.FC = () => {
 
@@ -39,10 +39,8 @@ const ExploreScreen: React.FC = () => {
     if (querySearchUsersCalled && querySearchUsersLoading) {
       subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <SearchUsers />;
+      subContent = <SearchUsersBanner />;
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
-
-      // const filtered = [...searchResults].filter(result => result.id !== userId);
       subContent = <UserSearchResults searchResults={searchResults} />;
     }
 

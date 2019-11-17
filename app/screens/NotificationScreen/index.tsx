@@ -16,6 +16,19 @@ const NotificationScreen: React.FC = () => {
     variables: { userId }
   });
 
+  const renderItem = ({ item }) => {
+    const { actionUser, type, createdAt } = item;
+
+    return (
+      <NotificationCard
+        avatar={actionUser.avatar}
+        handle={actionUser.handle}
+        type={type}
+        time={createdAt}
+      />
+    )
+  };
+
   let content = <NotificationScreenPlaceholder />;
 
   if (!loading && !error) {
@@ -28,18 +41,7 @@ const NotificationScreen: React.FC = () => {
         ListEmptyComponent={() => <ListEmptyComponent listType='notifications' spacing={60} />}
         style={styles().notificationList}
         spacing={20}
-        renderItem={({ item }) => {
-          const { actionUser, type, createdAt } = item;
-
-          return (
-            <NotificationCard
-              avatar={actionUser.avatar}
-              handle={actionUser.handle}
-              type={type}
-              time={createdAt}
-            />
-          )
-        }}
+        renderItem={renderItem}
       />
     );
   }

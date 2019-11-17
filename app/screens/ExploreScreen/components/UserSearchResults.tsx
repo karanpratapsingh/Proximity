@@ -15,6 +15,20 @@ const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) =
 
   const filteredSearchResults = [...searchResults].filter(result => result.id !== userId);
 
+  const renderItem = ({ item }) => {
+
+    const { id, avatar, handle, name } = item;
+
+    return (
+      <UserCard
+        userId={id}
+        avatar={avatar}
+        handle={handle}
+        name={name}
+      />
+    );
+  };
+
   return (
     <FlatGrid
       itemDimension={responsiveWidth(85)}
@@ -23,19 +37,7 @@ const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) =
       ListEmptyComponent={() => <ListEmptyComponent placeholder='No users found' spacing={60} />}
       style={styles.container}
       spacing={20}
-      renderItem={({ item }) => {
-
-        const { id, avatar, handle, name } = item;
-
-        return (
-          <UserCard
-            userId={id}
-            avatar={avatar}
-            handle={handle}
-            name={name}
-          />
-        );
-      }}
+      renderItem={renderItem}
     />
   );
 };

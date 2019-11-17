@@ -24,6 +24,23 @@ const MessageScreen: React.FC = () => {
     queryChats();
   }, []);
 
+  const renderItem = ({ item }) => {
+
+    const { id, participants, messages } = item;
+    const [participant] = participants.filter(({ id }) => userId !== id);
+    const [lastMessage] = messages;
+
+    return (
+      <MessageCard
+        chatId={id}
+        avatar={participant.avatar}
+        handle={participant.handle}
+        lastMessage={lastMessage.body}
+        time={lastMessage.createdAt}
+      />
+    );
+  };
+
   let content = <MessageScreenPlaceholder />;
 
   if (called && !loading && !error) {
@@ -36,22 +53,7 @@ const MessageScreen: React.FC = () => {
         ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
         style={styles().messagesList}
         spacing={20}
-        renderItem={({ item }) => {
-
-          const { id, participants, messages } = item;
-          const [participant] = participants.filter(({ id }) => userId !== id);
-          const [lastMessage] = messages;
-
-          return (
-            <MessageCard
-              chatId={id}
-              avatar={participant.avatar}
-              handle={participant.handle}
-              lastMessage={lastMessage.body}
-              time={lastMessage.createdAt}
-            />
-          );
-        }}
+        renderItem={renderItem}
       />
     );
   }
