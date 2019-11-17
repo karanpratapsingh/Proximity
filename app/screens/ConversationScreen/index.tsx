@@ -15,6 +15,8 @@ import CustomSend from './components/CustomSend';
 import { Typography } from '../../theme';
 import client from '../../graphql/client';
 import { AppContext } from '../../context';
+import { ThemedColor } from 'react-navigation-tabs/lib/typescript/src/types';
+import { ThemeColors } from '../../types';
 
 const { IconSizes } = Typography;
 
@@ -22,7 +24,7 @@ const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
-  const { userId } = useContext(AppContext);
+  const { userId, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
@@ -81,16 +83,17 @@ const ConversationScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles(theme).container}>
       <GoBackHeader title={handle} iconSize={IconSizes.x6} />
       {content}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: theme.base
   }
 });
 
