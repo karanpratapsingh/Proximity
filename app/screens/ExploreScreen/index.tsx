@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { AppContext } from '../../context';
 import { QUERY_SEARCH_USERS } from '../../graphql/query';
-import { ExploreScreenPlaceholder, Header, SearchBar, SearchUsersPlaceholder } from '../../layout';
+import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserSearchResults from './components/UserSearchResults';
 import SearchUsers from '../../../assets/svg/search-users.svg';
@@ -54,8 +54,9 @@ const ExploreScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       <Header title='Explore' />
-      <SearchBar
+      <AnimatedSearchBar
         onFocus={onFocus}
+        onBlur={onBlur}
         value={userSearch}
         onChangeText={searchText => setUserSearch(searchText.toLowerCase())}
         placeholder='Search for users...'

@@ -1,5 +1,6 @@
 import Header from './headers/Header';
 import SearchBar from './headers/SearchBar';
+import AnimatedSearchBar from './headers/AnimatedSearchBar';
 import GoBackHeader from './headers/GoBackHeader';
 import ListEmptyComponent from './misc/ListEmptyComponent';
 import LoadingIndicator from './misc/LoadingIndicator';
@@ -16,6 +17,7 @@ import ProfileCard from './shared/ProfileCard';
 export {
   Header,
   SearchBar,
+  AnimatedSearchBar,
   GoBackHeader,
   ListEmptyComponent,
   LoadingIndicator,
