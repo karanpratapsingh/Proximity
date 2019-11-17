@@ -81,3 +81,14 @@ export const QUERY_CHAT_EXISTS = gql`
     }
   }
 `;
+
+export const QUERY_SEARCH_USERS = gql`
+  query SearchUsers($name: String!) {
+    searchUsers(name: $name) {
+      id
+      avatar
+      name
+      handle
+    }
+  }
+`;
