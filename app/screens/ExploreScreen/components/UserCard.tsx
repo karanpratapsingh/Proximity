@@ -21,9 +21,7 @@ const UserCard = ({ userId, avatar, handle, name }) => {
       />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}</Text>
-        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles(theme).nameText}>
-          {name}
-        </Text>
+        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles(theme).nameText}>{name}</Text>
       </View>
     </TouchableOpacity>
   );

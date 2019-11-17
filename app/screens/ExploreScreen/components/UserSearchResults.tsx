@@ -14,7 +14,7 @@ const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) =
     itemDimension={responsiveWidth(85)}
     showsVerticalScrollIndicator={false}
     items={searchResults}
-    ListEmptyComponent={() => <ListEmptyComponent listType='users' spacing={60} />}
+    ListEmptyComponent={() => <ListEmptyComponent placeholder='No users found' spacing={60} />}
     style={styles.container}
     spacing={20}
     renderItem={({ item }) => {
