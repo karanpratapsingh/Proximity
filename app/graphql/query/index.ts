@@ -92,3 +92,9 @@ export const QUERY_SEARCH_USERS = gql`
     }
   }
 `;
+
+export const QUERY_HANDLE_AVAILABLE = gql`
+  query IsHandleAvailable($userId: String!, $handle: String!) {
+    isHandleAvailable(userId: $userId, handle: $handle)
+  }
+`;

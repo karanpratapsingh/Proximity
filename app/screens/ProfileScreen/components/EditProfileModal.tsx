@@ -3,11 +3,12 @@ import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-nativ
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AppContext } from '../../../context';
-import { Button, FormInput, ModalHeader } from '../../../layout';
+import { Button, FormInput, ModalHeader, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
+import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -24,7 +25,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   const [editableName, setEditableName] = useState('');
   const [editableHandle, setEditableHandle] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
-  const [updateUser, { loading }] = useMutation(MUTATION_UPDATE_USER);
+  const [queryIsHandleAvailable, {
+    loading: isHandleAvailableLoading,
+    called: isHandleAvailableCalled,
+    data: isHandleAvailableData
+  }] = useLazyQuery(QUERY_HANDLE_AVAILABLE);
+  const [updateUser, { loading: updateUserLoading }] = useMutation(MUTATION_UPDATE_USER);
   useEffect(() => {
     setEditableAvatar(avatar);
     setEditableName(name);
@@ -33,7 +39,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   }, []);
 
   const onDone = () => {
-    //?TODO: check if about<=200 and handle is valid
+    //?TODO-Later: show error in fields
+    //?TODO-Later: implement image get and upload logic
+    const { isHandleAvailable } = isHandleAvailableData;
+    if (editableAbout.trim().length > 200) return;
+    if (!isHandleAvailable) return;
+
     updateUser({
       variables: {
         userId,
@@ -46,6 +57,25 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     //@ts-ignore
     ref.current.close();
   };
+
+  useEffect(() => {
+    queryIsHandleAvailable({
+      variables: {
+        userId,
+        handle: editableHandle
+      }
+    });
+  }, [editableHandle]);
+
+  let content = (
+    <View>
+      <LoadingIndicator size={4} color={theme.accent} />
+    </View>
+  );
+  
+  if (!isHandleAvailableLoading && isHandleAvailableCalled) {
+    content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={24} />;
+  }
 
   return (
     <Modalize
@@ -72,7 +102,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
         <FormInput label='Name' value={editableName} onChangeText={setEditableName} />
         <FormInput label='Username' value={editableHandle} onChangeText={setEditableHandle}>
-          <MaterialIcons name='done' color='green' size={24} />
+          {content}
         </FormInput>
         <FormInput
           label='About'
@@ -84,7 +114,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         <Button
           label='Done'
           onPress={onDone}
-          loading={loading}
+          loading={updateUserLoading}
           containerStyle={styles().doneButton}
         />
       </View>
