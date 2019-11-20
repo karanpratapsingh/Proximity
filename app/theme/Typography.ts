@@ -27,6 +27,9 @@ const FontSizes = {
   SubHeading: {
     fontSize: 24
   },
+  Label: {
+    fontSize: 20
+  },
   Body: {
     fontSize: 16
   },
