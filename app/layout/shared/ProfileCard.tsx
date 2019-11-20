@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import { AppContext } from '../../context';
 import { parseConnectionsCount } from '../../utils';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { ThemeStatic } from '../../theme/Colors';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -22,8 +24,23 @@ const Connections: React.FC<ConnectionsType> = ({ total, type }) => {
   );
 };
 
+interface EditProfileTYpe {
+  onEdit: any
+};
+
+const EditProfile: React.FC<EditProfileTYpe> = ({ onEdit }) => {
+  const { theme } = useContext(AppContext);
+  return (
+    <TouchableOpacity activeOpacity={1} onPress={onEdit} style={styles(theme).editProfile}>
+      <MaterialIcons name='edit' size={16} color={ThemeStatic.white} />
+    </TouchableOpacity>
+  );
+};
+
 interface ProfileCardType {
   avatar: string,
+  editable?: boolean,
+  onEdit?: any,
   following: number,
   followers: number,
   name: string,
@@ -32,16 +49,19 @@ interface ProfileCardType {
   about: string
 };
 
-const ProfileCard: React.FC<ProfileCardType> = ({ avatar, following, followers, name, handle, renderInteractions, about }) => {
+const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, following, followers, name, handle, renderInteractions, about }) => {
   const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
       <View style={styles(theme).info}>
         <Connections total={parseConnectionsCount(following)} type='FOLLOWING' />
-        <Image
+        <ImageBackground
           source={{ uri: avatar }}
-          style={styles(theme).avatarImage}
-        />
+          style={styles(theme).avatar}
+          imageStyle={styles(theme).avatarImage}>
+          {editable && <EditProfile onEdit={onEdit} />}
+        </ImageBackground>
+
         <Connections total={parseConnectionsCount(followers)} type='FOLLOWERS' />
       </View>
       <View style={styles(theme).name}>
@@ -68,11 +88,26 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  avatarImage: {
+  avatar: {
     height: 120,
-    width: 120,
+    width: 120
+  },
+  avatarImage: {
+    backgroundColor: theme.placeholder,
     borderRadius: 120,
-    backgroundColor: theme.placeholder
+  },
+  editProfile: {
+    position: 'absolute',
+    bottom: -10,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 40,
+    width: 60,
+    height: 30,
+    borderWidth: 1,
+    borderColor: theme.base,
+    backgroundColor: theme.accent
   },
   connections: {
     alignItems: 'center',
