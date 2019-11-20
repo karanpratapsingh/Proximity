@@ -1,5 +1,7 @@
 import Header from './headers/Header';
 import SearchBar from './headers/SearchBar';
+import ModalHeader from './headers/ModalHeader';
+import FormInput from './controls/FormInput';
 import AnimatedSearchBar from './headers/AnimatedSearchBar';
 import GoBackHeader from './headers/GoBackHeader';
 import ListEmptyComponent from './misc/ListEmptyComponent';
@@ -17,6 +19,8 @@ import ProfileCard from './shared/ProfileCard';
 export {
   Header,
   SearchBar,
+  ModalHeader,
+  FormInput,
   AnimatedSearchBar,
   GoBackHeader,
   ListEmptyComponent,
