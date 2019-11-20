@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Send } from 'react-native-gifted-chat';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Typography } from '../../../../theme';
-import { ThemeStatic } from '../../../../theme/Colors';
+import { ThemeStatic } from '../../../../theme';
 
 const { IconSizes } = Typography;
 

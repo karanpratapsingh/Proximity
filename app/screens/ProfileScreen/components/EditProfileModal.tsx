@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { ThemeColors } from '../../../types';
-import { ModalHeader, FormInput } from '../../../layout';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AppContext } from '../../../context';
-import { ThemeStatic } from '../../../theme/Colors';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { Button, FormInput, ModalHeader } from '../../../layout';
+import { ThemeStatic } from '../../../theme';
+import { ThemeColors } from '../../../types';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -22,19 +21,27 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   const [editableName, setEditableName] = useState('');
   const [editableHandle, setEditableHandle] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
-
+  const modalHeight = 450 + ((about.length / 10) * 10);
   useEffect(() => {
     setEditableName(name);
     setEditableHandle(handle);
     setEditableAbout(about);
   }, []);
-  // const 
+
+  const onDone = () => {
+    //@ts-ignore
+    ref.current.close();
+  };
+
   return (
     <Modalize
       //@ts-ignore
       ref={ref}
+      scrollViewProps={{
+        showsVerticalScrollIndicator: false
+      }}
       modalStyle={styles().container}
-      modalHeight={500}>
+      adjustToContentHeight>
       <ModalHeader
         heading='Edit profile'
         subHeading='Edit your personal information'
@@ -60,7 +67,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           multiline
           characterRestriction={200}
         />
-
+        <Button
+          label='Done'
+          onPress={onDone}
+          loading={false}
+          containerStyle={styles().doneButton}
+        />
       </View>
     </Modalize>
   );
@@ -76,24 +88,27 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   avatar: {
     alignSelf: 'center',
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 100,
     marginTop: 20
   },
   avatarImage: {
     backgroundColor: theme.placeholder,
-    borderRadius: 80
+    borderRadius: 100
   },
   avatarOverlay: {
     position: 'absolute',
-    height: 80,
-    width: 80,
-    borderRadius: 80,
+    height: 100,
+    width: 100,
+    borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: theme.accent,
     opacity: 0.8
+  },
+  doneButton: {
+    marginVertical: 20
   }
 });
 

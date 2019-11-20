@@ -5,7 +5,7 @@ import { Typography } from '../../theme';
 import { AppContext } from '../../context';
 import { parseConnectionsCount } from '../../utils';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { ThemeStatic } from '../../theme/Colors';
+import { ThemeStatic } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 

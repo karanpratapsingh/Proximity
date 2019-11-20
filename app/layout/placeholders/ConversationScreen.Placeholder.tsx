@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Typography } from '../../theme';
-import { ThemeStatic } from '../../theme/Colors';
+import { ThemeStatic } from '../../theme';
 import LoadingIndicator from '../misc/LoadingIndicator';
 
 const { IconSizes } = Typography;
