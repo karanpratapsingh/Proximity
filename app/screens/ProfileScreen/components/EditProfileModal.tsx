@@ -6,6 +6,8 @@ import { AppContext } from '../../../context';
 import { Button, FormInput, ModalHeader } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -17,18 +19,30 @@ interface EditProfileBottomSheetType {
 
 const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
-  const { theme } = useContext(AppContext);
+  const { userId, theme } = useContext(AppContext);
+  const [editableAvatar, setEditableAvatar] = useState('');
   const [editableName, setEditableName] = useState('');
   const [editableHandle, setEditableHandle] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
-  const modalHeight = 450 + ((about.length / 10) * 10);
+  const [updateUser, { loading }] = useMutation(MUTATION_UPDATE_USER);
   useEffect(() => {
+    setEditableAvatar(avatar);
     setEditableName(name);
     setEditableHandle(handle);
     setEditableAbout(about);
   }, []);
 
   const onDone = () => {
+    //?TODO: check if about<=200 and handle is valid
+    updateUser({
+      variables: {
+        userId,
+        avatar: editableAvatar,
+        name: editableName.trim(),
+        handle: editableHandle.trim(),
+        about: editableAbout.trim()
+      }
+    });
     //@ts-ignore
     ref.current.close();
   };
@@ -48,7 +62,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       />
       <View style={styles().content}>
         <ImageBackground
-          source={{ uri: avatar }}
+          source={{ uri: editableAvatar }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           <TouchableOpacity activeOpacity={0.9} onPress={() => null} style={styles(theme).avatarOverlay}>
@@ -70,7 +84,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         <Button
           label='Done'
           onPress={onDone}
-          loading={false}
+          loading={loading}
           containerStyle={styles().doneButton}
         />
       </View>

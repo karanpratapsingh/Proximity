@@ -18,7 +18,8 @@ const ProfileScreen: React.FC = () => {
   const { userId, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId }
+    variables: { userId },
+    pollInterval: 1000
   });
 
   const editProfileBottomSheetRef = useRef();

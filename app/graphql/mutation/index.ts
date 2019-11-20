@@ -52,3 +52,17 @@ export const MUTATION_CONNECT_CHAT_TO_USERS = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_USER = gql`
+  mutation UpdateUser($userId: String!, $avatar: String!, $name: String!, $handle: String!, $about: String!) {
+    updateUser(
+      userId: $userId,
+      avatar: $avatar,
+      name: $name,
+      handle: $handle,
+      about: $about
+    ) {
+      id
+    }
+  }
+`;
