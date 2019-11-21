@@ -26,6 +26,7 @@ const SearchBar:React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlu
       style={[styles(theme).container, style]}
       value={value}
       placeholder={placeholder}
+      placeholderTextColor={theme.text02}
       onChangeText={onChangeText}
     />
   );
@@ -40,7 +41,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
-    color: theme.text02,
+    color: theme.text01,
     borderRadius: 20,
     marginVertical: 5
   }

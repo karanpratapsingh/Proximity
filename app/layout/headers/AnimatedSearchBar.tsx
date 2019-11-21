@@ -18,12 +18,11 @@ interface SearchBarType {
 };
 
 const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
-  const { theme } = useContext(AppContext);
-  // const [clock] = useState(new Clock());
 
-  const transition = <Transition.Change interpolation='easeInOut' />;
-  let [barWidth, setBarWidth] = useState(90);
-  let [cancelWidth, setCancelWidth] = useState(0);
+  const { theme } = useContext(AppContext);
+
+  const [barWidth, setBarWidth] = useState(90);
+  const [cancelWidth, setCancelWidth] = useState(0);
   const transitionRef = useRef();
 
   const onOpen = () => {
@@ -44,6 +43,8 @@ const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBl
     onBlur();
   };
 
+  const transition = <Transition.Change interpolation='easeInOut' />;
+
   return (
     <Transitioning.View
       style={styles().container}
@@ -57,6 +58,7 @@ const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBl
         style={[styles(theme).searchBar, { width: `${barWidth}%` }, style]}
         value={value}
         placeholder={placeholder}
+        placeholderTextColor={theme.text02}
         onChangeText={onChangeText}
       />
       <TouchableOpacity
@@ -72,8 +74,7 @@ const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBl
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
-    // backgroundColor: 'red'
+    alignItems: 'center'
   },
   searchBar: {
     ...FontWeights.Light,
@@ -82,17 +83,16 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
-    color: theme.text02,
+    color: theme.text01,
     borderRadius: 20,
     marginVertical: 5
   },
   cancel: {
     alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'yellow'
+    justifyContent: 'center'
   },
   cancelText: {
-    ...FontWeights.Regular,
+    ...FontWeights.Light,
     ...FontSizes.Body,
     color: theme.text01
   }

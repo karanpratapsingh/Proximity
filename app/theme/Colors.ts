@@ -31,10 +31,10 @@ export const Theme = {
       base: '#111111',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
-      placeholder: '#F4F4F4',
+      placeholder: '#222',
       white: '#FFFFFF'
     }
-  } as ThemeType,
+  } as ThemeType
 };
 
 /**
