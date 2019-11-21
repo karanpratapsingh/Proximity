@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';

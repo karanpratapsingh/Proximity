@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Platform, Keyboard, StyleSheet, Text, TextInput } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput } from 'react-native';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
