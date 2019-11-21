@@ -13,23 +13,23 @@ const TabIcon = ({ route, isActive }) => {
   switch (route) {
     case 'HomeScreen':
 
-      return <Entypo name='home' color={isActive ? theme.text01 : theme.text02} size={IconSizes.x5} />;
+      return <Entypo name='home' color={isActive ? theme.accent : theme.text02} size={IconSizes.x5} />;
 
     case 'ExploreScreen':
 
-      return <AntDesign name='search1' color={isActive ? theme.text01 : theme.text02} size={IconSizes.x5} />;
+      return <AntDesign name='search1' color={isActive ? theme.accent : theme.text02} size={IconSizes.x5} />;
 
     case 'UploadScreen':
 
-      return <AntDesign name='plus' color={isActive ? theme.text01 : theme.text02} size={IconSizes.x5} />;
+      return <AntDesign name='plus' color={isActive ? theme.accent : theme.text02} size={IconSizes.x5} />;
 
     case 'NotificationScreen':
 
-      return <Feather name='bell' color={isActive ? theme.text01 : theme.text02} size={IconSizes.x5} />;
+      return <Feather name='bell' color={isActive ? theme.accent : theme.text02} size={IconSizes.x5} />;
 
     case 'ProfileScreen':
 
-      return <AntDesign name='user' color={isActive ? theme.text01 : theme.text02} size={IconSizes.x5} />;
+      return <AntDesign name='user' color={isActive ? theme.accent : theme.text02} size={IconSizes.x5} />;
 
     default:
       return null;
