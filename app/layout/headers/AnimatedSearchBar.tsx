@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Keyboard, StyleSheet, Text, TextInput } from 'react-native';
+import { Platform, Keyboard, StyleSheet, Text, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { AppContext } from '../../context';
@@ -54,7 +54,6 @@ const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBl
       <TextInput
         autoCorrect={false}
         onFocus={onOpen}
-        // onBlur={onBlur}
         style={[styles(theme).searchBar, { width: `${barWidth}%` }, style]}
         value={value}
         placeholder={placeholder}
@@ -80,7 +79,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Body,
     marginLeft: 20,
-    paddingVertical: 8,
+    paddingVertical: Platform.select({ ios: 8, android: 6 }),
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
     color: theme.text01,
@@ -88,6 +87,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginVertical: 5
   },
   cancel: {
+    height: 20,
     alignItems: 'center',
     justifyContent: 'center'
   },

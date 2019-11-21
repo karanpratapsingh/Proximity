@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { Platform, StyleSheet, TextInput } from 'react-native';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
@@ -15,7 +15,7 @@ interface SearchBarType {
   style?: object
 };
 
-const SearchBar:React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
+const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
   const { theme } = useContext(AppContext);
 
   return (
@@ -38,7 +38,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     width: '90%',
     alignSelf: 'center',
-    paddingVertical: 8,
+    paddingVertical: Platform.select({ ios: 8, android: 6 }),
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
     color: theme.text01,
