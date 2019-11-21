@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-nativ
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AppContext } from '../../../context';
-import { Button, FormInput, ModalHeader, LoadingIndicator } from '../../../layout';
+import { Button, FormInput, BottomSheetHeader, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
@@ -102,7 +102,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       }}
       modalStyle={styles().container}
       adjustToContentHeight>
-      <ModalHeader
+      <BottomSheetHeader
         heading='Edit profile'
         subHeading='Edit your personal information'
       />

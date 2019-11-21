@@ -9,7 +9,8 @@ import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, Pr
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 
-import EditProfileBottomSheet from './components/EditProfileModal';
+import EditProfileBottomSheet from './components/EditProfileBottomSheet';
+import SettingsBottomSheet from './components/SettingsBottomSheet';
 
 const { IconSizes } = Typography;
 
@@ -23,11 +24,12 @@ const ProfileScreen: React.FC = () => {
   });
 
   const editProfileBottomSheetRef = useRef();
+  const settingsBottomSheetRef = useRef();
 
-  const onEdit = () => {
-    // @ts-ignore
-    editProfileBottomSheetRef.current.open();
-  };
+  // @ts-ignore
+  const onEdit = () => editProfileBottomSheetRef.current.open();
+  // @ts-ignore
+  const onSettings = () => settingsBottomSheetRef.current.open();
 
   const ListHeaderComponent = () => {
     const { user: { avatar, following, followers, name, handle, about } } = data;
@@ -78,13 +80,21 @@ const ProfileScreen: React.FC = () => {
     );
   }
 
+  const IconRight = () => <Entypo
+    name='dots-three-vertical'
+    size={IconSizes.x5}
+    color={theme.text01}
+    onPress={onSettings}
+  />;
+
   return (
     <View style={styles(theme).container}>
       <Header
         title='My Profile'
-        IconRight={() => <Entypo name='dots-three-vertical' size={IconSizes.x5} color={theme.text01} />}
+        IconRight={IconRight}
       />
       {content}
+      <SettingsBottomSheet ref={settingsBottomSheetRef} />
     </View>
   );
 };
@@ -97,7 +107,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   postGrid: {
     flex: 1,
     marginHorizontal: 10
-  },
+  }
 });
 
 export default ProfileScreen;

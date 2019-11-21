@@ -1,6 +1,6 @@
 import Header from './headers/Header';
 import SearchBar from './headers/SearchBar';
-import ModalHeader from './headers/ModalHeader';
+import BottomSheetHeader from './headers/BottomSheetHeader';
 import AnimatedSearchBar from './headers/AnimatedSearchBar';
 import GoBackHeader from './headers/GoBackHeader';
 
@@ -23,7 +23,7 @@ import ProfileCard from './shared/ProfileCard';
 export {
   Header,
   SearchBar,
-  ModalHeader,
+  BottomSheetHeader,
   AnimatedSearchBar,
   GoBackHeader,
   FormInput,

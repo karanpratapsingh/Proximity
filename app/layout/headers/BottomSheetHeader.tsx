@@ -6,12 +6,12 @@ import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface ModalHeaderType {
+interface BottomSheetHeaderType {
   heading: string,
   subHeading: string
 };
 
-const ModalHeader: React.FC<ModalHeaderType> = ({ heading, subHeading }) => {
+const BottomSheetHeader: React.FC<BottomSheetHeaderType> = ({ heading, subHeading }) => {
   const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
@@ -35,4 +35,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default ModalHeader;
+export default BottomSheetHeader;
