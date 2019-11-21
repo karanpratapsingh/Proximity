@@ -21,22 +21,47 @@ interface EditProfileBottomSheetType {
 const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
   const { userId, theme } = useContext(AppContext);
+
   const [editableAvatar, setEditableAvatar] = useState('');
   const [editableName, setEditableName] = useState('');
   const [editableHandle, setEditableHandle] = useState('');
+  const [handleError, setHandleError] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
+
   const [queryIsHandleAvailable, {
     loading: isHandleAvailableLoading,
     called: isHandleAvailableCalled,
     data: isHandleAvailableData
   }] = useLazyQuery(QUERY_HANDLE_AVAILABLE);
+
   const [updateUser, { loading: updateUserLoading }] = useMutation(MUTATION_UPDATE_USER);
+
   useEffect(() => {
     setEditableAvatar(avatar);
     setEditableName(name);
     setEditableHandle(handle);
     setEditableAbout(about);
   }, []);
+
+  useEffect(() => {
+    queryIsHandleAvailable({
+      variables: {
+        userId,
+        handle: editableHandle
+      }
+    });
+  }, [editableHandle]);
+
+  useEffect(() => {
+    if (!isHandleAvailableLoading && isHandleAvailableCalled) {
+      const { isHandleAvailable } = isHandleAvailableData;
+      if (!isHandleAvailable) {
+        setHandleError('username not available');
+      } else {
+        setHandleError('');
+      }
+    }
+  }, [isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
 
   const onDone = () => {
     //?TODO-Later: show error in fields
@@ -58,21 +83,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     ref.current.close();
   };
 
-  useEffect(() => {
-    queryIsHandleAvailable({
-      variables: {
-        userId,
-        handle: editableHandle
-      }
-    });
-  }, [editableHandle]);
-
   let content = (
     <View>
       <LoadingIndicator size={4} color={theme.accent} />
     </View>
   );
-  
+
   if (!isHandleAvailableLoading && isHandleAvailableCalled) {
     content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={24} />;
   }
@@ -100,8 +116,16 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           </TouchableOpacity>
         </ImageBackground>
 
-        <FormInput label='Name' value={editableName} onChangeText={setEditableName} />
-        <FormInput label='Username' value={editableHandle} onChangeText={setEditableHandle}>
+        <FormInput
+          label='Name'
+          value={editableName}
+          onChangeText={setEditableName}
+        />
+        <FormInput
+          label='Username'
+          error={handleError}
+          value={editableHandle}
+          onChangeText={setEditableHandle}>
           {content}
         </FormInput>
         <FormInput
@@ -120,8 +144,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       </View>
     </Modalize>
   );
-}
-);
+});
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {

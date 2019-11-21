@@ -17,13 +17,15 @@ interface FormInputType {
   onChangeText: any,
   multiline?: boolean,
   characterRestriction?: number,
-  children?: any
+  children?: any,
+  error?: string
 };
 
-const FormInput: React.FC<FormInputType> = ({ label, value, onChangeText, children, multiline, characterRestriction }) => {
+const FormInput: React.FC<FormInputType> = ({ label, value, onChangeText, children, multiline, characterRestriction, error }) => {
   const { theme } = useContext(AppContext);
   return (
     <TextField
+      error={error}
       autoCorrect={false}
       tintColor={theme.accent}
       textColor={theme.text01}
