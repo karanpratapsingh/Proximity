@@ -5849,6 +5849,13 @@ react-native-modalize@^1.2.3:
   resolved "https://registry.yarnpkg.com/react-native-modalize/-/react-native-modalize-1.2.3.tgz#cf41f74520e85b925abd53f31861436ba2eef8f8"
   integrity sha512-lecy8pFZnscgAMP2SWwEMeLUS74Soq65/x+Q3/IQIge3u3wFs+fJIU/ed6dXRhKxGd/9mXL1N6juwTrHHjIFcg==
 
+react-native-modest-checkbox@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-modest-checkbox/-/react-native-modest-checkbox-3.3.0.tgz#b83d05258c0f2e08f5be85a8f804432910d953d5"
+  integrity sha512-bTf6N76LYEgvOl1erKxVbbfHVqaSfyY9/JXwnokKUSGiTw+37yiPWwMK5+qM7J3YX+N1rrWrC5UZUVEJzTR8Qg==
+  dependencies:
+    prop-types "^15.7.2"
+
 "react-native-parsed-text@https://github.com/EvanBacon/react-native-parsed-text.git":
   version "0.0.22"
   resolved "https://github.com/EvanBacon/react-native-parsed-text.git#f55c4713c62961f13a2eec99cbc1ec619615ee72"
