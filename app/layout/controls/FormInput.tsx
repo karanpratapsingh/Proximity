@@ -1,10 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import {
-  TextField,
-  FilledTextField,
-  OutlinedTextField,
-} from 'react-native-material-textfield';
+import { StyleSheet } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
@@ -28,10 +24,10 @@ const FormInput: React.FC<FormInputType> = ({ label, value, onChangeText, childr
       error={error}
       autoCorrect={false}
       tintColor={theme.accent}
-      textColor={theme.text01}
+      baseColor={theme.text02}
       fontSize={FontSizes.Body.fontSize}
       labelFontSize={FontSizes.Body.fontSize}
-      labelTextStyle={styles(theme).labelTextStyle}
+      labelTextStyle={styles().labelTextStyle}
       style={styles(theme).textStyle}
       lineWidth={0}
       activeLineWidth={0}
@@ -50,7 +46,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Regular
   },
   textStyle: {
-    ...FontWeights.Light
+    ...FontWeights.Light,
+    color: theme.text01
   }
 });
 

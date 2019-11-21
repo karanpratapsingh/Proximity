@@ -7,7 +7,9 @@ import { ThemeType } from '../types';
 export const ThemeStatic = {
   accent: '#846BE2',
   white: '#FFFFFF',
-  black: '#000000'
+  black: '#000000',
+  text01: '#000000',
+  text02: '#BBBBBB'
 };
 
 export const Theme = {

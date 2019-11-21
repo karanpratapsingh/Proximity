@@ -100,7 +100,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       scrollViewProps={{
         showsVerticalScrollIndicator: false
       }}
-      modalStyle={styles().container}
+      modalStyle={styles(theme).container}
       adjustToContentHeight>
       <BottomSheetHeader
         heading='Edit profile'
@@ -148,7 +148,8 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    padding: 20
+    padding: 20,
+    backgroundColor: theme.base
   },
   content: {
     flex: 1
