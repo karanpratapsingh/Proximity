@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'Boilerplate' do
-  # Pods for Boilerplate
+target 'Proximity' do
+  # Pods for Proximity
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'Boilerplate' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'BoilerplateTests' do
+  target 'ProximityTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'Boilerplate' do
   use_native_modules!
 end
 
-target 'Boilerplate-tvOS' do
-  # Pods for Boilerplate-tvOS
+target 'Proximity-tvOS' do
+  # Pods for Proximity-tvOS
 
-  target 'Boilerplate-tvOSTests' do
+  target 'Proximity-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

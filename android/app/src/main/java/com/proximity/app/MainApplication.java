@@ -1,4 +1,4 @@
-package com.boilerplate;
+package com.proximity.app;
 
 import android.app.Application;
 import android.content.Context;
