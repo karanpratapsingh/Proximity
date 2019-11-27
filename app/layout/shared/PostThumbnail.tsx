@@ -6,7 +6,15 @@ import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import NativeImage from '../misc/NativeImage';
 
-const PostThumbnail = ({ id, uri }) => {
+interface PostThumbnailProps {
+  id: string,
+  uri: string,
+  dimensions: {
+    height: number,
+    width: number
+  }
+};
+const PostThumbnail: React.FC<PostThumbnailProps> = ({ id, uri, dimensions }) => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
 
@@ -15,7 +23,7 @@ const PostThumbnail = ({ id, uri }) => {
   };
 
   return (
-    <TouchableOpacity onPress={navigateToPost} activeOpacity={0.95} style={styles(theme).container}>
+    <TouchableOpacity onPress={navigateToPost} activeOpacity={0.95} style={[styles(theme).container, { ...dimensions }]}>
       <NativeImage uri={uri} style={styles().thumbnailImage} />
     </TouchableOpacity>
   );
@@ -23,7 +31,6 @@ const PostThumbnail = ({ id, uri }) => {
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    height: 150,
     backgroundColor: theme.placeholder,
     overflow: 'hidden',
     borderRadius: 10

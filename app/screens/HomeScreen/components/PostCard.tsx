@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../constants';
+import { Routes, PostDimensions } from '../../../constants';
 import { parseTimeElapsed } from '../../../utils';
 
 const { FontWeights, FontSizes } = Typography;
@@ -57,8 +57,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
 
 const styles = StyleSheet.create({
   container: {
-    height: 400,
-    width: 335,
+    ...PostDimensions.Large,
     alignSelf: 'center',
     justifyContent: 'space-between',
     backgroundColor: ThemeStatic.black,
@@ -67,8 +66,7 @@ const styles = StyleSheet.create({
   },
   postImage: {
     position: 'absolute',
-    height: 400,
-    width: 335
+    ...PostDimensions.Large
   },
   avatarImage: {
     height: 50,

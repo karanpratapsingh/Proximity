@@ -9,6 +9,7 @@ import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
 import { useNavigationParam } from 'react-navigation-hooks';
+import { PostDimensions } from '../../constants';
 
 const { IconSizes } = Typography;
 
@@ -42,6 +43,7 @@ const ProfileViewScreen: React.FC = () => {
       <PostThumbnail
         id={id}
         uri={uri}
+        dimensions={PostDimensions.Medium}
       />
     );
   };

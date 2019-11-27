@@ -7,7 +7,7 @@ import { AppContext } from '../../context';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_POST } from '../../graphql/query';
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../constants';
+import { Routes, PostDimensions } from '../../constants';
 import { parseTimeElapsed } from '../../utils';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
@@ -37,7 +37,7 @@ const PostViewScreen = () => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
-  
+
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
 
   const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
@@ -125,8 +125,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginTop: 2
   },
   postImage: {
-    height: 400,
-    width: 335,
+    ...PostDimensions.Large,
     marginTop: 25,
     borderRadius: 10,
     backgroundColor: theme.placeholder

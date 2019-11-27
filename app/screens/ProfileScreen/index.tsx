@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -11,6 +11,7 @@ import { ThemeColors } from '../../types';
 
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
+import { PostDimensions } from '../../constants';
 
 const { IconSizes } = Typography;
 
@@ -53,6 +54,7 @@ const ProfileScreen: React.FC = () => {
       <PostThumbnail
         id={id}
         uri={uri}
+        dimensions={PostDimensions.Medium}
       />
     );
   };
