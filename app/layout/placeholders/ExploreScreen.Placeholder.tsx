@@ -7,9 +7,9 @@ const ExploreScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
     <Placeholder Animation={Fade}>
       {new Array(8)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.postContainer}>
+        .fill({})
+        .map((_, index) =>
+          <View key={index} style={styles.postContainer}>
             <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />
             <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />
             <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />

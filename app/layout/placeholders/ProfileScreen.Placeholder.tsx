@@ -27,9 +27,9 @@ const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ view
         <PlaceholderLine style={styles.aboutPlaceholder} noMargin width={100} height={110} />
       </View>
       {new Array(4)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.postContainer}>
+        .fill({})
+        .map((_, index) =>
+          <View key={index} style={styles.postContainer}>
             <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
             <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
           </View>

@@ -9,8 +9,8 @@ const PostViewScreenPlaceholder = () => (
       <View style={styles.postHeader}>
         <PlaceholderMedia size={50} isRound />
         <View style={styles.author}>
-          <PlaceholderLine noMargin width={responsiveWidth(20)} style={styles.handleLine} />
-          <PlaceholderLine noMargin width={responsiveWidth(10)} style={styles.timeLine} />
+          <PlaceholderLine noMargin width={responsiveWidth(20)} style={styles.handlePlaceholder} />
+          <PlaceholderLine noMargin width={responsiveWidth(10)} style={styles.timePlaceholder} />
         </View>
       </View>
       <PlaceholderLine
@@ -18,8 +18,8 @@ const PostViewScreenPlaceholder = () => (
         height={400}
         style={styles.card}
       />
-      <PlaceholderLine noMargin width={responsiveWidth(5)} style={styles.likesLine} />
-      <PlaceholderLine noMargin width={responsiveWidth(26)} style={styles.captionLine} />
+      <PlaceholderLine noMargin width={responsiveWidth(5)} style={styles.likesPlaceholder} />
+      <PlaceholderLine noMargin width={responsiveWidth(26)} style={styles.captionPlaceholder} />
     </Placeholder>
   </View>
 );
@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: responsiveWidth(50)
   },
-  handleLine: {
+  handlePlaceholder: {
     marginLeft: 12,
     borderRadius: 10
   },
-  timeLine: {
-    marginTop: 8,
+  timePlaceholder: {
+    marginTop: 10,
     marginLeft: 12,
     borderRadius: 10
   },
@@ -50,12 +50,12 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderRadius: 10
   },
-  likesLine: {
+  likesPlaceholder: {
     marginTop: 20,
     marginBottom: 5,
     borderRadius: 10
   },
-  captionLine: {
+  captionPlaceholder: {
     marginTop: 5,
     borderRadius: 10
   }

@@ -8,22 +8,20 @@ const SearchUsersPlaceholder: React.FC = () => (
   <View style={styles.container}>
     <Placeholder Animation={Fade}>
       {new Array(20)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.cardContainer}>
+        .fill({})
+        .map((_, index) =>
+          <View key={index} style={styles.cardContainer}>
             <PlaceholderMedia size={50} isRound />
             <View style={styles.infoContainer}>
               <PlaceholderLine
                 noMargin
-                style={styles.notificationCardPlaceholder}
-                height={14}
-                width={responsiveWidth(10)}
+                style={styles.userInfoPlaceholder}
+                width={responsiveWidth(20)}
               />
               <PlaceholderLine
                 noMargin
-                style={styles.notificationCardPlaceholder}
-                height={10}
-                width={responsiveWidth(15)}
+                style={styles.userInfoPlaceholder}
+                width={responsiveWidth(10)}
               />
             </View>
           </View>
@@ -46,8 +44,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 10
   },
-  notificationCardPlaceholder: {
-    borderRadius: 2,
+  userInfoPlaceholder: {
+    borderRadius: 10,
     marginTop: 10
   }
 });
