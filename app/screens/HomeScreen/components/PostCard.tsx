@@ -8,20 +8,24 @@ import { Routes } from '../../../constants';
 const { FontWeights, FontSizes } = Typography;
 
 interface PostCardProps {
-  avatar: string,
-  name: string,
+  id: string,
+  author: {
+    id: string,
+    avatar: string,
+    handle: string
+  },
   time: string,
   uri: string,
   likes: number,
   caption: string
 };
 
-const PostCard: React.FC<PostCardProps> = ({ avatar, name, time, uri, likes, caption }) => {
+const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, caption }) => {
 
   const { navigate } = useNavigation();
 
   const navigateToPost = () => {
-    navigate(Routes.PostViewScreen, { id: '123' });
+    navigate(Routes.PostViewScreen, { id });
   };
 
   return (
@@ -33,11 +37,11 @@ const PostCard: React.FC<PostCardProps> = ({ avatar, name, time, uri, likes, cap
 
       <View style={styles.upperContent}>
         <NativeImage
-          uri={avatar}
+          uri={author.avatar}
           style={styles.avatarImage}
         />
         <View>
-          <Text style={styles.nameText}>{name}</Text>
+          <Text style={styles.handleText}>{author.handle}</Text>
           <Text style={styles.timeText}>{time}</Text>
         </View>
       </View>
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.1)'
   },
-  nameText: {
+  handleText: {
     ...FontWeights.Bold,
     ...FontSizes.Body,
     color: ThemeStatic.white

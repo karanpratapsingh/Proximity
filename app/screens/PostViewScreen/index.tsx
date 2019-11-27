@@ -41,7 +41,7 @@ const PostViewScreen = props => {
       <ScrollView style={styles().content}>
         <TouchableOpacity onPress={navigateToProfile} style={styles().postHeader}>
           <NativeImage
-            uri='https://images.unsplash.com/photo-1457583221838-6bf5ad5ea874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80' // avatar
+            uri='https://images.unsplash.com/photo-1457583221838-6bf5ad5ea874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80' // global:state -> user avatar
             style={styles(theme).avatarImage}
           />
           <View>
@@ -50,7 +50,7 @@ const PostViewScreen = props => {
           </View>
         </TouchableOpacity>
         <NativeImage
-          uri='https://source.unsplash.com/random'
+          uri='https://images.unsplash.com/photo-1457583221838-6bf5ad5ea874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80'
           style={styles(theme).postImage}
         />
         <Text style={styles(theme).likesText}>12 likes</Text>

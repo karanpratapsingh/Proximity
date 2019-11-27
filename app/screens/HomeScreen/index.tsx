@@ -1,17 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Image, View, Text, } from 'react-native';
-import { AppContext } from '../../context';
-import { Header, NativeImage, ListEmptySvg, PostCardPlaceholder } from '../../layout';
-import { ThemeColors } from '../../types';
-import { Typography } from '../../theme';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../constants';
-import PostCard from './components/PostCard';
-import { FlatGrid } from 'react-native-super-grid';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { Routes } from '../../constants';
+import { AppContext } from '../../context';
+import { Header, ListEmptySvg, PostCardPlaceholder } from '../../layout';
+import { Typography } from '../../theme';
+import { ThemeColors } from '../../types';
+import PostCard from './components/PostCard';
 
 const { IconSizes } = Typography;
 
@@ -21,6 +20,19 @@ const HomeScreen: React.FC = () => {
   const { navigate } = useNavigation();
   const [loading, setLoading] = useState(true);
 
+  const dummyPost = {
+    "id": "ck3hf3vza001g0774mbx0929j",
+    "uri": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+    "createdAt": "2019-11-27T14:58:01.133Z",
+    "author": {
+      "id": "ck2ojhiw1002v0765ou6bdsl8",
+      "avatar": "https://animals.net/wp-content/uploads/2018/07/Pembroke-Welsh-Corgi-7-650x425.jpg",
+      "handle": "@doggo"
+    },
+    "likes": 12
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -29,14 +41,19 @@ const HomeScreen: React.FC = () => {
 
   const navigateToMessages = () => navigate(Routes.MessageScreen);
 
-  const renderItem = ({ item }) => <PostCard
-    avatar='https://images.unsplash.com/photo-1574799643391-479f81bed030?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=774&q=80'
-    name='Charlotte Jefferson'
-    time='12 hrs ago'
-    uri='https://source.unsplash.com/random'
-    likes={12}
-    caption='I look freakin awesome man'
-  />;
+  const renderItem = ({ item }) => {
+
+    const { id, uri, caption, likes, createdAt, author } = item;
+
+    return <PostCard
+      id={id}
+      author={author}
+      time={createdAt}
+      uri={uri}
+      likes={likes}
+      caption={caption}
+    />;
+  };
 
   let content = <PostCardPlaceholder />;
 
@@ -45,7 +62,7 @@ const HomeScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={[1, 2, 4]}
+        items={[dummyPost]}
         ListEmptyComponent={() => <ListEmptySvg Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='your feed is empty' />}
         style={styles().postList}
         spacing={20}
