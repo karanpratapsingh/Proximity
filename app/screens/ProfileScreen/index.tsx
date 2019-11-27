@@ -5,7 +5,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
+import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard, IconButton } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 
@@ -85,11 +85,13 @@ const ProfileScreen: React.FC = () => {
     );
   }
 
-  const IconRight = () => <Entypo
-    name='dots-three-vertical'
-    size={IconSizes.x5}
-    color={theme.text01}
+  const IconRight = () => <IconButton
     onPress={onSettings}
+    Icon={() => <Entypo
+      name='dots-three-vertical'
+      size={IconSizes.x5}
+      color={theme.text01}
+    />}
   />;
 
   return (

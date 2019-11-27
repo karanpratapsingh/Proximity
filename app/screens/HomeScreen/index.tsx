@@ -7,7 +7,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { Header, ListEmptySvg, PostCardPlaceholder } from '../../layout';
+import { Header, ListEmptySvg, PostCardPlaceholder, IconButton } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import PostCard from './components/PostCard';
@@ -71,11 +71,21 @@ const HomeScreen: React.FC = () => {
     );
   }
 
+  const IconRight = () => <IconButton
+    Icon={() =>
+      <FontAwesome
+        name='send'
+        size={IconSizes.x5}
+        color={theme.text01}
+      />}
+    onPress={navigateToMessages}
+  />
+
   return (
     <View style={styles(theme).container}>
       <Header
         title='Home'
-        IconRight={() => <FontAwesome onPress={navigateToMessages} name='send' size={IconSizes.x5} color={theme.text01} />}
+        IconRight={IconRight}
       />
       {content}
     </View>

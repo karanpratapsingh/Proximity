@@ -6,6 +6,7 @@ import GoBackHeader from './headers/GoBackHeader';
 
 import FormInput from './controls/FormInput';
 import Button from './controls/Button';
+import IconButton from './controls/IconButton';
 
 import ListEmptySvg from './misc/ListEmptySvg';
 import ListEmptyComponent from './misc/ListEmptyComponent';
@@ -32,6 +33,7 @@ export {
   GoBackHeader,
   FormInput,
   Button,
+  IconButton,
   ListEmptySvg,
   ListEmptyComponent,
   LoadingIndicator,

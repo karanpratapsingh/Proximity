@@ -35,13 +35,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Bold,
     ...FontSizes.Heading,
     color: theme.text01
-  },
-  underline: {
-    marginTop: 16,
-    height: 2,
-    width: 20,
-    borderRadius: 10,
-    backgroundColor: theme.text01
   }
 });
 

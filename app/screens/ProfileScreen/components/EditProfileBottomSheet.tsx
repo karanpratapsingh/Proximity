@@ -4,11 +4,13 @@ import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AppContext } from '../../../context';
 import { Button, FormInput, BottomSheetHeader, LoadingIndicator } from '../../../layout';
-import { ThemeStatic } from '../../../theme';
+import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
+
+const { IconSizes } = Typography;
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -90,7 +92,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   );
 
   if (!isHandleAvailableLoading && isHandleAvailableCalled) {
-    content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={24} />;
+    content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={IconSizes.x6} />;
   }
 
   return (
