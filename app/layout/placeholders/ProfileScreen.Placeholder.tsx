@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   namePlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   },
   handlePlaceholder: {
     marginTop: 10,
-    borderRadius: 5
+    borderRadius: 10
   },
   interact: {
     flexDirection: 'row',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   aboutPlaceholder: {
     marginTop: 16,
-    borderRadius: 5
+    borderRadius: 10
   },
   postContainer: {
     flexDirection: 'row',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   postPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   }
 });
 

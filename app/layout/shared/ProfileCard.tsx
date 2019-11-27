@@ -73,7 +73,6 @@ const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, foll
         <Text style={styles(theme).aboutTitle}>About</Text>
         <Text style={styles(theme).aboutText}>{about}</Text>
       </View>
-
     </View>
   );
 };
@@ -144,7 +143,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     padding: 16,
     marginTop: 16,
     backgroundColor: theme.accent,
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 10
   },
   aboutTitle: {

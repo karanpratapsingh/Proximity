@@ -21,7 +21,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     height: 150,
     backgroundColor: theme.placeholder,
     overflow: 'hidden',
-    borderRadius: 5,
+    borderRadius: 10
   },
   thumbnailImage: {
     flex: 1
