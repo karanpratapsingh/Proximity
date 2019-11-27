@@ -29,7 +29,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 24,
     paddingBottom: 10,
-    paddingHorizontal: 24
+    paddingHorizontal: 20
   },
   title: {
     ...FontWeights.Bold,
