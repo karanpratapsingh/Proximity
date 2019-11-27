@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   avatarImage: {
     height: 50,
     width: 50,
+    backgroundColor: ThemeStatic.placeholder,
     borderRadius: 50,
     marginRight: 12
   },
