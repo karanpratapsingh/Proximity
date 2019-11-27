@@ -98,3 +98,19 @@ export const QUERY_HANDLE_AVAILABLE = gql`
     isHandleAvailable(userId: $userId, handle: $handle)
   }
 `;
+
+export const QUERY_POST = gql`
+  query Post($postId: String!) {
+    post(postId: $postId) {
+      author {
+        id
+        handle
+        avatar
+      }
+      uri
+      likes
+      caption
+      createdAt
+    }
+  }
+`;
