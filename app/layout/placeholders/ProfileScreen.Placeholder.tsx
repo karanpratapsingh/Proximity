@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
 
 interface ProfileScreenPlaceholderType {
   viewMode?: boolean

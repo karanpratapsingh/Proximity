@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
 
 const ExploreScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
@@ -16,15 +15,14 @@ const ExploreScreenPlaceholder: React.FC = () => (
           </View>
         )}
     </Placeholder>
-  </View>
+  </View >
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     paddingTop: 10,
-    paddingBottom: 0
+    paddingHorizontal: 20
   },
   postContainer: {
     flexDirection: 'row',
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   postPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   }
 });
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 
 const NotificationScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
