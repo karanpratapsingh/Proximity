@@ -10,8 +10,7 @@ export const ThemeStatic = {
   black: '#000000',
   text01: '#000000',
   text02: '#BBBBBB',
-  placeholder: '#F4F4F4',
-
+  placeholder: '#F4F4F4'
 };
 
 export const Theme = {
