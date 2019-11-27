@@ -21,6 +21,12 @@ export const FollowInteractionType = {
   UNFOLLOW: 'UNFOLLOW'
 };
 
+export const PostDimensions = {
+  Small: { height: 80, width: 80 },
+  Medium: { height: 150, width: 150 },
+  Large: { height: 400, width: 335 }
+};
+
 export const DummyUsers = {
   '@occult_686': 'ck2oj3x2n001w0765e34k94w1',
   '@ayushieee': 'ck2oj8o2m00290765ckrg3ozy',
