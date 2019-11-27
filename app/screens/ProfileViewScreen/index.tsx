@@ -8,7 +8,6 @@ import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbna
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
-import { DummyUsers } from '../../constants';
 import { useNavigationParam } from 'react-navigation-hooks';
 
 const { IconSizes } = Typography;

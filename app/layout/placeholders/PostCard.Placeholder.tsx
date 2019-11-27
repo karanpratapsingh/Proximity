@@ -17,7 +17,7 @@ const PostCardPlaceholder = () => (
             noMargin
             key={index}
             height={400}
-            style={styles.placeholder}
+            style={styles.card}
           />
         )}
     </Placeholder>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     paddingHorizontal: 20
   },
-  placeholder: {
+  card: {
     marginTop: 20,
     borderRadius: 10
   }
