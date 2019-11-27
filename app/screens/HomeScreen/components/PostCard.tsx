@@ -4,6 +4,7 @@ import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
+import { parseTimeElapsed } from '../../../utils';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -42,7 +43,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
         />
         <View>
           <Text style={styles.handleText}>{author.handle}</Text>
-          <Text style={styles.timeText}>{time}</Text>
+          <Text style={styles.timeText}>{parseTimeElapsed(time)} ago</Text>
         </View>
       </View>
 

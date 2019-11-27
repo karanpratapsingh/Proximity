@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { QUERY_POST } from '../../graphql/query';
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
+import { parseTimeElapsed } from '../../utils';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
@@ -62,7 +63,7 @@ const PostViewScreen = props => {
           />
           <View>
             <Text style={styles(theme).handleText}>{handle}</Text>
-            <Text style={styles(theme).timeText}>{createdAt}</Text>
+            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)} ago</Text>
           </View>
         </TouchableOpacity>
         <NativeImage
