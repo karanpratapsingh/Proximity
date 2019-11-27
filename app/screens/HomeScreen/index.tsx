@@ -24,7 +24,7 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 1000);
   }, [])
 
   const navigateToMessages = () => navigate(Routes.MessageScreen);

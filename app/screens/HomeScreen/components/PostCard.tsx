@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -16,7 +18,12 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ avatar, name, time, uri, likes, caption }) => {
 
-  const navigateToPost = () => { };
+  const { navigate } = useNavigation();
+
+  const navigateToPost = () => {
+    navigate(Routes.PostViewScreen, { id: '123' });
+  };
+
   return (
     <TouchableOpacity onPress={navigateToPost} activeOpacity={0.9} style={styles.container}>
       <NativeImage

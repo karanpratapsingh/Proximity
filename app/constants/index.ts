@@ -6,7 +6,8 @@ export const Routes = {
   ProfileScreen: 'ProfileScreen,',
   ProfileViewScreen: 'ProfileViewScreen',
   MessageScreen: 'MessageScreen',
-  ConversationScreen: 'ConversationScreen'
+  ConversationScreen: 'ConversationScreen',
+  PostViewScreen: 'PostViewScreen'
 };
 
 export const NotificationText = {
