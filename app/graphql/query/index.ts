@@ -15,6 +15,7 @@ export const QUERY_USER = gql`
         id
       }
       posts {
+        id
         uri
       }
     }

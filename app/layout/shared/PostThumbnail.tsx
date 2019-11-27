@@ -2,11 +2,19 @@ import React, { useContext } from 'react';
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { ThemeColors } from '../../types';
 import { AppContext } from '../../context';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../constants';
 
 const PostThumbnail = ({ id, uri }) => {
   const { theme } = useContext(AppContext);
+  const { navigate } = useNavigation();
+
+  const navigateToPost = () => {
+    navigate(Routes.PostViewScreen, { postId: id });
+  };
+
   return (
-    <TouchableOpacity onPress={() => null} activeOpacity={0.95} style={styles(theme).container}>
+    <TouchableOpacity onPress={navigateToPost} activeOpacity={0.95} style={styles(theme).container}>
       <Image
         source={{ uri }}
         style={styles().thumbnailImage}
