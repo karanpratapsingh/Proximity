@@ -18,9 +18,7 @@ const PostThumbnail: React.FC<PostThumbnailProps> = ({ id, uri, dimensions }) =>
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
 
-  const navigateToPost = () => {
-    navigate(Routes.PostViewScreen, { postId: id });
-  };
+  const navigateToPost = () => navigate(Routes.PostViewScreen, { postId: id });
 
   return (
     <TouchableOpacity onPress={navigateToPost} activeOpacity={0.95} style={[styles(theme).container, { ...dimensions }]}>

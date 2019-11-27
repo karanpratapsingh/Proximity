@@ -25,9 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
 
   const { navigate } = useNavigation();
 
-  const navigateToPost = () => {
-    navigate(Routes.PostViewScreen, { postId: id });
-  };
+  const navigateToPost = () => navigate(Routes.PostViewScreen, { postId: id });
 
   return (
     <TouchableOpacity onPress={navigateToPost} activeOpacity={0.9} style={styles.container}>

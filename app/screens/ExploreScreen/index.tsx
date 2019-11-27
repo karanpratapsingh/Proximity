@@ -58,7 +58,7 @@ const ExploreScreen: React.FC = () => {
         onFocus={onFocus}
         onBlur={onBlur}
         value={userSearch}
-        onChangeText={searchText => setUserSearch(searchText.toLowerCase())}
+        onChangeText={setUserSearch}
         placeholder='Search for users...'
       />
       <View style={styles().content}>

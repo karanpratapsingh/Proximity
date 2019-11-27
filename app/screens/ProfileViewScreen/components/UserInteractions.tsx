@@ -30,7 +30,7 @@ const UserInteractions = ({ targetId, handle }) => {
     const { doesFollow } = doesFollowData;
     content = (
       <Text style={styles(theme).followInteractionText}>
-        {`${doesFollow ? 'UNFOLLOW' : 'FOLLOW'}`}
+        {`${doesFollow ? 'FOLLOWING' : 'FOLLOW'}`}
       </Text>
     );
   }

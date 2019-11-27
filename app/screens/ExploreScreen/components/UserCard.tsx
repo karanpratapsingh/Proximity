@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
+import { NativeImage } from '../../../layout';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -13,12 +14,11 @@ const UserCard = ({ userId, avatar, handle, name }) => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
 
+  const navigateToProfile = () => navigate(Routes.ProfileViewScreen, { userId });
+
   return (
-    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ProfileViewScreen, { userId })} style={styles().container}>
-      <Image
-        source={{ uri: avatar }}
-        style={styles(theme).avatarImage}
-      />
+    <TouchableOpacity activeOpacity={0.90} onPress={navigateToProfile} style={styles().container}>
+      <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}</Text>
         <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles(theme).nameText}>{name}</Text>
