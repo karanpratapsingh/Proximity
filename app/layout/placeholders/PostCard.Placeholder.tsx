@@ -1,0 +1,38 @@
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Typography } from '../../theme';
+import { ThemeStatic } from '../../theme';
+import LoadingIndicator from '../misc/LoadingIndicator';
+import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
+
+const { IconSizes } = Typography;
+
+const PostCardPlaceholder = () => (
+  <View style={styles.container}>
+    <Placeholder Animation={Fade}>
+      {new Array(4)
+        .fill({})
+        .map((_, index) =>
+          <PlaceholderLine
+            noMargin
+            key={index}
+            height={400}
+            style={styles.placeholder}
+          />
+        )}
+    </Placeholder>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 2,
+    paddingHorizontal: 20
+  },
+  placeholder: {
+    marginTop: 20,
+    borderRadius: 10
+  }
+});
+
+export default PostCardPlaceholder;

@@ -46,7 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({ avatar, name, time, uri, likes, cap
 const styles = StyleSheet.create({
   container: {
     height: 400,
-    width: 340,
+    width: 335,
     alignSelf: 'center',
     justifyContent: 'space-between',
     backgroundColor: ThemeStatic.black,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   postImage: {
     position: 'absolute',
     height: 400,
-    width: 340
+    width: 335
   },
   avatarImage: {
     height: 50,

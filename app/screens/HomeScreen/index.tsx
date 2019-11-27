@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Image, View, Text, } from 'react-native';
 import { AppContext } from '../../context';
-import { Header, NativeImage, ListEmptySvg } from '../../layout';
+import { Header, NativeImage, ListEmptySvg, PostCardPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -38,7 +38,7 @@ const HomeScreen: React.FC = () => {
     caption='I look freakin awesome man'
   />;
 
-  let content;
+  let content = <PostCardPlaceholder />;
 
   if (!loading) {
     content = (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
 import { generateUUID } from '../../utils';
 
 const ExploreScreenPlaceholder: React.FC = () => (
