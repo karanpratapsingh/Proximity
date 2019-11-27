@@ -4,6 +4,10 @@ import { GoBackHeader, NativeImage } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import { AppContext } from '../../context';
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_POST } from '../../graphql/query';
+import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../constants';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
@@ -13,7 +17,7 @@ const CommentInput = () => {
   return (
     <View style={styles().commentInput}>
       <NativeImage
-        uri='https://images.unsplash.com/reserve/eBJIgrh3TCeHf7unLQ5e_sailing-5.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80' // user's avatar
+        uri='https://images.unsplash.com/reserve/eBJIgrh3TCeHf7unLQ5e_sailing-5.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80' //global:state -> avatar
         style={styles(theme).commentAvatarImage}
       />
       <TextInput
@@ -30,31 +34,52 @@ const CommentInput = () => {
 const PostViewScreen = props => {
 
   const { theme } = useContext(AppContext);
+  const { navigate } = useNavigation();
+  const postId = useNavigationParam('postId');
+  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
 
-  const navigateToProfile = () => {
+  const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
 
-  };
+  let content;
+
+  if (!postLoading && !postError) {
+    const {
+      post: {
+        author: { id: userId, avatar, handle },
+        uri,
+        likes,
+        caption,
+        createdAt
+      }
+    } = postData;
+
+    content = (
+      <>
+        <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
+          <NativeImage
+            uri={avatar}
+            style={styles(theme).avatarImage}
+          />
+          <View>
+            <Text style={styles(theme).handleText}>{handle}</Text>
+            <Text style={styles(theme).timeText}>{createdAt}</Text>
+          </View>
+        </TouchableOpacity>
+        <NativeImage
+          uri={uri}
+          style={styles(theme).postImage}
+        />
+        <Text style={styles(theme).likesText}>{likes} likes</Text>
+        <Text style={styles(theme).captionText}>{caption}</Text>
+      </>
+    );
+  }
 
   return (
     <View style={styles(theme).container}>
       <GoBackHeader iconSize={IconSizes.x6} />
       <ScrollView style={styles().content}>
-        <TouchableOpacity onPress={navigateToProfile} style={styles().postHeader}>
-          <NativeImage
-            uri='https://images.unsplash.com/photo-1457583221838-6bf5ad5ea874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80' // global:state -> user avatar
-            style={styles(theme).avatarImage}
-          />
-          <View>
-            <Text style={styles(theme).nameText}>Charlotte Jefferson</Text>
-            <Text style={styles(theme).timeText}>12 hrs ago</Text>
-          </View>
-        </TouchableOpacity>
-        <NativeImage
-          uri='https://images.unsplash.com/photo-1457583221838-6bf5ad5ea874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80'
-          style={styles(theme).postImage}
-        />
-        <Text style={styles(theme).likesText}>12 likes</Text>
-        <Text numberOfLines={1} ellipsizeMode='tail' style={styles(theme).captionText}>this is amazing, this is amazing, this is amazing</Text>
+        {content}
       </ScrollView>
       <CommentInput />
     </View>
@@ -82,7 +107,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     borderRadius: 50,
     marginRight: 12
   },
-  nameText: {
+  handleText: {
     ...FontWeights.Regular,
     ...FontSizes.Body,
     color: theme.text01
@@ -110,7 +135,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Body,
     color: theme.text01,
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 20
   },
   commentInput: {
     flexDirection: 'row',

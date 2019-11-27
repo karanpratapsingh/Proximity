@@ -25,7 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
   const { navigate } = useNavigation();
 
   const navigateToPost = () => {
-    navigate(Routes.PostViewScreen, { id });
+    navigate(Routes.PostViewScreen, { postId: id });
   };
 
   return (
