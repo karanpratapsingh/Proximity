@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { NotificationText } from '../../../constants';
 import { AppContext } from '../../../context';
+import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils';
-import { NotificationText } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -16,10 +17,7 @@ const NotificationCard = ({ avatar, handle, type, time }) => {
 
   return (
     <View style={styles().container}>
-      <Image
-        source={{ uri: avatar }}
-        style={styles(theme).avatarImage}
-      />
+      <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).notificationText}>
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>

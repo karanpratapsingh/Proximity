@@ -36,12 +36,15 @@ const ProfileViewScreen: React.FC = () => {
     );
   };
 
-  const renderItem = ({ item, index }) => (
-    <PostThumbnail
-      id={null}
-      uri='https://source.unsplash.com/random'
-    />
-  );
+  const renderItem = ({ item }) => {
+    const { id, uri } = item;
+    return (
+      <PostThumbnail
+        id={id}
+        uri={uri}
+      />
+    );
+  };
 
   let content = <ProfileScreenPlaceholder viewMode />;
 

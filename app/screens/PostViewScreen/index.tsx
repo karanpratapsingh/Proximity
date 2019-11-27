@@ -37,6 +37,7 @@ const PostViewScreen = () => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
+  
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
 
   const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
