@@ -1,11 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Typography } from '../../theme';
-import { ThemeStatic } from '../../theme';
-import LoadingIndicator from '../misc/LoadingIndicator';
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
-
-const { IconSizes } = Typography;
 
 const PostCardPlaceholder = () => (
   <View style={styles.container}>

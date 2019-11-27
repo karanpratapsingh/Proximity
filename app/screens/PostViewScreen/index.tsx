@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ScrollView, Platform, View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { GoBackHeader, NativeImage } from '../../layout';
+import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import { AppContext } from '../../context';
@@ -32,7 +32,7 @@ const CommentInput = () => {
   );
 };
 
-const PostViewScreen = props => {
+const PostViewScreen = () => {
 
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -41,12 +41,16 @@ const PostViewScreen = props => {
 
   const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
 
-  let content;
+  let content = <PostViewScreenPlaceholder />;
 
   if (!postLoading && !postError) {
     const {
       post: {
-        author: { id: userId, avatar, handle },
+        author: {
+          id: userId,
+          avatar,
+          handle
+        },
         uri,
         likes,
         caption,
@@ -78,7 +82,7 @@ const PostViewScreen = props => {
 
   return (
     <View style={styles(theme).container}>
-      <GoBackHeader iconSize={IconSizes.x6} />
+      <GoBackHeader iconSize={IconSizes.x7} />
       <ScrollView style={styles().content}>
         {content}
       </ScrollView>
