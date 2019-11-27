@@ -4,7 +4,7 @@ import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
 
 const PostCardPlaceholder = () => (
   <View style={styles.container}>
-    <Placeholder Animation={Fade}>
+    <Placeholder Animation={props => <Fade {...props} />}>
       {new Array(4)
         .fill({})
         .map((_, index) =>

@@ -5,7 +5,7 @@ import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeho
 
 const NotificationScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
-    <Placeholder Animation={Fade}>
+    <Placeholder Animation={props => <Fade {...props} />}>
       {new Array(20)
         .fill({})
         .map((_, index) =>

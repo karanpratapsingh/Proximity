@@ -8,7 +8,7 @@ interface ProfileScreenPlaceholderType {
 
 const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => (
   <View style={styles.container}>
-    <Placeholder Animation={Fade}>
+    <Placeholder Animation={props => <Fade {...props} />}>
       <View style={styles.avatarPlaceholder}>
         <PlaceholderLine style={styles.connectionsPlaceholder} noMargin width={24} height={40} />
         <PlaceholderMedia size={120} isRound />

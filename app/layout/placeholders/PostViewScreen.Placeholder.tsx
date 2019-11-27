@@ -5,7 +5,7 @@ import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeho
 
 const PostViewScreenPlaceholder = () => (
   <View style={styles.container}>
-    <Placeholder Animation={Fade}>
+    <Placeholder Animation={props => <Fade {...props} />}>
       <View style={styles.postHeader}>
         <PlaceholderMedia size={50} isRound />
         <View style={styles.author}>
