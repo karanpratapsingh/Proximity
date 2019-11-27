@@ -9,6 +9,7 @@ import Button from './controls/Button';
 
 import ListEmptyComponent from './misc/ListEmptyComponent';
 import LoadingIndicator from './misc/LoadingIndicator';
+import NativeImage from './misc/NativeImage';
 
 import MessageScreenPlaceholder from './placeholders/MessageScreen.Placeholder';
 import ConversationScreenPlaceholder from './placeholders/ConversationScreen.Placeholder';
@@ -30,6 +31,7 @@ export {
   Button,
   ListEmptyComponent,
   LoadingIndicator,
+  NativeImage,
   MessageScreenPlaceholder,
   ConversationScreenPlaceholder,
   NotificationScreenPlaceholder,
