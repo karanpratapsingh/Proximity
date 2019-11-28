@@ -7,6 +7,7 @@ type AppContextType = {
   userId: string,
   updateUser: (id: string) => void
   theme: ThemeColors,
+  themeType: string,
   toggleTheme: (type: string) => void
 };
 
@@ -15,7 +16,7 @@ export const AppContext = createContext({} as AppContextType);
 export const AppContextProvider = props => {
   const [userId, setUserId] = useState(DummyUsers['@occult_686']);
   const [theme, setTheme] = useState(Theme.light.colors);
-  const [, setThemeType] = useState(Theme.light.type);
+  const [themeType, setThemeType] = useState(Theme.light.type);
 
   const updateUser = id => {
     setUserId(id);
@@ -28,7 +29,7 @@ export const AppContextProvider = props => {
   };
 
   return (
-    <AppContext.Provider value={{ userId, updateUser, theme, toggleTheme }}>
+    <AppContext.Provider value={{ userId, updateUser, theme, themeType, toggleTheme }}>
       {props.children}
     </AppContext.Provider>
   );
