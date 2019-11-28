@@ -104,9 +104,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     <Modalize
       //@ts-ignore
       ref={ref}
-      scrollViewProps={{
-        showsVerticalScrollIndicator: false
-      }}
+      scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}
       adjustToContentHeight>
       <BottomSheetHeader
@@ -119,7 +117,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           <TouchableOpacity activeOpacity={0.9} onPress={() => null} style={styles(theme).avatarOverlay}>
-            <MaterialIcons name='edit' size={24} color={ThemeStatic.white} />
+            <MaterialIcons name='edit' size={IconSizes.x6} color={ThemeStatic.white} />
           </TouchableOpacity>
         </ImageBackground>
 
@@ -143,6 +141,11 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           characterRestriction={200}
         />
         <Button
+          Icon={() => <MaterialIcons
+            name='done'
+            color={ThemeStatic.white}
+            size={IconSizes.x5}
+          />}
           label='Done'
           onPress={onDone}
           loading={updateUserLoading}

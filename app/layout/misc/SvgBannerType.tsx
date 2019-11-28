@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
@@ -9,16 +9,17 @@ const { FontWeights, FontSizes } = Typography;
 interface SvgBannerType {
   Svg: any,
   placeholder: string,
-  topSpacing?: number
+  topSpacing?: number,
+  textStyle?: StyleProp<TextStyle>
 };
 
-const SvgBanner: React.FC<SvgBannerType> = ({ Svg, placeholder, topSpacing }) => {
+const SvgBanner: React.FC<SvgBannerType> = ({ Svg, placeholder, topSpacing, textStyle }) => {
   const { theme } = useContext(AppContext);
 
   return (
     <View style={[styles().container, { marginTop: topSpacing }]}>
       <Svg />
-      <Text style={styles(theme).placeholderText}>{placeholder}</Text>
+      <Text style={[styles(theme).placeholderText, textStyle]}>{placeholder}</Text>
     </View>
   );
 };

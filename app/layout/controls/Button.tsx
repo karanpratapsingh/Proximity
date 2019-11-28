@@ -6,6 +6,7 @@ import { ThemeStatic, Typography } from '../../theme';
 const { FontWeights, FontSizes } = Typography;
 
 interface ButtonType {
+  Icon?: React.FC,
   label: string,
   onPress: any,
   loading: boolean,
@@ -13,10 +14,15 @@ interface ButtonType {
   labelStyle?: any
 };
 
-const Button: React.FC<ButtonType> = ({ label, onPress, loading, containerStyle, labelStyle }) => {
+const Button: React.FC<ButtonType> = ({ Icon, label, onPress, loading, containerStyle, labelStyle }) => {
 
   let content = <LoadingIndicator size={8} color={ThemeStatic.white} />
-  if (!loading) content = <Text style={[styles.label, labelStyle]}>{label}</Text>;
+  if (!loading) content = (
+    <>
+      {Icon && <Icon />}
+      <Text style={[styles.label, labelStyle]}>{label}</Text>
+    </>
+  );
 
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={[styles.container, containerStyle]}>
@@ -28,6 +34,7 @@ const Button: React.FC<ButtonType> = ({ label, onPress, loading, containerStyle,
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
@@ -37,6 +44,7 @@ const styles = StyleSheet.create({
   label: {
     ...FontWeights.Light,
     ...FontSizes.Body,
+    marginLeft: 5,
     color: ThemeStatic.white
   }
 });

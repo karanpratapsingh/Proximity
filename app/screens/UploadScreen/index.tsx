@@ -26,7 +26,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   content: {
     flex: 1,
-    alignItems: 'center',
     paddingHorizontal: 20
   }
 });
