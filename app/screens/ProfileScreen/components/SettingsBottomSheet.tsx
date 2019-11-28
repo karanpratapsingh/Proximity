@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import Checkbox from 'react-native-modest-checkbox';
@@ -10,7 +10,7 @@ import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 
-const { FontWeights, FontSizes } = Typography;
+const { FontWeights, FontSizes, IconSizes } = Typography;
 
 interface OptionType {
   label?: string,
@@ -25,14 +25,14 @@ const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) =>
   if (children)
     return (
       <View style={styles().option}>
-        <Ionicons name={iconName} size={20} color={theme.text01} />
+        <Ionicons name={iconName} size={IconSizes.x6} color={theme.text01} />
         {children}
       </View>
     );
 
   return (
     <TouchableOpacity style={styles().option} activeOpacity={0.9} onPress={onPress}>
-      <Ionicons name={iconName} size={20} color={theme.text01} />
+      <Ionicons name={iconName} size={IconSizes.x6} color={theme.text01} />
       <Text style={styles(theme).optionLabel}>{label}</Text>
     </TouchableOpacity>
   );
@@ -44,15 +44,17 @@ interface SettingsBottomSheetType {
 
 const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((props, ref) => {
 
-  const { toggleTheme, theme } = useContext(AppContext);
+  const { toggleTheme, theme, themeType } = useContext(AppContext);
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const onChange = ({ checked }) => {
+  useEffect(() => {
+    setIsChecked(themeType === 'dark');
+  }, []);
 
+  const onChange = ({ checked }) => {
     if (checked) toggleTheme('dark');
     else toggleTheme('light');
-
     setIsChecked(checked);
   };
 
@@ -81,7 +83,11 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
             uncheckedComponent={<MaterialIcons name='done' size={25} color={ThemeStatic.text02} />}
           />
         </Option>
-        <Option label='Logout' iconName='ios-log-out' onPress={() => null} />
+        <Option
+          label='Logout'
+          iconName='ios-log-out'
+          onPress={() => null}
+        />
       </View>
     </Modalize>
   );
@@ -94,22 +100,22 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 16
+    paddingTop: 20
   },
   label: {
     ...FontWeights.Light,
-    ...FontSizes.Body,
+    ...FontSizes.Label,
     width: responsiveWidth(74),
     color: theme.text01
   },
   option: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5
+    marginVertical: 6
   },
   optionLabel: {
     ...FontWeights.Light,
-    ...FontSizes.Body,
+    ...FontSizes.Label,
     color: theme.text01,
     marginLeft: 10
   }
