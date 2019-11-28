@@ -80,8 +80,8 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
             label='Dark Mode'
             onChange={onChange}
             labelStyle={styles(theme).label}
-            checkedComponent={<MaterialIcons name='done' size={25} color={ThemeStatic.accent} />}
-            uncheckedComponent={<MaterialIcons name='done' size={25} color={ThemeStatic.text02} />}
+            checkedComponent={<MaterialIcons name='done' size={IconSizes.x6} color={ThemeStatic.accent} />}
+            uncheckedComponent={<MaterialIcons name='done' size={IconSizes.x6} color={ThemeStatic.text02} />}
           />
         </Option>
         <Option

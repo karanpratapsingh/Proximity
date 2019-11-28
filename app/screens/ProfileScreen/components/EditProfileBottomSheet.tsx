@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes } from '../../../constants';
+import { IconSizes, HandleAvailableColor } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
@@ -86,12 +86,18 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
   let content = (
     <View>
-      <LoadingIndicator size={4} color={theme.accent} />
+      <LoadingIndicator size={IconSizes.x00} color={theme.accent} />
     </View>
   );
 
   if (!isHandleAvailableLoading && isHandleAvailableCalled) {
-    content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={IconSizes.x6} />;
+    content = (
+      <MaterialIcons
+        name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'}
+        color={HandleAvailableColor[isHandleAvailableData.isHandleAvailable]}
+        size={IconSizes.x6}
+      />
+    );
   }
 
   return (

@@ -22,6 +22,7 @@ export const FollowInteractionType = {
 };
 
 export const IconSizes = {
+  x00: 4,
   x0: 6,
   x1: 10,
   x2: 12,
@@ -43,6 +44,11 @@ export const PostDimensions = {
 export const ThemeType = {
   light: 'light',
   dark: 'dark'
+};
+
+export const HandleAvailableColor = {
+  true: 'green',
+  false: 'red'
 };
 
 export const DummyUsers = {
