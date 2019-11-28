@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
 
 interface ProfileScreenPlaceholderType {
   viewMode?: boolean
@@ -8,7 +9,7 @@ interface ProfileScreenPlaceholderType {
 
 const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => (
   <View style={styles.container}>
-    <Placeholder Animation={props => <Fade {...props} />}>
+    <Placeholder Animation={PlaceholderAnimation}>
       <View style={styles.avatarPlaceholder}>
         <PlaceholderLine style={styles.connectionsPlaceholder} noMargin width={24} height={40} />
         <PlaceholderMedia size={120} isRound />

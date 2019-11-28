@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
 
 const PostViewScreenPlaceholder = () => (
   <View style={styles.container}>
-    <Placeholder Animation={props => <Fade {...props} />}>
+    <Placeholder Animation={PlaceholderAnimation}>
       <View style={styles.postHeader}>
         <PlaceholderMedia size={50} isRound />
         <View style={styles.author}>

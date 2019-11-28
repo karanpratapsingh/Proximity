@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
+import { Placeholder, PlaceholderLine } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
 
 const ExploreScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
-    <Placeholder Animation={props => <Fade {...props} />}>
+    <Placeholder Animation={PlaceholderAnimation}>
       {new Array(8)
         .fill({})
         .map((_, index) =>

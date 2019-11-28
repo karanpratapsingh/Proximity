@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
 
 const NotificationScreenPlaceholder: React.FC = () => (
   <View style={styles.container}>
-    <Placeholder Animation={props => <Fade {...props} />}>
+    <Placeholder Animation={PlaceholderAnimation}>
       {new Array(20)
         .fill({})
         .map((_, index) =>
