@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { AppContext } from '../../context';
 import { QUERY_SEARCH_USERS } from '../../graphql/query';
-import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceholder, ListEmptySvg } from '../../layout';
+import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserSearchResults from './components/UserSearchResults';
 import SearchUsersBanner from '../../../assets/svg/search-users.svg';
@@ -39,7 +39,7 @@ const ExploreScreen: React.FC = () => {
     if (querySearchUsersCalled && querySearchUsersLoading) {
       subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <ListEmptySvg Svg={SearchUsersBanner} placeholder='Search users' />
+      subContent = <SvgBannerType Svg={SearchUsersBanner} placeholder='Search users' />
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
       subContent = <UserSearchResults searchResults={searchResults} />;
     }

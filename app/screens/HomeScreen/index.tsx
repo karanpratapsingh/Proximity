@@ -7,7 +7,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
 import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { Header, IconButton, ListEmptySvg, PostCardPlaceholder } from '../../layout';
+import { Header, IconButton, SvgBannerType, PostCardPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import PostCard from './components/PostCard';
 
@@ -60,7 +60,7 @@ const HomeScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={[dummyPost]}
-        ListEmptyComponent={() => <ListEmptySvg Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='your feed is empty' />}
+        ListEmptyComponent={() => <SvgBannerType Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='your feed is empty' />}
         style={styles().postList}
         spacing={20}
         renderItem={renderItem}

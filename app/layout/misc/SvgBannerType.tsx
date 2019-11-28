@@ -6,13 +6,13 @@ import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface ListEmptySvgType {
+interface SvgBannerType {
   Svg: any,
   placeholder: string,
   topSpacing?: number
 };
 
-const ListEmptySvg: React.FC<ListEmptySvgType> = ({ Svg, placeholder, topSpacing }) => {
+const SvgBanner: React.FC<SvgBannerType> = ({ Svg, placeholder, topSpacing }) => {
   const { theme } = useContext(AppContext);
 
   return (
@@ -38,4 +38,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default ListEmptySvg;
+export default SvgBanner;

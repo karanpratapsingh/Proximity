@@ -8,7 +8,7 @@ import FormInput from './controls/FormInput';
 import Button from './controls/Button';
 import IconButton from './controls/IconButton';
 
-import ListEmptySvg from './misc/ListEmptySvg';
+import SvgBannerType from './misc/SvgBannerType';
 import ListEmptyComponent from './misc/ListEmptyComponent';
 import LoadingIndicator from './misc/LoadingIndicator';
 import NativeImage from './misc/NativeImage';
@@ -34,7 +34,7 @@ export {
   FormInput,
   Button,
   IconButton,
-  ListEmptySvg,
+  SvgBannerType,
   ListEmptyComponent,
   LoadingIndicator,
   NativeImage,
