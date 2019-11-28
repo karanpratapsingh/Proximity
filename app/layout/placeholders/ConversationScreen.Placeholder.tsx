@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Typography } from '../../theme';
+import { IconSizes } from '../../constants';
 import { ThemeStatic } from '../../theme';
 import LoadingIndicator from '../misc/LoadingIndicator';
 
-const { IconSizes } = Typography;
 const ConversationScreenPlaceholder = () => (
   <View style={styles.container}>
     <LoadingIndicator size={IconSizes.x2} color={ThemeStatic.accent} />
@@ -14,7 +13,6 @@ const ConversationScreenPlaceholder = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
     paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center'

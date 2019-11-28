@@ -1,24 +1,24 @@
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { ThemeColors } from '../../../types';
-import { Typography } from '../../../theme';
-import { AppContext } from '../../../context';
-import { LoadingIndicator } from '../../../layout';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
-import { MUTATION_UPDATE_FOLLOWING, MUTATION_CREATE_TEMPORARY_CHAT } from '../../../graphql/mutation';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes, FollowInteractionType } from '../../../constants';
+import { FollowInteractionType, IconSizes, Routes } from '../../../constants';
+import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
+import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
+import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
+import { LoadingIndicator } from '../../../layout';
+import { Typography } from '../../../theme';
+import { ThemeColors } from '../../../types';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 const UserInteractions = ({ targetId, handle }) => {
 
   const { navigate } = useNavigation();
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
-    variables: { userId, targetId },
+    variables: { userId: user.id, targetId },
     pollInterval: 500
   });
 
@@ -30,7 +30,7 @@ const UserInteractions = ({ targetId, handle }) => {
     const { doesFollow } = doesFollowData;
     content = (
       <Text style={styles(theme).followInteractionText}>
-        {`${doesFollow ? 'UNFOLLOW' : 'FOLLOW'}`}
+        {`${doesFollow ? 'FOLLOWING' : 'FOLLOW'}`}
       </Text>
     );
   }
@@ -39,7 +39,7 @@ const UserInteractions = ({ targetId, handle }) => {
     if (doesFollowLoading) return;
 
     const { doesFollow } = doesFollowData;
-    const updateFollowingArgs = { userId, targetId };
+    const updateFollowingArgs = { userId: user.id, targetId };
     if (doesFollow) {
       updateFollowing({
         variables: {
@@ -61,7 +61,7 @@ const UserInteractions = ({ targetId, handle }) => {
     try {
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
-        variables: { userId, targetId }
+        variables: { userId: user.id, targetId }
       });
 
       if (chatExists) {

@@ -11,9 +11,9 @@ interface UserSearchResultsType {
 };
 
 const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) => {
-  const { userId } = useContext(AppContext);
+  const { user } = useContext(AppContext);
 
-  const filteredSearchResults = [...searchResults].filter(result => result.id !== userId);
+  const filteredSearchResults = [...searchResults].filter(result => result.id !== user.id);
 
   const renderItem = ({ item }) => {
 

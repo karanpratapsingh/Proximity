@@ -1,30 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
+import { Placeholder, PlaceholderLine } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
+import { AppContext } from '../../context';
 
-const ExploreScreenPlaceholder: React.FC = () => (
-  <View style={styles.container}>
-    <Placeholder Animation={Fade}>
-      {new Array(8)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.postContainer}>
-            <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />
-            <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />
-            <PlaceholderLine style={styles.postPlaceholder} noMargin width={32.5} height={100} />
-          </View>
-        )}
-    </Placeholder>
-  </View>
-);
+const ExploreScreenPlaceholder: React.FC = () => {
+  const { theme } = useContext(AppContext);
+
+  return (
+    <View style={styles.container}>
+      <Placeholder Animation={PlaceholderAnimation}>
+        {new Array(8)
+          .fill({})
+          .map((_, index) =>
+            <View key={index} style={styles.postContainer}>
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
+            </View>
+          )}
+      </Placeholder>
+    </View >
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     paddingTop: 10,
-    paddingBottom: 0
+    paddingHorizontal: 20
   },
   postContainer: {
     flexDirection: 'row',
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   postPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   }
 });
 

@@ -1,18 +1,39 @@
 import { ApolloProvider } from '@apollo/react-hooks';
-import React from 'react';
-import { YellowBox } from 'react-native';
-import { AppContextProvider } from './app/context';
+import React, { useContext } from 'react';
+import { StyleSheet, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
+import { ThemeColors } from './app/types';
+import { ThemeType } from './app/constants';
 
-YellowBox.ignoreWarnings(['Warning: Encountered two children with the same key']);
-
-const App = () => (
-  <ApolloProvider client={client}>
-    <AppContextProvider>
+const SafeAreaApp = () => {
+  const { theme, themeType } = useContext(AppContext);
+  const dynamicBarStyle = `${themeType === ThemeType.light ? ThemeType.dark : ThemeType.light}-content`;
+  return (
+    <SafeAreaView style={styles(theme).container}>
+      <StatusBar animated barStyle={dynamicBarStyle as any} />
       <AppNavigator />
-    </AppContextProvider>
-  </ApolloProvider>
-);
+    </SafeAreaView>
+  );
+};
+
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
+      <AppContextProvider>
+        <SafeAreaApp />
+      </AppContextProvider>
+    </ApolloProvider>
+  );
+};
+
+const styles = (theme = {} as ThemeColors) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.base
+  }
+});
 
 export default App;

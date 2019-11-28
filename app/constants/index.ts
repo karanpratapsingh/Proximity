@@ -6,7 +6,8 @@ export const Routes = {
   ProfileScreen: 'ProfileScreen,',
   ProfileViewScreen: 'ProfileViewScreen',
   MessageScreen: 'MessageScreen',
-  ConversationScreen: 'ConversationScreen'
+  ConversationScreen: 'ConversationScreen',
+  PostViewScreen: 'PostViewScreen'
 };
 
 export const NotificationText = {
@@ -18,6 +19,36 @@ export const NotificationText = {
 export const FollowInteractionType = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW'
+};
+
+export const IconSizes = {
+  x00: 4,
+  x0: 6,
+  x1: 10,
+  x2: 12,
+  x3: 14,
+  x4: 16,
+  x5: 20,
+  x6: 24,
+  x7: 28,
+  x8: 32,
+  x9: 40
+};
+
+export const PostDimensions = {
+  Small: { height: 80, width: 80 },
+  Medium: { height: 150, width: 150 },
+  Large: { height: 400, width: 335 }
+};
+
+export const ThemeType = {
+  light: 'light',
+  dark: 'dark'
+};
+
+export const HandleAvailableColor = {
+  true: 'green',
+  false: 'red'
 };
 
 export const DummyUsers = {

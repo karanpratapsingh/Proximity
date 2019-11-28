@@ -63,7 +63,7 @@ const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBl
         activeOpacity={0.90}
         onPress={onCancel}
         style={[styles().cancel, { width: cancelWidth }]}>
-        <Text style={styles(theme).cancelText}>Cancel</Text>
+        <Text style={[styles(theme).cancelText, { color: cancelWidth ? theme.text01 : theme.white }]}>Cancel</Text>
       </TouchableOpacity>
     </Transitioning.View>
   );
@@ -92,8 +92,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   cancelText: {
     ...FontWeights.Light,
-    ...FontSizes.Body,
-    color: theme.text01
+    ...FontSizes.Body
   }
 });
 

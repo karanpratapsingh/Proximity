@@ -15,6 +15,7 @@ export const QUERY_USER = gql`
         id
       }
       posts {
+        id
         uri
       }
     }
@@ -96,5 +97,21 @@ export const QUERY_SEARCH_USERS = gql`
 export const QUERY_HANDLE_AVAILABLE = gql`
   query IsHandleAvailable($userId: String!, $handle: String!) {
     isHandleAvailable(userId: $userId, handle: $handle)
+  }
+`;
+
+export const QUERY_POST = gql`
+  query Post($postId: String!) {
+    post(postId: $postId) {
+      author {
+        id
+        handle
+        avatar
+      }
+      uri
+      likes
+      caption
+      createdAt
+    }
   }
 `;

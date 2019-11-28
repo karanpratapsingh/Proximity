@@ -1,30 +1,27 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
+import { IconSizes } from '../../constants';
+import { AppContext } from '../../context';
+import client from '../../graphql/client';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
-import { GoBackHeader, ConversationScreenPlaceholder } from '../../layout';
+import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
+import { ThemeColors } from '../../types';
 import { transformMessages } from '../../utils';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
-import { Typography } from '../../theme';
-import client from '../../graphql/client';
-import { AppContext } from '../../context';
-import { ThemedColor } from 'react-navigation-tabs/lib/typescript/src/types';
-import { ThemeColors } from '../../types';
-
-const { IconSizes } = Typography;
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
@@ -53,12 +50,12 @@ const ConversationScreen = () => {
     if (isFirstMessage) {
       await client.mutate({
         mutation: MUTATION_CONNECT_CHAT_TO_USERS,
-        variables: { chatId, userId, targetId }
+        variables: { chatId, userId: user.id, targetId }
       });
     }
     addMessage({
       variables:
-        { chatId, authorId: userId, body: updatedMessage.text }
+        { chatId, authorId: user.id, body: updatedMessage.text }
     });
   };
 
@@ -77,7 +74,7 @@ const ConversationScreen = () => {
         renderBubble={CustomBubble}
         renderSend={CustomSend}
         onSend={updatedMessages => onSend(updatedMessages)}
-        user={{ _id: userId }}
+        user={{ _id: user.id }}
       />
     );
   }

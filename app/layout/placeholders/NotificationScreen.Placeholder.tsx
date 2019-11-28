@@ -1,36 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderMedia, PlaceholderLine } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
+import { AppContext } from '../../context';
 
-const NotificationScreenPlaceholder: React.FC = () => (
-  <View style={styles.container}>
-    <Placeholder Animation={Fade}>
-      {new Array(20)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.cardContainer}>
-            <PlaceholderMedia size={50} isRound />
-            <View style={styles.infoContainer}>
-              <PlaceholderLine
-                noMargin
-                style={styles.notificationCardPlaceholder}
-                height={14}
-                width={responsiveWidth(25)}
-              />
-              <PlaceholderLine
-                noMargin
-                style={styles.notificationCardPlaceholder}
-                height={10}
-                width={20}
-              />
+const NotificationScreenPlaceholder: React.FC = () => {
+
+  const { theme } = useContext(AppContext);
+
+  return (
+    <View style={styles.container}>
+      <Placeholder Animation={PlaceholderAnimation}>
+        {new Array(20)
+          .fill({})
+          .map((_, index) =>
+            <View key={index} style={styles.cardContainer}>
+              <PlaceholderMedia color={theme.placeholder} size={50} isRound />
+              <View style={styles.infoContainer}>
+                <PlaceholderLine
+                  noMargin
+                  color={theme.placeholder}
+                  style={styles.notificationCardPlaceholder}
+                  width={responsiveWidth(25)}
+                />
+                <PlaceholderLine
+                  noMargin
+                  color={theme.placeholder}
+                  style={styles.notificationCardPlaceholder}
+                  width={responsiveWidth(10)}
+                />
+              </View>
             </View>
-          </View>
-        )}
-    </Placeholder>
-  </View>
-);
+          )}
+      </Placeholder>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   notificationCardPlaceholder: {
-    borderRadius: 2,
+    borderRadius: 10,
     marginTop: 10
   }
 });

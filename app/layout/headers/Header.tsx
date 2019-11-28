@@ -4,7 +4,7 @@ import { Typography } from '../../theme';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 interface HeaderType {
   title: string,
@@ -27,21 +27,13 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 24,
     paddingBottom: 10,
-    paddingHorizontal: 24
+    paddingHorizontal: 20
   },
   title: {
     ...FontWeights.Bold,
     ...FontSizes.Heading,
     color: theme.text01
-  },
-  underline: {
-    marginTop: 16,
-    height: 2,
-    width: 20,
-    borderRadius: 10,
-    backgroundColor: theme.text01
   }
 });
 

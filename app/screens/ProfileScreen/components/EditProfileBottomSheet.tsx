@@ -1,14 +1,15 @@
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { IconSizes, HandleAvailableColor } from '../../../constants';
 import { AppContext } from '../../../context';
-import { Button, FormInput, BottomSheetHeader, LoadingIndicator } from '../../../layout';
-import { ThemeStatic } from '../../../theme';
-import { ThemeColors } from '../../../types';
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
+import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
+import { ThemeStatic } from '../../../theme';
+import { ThemeColors } from '../../../types';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -20,7 +21,7 @@ interface EditProfileBottomSheetType {
 
 const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const [editableAvatar, setEditableAvatar] = useState('');
   const [editableName, setEditableName] = useState('');
@@ -46,7 +47,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   useEffect(() => {
     queryIsHandleAvailable({
       variables: {
-        userId,
+        userId: user.id,
         handle: editableHandle
       }
     });
@@ -72,7 +73,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
     updateUser({
       variables: {
-        userId,
+        userId: user.id,
         avatar: editableAvatar,
         name: editableName.trim(),
         handle: editableHandle.trim(),
@@ -85,12 +86,18 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
   let content = (
     <View>
-      <LoadingIndicator size={4} color={theme.accent} />
+      <LoadingIndicator size={IconSizes.x00} color={theme.accent} />
     </View>
   );
 
   if (!isHandleAvailableLoading && isHandleAvailableCalled) {
-    content = <MaterialIcons name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'} color={isHandleAvailableData.isHandleAvailable ? 'green' : 'red'} size={24} />;
+    content = (
+      <MaterialIcons
+        name={isHandleAvailableData.isHandleAvailable ? 'done' : 'close'}
+        color={HandleAvailableColor[isHandleAvailableData.isHandleAvailable]}
+        size={IconSizes.x6}
+      />
+    );
   }
 
   return (

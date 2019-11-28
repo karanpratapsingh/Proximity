@@ -9,7 +9,8 @@ export const ThemeStatic = {
   white: '#FFFFFF',
   black: '#000000',
   text01: '#000000',
-  text02: '#BBBBBB'
+  text02: '#BBBBBB',
+  placeholder: '#F4F4F4'
 };
 
 export const Theme = {
@@ -28,7 +29,7 @@ export const Theme = {
     type: 'dark',
     colors: {
       accent: '#846BE2',
-      base: '#111111',
+      base: '#121212',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
       placeholder: '#222',

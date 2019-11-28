@@ -1,42 +1,101 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
-import { generateUUID } from '../../utils';
+import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import PlaceholderAnimation from './PlaceholderAnimation';
+import { AppContext } from '../../context';
 
 interface ProfileScreenPlaceholderType {
   viewMode?: boolean
 };
 
-const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => (
-  <View style={styles.container}>
-    <Placeholder Animation={Fade}>
-      <View style={styles.avatarPlaceholder}>
-        <PlaceholderLine style={styles.connectionsPlaceholder} noMargin width={24} height={40} />
-        <PlaceholderMedia size={120} isRound />
-        <PlaceholderLine style={styles.connectionsPlaceholder} noMargin width={24} height={40} />
-      </View>
+const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => {
+  const { theme } = useContext(AppContext);
 
-      <View style={styles.infoPlaceholder}>
-        <PlaceholderLine style={styles.namePlaceholder} noMargin width={70} height={20} />
-        <PlaceholderLine style={styles.handlePlaceholder} noMargin width={50} height={16} />
-        {viewMode &&
-          <View style={styles.interact}>
-            <PlaceholderLine style={styles.interaction} noMargin width={48} height={32} />
-            <PlaceholderLine style={styles.interaction} noMargin width={48} height={32} />
-          </View>}
-        <PlaceholderLine style={styles.aboutPlaceholder} noMargin width={100} height={110} />
-      </View>
-      {new Array(4)
-        .fill(generateUUID())
-        .map(placeholderKey =>
-          <View key={placeholderKey} style={styles.postContainer}>
-            <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-            <PlaceholderLine style={styles.postPlaceholder} noMargin width={48.5} height={150} />
-          </View>
-        )}
-    </Placeholder>
-  </View>
-);
+  return (
+    <View style={styles.container}>
+      <Placeholder Animation={PlaceholderAnimation}>
+        <View style={styles.avatarPlaceholder}>
+          <PlaceholderLine
+            noMargin
+            color={theme.placeholder}
+            style={styles.connectionsPlaceholder}
+            width={24}
+            height={40}
+          />
+          <PlaceholderMedia color={theme.placeholder} size={120} isRound />
+          <PlaceholderLine
+            noMargin
+            color={theme.placeholder}
+            style={styles.connectionsPlaceholder}
+            width={24}
+            height={40}
+          />
+        </View>
+
+        <View style={styles.infoPlaceholder}>
+          <PlaceholderLine
+            noMargin
+            color={theme.placeholder}
+            style={styles.namePlaceholder}
+            width={70}
+            height={20}
+          />
+          <PlaceholderLine
+            noMargin
+            color={theme.placeholder}
+            style={styles.handlePlaceholder}
+            width={50}
+            height={16}
+          />
+          {viewMode &&
+            <View style={styles.interact}>
+              <PlaceholderLine
+                noMargin
+                color={theme.placeholder}
+                style={styles.interaction}
+                width={48}
+                height={32}
+              />
+              <PlaceholderLine
+                noMargin
+                color={theme.placeholder}
+                style={styles.interaction}
+                width={48}
+                height={32}
+              />
+            </View>}
+          <PlaceholderLine
+            noMargin
+            color={theme.placeholder}
+            style={styles.aboutPlaceholder}
+            width={100}
+            height={110}
+          />
+        </View>
+        {new Array(4)
+          .fill({})
+          .map((_, index) =>
+            <View key={index} style={styles.postContainer}>
+              <PlaceholderLine
+                noMargin
+                color={theme.placeholder}
+                style={styles.postPlaceholder}
+                width={48.5}
+                height={150}
+              />
+              <PlaceholderLine
+                noMargin
+                color={theme.placeholder}
+                style={styles.postPlaceholder}
+                width={48.5}
+                height={150}
+              />
+            </View>
+          )}
+      </Placeholder>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   connectionsPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   },
   infoPlaceholder: {
     alignItems: 'center',
@@ -61,11 +120,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   namePlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   },
   handlePlaceholder: {
     marginTop: 10,
-    borderRadius: 5
+    borderRadius: 10
   },
   interact: {
     flexDirection: 'row',
@@ -79,7 +138,7 @@ const styles = StyleSheet.create({
   },
   aboutPlaceholder: {
     marginTop: 16,
-    borderRadius: 5
+    borderRadius: 10
   },
   postContainer: {
     flexDirection: 'row',
@@ -88,7 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   postPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   }
 });
 

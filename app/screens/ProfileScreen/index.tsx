@@ -1,25 +1,22 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { IconSizes, PostDimensions } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
-import { Typography } from '../../theme';
+import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
-
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
 
-const { IconSizes } = Typography;
-
 const ProfileScreen: React.FC = () => {
 
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId },
+    variables: { userId: user.id },
     pollInterval: 1000
   });
 
@@ -47,12 +44,16 @@ const ProfileScreen: React.FC = () => {
     );
   };
 
-  const renderItem = ({ item, index }) => (
-    <PostThumbnail
-      id={null}
-      uri='https://source.unsplash.com/random'
-    />
-  );
+  const renderItem = ({ item }) => {
+    const { id, uri } = item;
+    return (
+      <PostThumbnail
+        id={id}
+        uri={uri}
+        dimensions={PostDimensions.Medium}
+      />
+    );
+  };
 
   let content = <ProfileScreenPlaceholder />;
 
@@ -80,11 +81,13 @@ const ProfileScreen: React.FC = () => {
     );
   }
 
-  const IconRight = () => <Entypo
-    name='dots-three-vertical'
-    size={IconSizes.x5}
-    color={theme.text01}
+  const IconRight = () => <IconButton
     onPress={onSettings}
+    Icon={() => <Entypo
+      name='dots-three-vertical'
+      size={IconSizes.x5}
+      color={theme.text01}
+    />}
   />;
 
   return (
