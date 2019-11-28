@@ -22,8 +22,8 @@ export const AppContext = createContext({} as AppContextType);
 export const AppContextProvider = props => {
   const [user, setUser] = useState({
     id: DummyUsers['@occult_686'],
-    avatar: '',
-    handle: 'abcd'
+    avatar: 'https://images.unsplash.com/reserve/eBJIgrh3TCeHf7unLQ5e_sailing-5.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80',
+    handle: '@occult_686'
   });
   const [theme, setTheme] = useState(Theme.light.colors);
   const [themeType, setThemeType] = useState(Theme.light.type);

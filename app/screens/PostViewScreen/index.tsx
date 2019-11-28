@@ -13,19 +13,19 @@ import { parseTimeElapsed } from '../../utils';
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
 const CommentInput = () => {
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   return (
     <View style={styles().commentInput}>
       <NativeImage
-        uri='https://images.unsplash.com/reserve/eBJIgrh3TCeHf7unLQ5e_sailing-5.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80' //global:state -> avatar
+        uri={user.avatar}
         style={styles(theme).commentAvatarImage}
       />
       <TextInput
         autoCorrect={false}
         style={styles(theme).commentTextInput}
         value={''}
-        placeholder={'Add a comment as occult_686...'} //global:state -> username
+        placeholder={`Add a comment as ${user.handle}...`}
         placeholderTextColor={theme.text02}
         onChangeText={text => null} />
     </View>
