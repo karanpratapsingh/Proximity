@@ -2,16 +2,13 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
+import { useNavigationParam } from 'react-navigation-hooks';
+import { IconSizes, PostDimensions } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { GoBackHeader, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard } from '../../layout';
-import { Typography } from '../../theme';
+import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
-import { useNavigationParam } from 'react-navigation-hooks';
-import { PostDimensions } from '../../constants';
-
-const { IconSizes } = Typography;
 
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);

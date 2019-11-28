@@ -4,7 +4,7 @@ import { Typography } from '../../theme';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 interface HeaderType {
   title: string,

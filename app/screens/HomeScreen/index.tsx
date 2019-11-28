@@ -5,14 +5,11 @@ import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { Routes } from '../../constants';
+import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { Header, ListEmptySvg, PostCardPlaceholder, IconButton } from '../../layout';
-import { Typography } from '../../theme';
+import { Header, IconButton, ListEmptySvg, PostCardPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import PostCard from './components/PostCard';
-
-const { IconSizes } = Typography;
 
 const HomeScreen: React.FC = () => {
 

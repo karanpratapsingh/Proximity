@@ -1,16 +1,16 @@
+import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { ScrollView, Platform, View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
+import { IconSizes, PostDimensions, Routes } from '../../constants';
+import { AppContext } from '../../context';
+import { QUERY_POST } from '../../graphql/query';
 import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
-import { AppContext } from '../../context';
-import { useQuery } from '@apollo/react-hooks';
-import { QUERY_POST } from '../../graphql/query';
-import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
-import { Routes, PostDimensions } from '../../constants';
 import { parseTimeElapsed } from '../../utils';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 const CommentInput = () => {
   const { user, theme } = useContext(AppContext);

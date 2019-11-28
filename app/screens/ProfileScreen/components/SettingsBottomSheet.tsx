@@ -1,17 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { IconSizes, ThemeType } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
-import { ThemeType } from '../../../constants';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 interface OptionType {
   label?: string,

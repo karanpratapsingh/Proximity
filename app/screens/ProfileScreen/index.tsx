@@ -3,17 +3,13 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { IconSizes, PostDimensions } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, ListEmptyComponent, ProfileScreenPlaceholder, PostThumbnail, ProfileCard, IconButton } from '../../layout';
-import { Typography } from '../../theme';
+import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
-
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
-import { PostDimensions } from '../../constants';
-
-const { IconSizes } = Typography;
 
 const ProfileScreen: React.FC = () => {
 

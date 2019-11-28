@@ -21,6 +21,19 @@ export const FollowInteractionType = {
   UNFOLLOW: 'UNFOLLOW'
 };
 
+export const IconSizes = {
+  x0: 6,
+  x1: 10,
+  x2: 12,
+  x3: 14,
+  x4: 16,
+  x5: 20,
+  x6: 24,
+  x7: 28,
+  x8: 32,
+  x9: 40
+};
+
 export const PostDimensions = {
   Small: { height: 80, width: 80 },
   Medium: { height: 150, width: 150 },

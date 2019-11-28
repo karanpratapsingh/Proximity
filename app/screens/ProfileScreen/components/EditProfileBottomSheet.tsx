@@ -1,16 +1,15 @@
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
-import { Button, FormInput, BottomSheetHeader, LoadingIndicator } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
-
-const { IconSizes } = Typography;
+import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
+import { ThemeStatic } from '../../../theme';
+import { ThemeColors } from '../../../types';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,

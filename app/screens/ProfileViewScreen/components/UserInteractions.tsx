@@ -1,17 +1,17 @@
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { ThemeColors } from '../../../types';
-import { Typography } from '../../../theme';
-import { AppContext } from '../../../context';
-import { LoadingIndicator } from '../../../layout';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { QUERY_DOES_FOLLOW, QUERY_CHAT_EXISTS } from '../../../graphql/query';
-import { MUTATION_UPDATE_FOLLOWING, MUTATION_CREATE_TEMPORARY_CHAT } from '../../../graphql/mutation';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes, FollowInteractionType } from '../../../constants';
+import { FollowInteractionType, IconSizes, Routes } from '../../../constants';
+import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
+import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
+import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
+import { LoadingIndicator } from '../../../layout';
+import { Typography } from '../../../theme';
+import { ThemeColors } from '../../../types';
 
-const { FontWeights, FontSizes, IconSizes } = Typography;
+const { FontWeights, FontSizes } = Typography;
 
 const UserInteractions = ({ targetId, handle }) => {
 
