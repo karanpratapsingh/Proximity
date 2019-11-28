@@ -14,7 +14,6 @@ const ConversationScreenPlaceholder = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 24,
     paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center'

@@ -30,7 +30,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 20,
     paddingBottom: 10,
     paddingHorizontal: 10
   },

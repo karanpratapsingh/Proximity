@@ -27,7 +27,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 24,
     paddingBottom: 10,
     paddingHorizontal: 20
   },
