@@ -27,6 +27,11 @@ export const PostDimensions = {
   Large: { height: 400, width: 335 }
 };
 
+export const ThemeType = {
+  light: 'light',
+  dark: 'dark'
+};
+
 export const DummyUsers = {
   '@occult_686': 'ck2oj3x2n001w0765e34k94w1',
   '@ayushieee': 'ck2oj8o2m00290765ckrg3ozy',

@@ -2,9 +2,15 @@ import React, { useContext } from 'react';
 import { Fade } from 'rn-placeholder';
 import { AppContext } from '../../context';
 
+const AnimationBackground = {
+  light: '#dfdfdf',
+  dark: '#242424'
+};
+
 const PlaceholderAnimation = props => {
   const { themeType } = useContext(AppContext);
-  const backgroundColor = themeType === 'light' ? '#dfdfdf' : '#242424';
+  const backgroundColor = AnimationBackground[themeType];
+
   return <Fade {...props} style={{ backgroundColor }} />;
 };
 

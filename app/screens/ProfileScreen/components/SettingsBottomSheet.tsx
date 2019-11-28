@@ -9,6 +9,7 @@ import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { ThemeType } from '../../../constants';
 
 const { FontWeights, FontSizes, IconSizes } = Typography;
 
@@ -49,12 +50,12 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    setIsChecked(themeType === 'dark');
+    setIsChecked(themeType === ThemeType.dark);
   }, []);
 
   const onChange = ({ checked }) => {
-    if (checked) toggleTheme('dark');
-    else toggleTheme('light');
+    if (checked) toggleTheme(ThemeType.dark);
+    else toggleTheme(ThemeType.light);
     setIsChecked(checked);
   };
 

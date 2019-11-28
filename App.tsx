@@ -6,10 +6,11 @@ import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
 import { ThemeColors } from './app/types';
+import { ThemeType } from './app/constants';
 
 const SafeAreaApp = () => {
   const { theme, themeType } = useContext(AppContext);
-  const dynamicBarStyle = `${themeType === 'light' ? 'dark' : 'light'}-content`;
+  const dynamicBarStyle = `${themeType === ThemeType.light ? ThemeType.dark : ThemeType.light}-content`;
   return (
     <SafeAreaView style={styles(theme).container}>
       <StatusBar animated barStyle={dynamicBarStyle as any} />
