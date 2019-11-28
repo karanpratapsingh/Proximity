@@ -1,3 +1,6 @@
+import ImagePicker from "react-native-image-crop-picker";
+import { ThemeStatic } from "../theme";
+
 export const createAsyncDelay = duration => {
 
   return new Promise((resolve, _) => setTimeout(() => { resolve(); }, duration));
@@ -66,3 +69,19 @@ export const transformMessages = messages =>
 
 export const filterChatParticipants = (userId, participants) =>
   participants.filter(participant => userId !== participant.id);
+
+export const getImageFromLibrary = async (height: number, width: number, circular: boolean = false) => {
+  const options = {
+    height,
+    width,
+    cropperCircleOverlay: circular,
+    cropping: true,
+    cropperActiveWidgetColor: ThemeStatic.accent,
+    cropperStatusBarColor: ThemeStatic.accent,
+    cropperToolbarColor: ThemeStatic.accent,
+    compressImageQuality: 0.5,
+    mediaType: 'photo'
+  };
+
+  return ImagePicker.openPicker(options);
+}

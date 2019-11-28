@@ -11,13 +11,18 @@ import UploadBanner from './components/UploadBanner';
 const UploadScreen: React.FC = () => {
 
   const { theme } = useContext(AppContext);
+  const [pickedAsset, setPickedAsset] = useState('');
   const [caption, setCaption] = useState('');
+
+  const uploadImage = () => {
+
+  };
 
   return (
     <View style={styles(theme).container}>
       <Header title='Upload' />
       <ScrollView style={styles().content}>
-        <UploadBanner />
+        <UploadBanner pickedAsset={pickedAsset} onAsset={setPickedAsset} />
         <FormInput
           multiline
           label='Caption'
@@ -33,7 +38,7 @@ const UploadScreen: React.FC = () => {
             size={IconSizes.x5}
           />}
           label='Upload'
-          onPress={() => null}
+          onPress={uploadImage}
           loading={false}
           containerStyle={styles().uploadButton}
         />

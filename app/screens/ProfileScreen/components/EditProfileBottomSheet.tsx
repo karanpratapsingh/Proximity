@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, HandleAvailableColor } from '../../../constants';
+import { HandleAvailableColor, IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
 import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { getImageFromLibrary } from '../../../utils';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -64,6 +65,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     }
   }, [isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
 
+  const onAvatarPick = async () => {
+    //@ts-ignore
+    const { path } = await getImageFromLibrary(120, 120, true);
+    setEditableAvatar(path);
+  };
+
   const onDone = () => {
     //?TODO-Later: show error in fields
     //?TODO-Later: implement image get and upload logic
@@ -116,7 +123,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           source={{ uri: editableAvatar }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
-          <TouchableOpacity activeOpacity={0.9} onPress={() => null} style={styles(theme).avatarOverlay}>
+          <TouchableOpacity activeOpacity={0.9} onPress={onAvatarPick} style={styles(theme).avatarOverlay}>
             <MaterialIcons name='edit' size={IconSizes.x6} color={ThemeStatic.white} />
           </TouchableOpacity>
         </ImageBackground>
