@@ -17,7 +17,7 @@ const PostCardPlaceholder = () => {
               noMargin
               color={theme.placeholder}
               key={index}
-              height={400}
+              height={340}
               style={styles.card}
             />
           )}

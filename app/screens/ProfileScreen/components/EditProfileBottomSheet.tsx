@@ -123,11 +123,13 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
         <FormInput
           label='Name'
+          placeholder='example: Doggo'
           value={editableName}
           onChangeText={setEditableName}
         />
         <FormInput
           label='Username'
+          placeholder='example: doggo'
           error={handleError}
           value={editableHandle}
           onChangeText={setEditableHandle}>
@@ -135,6 +137,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         </FormInput>
         <FormInput
           label='About'
+          placeholder='example: hey, I am a doggo'
           value={editableAbout}
           onChangeText={setEditableAbout}
           multiline

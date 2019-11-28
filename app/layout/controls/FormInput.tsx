@@ -9,6 +9,7 @@ const { FontWeights, FontSizes } = Typography;
 
 interface FormInputType {
   label: string,
+  placeholder: string,
   value: string,
   onChangeText: any,
   multiline?: boolean,
@@ -17,14 +18,14 @@ interface FormInputType {
   error?: string
 };
 
-const FormInput: React.FC<FormInputType> = ({ label, value, onChangeText, children, multiline, characterRestriction, error }) => {
+const FormInput: React.FC<FormInputType> = ({ label, placeholder, value, onChangeText, children, multiline, characterRestriction, error }) => {
   const { theme } = useContext(AppContext);
   return (
     <TextField
       error={error}
       autoCorrect={false}
       tintColor={theme.accent}
-      baseColor={theme.text02}
+      baseColor={theme.accent}
       fontSize={FontSizes.Body.fontSize}
       labelFontSize={FontSizes.Body.fontSize}
       labelTextStyle={styles().labelTextStyle}
@@ -32,6 +33,7 @@ const FormInput: React.FC<FormInputType> = ({ label, value, onChangeText, childr
       lineWidth={0}
       activeLineWidth={0}
       label={label}
+      placeholder={placeholder}
       onChangeText={onChangeText}
       value={value}
       multiline={multiline || false}
