@@ -16,9 +16,9 @@ const { FontWeights, FontSizes, IconSizes } = Typography;
 const UserInteractions = ({ targetId, handle }) => {
 
   const { navigate } = useNavigation();
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
-    variables: { userId, targetId },
+    variables: { userId: user.id, targetId },
     pollInterval: 500
   });
 
@@ -39,7 +39,7 @@ const UserInteractions = ({ targetId, handle }) => {
     if (doesFollowLoading) return;
 
     const { doesFollow } = doesFollowData;
-    const updateFollowingArgs = { userId, targetId };
+    const updateFollowingArgs = { userId: user.id, targetId };
     if (doesFollow) {
       updateFollowing({
         variables: {
@@ -61,7 +61,7 @@ const UserInteractions = ({ targetId, handle }) => {
     try {
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
-        variables: { userId, targetId }
+        variables: { userId: user.id, targetId }
       });
 
       if (chatExists) {

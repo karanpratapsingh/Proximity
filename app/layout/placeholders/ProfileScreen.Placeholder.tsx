@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   connectionsPlaceholder: {
-    borderRadius: 5
+    borderRadius: 10
   },
   infoPlaceholder: {
     alignItems: 'center',

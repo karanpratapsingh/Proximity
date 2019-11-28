@@ -24,7 +24,7 @@ const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
@@ -53,12 +53,12 @@ const ConversationScreen = () => {
     if (isFirstMessage) {
       await client.mutate({
         mutation: MUTATION_CONNECT_CHAT_TO_USERS,
-        variables: { chatId, userId, targetId }
+        variables: { chatId, userId: user.id, targetId }
       });
     }
     addMessage({
       variables:
-        { chatId, authorId: userId, body: updatedMessage.text }
+        { chatId, authorId: user.id, body: updatedMessage.text }
     });
   };
 
@@ -77,7 +77,7 @@ const ConversationScreen = () => {
         renderBubble={CustomBubble}
         renderSend={CustomSend}
         onSend={updatedMessages => onSend(updatedMessages)}
-        user={{ _id: userId }}
+        user={{ _id: user.id }}
       />
     );
   }

@@ -17,10 +17,10 @@ const { IconSizes } = Typography;
 
 const ProfileScreen: React.FC = () => {
 
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_USER, {
-    variables: { userId },
+    variables: { userId: user.id },
     pollInterval: 1000
   });
 

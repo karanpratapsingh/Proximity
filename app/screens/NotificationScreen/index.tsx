@@ -10,10 +10,10 @@ import { QUERY_NOTIFICATION } from '../../graphql/query';
 import { useQuery } from '@apollo/react-hooks';
 
 const NotificationScreen: React.FC = () => {
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_NOTIFICATION, {
-    variables: { userId },
+    variables: { userId: user.id },
     pollInterval: 2000
   });
 

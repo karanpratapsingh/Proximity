@@ -11,10 +11,10 @@ import MessageCard from './components/MessageCard';
 
 const MessageScreen: React.FC = () => {
 
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
-    variables: { userId },
+    variables: { userId: user.id },
     fetchPolicy: 'network-only',
     pollInterval: 4000
   });
@@ -27,7 +27,7 @@ const MessageScreen: React.FC = () => {
   const renderItem = ({ item }) => {
 
     const { id, participants, messages } = item;
-    const [participant] = participants.filter(({ id }) => userId !== id);
+    const [participant] = participants.filter(({ id }) => user.id !== id);
     const [lastMessage] = messages;
 
     return (

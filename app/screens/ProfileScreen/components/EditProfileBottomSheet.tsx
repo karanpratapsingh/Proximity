@@ -22,7 +22,7 @@ interface EditProfileBottomSheetType {
 
 const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
-  const { userId, theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
 
   const [editableAvatar, setEditableAvatar] = useState('');
   const [editableName, setEditableName] = useState('');
@@ -48,7 +48,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   useEffect(() => {
     queryIsHandleAvailable({
       variables: {
-        userId,
+        userId: user.id,
         handle: editableHandle
       }
     });
@@ -74,7 +74,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
     updateUser({
       variables: {
-        userId,
+        userId: user.id,
         avatar: editableAvatar,
         name: editableName.trim(),
         handle: editableHandle.trim(),
