@@ -29,7 +29,7 @@ export const Theme = {
     type: 'dark',
     colors: {
       accent: '#846BE2',
-      base: '#111111',
+      base: '#121212',
       text01: '#FFFFFF',
       text02: '#BBBBBB',
       placeholder: '#222',

@@ -25,8 +25,8 @@ export const AppContextProvider = props => {
     avatar: 'https://images.unsplash.com/reserve/eBJIgrh3TCeHf7unLQ5e_sailing-5.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80',
     handle: '@occult_686'
   });
-  const [theme, setTheme] = useState(Theme.light.colors);
-  const [themeType, setThemeType] = useState(Theme.light.type);
+  const [theme, setTheme] = useState(Theme.dark.colors);
+  const [themeType, setThemeType] = useState(Theme.dark.type);
 
   const updateUser = (user: UserType) => {
     setUser(user);

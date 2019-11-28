@@ -1,30 +1,55 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
+import { AppContext } from '../../context';
 
-const PostViewScreenPlaceholder = () => (
-  <View style={styles.container}>
-    <Placeholder Animation={PlaceholderAnimation}>
-      <View style={styles.postHeader}>
-        <PlaceholderMedia size={50} isRound />
-        <View style={styles.author}>
-          <PlaceholderLine noMargin width={responsiveWidth(20)} style={styles.handlePlaceholder} />
-          <PlaceholderLine noMargin width={responsiveWidth(10)} style={styles.timePlaceholder} />
+const PostViewScreenPlaceholder = () => {
+  const { theme } = useContext(AppContext);
+
+  return (
+    <View style={styles.container}>
+      <Placeholder Animation={PlaceholderAnimation}>
+        <View style={styles.postHeader}>
+          <PlaceholderMedia color={theme.placeholder} size={50} isRound />
+          <View style={styles.author}>
+            <PlaceholderLine
+              noMargin
+              color={theme.placeholder}
+              width={responsiveWidth(20)}
+              style={styles.handlePlaceholder}
+            />
+            <PlaceholderLine
+              noMargin
+              color={theme.placeholder}
+              width={responsiveWidth(10)}
+              style={styles.timePlaceholder}
+            />
+          </View>
         </View>
-      </View>
-      <PlaceholderLine
-        noMargin
-        height={400}
-        style={styles.card}
-      />
-      <PlaceholderLine noMargin width={responsiveWidth(5)} style={styles.likesPlaceholder} />
-      <PlaceholderLine noMargin width={responsiveWidth(26)} style={styles.captionPlaceholder} />
-    </Placeholder>
-  </View>
-);
-
+        <PlaceholderLine
+          noMargin
+          color={theme.placeholder}
+          height={400}
+          style={styles.card}
+        />
+        <PlaceholderLine
+          noMargin
+          color={theme.placeholder}
+          width={responsiveWidth(5)}
+          style={styles.likesPlaceholder}
+        />
+        <PlaceholderLine
+          noMargin
+          color={theme.placeholder}
+          width={responsiveWidth(26)}
+          style={styles.captionPlaceholder}
+        />
+      </Placeholder>
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     paddingTop: 2
