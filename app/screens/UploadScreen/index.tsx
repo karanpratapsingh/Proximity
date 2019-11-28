@@ -7,6 +7,8 @@ import { Button, FormInput, Header } from '../../layout';
 import { ThemeStatic } from '../../theme';
 import { ThemeColors } from '../../types';
 import UploadBanner from './components/UploadBanner';
+import { storage } from '../../utils/firebase';
+import { generateUUID } from '../../utils';
 
 const UploadScreen: React.FC = () => {
 
@@ -14,8 +16,13 @@ const UploadScreen: React.FC = () => {
   const [pickedAsset, setPickedAsset] = useState('');
   const [caption, setCaption] = useState('');
 
-  const uploadImage = () => {
-
+  const uploadImage = async () => {
+    if (!pickedAsset) return;
+    // if (!caption) return;
+    const [type] = pickedAsset.split('.').slice(-1);
+    
+    const { downloadURL } = await storage.ref(`posts/${generateUUID()}.${type}`).putFile(pickedAsset);
+    // create post mutation
   };
 
   return (
@@ -53,8 +60,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
-    flex: 1,
-    // justifyContent: 'space-between',
+    flex: 1, 
     paddingHorizontal: 20
   },
   uploadButton: {

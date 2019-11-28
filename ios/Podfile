@@ -35,6 +35,7 @@ target 'Proximity' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'Firebase/Core', '~> 6.6.0'
+  pod 'Firebase/Storage', '~> 6.6.0'
   
   target 'ProximityTests' do
     inherit! :search_paths
