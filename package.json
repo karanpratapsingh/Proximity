@@ -34,6 +34,7 @@
     "react-native-fast-image": "^7.0.2",
     "react-native-gesture-handler": "^1.5.0",
     "react-native-gifted-chat": "^0.11.3",
+    "react-native-image-crop-picker": "^0.26.1",
     "react-native-indicators": "^0.17.0",
     "react-native-material-textfield": "^0.16.1",
     "react-native-modalize": "^1.2.3",
