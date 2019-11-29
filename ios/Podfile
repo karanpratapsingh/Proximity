@@ -36,6 +36,7 @@ target 'Proximity' do
 
   pod 'Firebase/Core', '~> 6.6.0'
   pod 'Firebase/Storage', '~> 6.6.0'
+  pod 'Firebase/Messaging', '~> 6.6.0'
   
   target 'ProximityTests' do
     inherit! :search_paths

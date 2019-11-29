@@ -17,6 +17,9 @@ PODS:
     - FirebaseAnalytics (= 6.1.0)
   - Firebase/CoreOnly (6.6.0):
     - FirebaseCore (= 6.2.0)
+  - Firebase/Messaging (6.6.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.1.2)
   - Firebase/Storage (6.6.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 3.4.0)
@@ -29,6 +32,7 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
+  - FirebaseAnalyticsInterop (1.4.0)
   - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (6.2.0):
     - FirebaseCoreDiagnostics (~> 1.0)
@@ -46,6 +50,15 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseMessaging (4.1.9):
+    - FirebaseAnalyticsInterop (~> 1.3)
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Reachability (~> 6.2)
+    - GoogleUtilities/UserDefaults (~> 6.2)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - FirebaseStorage (3.4.2):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
@@ -103,6 +116,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - Protobuf (3.11.0)
   - QBImagePickerController (3.4.0)
   - RCTRequired (0.61.3)
   - RCTTypeSafety (0.61.3):
@@ -342,6 +356,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Firebase/Core (~> 6.6.0)
+  - Firebase/Messaging (~> 6.6.0)
   - Firebase/Storage (~> 6.6.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -383,11 +398,13 @@ SPEC REPOS:
     - Fabric
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
+    - FirebaseMessaging
     - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -396,6 +413,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - libwebp
     - nanopb
+    - Protobuf
     - QBImagePickerController
     - RSKImageCropper
     - SDWebImage
@@ -476,11 +494,13 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: f7be9bcc5ce259f7c39509f3f4caf59020d11d4c
   Firebase: a2b5951f30ff38fd3b3bdae9c7d340f940fd3c51
   FirebaseAnalytics: 48414ae5cbf6976d8a2f7177e0466540e5ab33ce
+  FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 8c9e08bce0c72a3affd83927d8184cf244918bc8
   FirebaseCoreDiagnostics: 511f4f3ed7d440bb69127e8b97c2bc8befae639e
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
   FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
+  FirebaseMessaging: e8d71368a5c579083da02203146c953f3386d503
   FirebaseStorage: 046abe9ac4e2a1a0e47d72f536490ffa50896632
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
@@ -491,6 +511,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  Protobuf: 394b2bf29ec303f4325e3ee4892c09e675647152
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RCTRequired: a72523286ea3381f97b28d87529c265baad3ad7d
   RCTTypeSafety: e3cc0537400222250f0be37bd69f4b339d3c0a0f
@@ -523,6 +544,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
   Yoga: 02036f6383c0008edb7ef0773a0e6beb6ce82bd1
 
-PODFILE CHECKSUM: cfd611a74fc3f337c2c93790488f72bf88959467
+PODFILE CHECKSUM: b1e9d8364478bd94fae354b801103d555349b884
 
 COCOAPODS: 1.8.4
