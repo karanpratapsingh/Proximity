@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           packages.add(new RNFirebaseStoragePackage());
           packages.add(new RNFirebaseMessagingPackage());
+          packages.add(new RNFirebaseNotificationsPackage());
           return packages;
         }
 
