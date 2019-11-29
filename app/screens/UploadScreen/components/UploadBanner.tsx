@@ -6,7 +6,7 @@ import { IconSizes, PostDimensions } from '../../../constants';
 import { IconButton } from '../../../layout';
 import SvgBanner from '../../../layout/misc/SvgBannerType';
 import { ThemeStatic } from '../../../theme';
-import { getImageFromLibrary } from '../../../utils';
+import { getImageFromLibrary } from '../../../utils/shared';
 
 console.disableYellowBox = true;
 

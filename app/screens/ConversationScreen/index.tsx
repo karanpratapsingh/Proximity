@@ -11,7 +11,7 @@ import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types';
-import { transformMessages } from '../../utils';
+import { transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';

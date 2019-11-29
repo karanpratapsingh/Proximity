@@ -4,7 +4,7 @@ import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes, PostDimensions } from '../../../constants';
-import { parseTimeElapsed } from '../../../utils';
+import { parseTimeElapsed } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
 import { AppContext } from '../../context';
-import { parseConnectionsCount } from '../../utils';
+import { parseConnectionsCount } from '../../utils/shared';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { ThemeStatic } from '../../theme';
 

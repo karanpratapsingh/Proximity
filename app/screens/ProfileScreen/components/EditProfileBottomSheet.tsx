@@ -10,7 +10,7 @@ import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
 import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
-import { getImageFromLibrary } from '../../../utils';
+import { getImageFromLibrary } from '../../../utils/shared';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
