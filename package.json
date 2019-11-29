@@ -7,6 +7,7 @@
     "test": "jest",
     "cocoapods": "cd ios && pod install && cd ..",
     "ios": "react-native run-ios --simulator=\"iPhone 6\"",
+    "device": "react-native run-ios --device=\"iPhone\"",
     "android": "react-native run-android",
     "rename": "react-native-rename",
     "redux:remove": "yarn remove redux react-redux redux-thunk",
