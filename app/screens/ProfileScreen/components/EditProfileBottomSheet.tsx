@@ -11,6 +11,7 @@ import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../..
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { getImageFromLibrary } from '../../../utils/shared';
+import { uploadToStorage } from '../../../utils/firebase';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -29,6 +30,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   const [editableHandle, setEditableHandle] = useState('');
   const [handleError, setHandleError] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
 
   const [queryIsHandleAvailable, {
     loading: isHandleAvailableLoading,
@@ -36,7 +38,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     data: isHandleAvailableData
   }] = useLazyQuery(QUERY_HANDLE_AVAILABLE);
 
-  const [updateUser, { loading: updateUserLoading }] = useMutation(MUTATION_UPDATE_USER);
+  const [updateUser] = useMutation(MUTATION_UPDATE_USER);
 
   useEffect(() => {
     setEditableAvatar(avatar);
@@ -71,14 +73,22 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     setEditableAvatar(path);
   };
 
-  const onDone = () => {
+  const onDone = async () => {
     //?TODO-Later: show error in fields
     //?TODO-Later: implement image get and upload logic
     const { isHandleAvailable } = isHandleAvailableData;
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
 
-    updateUser({
+    setIsUploading(true)
+
+    if (avatar !== editableAvatar) {
+      const { downloadURL } = await uploadToStorage('avatars', editableAvatar);
+      //@ts-ignore
+      setEditableAvatar(downloadURL);
+    }
+
+    await updateUser({
       variables: {
         userId: user.id,
         avatar: editableAvatar,
@@ -87,6 +97,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         about: editableAbout.trim()
       }
     });
+    setIsUploading(false);
     //@ts-ignore
     ref.current.close();
   };
@@ -158,7 +169,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           />}
           label='Done'
           onPress={onDone}
-          loading={updateUserLoading}
+          loading={isUploading}
           containerStyle={styles().doneButton}
         />
       </View>
