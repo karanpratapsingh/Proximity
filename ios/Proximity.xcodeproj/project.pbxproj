@@ -348,7 +348,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 2Y8SR3M2XA;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -750,8 +750,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Proximity/Proximity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 2Y8SR3M2XA;
@@ -764,7 +764,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.proximity.app;
 				PRODUCT_NAME = Proximity;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Proximity;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -775,8 +775,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Proximity/Proximity.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2Y8SR3M2XA;
 				INFOPLIST_FILE = Proximity/Info.plist;
@@ -788,7 +788,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.proximity.app;
 				PRODUCT_NAME = Proximity;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Proximity;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
