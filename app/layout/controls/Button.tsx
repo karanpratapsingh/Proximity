@@ -33,6 +33,7 @@ const Button: React.FC<ButtonType> = ({ Icon, label, onPress, loading, container
 
 const styles = StyleSheet.create({
   container: {
+    height: 40,
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',

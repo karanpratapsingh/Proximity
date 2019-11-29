@@ -46,6 +46,12 @@ const PostViewScreenPlaceholder = () => {
           width={responsiveWidth(26)}
           style={styles.captionPlaceholder}
         />
+        <PlaceholderLine
+          noMargin
+          color={theme.placeholder}
+          width={responsiveWidth(26)}
+          style={styles.captionPlaceholder}
+        />
       </Placeholder>
     </View>
   );

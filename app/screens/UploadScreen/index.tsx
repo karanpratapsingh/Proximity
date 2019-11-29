@@ -1,27 +1,46 @@
+import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { IconSizes } from '../../constants';
+import { useNavigation } from 'react-navigation-hooks';
+import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
+import { MUTATION_CREATE_POST } from '../../graphql/mutation';
 import { Button, FormInput, Header } from '../../layout';
 import { ThemeStatic } from '../../theme';
 import { ThemeColors } from '../../types';
+import { uploadToStorage } from '../../utils/firebase';
 import UploadBanner from './components/UploadBanner';
-import { storage, uploadToStorage } from '../../utils/firebase';
-import { generateUUID } from '../../utils/shared';
 
 const UploadScreen: React.FC = () => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
+  const { navigate } = useNavigation();
+
   const [pickedAsset, setPickedAsset] = useState('');
   const [caption, setCaption] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const [createPost] = useMutation(MUTATION_CREATE_POST);
 
   const uploadImage = async () => {
     if (!pickedAsset) return;
-    // if (!caption) return;
+    if (caption.length < 20) return; //? TODO: show alert or success
 
-    const { downloadURL } = await uploadToStorage('posts', pickedAsset);
-    // create post mutation
+    setIsUploading(true);
+    const { downloadURL: uri } = await uploadToStorage('posts', pickedAsset);
+
+    // @ts-ignore
+    const { data: { createPost: { id: postId } } } = await createPost({
+      variables: {
+        userId: user.id,
+        uri,
+        caption
+      }
+    });
+    setIsUploading(false);
+    setPickedAsset('')
+    setCaption('');
+    navigate(Routes.PostViewScreen, { postId });
   };
 
   return (
@@ -45,7 +64,7 @@ const UploadScreen: React.FC = () => {
           />}
           label='Upload'
           onPress={uploadImage}
-          loading={false}
+          loading={isUploading}
           containerStyle={styles().uploadButton}
         />
       </ScrollView>
