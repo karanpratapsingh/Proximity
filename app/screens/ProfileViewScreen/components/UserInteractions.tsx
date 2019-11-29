@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
@@ -22,7 +22,9 @@ const UserInteractions = ({ targetId, handle }) => {
     pollInterval: 500
   });
 
-  const [updateFollowing, { loading: updateFollowingLoading, error: updateFollowingError }] = useMutation(MUTATION_UPDATE_FOLLOWING);
+  const [chatExistsQuery] = useLazyQuery(QUERY_CHAT_EXISTS);
+  const [updateFollowing, { loading: updateFollowingLoading }] = useMutation(MUTATION_UPDATE_FOLLOWING);
+  const [createTemporaryChat] = useMutation(MUTATION_CREATE_TEMPORARY_CHAT);
 
   let content = <LoadingIndicator size={IconSizes.x0} color={theme.white} />;
 
@@ -67,9 +69,7 @@ const UserInteractions = ({ targetId, handle }) => {
       if (chatExists) {
         navigate(Routes.ConversationScreen, { chatId: chatExists.id, handle, targetId: null });
       } else {
-        const { data } = await client.mutate({
-          mutation: MUTATION_CREATE_TEMPORARY_CHAT
-        });
+        const { data } = await createTemporaryChat();
         navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, handle, targetId });
       }
     } catch {
