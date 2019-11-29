@@ -6,7 +6,7 @@
     "start": "react-native start",
     "test": "jest",
     "cocoapods": "cd ios && pod install && cd ..",
-    "ios": "react-native run-ios --simulator=\"iPhone 6\"",
+    "ios": "react-native run-ios --simulator=\"iPhone 8\"",
     "device": "react-native run-ios --device=\"iPhone\"",
     "android": "react-native run-android",
     "rename": "react-native-rename",

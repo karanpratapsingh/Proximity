@@ -21,6 +21,11 @@ const HomeScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
+  useEffect(() => {
+    messaging.onMessage(message => {
+      alert(JSON.stringify(message));
+    });
+  }, []);
   const initializeFCM = async () => {
     const hasPermission = await messaging.hasPermission();
     if (!hasPermission) {
