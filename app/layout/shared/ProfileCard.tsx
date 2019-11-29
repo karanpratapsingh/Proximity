@@ -80,6 +80,7 @@ const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, foll
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     paddingTop: 10,
+    paddingBottom: 4,
     paddingHorizontal: 10
   },
   info: {

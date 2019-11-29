@@ -37,7 +37,7 @@ export const IconSizes = {
 
 export const PostDimensions = {
   Small: { height: 80, width: 80 },
-  Medium: { height: 150, width: 150 },
+  Medium: { height: 160, width: 160 },
   Large: { height: 340, width: 340 }
 };
 

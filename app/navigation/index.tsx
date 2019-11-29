@@ -22,7 +22,6 @@ const TabNavigator = createBottomTabNavigator({
     screen: TabBarRoutes.ProfileScreen
   },
 }, {
-  initialRouteName: 'UploadScreen',
   lazy: true,
   tabBarOptions: {
     showLabel: false,

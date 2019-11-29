@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   },
   aboutPlaceholder: {
     marginTop: 16,
+    marginBottom: 4,
     borderRadius: 10
   },
   postContainer: {

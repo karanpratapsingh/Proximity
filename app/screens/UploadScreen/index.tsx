@@ -46,7 +46,7 @@ const UploadScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       <Header title='Upload' />
-      <ScrollView style={styles().content}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
         <UploadBanner pickedAsset={pickedAsset} onAsset={setPickedAsset} />
         <FormInput
           multiline
