@@ -31,7 +31,7 @@ const PostViewScreenPlaceholder = () => {
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          height={400}
+          height={340}
           style={styles.card}
         />
         <PlaceholderLine
@@ -39,6 +39,12 @@ const PostViewScreenPlaceholder = () => {
           color={theme.placeholder}
           width={responsiveWidth(5)}
           style={styles.likesPlaceholder}
+        />
+        <PlaceholderLine
+          noMargin
+          color={theme.placeholder}
+          width={responsiveWidth(26)}
+          style={styles.captionPlaceholder}
         />
         <PlaceholderLine
           noMargin

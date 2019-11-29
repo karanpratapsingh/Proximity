@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, StyleProp, TouchableOpacityProps, ViewStyle } from 'react-native';
 
 interface IconButtonProps {
   Icon: React.FC,
-  onPress: any
+  onPress: any,
+  style?: StyleProp<ViewStyle>
 };
 
-const IconButton: React.FC<IconButtonProps> = ({ Icon, onPress }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.95} style={styles.container}>
+const IconButton: React.FC<IconButtonProps> = ({ Icon, onPress, style }) => (
+  <TouchableOpacity onPress={onPress} activeOpacity={0.95} style={[styles.container, style]}>
     <Icon />
   </TouchableOpacity>
 );

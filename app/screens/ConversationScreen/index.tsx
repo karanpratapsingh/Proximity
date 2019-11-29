@@ -5,13 +5,12 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes } from '../../constants';
 import { AppContext } from '../../context';
-import client from '../../graphql/client';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types';
-import { transformMessages } from '../../utils';
+import { transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
@@ -31,6 +30,7 @@ const ConversationScreen = () => {
     variables: { chatId }
   });
   const [addMessage] = useMutation(MUTATION_ADD_MESSAGE);
+  const [connectChat] = useMutation(MUTATION_CONNECT_CHAT_TO_USERS);
 
   useEffect(() => {
     if (!chatSubscriptionLoading) {
@@ -48,14 +48,20 @@ const ConversationScreen = () => {
     const isFirstMessage = messages.length === 0;
     const [updatedMessage] = updatedMessages;
     if (isFirstMessage) {
-      await client.mutate({
-        mutation: MUTATION_CONNECT_CHAT_TO_USERS,
-        variables: { chatId, userId: user.id, targetId }
+      await connectChat({
+        variables: {
+          chatId,
+          userId: user.id,
+          targetId
+        }
       });
     }
     addMessage({
-      variables:
-        { chatId, authorId: user.id, body: updatedMessage.text }
+      variables: {
+        chatId,
+        authorId: user.id,
+        body: updatedMessage.text
+      }
     });
   };
 

@@ -5,7 +5,7 @@ import { AppContext } from '../../../context';
 import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
-import { parseTimeElapsed } from '../../../utils';
+import { parseTimeElapsed } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 

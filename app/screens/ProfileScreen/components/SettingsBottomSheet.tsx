@@ -26,14 +26,14 @@ const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) =>
   if (children)
     return (
       <View style={styles().option}>
-        <Ionicons name={iconName} size={IconSizes.x6} color={theme.text01} />
+        <Ionicons name={iconName} size={IconSizes.x5} color={theme.text01} />
         {children}
       </View>
     );
 
   return (
     <TouchableOpacity style={styles().option} activeOpacity={0.9} onPress={onPress}>
-      <Ionicons name={iconName} size={IconSizes.x6} color={theme.text01} />
+      <Ionicons name={iconName} size={IconSizes.x5} color={theme.text01} />
       <Text style={styles(theme).optionLabel}>{label}</Text>
     </TouchableOpacity>
   );
@@ -63,9 +63,7 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
     <Modalize
       //@ts-ignore
       ref={ref}
-      scrollViewProps={{
-        showsVerticalScrollIndicator: false
-      }}
+      scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}
       adjustToContentHeight>
       <BottomSheetHeader
@@ -105,7 +103,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   label: {
     ...FontWeights.Light,
-    ...FontSizes.Label,
+    ...FontSizes.Body,
     width: responsiveWidth(74),
     color: theme.text01
   },
@@ -116,7 +114,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   optionLabel: {
     ...FontWeights.Light,
-    ...FontSizes.Label,
+    ...FontSizes.Body,
     color: theme.text01,
     marginLeft: 10
   }

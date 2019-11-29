@@ -3,13 +3,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, HandleAvailableColor } from '../../../constants';
+import { HandleAvailableColor, IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
 import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { getImageFromLibrary } from '../../../utils/shared';
+import { uploadToStorage } from '../../../utils/firebase';
 
 interface EditProfileBottomSheetType {
   ref: React.Ref<any>,
@@ -28,6 +30,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
   const [editableHandle, setEditableHandle] = useState('');
   const [handleError, setHandleError] = useState('');
   const [editableAbout, setEditableAbout] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
 
   const [queryIsHandleAvailable, {
     loading: isHandleAvailableLoading,
@@ -35,7 +38,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     data: isHandleAvailableData
   }] = useLazyQuery(QUERY_HANDLE_AVAILABLE);
 
-  const [updateUser, { loading: updateUserLoading }] = useMutation(MUTATION_UPDATE_USER);
+  const [updateUser] = useMutation(MUTATION_UPDATE_USER);
 
   useEffect(() => {
     setEditableAvatar(avatar);
@@ -64,14 +67,28 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     }
   }, [isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
 
-  const onDone = () => {
+  const onAvatarPick = async () => {
+    //@ts-ignore
+    const { path } = await getImageFromLibrary(120, 120, true);
+    setEditableAvatar(path);
+  };
+
+  const onDone = async () => {
     //?TODO-Later: show error in fields
     //?TODO-Later: implement image get and upload logic
     const { isHandleAvailable } = isHandleAvailableData;
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
 
-    updateUser({
+    setIsUploading(true)
+
+    if (avatar !== editableAvatar) {
+      const { downloadURL } = await uploadToStorage('avatars', editableAvatar);
+      //@ts-ignore
+      setEditableAvatar(downloadURL);
+    }
+
+    await updateUser({
       variables: {
         userId: user.id,
         avatar: editableAvatar,
@@ -80,6 +97,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         about: editableAbout.trim()
       }
     });
+    setIsUploading(false);
     //@ts-ignore
     ref.current.close();
   };
@@ -104,9 +122,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     <Modalize
       //@ts-ignore
       ref={ref}
-      scrollViewProps={{
-        showsVerticalScrollIndicator: false
-      }}
+      scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}
       adjustToContentHeight>
       <BottomSheetHeader
@@ -118,18 +134,20 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           source={{ uri: editableAvatar }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
-          <TouchableOpacity activeOpacity={0.9} onPress={() => null} style={styles(theme).avatarOverlay}>
-            <MaterialIcons name='edit' size={24} color={ThemeStatic.white} />
+          <TouchableOpacity activeOpacity={0.9} onPress={onAvatarPick} style={styles(theme).avatarOverlay}>
+            <MaterialIcons name='edit' size={IconSizes.x6} color={ThemeStatic.white} />
           </TouchableOpacity>
         </ImageBackground>
 
         <FormInput
           label='Name'
+          placeholder='example: Doggo'
           value={editableName}
           onChangeText={setEditableName}
         />
         <FormInput
           label='Username'
+          placeholder='example: doggo'
           error={handleError}
           value={editableHandle}
           onChangeText={setEditableHandle}>
@@ -137,15 +155,21 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
         </FormInput>
         <FormInput
           label='About'
+          placeholder='example: hey, I am a doggo'
           value={editableAbout}
           onChangeText={setEditableAbout}
           multiline
           characterRestriction={200}
         />
         <Button
+          Icon={() => <MaterialIcons
+            name='done'
+            color={ThemeStatic.white}
+            size={IconSizes.x5}
+          />}
           label='Done'
           onPress={onDone}
-          loading={updateUserLoading}
+          loading={isUploading}
           containerStyle={styles().doneButton}
         />
       </View>

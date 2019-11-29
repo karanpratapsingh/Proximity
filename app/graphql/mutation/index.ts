@@ -66,3 +66,11 @@ export const MUTATION_UPDATE_USER = gql`
     }
   }
 `;
+
+export const MUTATION_CREATE_POST = gql`
+  mutation CreatePost($userId: String!, $uri: String!, $caption: String) {
+    createPost(userId: $userId, uri: $uri, caption: $caption) {
+      id
+    }
+  }
+`;

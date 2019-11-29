@@ -8,7 +8,7 @@ import { QUERY_POST } from '../../graphql/query';
 import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
-import { parseTimeElapsed } from '../../utils';
+import { parseTimeElapsed } from '../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
