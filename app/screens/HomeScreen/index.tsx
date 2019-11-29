@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
@@ -7,15 +8,33 @@ import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
 import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { Header, IconButton, SvgBannerType, PostCardPlaceholder } from '../../layout';
+import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
+import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
+import { messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
 
 const HomeScreen: React.FC = () => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const [loading, setLoading] = useState(true);
+  const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
+
+  const initializeFCM = async () => {
+    const hasPermission = await messaging.hasPermission();
+    if (!hasPermission) {
+      await messaging.requestPermission();
+    } else if (hasPermission) {
+      const fcmToken = await messaging.getToken();
+      updateFcmToken({
+        variables: {
+          userId: user.id,
+          fcmToken
+        }
+      });
+    }
+  };
 
   const dummyPost = {
     "id": "ck3hf3vza001g0774mbx0929j",
@@ -31,6 +50,7 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
+    initializeFCM();
     setTimeout(() => {
       setLoading(false);
     }, 1000);

@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { AppContext, AppContextProvider } from './app/context';
@@ -11,6 +11,18 @@ import { ThemeType } from './app/constants';
 const SafeAreaApp = () => {
   const { theme, themeType } = useContext(AppContext);
   const dynamicBarStyle = `${themeType === ThemeType.light ? ThemeType.dark : ThemeType.light}-content`;
+
+  const initialize = async () => {
+    // check if already logged in
+    // - if true then run fcm stuff
+    //  - subscribe to token changes
+    // - else if redirect to login page (switch navigator)
+  };
+
+  useEffect(() => {
+    initialize();
+  }, []);
+
   return (
     <SafeAreaView style={styles(theme).container}>
       <StatusBar animated barStyle={dynamicBarStyle as any} />
