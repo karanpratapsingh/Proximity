@@ -23,7 +23,7 @@ interface EditProfileBottomSheetType {
 
 const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
-  const { user, theme } = useContext(AppContext);
+  const { user, updateUser: updateUserContext, theme } = useContext(AppContext);
 
   const [editableAvatar, setEditableAvatar] = useState('');
   const [editableName, setEditableName] = useState('');
@@ -96,8 +96,8 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       updatedProfileData.avatar = downloadURL;
     }
 
-    await updateUser({ variables: updatedProfileData });
-    // ?TODO: update local context
+    const { data: { updateUser: { id, avatar: updatedAvatar, handle: updatedHandle } } } = await updateUser({ variables: updatedProfileData });
+    updateUserContext({ id, avatar: updatedAvatar, handle: updatedHandle });
     setIsUploading(false);
     //@ts-ignore
     ref.current.close();
