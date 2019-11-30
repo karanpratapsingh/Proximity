@@ -11,7 +11,7 @@ type UserType = {
 
 type AppContextType = {
   user: UserType,
-  updateUser: (use: UserType) => void
+  updateUser: (user: UserType) => void
   theme: ThemeColors,
   themeType: string,
   toggleTheme: (type: string) => void
