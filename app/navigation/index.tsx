@@ -30,6 +30,9 @@ const TabNavigator = createBottomTabNavigator({
 });
 
 const StackNavigator = createStackNavigator({
+  LoginScreen: {
+    screen: StackRoutes.LoginScreen
+  },
   TabNavigator: {
     screen: TabNavigator
   },
