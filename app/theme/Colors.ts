@@ -2,6 +2,7 @@
  * App Colors:
  * This contains all the color config for the application
  */
+
 import { ThemeType } from '../types';
 
 export const ThemeStatic = {

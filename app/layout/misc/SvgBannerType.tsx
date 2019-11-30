@@ -33,7 +33,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   placeholderText: {
     ...FontWeights.Light,
-    ...FontSizes.Label,
+    ...FontSizes.SubHeading,
     color: theme.text02,
     marginTop: 40
   }

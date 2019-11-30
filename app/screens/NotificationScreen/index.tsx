@@ -1,13 +1,14 @@
+import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
+import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
 import { AppContext } from '../../context';
-import { Header, ListEmptyComponent, NotificationScreenPlaceholder } from '../../layout';
+import { QUERY_NOTIFICATION } from '../../graphql/query';
+import { Header, NotificationScreenPlaceholder, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
 import NotificationCard from './components/NotificationCard';
-import { QUERY_NOTIFICATION } from '../../graphql/query';
-import { useQuery } from '@apollo/react-hooks';
 
 const NotificationScreen: React.FC = () => {
   const { user, theme } = useContext(AppContext);
@@ -39,7 +40,7 @@ const NotificationScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={notifications.reverse()}
-        ListEmptyComponent={() => <ListEmptyComponent listType='notifications' spacing={60} />}
+        ListEmptyComponent={() => <SvgBannerType Svg={EmptyNotifications} topSpacing={responsiveHeight(20)} placeholder='No notifications yet' />}
         style={styles().notificationList}
         spacing={20}
         renderItem={renderItem}
