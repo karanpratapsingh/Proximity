@@ -1,8 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
@@ -31,12 +30,16 @@ const LoginScreen: React.FC = () => {
   };
 
   const initialize = async () => {
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    SplashScreen.hide();
-    if (isSignedIn) {
-      const currentUser = await GoogleSignin.getCurrentUser();
-      //@ts-ignore
-      navigateToApp(currentUser.user.id);
+    try {
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      SplashScreen.hide();
+      if (isSignedIn) {
+        const currentUser = await GoogleSignin.getCurrentUser();
+        //@ts-ignore
+        navigateToApp(currentUser.user.id);
+      }
+    } catch (error) {
+      alert(JSON.stringify(error));
     }
   };
 
@@ -45,15 +48,20 @@ const LoginScreen: React.FC = () => {
   }, []);
 
   const onSignIn = async () => {
-    const data = await GoogleSignin.signIn();
-    const { user: { id: token, name, photo } } = data;
 
-    const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
-    if (!userExists) {
-      await createUser({ variables: { token: token, avatar: photo, name } });
+    try {
+      const data = await GoogleSignin.signIn();
+      const { user: { id: token, name, photo } } = data;
+
+      const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
+      if (!userExists) {
+        await createUser({ variables: { token: token, avatar: photo, name } });
+      }
+      //@ts-ignore
+      navigateToApp(token);
+    } catch (error) {
+      alert(JSON.stringify(error));
     }
-    //@ts-ignore
-    navigateToApp(token);
   };
 
   return (

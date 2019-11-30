@@ -5,7 +5,7 @@ import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, ThemeType } from '../../../constants';
+import { IconSizes, ThemeType, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
@@ -62,8 +62,12 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
   };
 
   const signOut = async () => {
-    await GoogleSignin.signOut();
-    navigate('Auth');
+    try {
+      await GoogleSignin.signOut();
+      navigate(Routes.Auth);
+    } catch (error) {
+      alert(JSON.stringify(error));
+    }
   };
 
   return (
