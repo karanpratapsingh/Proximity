@@ -13,6 +13,7 @@ import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../la
 import { ThemeColors } from '../../types';
 import { messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
+import firebase, { notifications } from 'react-native-firebase';
 
 const HomeScreen: React.FC = () => {
 
@@ -22,8 +23,8 @@ const HomeScreen: React.FC = () => {
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
   useEffect(() => {
-    messaging.onMessage(message => {
-      alert(JSON.stringify(message));
+    firebase.notifications().onNotification(notification => {
+      firebase.notifications().displayNotification(notification);
     });
   }, []);
   const initializeFCM = async () => {
