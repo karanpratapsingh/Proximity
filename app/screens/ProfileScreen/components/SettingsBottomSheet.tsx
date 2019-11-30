@@ -10,6 +10,8 @@ import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -46,7 +48,7 @@ interface SettingsBottomSheetType {
 const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((props, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
-
+  const { navigate } = useNavigation();
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -57,6 +59,11 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
     if (checked) toggleTheme(ThemeType.dark);
     else toggleTheme(ThemeType.light);
     setIsChecked(checked);
+  };
+
+  const signOut = async () => {
+    await GoogleSignin.signOut();
+    navigate('Auth');
   };
 
   return (
@@ -85,7 +92,7 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
         <Option
           label='Logout'
           iconName='ios-log-out'
-          onPress={() => null}
+          onPress={signOut}
         />
       </View>
     </Modalize>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const  QUERY_SIGNIN = gql`
+export const QUERY_SIGNIN = gql`
   query SignIn($token: String!) {
     signIn(token: $token) {
       id
@@ -30,6 +30,12 @@ export const QUERY_USER = gql`
       }
     }
 }
+`;
+
+export const QUERY_USER_EXISTS = gql`
+  query UserExists($token: String!) {
+    userExists(token: $token)
+  }
 `;
 
 export const QUERY_NOTIFICATION = gql`

@@ -1,4 +1,6 @@
 export const Routes = {
+  App: 'App',
+  Auth: 'Auth',
   HomeScreen: 'HomeScreen,',
   ExploreScreen: 'ExploreScreen,',
   UploadScreen: 'UploadScreen,',

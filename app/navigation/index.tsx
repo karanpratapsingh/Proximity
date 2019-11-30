@@ -1,5 +1,5 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { TabBarRoutes, StackRoutes } from './Routes'
@@ -29,10 +29,13 @@ const TabNavigator = createBottomTabNavigator({
   tabBarComponent: props => <TabBarComponent  {...props} />
 });
 
-const StackNavigator = createStackNavigator({
+const AuthStack = createStackNavigator({
   LoginScreen: {
     screen: StackRoutes.LoginScreen
-  },
+  }
+}, { headerMode: 'none' });
+
+const AppStack = createStackNavigator({
   TabNavigator: {
     screen: TabNavigator
   },
@@ -50,6 +53,13 @@ const StackNavigator = createStackNavigator({
   }
 }, { headerMode: 'none' });
 
-const AppNavigator = createAppContainer(StackNavigator);
+const SwitchNavigator = createSwitchNavigator({
+  Auth: AuthStack,
+  App: AppStack
+}, {
+  initialRouteName: 'Auth'
+});
+
+const AppNavigator = createAppContainer(SwitchNavigator);
 
 export default AppNavigator;
