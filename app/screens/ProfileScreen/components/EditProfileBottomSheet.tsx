@@ -97,6 +97,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     }
 
     await updateUser({ variables: updatedProfileData });
+    // ?TODO: update local context
     setIsUploading(false);
     //@ts-ignore
     ref.current.close();
