@@ -4,6 +4,7 @@ export const Routes = {
   UploadScreen: 'UploadScreen,',
   NotificationScreen: 'NotificationScreen,',
   ProfileScreen: 'ProfileScreen,',
+  TabNavigator: 'TabNavigator',
   ProfileViewScreen: 'ProfileViewScreen',
   MessageScreen: 'MessageScreen',
   ConversationScreen: 'ConversationScreen',
