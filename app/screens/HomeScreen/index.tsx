@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -13,7 +14,6 @@ import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../la
 import { ThemeColors } from '../../types';
 import { messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
-import firebase, { notifications } from 'react-native-firebase';
 
 const HomeScreen: React.FC = () => {
 
@@ -22,11 +22,6 @@ const HomeScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
-  useEffect(() => {
-    firebase.notifications().onNotification(notification => {
-      firebase.notifications().displayNotification(notification);
-    });
-  }, []);
   const initializeFCM = async () => {
     const hasPermission = await messaging.hasPermission();
     if (!hasPermission) {

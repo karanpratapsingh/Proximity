@@ -1,16 +1,17 @@
 import { useMutation } from '@apollo/react-hooks';
-import { GoogleSignin, GoogleSigninButton } from '@react-native-community/google-signin';
+import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
+import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -31,6 +32,7 @@ const LoginScreen: React.FC = () => {
 
   const initialize = async () => {
     const isSignedIn = await GoogleSignin.isSignedIn();
+    SplashScreen.hide();
     if (isSignedIn) {
       const currentUser = await GoogleSignin.getCurrentUser();
       //@ts-ignore
