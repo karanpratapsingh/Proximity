@@ -8,5 +8,6 @@ fi
 
 if [[ ! -z "$GOOGLE_SERVICES_PLIST" ]]; then
     echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > ios/GoogleService-Info.plist
+    echo "$XCCONFIG" | base64 --decode > ios/Config.xcconfig
 fi
 
