@@ -1,5 +1,15 @@
 import gql from 'graphql-tag';
 
+export const QUERY_SIGNIN = gql`
+  query SignIn($token: String!) {
+    signIn(token: $token) {
+      id
+      avatar
+      handle
+    }
+  }
+`;
+
 export const QUERY_USER = gql`
  query User($userId: String!) {
     user(userId: $userId) {
@@ -20,6 +30,12 @@ export const QUERY_USER = gql`
       }
     }
 }
+`;
+
+export const QUERY_USER_EXISTS = gql`
+  query UserExists($token: String!) {
+    userExists(token: $token)
+  }
 `;
 
 export const QUERY_NOTIFICATION = gql`

@@ -1,11 +1,12 @@
 import { useLazyQuery } from '@apollo/react-hooks';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
+import EmptyMessages from '../../../assets/svg/empty-messages.svg';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
-import { Header, ListEmptyComponent, MessageScreenPlaceholder, SearchBar } from '../../layout';
+import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
 import MessageCard from './components/MessageCard';
 
@@ -50,7 +51,7 @@ const MessageScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={chats}
-        ListEmptyComponent={() => <ListEmptyComponent listType='messages' spacing={60} />}
+        ListEmptyComponent={() => <SvgBannerType Svg={EmptyMessages} topSpacing={responsiveHeight(16)} placeholder='No messages yet' />}
         style={styles().messagesList}
         spacing={20}
         renderItem={renderItem}

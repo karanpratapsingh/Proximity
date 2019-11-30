@@ -74,3 +74,21 @@ export const MUTATION_CREATE_POST = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_FCM_TOKEN = gql`
+  mutation UpdateFcmToken($userId: String!, $fcmToken: String!) {
+    updateFcmToken(userId: $userId, fcmToken: $fcmToken) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_CREATE_USER = gql`
+  mutation CreateUser($token: String!, $avatar: String, $name: String!) {
+    createUser(token: $token, avatar: $avatar, name: $name) {
+      id
+      avatar
+      handle
+    }
+  }
+`;

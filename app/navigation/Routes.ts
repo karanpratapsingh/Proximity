@@ -7,7 +7,8 @@ import {
   ProfileViewScreen,
   MessageScreen,
   ConversationScreen,
-  PostViewScreen
+  PostViewScreen,
+  LoginScreen
 } from '../screens';
 
 export const TabBarRoutes = {
@@ -22,5 +23,6 @@ export const StackRoutes = {
   MessageScreen,
   ConversationScreen,
   ProfileViewScreen,
-  PostViewScreen
+  PostViewScreen,
+  LoginScreen
 };

@@ -80,23 +80,24 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
 
-    setIsUploading(true)
+    setIsUploading(true);
+
+    const updatedProfileData = {
+      userId: user.id,
+      avatar: editableAvatar,
+      name: editableName.trim(),
+      handle: editableHandle.trim(),
+      about: editableAbout.trim()
+    };
 
     if (avatar !== editableAvatar) {
       const { downloadURL } = await uploadToStorage('avatars', editableAvatar);
       //@ts-ignore
-      setEditableAvatar(downloadURL);
+      updatedProfileData.avatar = downloadURL;
     }
 
-    await updateUser({
-      variables: {
-        userId: user.id,
-        avatar: editableAvatar,
-        name: editableName.trim(),
-        handle: editableHandle.trim(),
-        about: editableAbout.trim()
-      }
-    });
+    await updateUser({ variables: updatedProfileData });
+    // ?TODO: update local context
     setIsUploading(false);
     //@ts-ignore
     ref.current.close();

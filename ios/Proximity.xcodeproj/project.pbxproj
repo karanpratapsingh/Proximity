@@ -23,6 +23,7 @@
 		7ED5D18A922A44538536EDB7 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CAC668B5EBB49E2A83CD72B /* SFProDisplay-Regular.ttf */; };
 		DA629FB4AD84BF300A6B9DAC /* libPods-Proximity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262BDE6755CE104BAE0DB0CC /* libPods-Proximity.a */; };
 		E264308AC67B28C941516F2B /* libPods-Proximity-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86827CF6722B9890F3EFD57C /* libPods-Proximity-tvOS.a */; };
+		F6597E35239223CA00656B44 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F6597E34239223CA00656B44 /* Config.xcconfig */; };
 		F66138A4239017B6000C37DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F66138A3239017B6000C37DC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -90,7 +91,9 @@
 		D936128004E94FE98E6E4D11 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F6597E34239223CA00656B44 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F66138A3239017B6000C37DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F6AD2E072391049200A6EFF2 /* Proximity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Proximity.entitlements; path = Proximity/Proximity.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,7 @@
 		13B07FAE1A68108700A75B9A /* Proximity */ = {
 			isa = PBXGroup;
 			children = (
+				F6AD2E072391049200A6EFF2 /* Proximity.entitlements */,
 				F66138A3239017B6000C37DC /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -199,6 +203,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F6597E34239223CA00656B44 /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* Proximity */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ProximityTests */,
@@ -347,6 +352,14 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 2Y8SR3M2XA;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -398,6 +411,7 @@
 				30665F90D23B40248AF3479A /* SFProDisplay-Bold.ttf in Resources */,
 				31AB1EF23BE44D24828DD808 /* SFProDisplay-Light.ttf in Resources */,
 				7ED5D18A922A44538536EDB7 /* SFProDisplay-Regular.ttf in Resources */,
+				F6597E35239223CA00656B44 /* Config.xcconfig in Resources */,
 				F66138A4239017B6000C37DC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +535,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Proximity/Pods-Proximity-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -542,6 +557,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
@@ -739,7 +755,8 @@
 			baseConfigurationReference = 26B076B5970045C5977B6E9E /* Pods-Proximity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Proximity/Proximity.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -763,7 +780,8 @@
 			baseConfigurationReference = 21DA81769246FDF72E1DCEB1 /* Pods-Proximity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Proximity/Proximity.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2Y8SR3M2XA;
@@ -893,6 +911,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6597E34239223CA00656B44 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -946,6 +965,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6597E34239223CA00656B44 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
