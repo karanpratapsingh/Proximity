@@ -105,7 +105,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     borderRadius: 40,
     width: 60,
     height: 30,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: theme.base,
     backgroundColor: theme.accent
   },

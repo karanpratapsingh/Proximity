@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes } from '../../constants';
@@ -75,14 +75,17 @@ const ConversationScreen = () => {
       <GiftedChat
         isAnimated
         inverted={false}
+        maxInputLength={200}
         messages={transform}
-        renderComposer={CustomComposer}
+        textInputProps={{ disable: true }}
+        renderComposer={composerProps => <CustomComposer {...composerProps} />}
         renderMessageText={CustomMessageText}
         renderBubble={CustomBubble}
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: user.id }}
+        keyboardShouldPersistTaps={null}
         listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
