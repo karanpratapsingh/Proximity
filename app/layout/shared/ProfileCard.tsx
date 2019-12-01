@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
@@ -11,16 +11,17 @@ const { FontWeights, FontSizes } = Typography;
 
 interface ConnectionsType {
   total: string,
-  type: string
+  type: string,
+  onPress: any
 };
 
-const Connections: React.FC<ConnectionsType> = ({ total, type }) => {
+const Connections: React.FC<ConnectionsType> = ({ total, type, onPress }) => {
   const { theme } = useContext(AppContext);
   return (
-    <View style={styles(theme).connections}>
+    <TouchableOpacity activeOpacity={0.95} onPress={onPress} style={styles(theme).connections}>
       <Text style={styles(theme).connectionsText}>{total}</Text>
       <Text style={styles(theme).connectionsType}>{type}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -41,6 +42,8 @@ interface ProfileCardType {
   avatar: string,
   editable?: boolean,
   onEdit?: any,
+  onFollowingOpen: any,
+  onFollowersOpen: any,
   following: number,
   followers: number,
   name: string,
@@ -49,20 +52,19 @@ interface ProfileCardType {
   about: string
 };
 
-const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, following, followers, name, handle, renderInteractions, about }) => {
+const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, onFollowingOpen, onFollowersOpen, following, followers, name, handle, renderInteractions, about }) => {
   const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
       <View style={styles(theme).info}>
-        <Connections total={parseConnectionsCount(following)} type='FOLLOWING' />
+        <Connections onPress={onFollowingOpen} total={parseConnectionsCount(following)} type='FOLLOWING' />
         <ImageBackground
           source={{ uri: avatar }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           {editable && <EditProfile onEdit={onEdit} />}
         </ImageBackground>
-
-        <Connections total={parseConnectionsCount(followers)} type='FOLLOWERS' />
+        <Connections onPress={onFollowersOpen} total={parseConnectionsCount(followers)} type='FOLLOWERS' />
       </View>
       <View style={styles(theme).name}>
         <Text style={styles(theme).usernameText}>{name}</Text>
@@ -104,8 +106,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 40,
     width: 60,
-    height: 30,
-    borderWidth: 1,
+    height: 32,
+    borderWidth: 2,
     borderColor: theme.base,
     backgroundColor: theme.accent
   },

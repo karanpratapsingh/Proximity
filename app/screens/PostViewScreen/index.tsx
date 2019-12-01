@@ -24,7 +24,7 @@ const CommentInput = () => {
       <TextInput
         autoCorrect={false}
         style={styles(theme).commentTextInput}
-        value={''}
+        value=''
         placeholder={`Add a comment as ${user.handle}...`}
         placeholderTextColor={theme.text02}
         onChangeText={text => null} />

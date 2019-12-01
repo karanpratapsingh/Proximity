@@ -63,6 +63,8 @@ export const MUTATION_UPDATE_USER = gql`
       about: $about
     ) {
       id
+      avatar
+      handle
     }
   }
 `;

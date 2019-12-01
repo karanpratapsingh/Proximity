@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions } from '../../constants';
+import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
+import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
 
@@ -19,11 +19,21 @@ const ProfileViewScreen: React.FC = () => {
     pollInterval: 1000
   });
 
+  const followingBottomSheetRef = useRef();
+  const followersBottomSheetRef = useRef();
+
+  // @ts-ignore
+  const onFollowingOpen = () => followingBottomSheetRef.current.open();
+  // @ts-ignore
+  const onFollowersOpen = () => followersBottomSheetRef.current.open();
+
   const ListHeaderComponent = () => {
     const { user: { avatar, following, followers, name, handle, about } } = data;
     return (
       <ProfileCard
         avatar={avatar}
+        onFollowingOpen={onFollowingOpen}
+        onFollowersOpen={onFollowersOpen}
         following={following.length}
         followers={followers.length}
         name={name}
@@ -48,17 +58,29 @@ const ProfileViewScreen: React.FC = () => {
   let content = <ProfileScreenPlaceholder viewMode />;
 
   if (!loading && !error) {
-    const { user: { posts } } = data;
+    const { user: { id, posts } } = data;
     content = (
-      <FlatGrid
-        ListHeaderComponent={ListHeaderComponent}
-        itemDimension={150}
-        items={posts}
-        ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
-        style={styles().postGrid}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
-      />
+      <>
+        <FlatGrid
+          ListHeaderComponent={ListHeaderComponent}
+          itemDimension={150}
+          items={posts}
+          ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
+          style={styles().postGrid}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderItem}
+        />
+        <ConnectionsBottomSheet
+          ref={followingBottomSheetRef}
+          userId={id}
+          type={ConnectionsType.FOLLOWING}
+        />
+        <ConnectionsBottomSheet
+          ref={followersBottomSheetRef}
+          userId={id}
+          type={ConnectionsType.FOLLOWERS}
+        />
+      </>
     );
   }
 

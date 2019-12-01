@@ -21,9 +21,12 @@ import SearchUsersPlaceholder from './placeholders/SearchUsers.Placeholder';
 import ExploreScreenPlaceholder from './placeholders/ExploreScreen.Placeholder';
 import PostCardPlaceholder from './placeholders/PostCard.Placeholder';
 import PostViewScreenPlaceholder from './placeholders/PostViewScreen.Placeholder';
+import ConnectionsPlaceholder from './placeholders/Connections.Placeholder';
 
 import PostThumbnail from './shared/PostThumbnail';
 import ProfileCard from './shared/ProfileCard';
+import UserCard from './shared/UserCard';
+import ConnectionsBottomSheet from './shared/ConnectionsBottomSheet';
 
 export {
   Header,
@@ -44,8 +47,11 @@ export {
   ProfileScreenPlaceholder,
   PostThumbnail,
   ProfileCard,
+  UserCard,
+  ConnectionsBottomSheet,
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,
-  PostViewScreenPlaceholder
+  PostViewScreenPlaceholder,
+  ConnectionsPlaceholder
 };

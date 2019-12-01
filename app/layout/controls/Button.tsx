@@ -11,12 +11,13 @@ interface ButtonType {
   onPress: any,
   loading: boolean,
   containerStyle?: any,
-  labelStyle?: any
+  labelStyle?: any,
+  indicatorColor?: string
 };
 
-const Button: React.FC<ButtonType> = ({ Icon, label, onPress, loading, containerStyle, labelStyle }) => {
+const Button: React.FC<ButtonType> = ({ Icon, label, onPress, loading, containerStyle, labelStyle, indicatorColor }) => {
 
-  let content = <LoadingIndicator size={8} color={ThemeStatic.white} />
+  let content = <LoadingIndicator size={8} color={indicatorColor || ThemeStatic.white} />
   if (!loading) content = (
     <>
       {Icon && <Icon />}

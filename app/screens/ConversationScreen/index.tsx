@@ -13,6 +13,7 @@ import { ThemeColors } from '../../types';
 import { transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
+import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 
@@ -74,13 +75,18 @@ const ConversationScreen = () => {
       <GiftedChat
         isAnimated
         inverted={false}
+        maxInputLength={200}
         messages={transform}
-        renderComposer={CustomComposer}
+        textInputProps={{ disable: true }}
+        renderComposer={composerProps => <CustomComposer {...composerProps} />}
         renderMessageText={CustomMessageText}
         renderBubble={CustomBubble}
         renderSend={CustomSend}
+        renderInputToolbar={CustomInputToolbar}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: user.id }}
+        keyboardShouldPersistTaps={null}
+        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }

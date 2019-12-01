@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
   container: {
     ...PostDimensions.Large,
     alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderStyle: 'dashed',
     borderColor: ThemeStatic.accent,
     marginVertical: 20,

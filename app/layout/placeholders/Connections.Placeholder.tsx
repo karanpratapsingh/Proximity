@@ -5,14 +5,13 @@ import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
 
-const NotificationScreenPlaceholder: React.FC = () => {
-
+const ConnectionsPlaceholder: React.FC = () => {
   const { theme } = useContext(AppContext);
 
   return (
     <View style={styles.container}>
       <Placeholder Animation={PlaceholderAnimation}>
-        {new Array(20)
+        {new Array(10)
           .fill({})
           .map((_, index) =>
             <View key={index} style={styles.cardContainer}>
@@ -21,14 +20,14 @@ const NotificationScreenPlaceholder: React.FC = () => {
                 <PlaceholderLine
                   noMargin
                   color={theme.placeholder}
-                  style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(24)}
+                  style={styles.userInfoPlaceholder}
+                  width={responsiveWidth(20)}
                 />
                 <PlaceholderLine
                   noMargin
                   color={theme.placeholder}
-                  style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(8)}
+                  style={styles.userInfoPlaceholder}
+                  width={responsiveWidth(10)}
                 />
               </View>
             </View>
@@ -41,21 +40,20 @@ const NotificationScreenPlaceholder: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     paddingBottom: 0
   },
   cardContainer: {
     flexDirection: 'row',
-    marginBottom: 10
+    marginBottom: 20
   },
   infoContainer: {
     flex: 1,
     paddingLeft: 10
   },
-  notificationCardPlaceholder: {
+  userInfoPlaceholder: {
     borderRadius: 10,
     marginTop: 10
   }
 });
 
-export default NotificationScreenPlaceholder;
+export default ConnectionsPlaceholder;

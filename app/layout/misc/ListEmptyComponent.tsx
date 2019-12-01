@@ -36,7 +36,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   emptyText: {
     ...FontWeights.Light,
-    ...FontSizes.SubHeading,
+    ...FontSizes.Label,
     color: theme.text02
   }
 });

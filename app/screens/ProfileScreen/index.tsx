@@ -3,10 +3,10 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { IconSizes, PostDimensions } from '../../constants';
+import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
+import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
@@ -22,7 +22,13 @@ const ProfileScreen: React.FC = () => {
 
   const editProfileBottomSheetRef = useRef();
   const settingsBottomSheetRef = useRef();
+  const followingBottomSheetRef = useRef();
+  const followersBottomSheetRef = useRef();
 
+  // @ts-ignore
+  const onFollowingOpen = () => followingBottomSheetRef.current.open();
+  // @ts-ignore
+  const onFollowersOpen = () => followersBottomSheetRef.current.open();
   // @ts-ignore
   const onEdit = () => editProfileBottomSheetRef.current.open();
   // @ts-ignore
@@ -34,6 +40,8 @@ const ProfileScreen: React.FC = () => {
       <ProfileCard
         editable
         onEdit={onEdit}
+        onFollowingOpen={onFollowingOpen}
+        onFollowersOpen={onFollowersOpen}
         avatar={avatar}
         following={following.length}
         followers={followers.length}
@@ -69,6 +77,16 @@ const ProfileScreen: React.FC = () => {
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
+        />
+        <ConnectionsBottomSheet
+          ref={followingBottomSheetRef}
+          userId={user.id}
+          type={ConnectionsType.FOLLOWING}
+        />
+        <ConnectionsBottomSheet
+          ref={followersBottomSheetRef}
+          userId={user.id}
+          type={ConnectionsType.FOLLOWERS}
         />
         <EditProfileBottomSheet
           ref={editProfileBottomSheetRef}
