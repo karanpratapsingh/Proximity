@@ -45,7 +45,7 @@ interface SettingsBottomSheetType {
   ref: React.Ref<any>
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((props, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((_, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();

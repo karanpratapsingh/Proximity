@@ -10,6 +10,7 @@ import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, Pro
 import { ThemeColors } from '../../types';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
+import ConnectionsBottomSheet from './components/ConnectionsBottomSheet';
 
 const ProfileScreen: React.FC = () => {
 
@@ -22,7 +23,13 @@ const ProfileScreen: React.FC = () => {
 
   const editProfileBottomSheetRef = useRef();
   const settingsBottomSheetRef = useRef();
+  const followingBottomSheetRef = useRef();
+  const followersBottomSheetRef = useRef();
 
+  // @ts-ignore
+  const onFollowingOpen = () => followingBottomSheetRef.current.open();
+  // @ts-ignore
+  const onFollowersOpen = () => followersBottomSheetRef.current.open();
   // @ts-ignore
   const onEdit = () => editProfileBottomSheetRef.current.open();
   // @ts-ignore
@@ -34,6 +41,8 @@ const ProfileScreen: React.FC = () => {
       <ProfileCard
         editable
         onEdit={onEdit}
+        onFollowingOpen={onFollowingOpen}
+        onFollowersOpen={onFollowersOpen}
         avatar={avatar}
         following={following.length}
         followers={followers.length}
@@ -69,6 +78,16 @@ const ProfileScreen: React.FC = () => {
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
+        />
+        <ConnectionsBottomSheet
+          ref={followingBottomSheetRef}
+          userId={user.id}
+          type='Following'
+        />
+        <ConnectionsBottomSheet
+          ref={followersBottomSheetRef}
+          userId={user.id}
+          type='Followers'
         />
         <EditProfileBottomSheet
           ref={editProfileBottomSheetRef}
