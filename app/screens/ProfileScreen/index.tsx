@@ -3,14 +3,13 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { IconSizes, PostDimensions } from '../../constants';
+import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
+import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
-import ConnectionsBottomSheet from '../../layout/shared/ConnectionsBottomSheet';
 
 const ProfileScreen: React.FC = () => {
 
@@ -82,12 +81,12 @@ const ProfileScreen: React.FC = () => {
         <ConnectionsBottomSheet
           ref={followingBottomSheetRef}
           userId={user.id}
-          type='Following'
+          type={ConnectionsType.FOLLOWING}
         />
         <ConnectionsBottomSheet
           ref={followersBottomSheetRef}
           userId={user.id}
-          type='Followers'
+          type={ConnectionsType.FOLLOWERS}
         />
         <EditProfileBottomSheet
           ref={editProfileBottomSheetRef}

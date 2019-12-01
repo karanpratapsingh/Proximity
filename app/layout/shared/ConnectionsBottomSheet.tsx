@@ -1,13 +1,16 @@
+import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { useNavigation } from 'react-navigation-hooks';
-import { AppContext } from '../../context';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { FlatGrid } from 'react-native-super-grid';
 import { BottomSheetHeader, ConnectionsPlaceholder } from '..';
-import { Typography } from '../../theme';
+import { ConnectionsType } from '../../constants';
+import { AppContext } from '../../context';
+import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
 import { ThemeColors } from '../../types';
-
-const { FontWeights, FontSizes } = Typography;
+import ListEmptyComponent from '../misc/ListEmptyComponent';
+import UserCard from './UserCard';
 
 interface ConnectionsBottomSheetProps {
   ref: React.Ref<any>,
@@ -17,15 +20,52 @@ interface ConnectionsBottomSheetProps {
 
 const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ userId, type }, ref) => {
 
-  const { toggleTheme, theme, themeType } = useContext(AppContext);
-  const { navigate } = useNavigation();
+  const { theme } = useContext(AppContext);
 
+  const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
+    variables: { userId, type }
+  });
+
+  let content = <ConnectionsPlaceholder />;
+  let heading;
   let subHeading;
 
-  if (type === 'Following') {
+  if (type === ConnectionsType.FOLLOWING) {
+    heading = 'Following';
     subHeading = 'People you follow'
-  } else if (type === 'Followers') {
+  } else if (type === ConnectionsType.FOLLOWERS) {
+    heading = 'Follower';
     subHeading = 'People following you'
+  }
+
+  const renderItem = ({ item }) => {
+    const { id, avatar, handle, name } = item;
+    return (
+      <UserCard
+        userId={id}
+        avatar={avatar}
+        handle={handle}
+        name={name}
+      />
+    );
+  };
+
+  if (!loading && !error) {
+    const { userConnections } = data;
+    content = (
+      <FlatGrid
+        bounces={false}
+        itemDimension={responsiveWidth(85)}
+        showsVerticalScrollIndicator={false}
+        items={userConnections}
+        itemContainerStyle={styles().listItemContainer}
+        contentContainerStyle={styles().listContentContainer}
+        ListEmptyComponent={() => <ListEmptyComponent placeholder='No users found' spacing={60} />}
+        style={styles().listContainer}
+        spacing={20}
+        renderItem={renderItem}
+      />
+    );
   }
 
   return (
@@ -35,11 +75,11 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}>
       <BottomSheetHeader
-        heading={type}
+        heading={heading}
         subHeading={subHeading}
       />
       <View style={styles(theme).content}>
-        <ConnectionsPlaceholder />
+        {content}
       </View>
     </Modalize>
   );
@@ -55,6 +95,16 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     flex: 1,
     paddingTop: 20
   },
+  listContainer: {
+    flex: 1
+  },
+  listItemContainer: {
+    width: '106%'
+  },
+  listContentContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  }
 });
 
 export default ConnectionsBottomSheet;

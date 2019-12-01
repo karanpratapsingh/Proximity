@@ -29,7 +29,18 @@ export const QUERY_USER = gql`
         uri
       }
     }
-}
+  }
+`;
+
+export const QUERY_USER_CONNECTIONS = gql`
+ query UserConnections($userId: String!, $type: ConnectionsType!) {
+    userConnections(userId: $userId, type: $type) {
+      id
+      avatar
+      name
+      handle
+    }
+  }
 `;
 
 export const QUERY_USER_EXISTS = gql`

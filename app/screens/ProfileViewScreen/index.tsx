@@ -3,13 +3,12 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions } from '../../constants';
+import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
+import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
-import ConnectionsBottomSheet from '../../layout/shared/ConnectionsBottomSheet';
 
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);
@@ -74,12 +73,12 @@ const ProfileViewScreen: React.FC = () => {
         <ConnectionsBottomSheet
           ref={followingBottomSheetRef}
           userId={'user.id'}
-          type='Following'
+          type={ConnectionsType.FOLLOWING}
         />
         <ConnectionsBottomSheet
           ref={followersBottomSheetRef}
           userId={'user.id'}
-          type='Followers'
+          type={ConnectionsType.FOLLOWERS}
         />
       </>
     );

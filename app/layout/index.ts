@@ -25,6 +25,8 @@ import ConnectionsPlaceholder from './placeholders/Connections.Placeholder';
 
 import PostThumbnail from './shared/PostThumbnail';
 import ProfileCard from './shared/ProfileCard';
+import UserCard from './shared/UserCard';
+import ConnectionsBottomSheet from './shared/ConnectionsBottomSheet';
 
 export {
   Header,
@@ -45,6 +47,8 @@ export {
   ProfileScreenPlaceholder,
   PostThumbnail,
   ProfileCard,
+  UserCard,
+  ConnectionsBottomSheet,
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,

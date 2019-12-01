@@ -25,6 +25,11 @@ export const FollowInteractionType = {
   UNFOLLOW: 'UNFOLLOW'
 };
 
+export const ConnectionsType = {
+  FOLLOWING: 'FOLLOWING',
+  FOLLOWERS: 'FOLLOWERS'
+};
+
 export const IconSizes = {
   x00: 4,
   x0: 6,

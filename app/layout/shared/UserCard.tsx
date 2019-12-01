@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AppContext } from '../../../context';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { AppContext } from '../../context';
+import { Typography } from '../../theme';
+import { ThemeColors } from '../../types';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../constants';
-import { NativeImage } from '../../../layout';
+import { Routes } from '../../constants';
+import { NativeImage } from '..';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -30,7 +30,8 @@ const UserCard = ({ userId, avatar, handle, name }) => {
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
-    borderRadius: 5
+    borderRadius: 5,
+    width: '100%',
   },
   avatarImage: {
     height: 50,

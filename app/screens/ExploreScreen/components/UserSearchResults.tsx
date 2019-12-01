@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
-import UserCard from './UserCard';
+import { UserCard } from '../../../layout';
 import { AppContext } from '../../../context';
 
 interface UserSearchResultsType {
@@ -16,9 +16,7 @@ const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) =
   const filteredSearchResults = [...searchResults].filter(result => result.id !== user.id);
 
   const renderItem = ({ item }) => {
-
     const { id, avatar, handle, name } = item;
-
     return (
       <UserCard
         userId={id}
