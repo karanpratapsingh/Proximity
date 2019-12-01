@@ -32,7 +32,7 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
 
   if (type === ConnectionsType.FOLLOWING) {
     heading = 'Following';
-    subHeading = 'People you follow'
+    subHeading = 'People you are following'
   } else if (type === ConnectionsType.FOLLOWERS) {
     heading = 'Followers';
     subHeading = 'People who are following you'
