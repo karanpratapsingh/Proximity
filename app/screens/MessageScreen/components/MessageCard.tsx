@@ -24,7 +24,7 @@ const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
         <View style={styles(theme).time}>
-          <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles(theme).messageText}>
+          <Text numberOfLines={1} ellipsizeMode='tail' style={styles(theme).messageText}>
             {lastMessage}
           </Text>
           <Text style={styles(theme).timeText}>

@@ -2,14 +2,14 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { BottomSheetHeader, ConnectionsPlaceholder } from '..';
+import { BottomSheetHeader, ConnectionsPlaceholder, SvgBannerType } from '..';
+import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
 import { ConnectionsType } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
 import { ThemeColors } from '../../types';
-import ListEmptyComponent from '../misc/ListEmptyComponent';
 import UserCard from './UserCard';
 
 interface ConnectionsBottomSheetProps {
@@ -34,9 +34,17 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
     heading = 'Following';
     subHeading = 'People you follow'
   } else if (type === ConnectionsType.FOLLOWERS) {
-    heading = 'Follower';
-    subHeading = 'People following you'
+    heading = 'Followers';
+    subHeading = 'People who are following you'
   }
+
+  const ListEmptyComponent = () => (
+    <SvgBannerType
+      Svg={EmptyConnectionsBanner}
+      placeholder='No users found'
+      topSpacing={responsiveHeight(16)}
+    />
+  );
 
   const renderItem = ({ item }) => {
     const { id, avatar, handle, name } = item;
@@ -60,7 +68,7 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
         items={userConnections}
         itemContainerStyle={styles().listItemContainer}
         contentContainerStyle={styles().listContentContainer}
-        ListEmptyComponent={() => <ListEmptyComponent placeholder='No users found' spacing={60} />}
+        ListEmptyComponent={ListEmptyComponent}
         style={styles().listContainer}
         spacing={20}
         renderItem={renderItem}
@@ -92,8 +100,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
-    flex: 1,
-    paddingTop: 20
+    flex: 1
   },
   listContainer: {
     flex: 1

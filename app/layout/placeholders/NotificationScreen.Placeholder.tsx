@@ -22,13 +22,13 @@ const NotificationScreenPlaceholder: React.FC = () => {
                   noMargin
                   color={theme.placeholder}
                   style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(25)}
+                  width={responsiveWidth(24)}
                 />
                 <PlaceholderLine
                   noMargin
                   color={theme.placeholder}
                   style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(10)}
+                  width={responsiveWidth(8)}
                 />
               </View>
             </View>
