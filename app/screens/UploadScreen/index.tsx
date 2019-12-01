@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from 'react-navigation-hooks';
 import { IconSizes, Routes } from '../../constants';
@@ -43,8 +43,10 @@ const UploadScreen: React.FC = () => {
     navigate(Routes.PostViewScreen, { postId });
   };
 
+  const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;
+
   return (
-    <View style={styles(theme).container}>
+    <KeyboardAvoidingView behavior={keyboardBehavior} style={styles(theme).container}>
       <Header title='Upload' />
       <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
         <UploadBanner pickedAsset={pickedAsset} onAsset={setPickedAsset} />
@@ -68,7 +70,7 @@ const UploadScreen: React.FC = () => {
           containerStyle={styles().uploadButton}
         />
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
