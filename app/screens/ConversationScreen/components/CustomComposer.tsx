@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Composer } from 'react-native-gifted-chat';
-import { Typography } from '../../../../theme';
+import { Typography } from '../../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
 const CustomComposer = inputProps => (
   <Composer
     {...inputProps}
-    composerHeight={30}
+    // composerHeight={30}
+    multiline
     textInputProps={{ autoCorrect: false }}
     textInputStyle={styles.inputStyle}
   />
@@ -17,7 +18,9 @@ const CustomComposer = inputProps => (
 const styles = StyleSheet.create({
   inputStyle: {
     ...FontWeights.Light,
-    ...FontSizes.Body
+    ...FontSizes.Body,
+    paddingTop: 8,
+    paddingLeft: 10
   }
 });
 

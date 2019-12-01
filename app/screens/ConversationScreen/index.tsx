@@ -15,6 +15,7 @@ import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
+import CustomInputToolbar from './components/CustomInputToolbar';
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
@@ -79,8 +80,10 @@ const ConversationScreen = () => {
         renderMessageText={CustomMessageText}
         renderBubble={CustomBubble}
         renderSend={CustomSend}
+        renderInputToolbar={CustomInputToolbar}
         onSend={updatedMessages => onSend(updatedMessages)}
         user={{ _id: user.id }}
+        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }
