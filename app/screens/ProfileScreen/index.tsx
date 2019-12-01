@@ -10,7 +10,7 @@ import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, Pro
 import { ThemeColors } from '../../types';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
-import ConnectionsBottomSheet from './components/ConnectionsBottomSheet';
+import ConnectionsBottomSheet from '../../layout/shared/ConnectionsBottomSheet';
 
 const ProfileScreen: React.FC = () => {
 

@@ -9,7 +9,7 @@ import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types';
 import UserInteractions from './components/UserInteractions';
-import ConnectionsBottomSheet from '../ProfileScreen/components/ConnectionsBottomSheet';
+import ConnectionsBottomSheet from '../../layout/shared/ConnectionsBottomSheet';
 
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);

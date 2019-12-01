@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { useNavigation } from 'react-navigation-hooks';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { AppContext } from '../../context';
+import { BottomSheetHeader, ConnectionsPlaceholder } from '..';
+import { Typography } from '../../theme';
+import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -33,19 +33,21 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
       //@ts-ignore
       ref={ref}
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
-      modalStyle={styles(theme).container}
-      adjustToContentHeight>
+      modalStyle={styles(theme).container}>
       <BottomSheetHeader
         heading={type}
         subHeading={subHeading}
       />
-
+      <View style={styles(theme).content}>
+        <ConnectionsPlaceholder />
+      </View>
     </Modalize>
   );
 });
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
+    marginTop: 40,
     padding: 20,
     backgroundColor: theme.base
   },

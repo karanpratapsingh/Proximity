@@ -21,6 +21,7 @@ import SearchUsersPlaceholder from './placeholders/SearchUsers.Placeholder';
 import ExploreScreenPlaceholder from './placeholders/ExploreScreen.Placeholder';
 import PostCardPlaceholder from './placeholders/PostCard.Placeholder';
 import PostViewScreenPlaceholder from './placeholders/PostViewScreen.Placeholder';
+import ConnectionsPlaceholder from './placeholders/Connections.Placeholder';
 
 import PostThumbnail from './shared/PostThumbnail';
 import ProfileCard from './shared/ProfileCard';
@@ -47,5 +48,6 @@ export {
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,
-  PostViewScreenPlaceholder
+  PostViewScreenPlaceholder,
+  ConnectionsPlaceholder
 };
