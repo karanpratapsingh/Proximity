@@ -7,6 +7,7 @@ import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceho
 import { ThemeColors } from '../../types';
 import UserSearchResults from './components/UserSearchResults';
 import SearchUsersBanner from '../../../assets/svg/search-users.svg';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const ExploreScreen: React.FC = () => {
 
@@ -39,7 +40,7 @@ const ExploreScreen: React.FC = () => {
     if (querySearchUsersCalled && querySearchUsersLoading) {
       subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <SvgBannerType Svg={SearchUsersBanner} placeholder='Search users' />
+      subContent = <SvgBannerType Svg={SearchUsersBanner} topSpacing={responsiveHeight(16)} placeholder='Search users' />
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
       subContent = <UserSearchResults searchResults={searchResults} />;
     }
@@ -74,9 +75,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
   }
 });
 

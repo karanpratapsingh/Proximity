@@ -38,7 +38,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     width: '90%',
     alignSelf: 'center',
-    paddingVertical: Platform.select({ ios: 8, android: 6 }),
+    paddingVertical: Platform.select({ ios: 10, android: 5 }),
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
     color: theme.text01,

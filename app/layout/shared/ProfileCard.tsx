@@ -104,7 +104,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 40,
     width: 60,
-    height: 30,
+    height: 32,
     borderWidth: 2,
     borderColor: theme.base,
     backgroundColor: theme.accent

@@ -26,14 +26,13 @@ const SvgBanner: React.FC<SvgBannerType> = ({ Svg, placeholder, topSpacing, text
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10
   },
   placeholderText: {
     ...FontWeights.Light,
-    ...FontSizes.SubHeading,
+    ...FontSizes.Label,
     color: theme.text02,
     marginTop: 40
   }

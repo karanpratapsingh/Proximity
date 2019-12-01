@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes } from '../../constants';
@@ -13,9 +13,9 @@ import { ThemeColors } from '../../types';
 import { transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
+import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
-import CustomInputToolbar from './components/CustomInputToolbar';
 
 const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');

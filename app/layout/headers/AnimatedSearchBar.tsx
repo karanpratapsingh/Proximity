@@ -78,7 +78,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Body,
     marginLeft: 20,
-    paddingVertical: Platform.select({ ios: 8, android: 6 }),
+    paddingVertical: Platform.select({ ios: 10, android: 5 }),
     paddingHorizontal: 20,
     backgroundColor: theme.placeholder,
     color: theme.text01,

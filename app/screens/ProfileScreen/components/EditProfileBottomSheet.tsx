@@ -75,7 +75,6 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
 
   const onDone = async () => {
     //?TODO-Later: show error in fields
-    //?TODO-Later: implement image get and upload logic
     const { isHandleAvailable } = isHandleAvailableData;
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
