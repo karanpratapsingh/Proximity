@@ -72,7 +72,7 @@ const PostViewScreen = () => {
           />
           <View>
             <Text style={styles(theme).handleText}>{handle}</Text>
-            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)} ago</Text>
+            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)}</Text>
           </View>
         </TouchableOpacity>
         <NativeImage
