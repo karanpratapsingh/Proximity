@@ -51,6 +51,7 @@
     "react-native-svg": "^9.13.3",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
+    "react-navigation-animated-switch": "^0.3.2",
     "react-navigation-hooks": "^1.1.0",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.5.6",
