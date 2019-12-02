@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 interface NativeImageProps {
@@ -6,9 +7,10 @@ interface NativeImageProps {
   style: any
 };
 
-const NativeImage: React.FC<NativeImageProps> = ({ uri, style }) =>
-  <FastImage style={style} source={{ uri, priority: FastImage.priority.normal }}
-    // resizeMode={FastImage.resizeMode.contain}
-  />
+const NativeImage: React.FC<NativeImageProps> = ({ uri, style }) => {
+
+  if (!uri) return <View style={style} />
+  return <FastImage style={style} source={{ uri, priority: FastImage.priority.normal }} />
+};
 
 export default NativeImage;

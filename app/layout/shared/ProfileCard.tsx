@@ -59,7 +59,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ avatar, editable, onEdit, onF
       <View style={styles(theme).info}>
         <Connections onPress={onFollowingOpen} total={parseConnectionsCount(following)} type='FOLLOWING' />
         <ImageBackground
-          source={{ uri: avatar }}
+          source={{ uri: avatar ? avatar : '' }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           {editable && <EditProfile onEdit={onEdit} />}
