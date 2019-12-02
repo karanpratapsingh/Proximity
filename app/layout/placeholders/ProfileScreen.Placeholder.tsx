@@ -4,11 +4,11 @@ import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
 
-interface ProfileScreenPlaceholderType {
+interface ProfileScreenPlaceholderProps {
   viewMode?: boolean
 };
 
-const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderType> = ({ viewMode }) => {
+const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderProps> = ({ viewMode }) => {
   const { theme } = useContext(AppContext);
 
   return (

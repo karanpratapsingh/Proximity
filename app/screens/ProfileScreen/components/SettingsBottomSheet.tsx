@@ -15,14 +15,14 @@ import { signOut } from '../../../utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface OptionType {
+interface OptionProps {
   label?: string,
   iconName: string,
   onPress?: any,
   children?: any
 };
 
-const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) => {
+const Option: React.FC<OptionProps> = ({ label, iconName, onPress, children }) => {
   const { theme } = useContext(AppContext);
 
   if (children)
@@ -41,11 +41,11 @@ const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) =>
   );
 };
 
-interface SettingsBottomSheetType {
+interface SettingsBottomSheetProps {
   ref: React.Ref<any>
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((_, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef((_, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();

@@ -5,7 +5,7 @@ import { ThemeStatic, Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface ButtonType {
+interface ButtonProps {
   Icon?: React.FC,
   label: string,
   onPress: any,
@@ -15,7 +15,7 @@ interface ButtonType {
   indicatorColor?: string
 };
 
-const Button: React.FC<ButtonType> = ({ Icon, label, onPress, loading, containerStyle, labelStyle, indicatorColor }) => {
+const Button: React.FC<ButtonProps> = ({ Icon, label, onPress, loading, containerStyle, labelStyle, indicatorColor }) => {
 
   let content = <LoadingIndicator size={8} color={indicatorColor || ThemeStatic.white} />
   if (!loading) content = (

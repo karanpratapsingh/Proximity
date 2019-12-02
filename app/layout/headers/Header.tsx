@@ -6,12 +6,12 @@ import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface HeaderType {
+interface HeaderProps {
   title: string,
   IconRight?: React.FC
 };
 
-const Header: React.FC<HeaderType> = ({ title, IconRight }) => {
+const Header: React.FC<HeaderProps> = ({ title, IconRight }) => {
 
   const { theme } = useContext(AppContext);
   return (

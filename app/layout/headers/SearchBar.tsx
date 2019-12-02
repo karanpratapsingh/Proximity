@@ -6,7 +6,7 @@ import { ThemeColors } from '../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface SearchBarType {
+interface SearchBarProps {
   value: string,
   onChangeText: any,
   onFocus?: any,
@@ -15,7 +15,7 @@ interface SearchBarType {
   style?: object
 };
 
-const SearchBar: React.FC<SearchBarType> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
   const { theme } = useContext(AppContext);
 
   return (

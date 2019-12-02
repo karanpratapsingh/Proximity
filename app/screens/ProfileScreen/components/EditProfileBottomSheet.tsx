@@ -13,7 +13,7 @@ import { ThemeColors } from '../../../types';
 import { getImageFromLibrary } from '../../../utils/shared';
 import { uploadToStorage } from '../../../utils/firebase';
 
-interface EditProfileBottomSheetType {
+interface EditProfileBottomSheetProps {
   ref: React.Ref<any>,
   avatar: string,
   name: string,
@@ -21,7 +21,7 @@ interface EditProfileBottomSheetType {
   about: string
 };
 
-const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
+const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
   const { user, updateUser: updateUserContext, theme } = useContext(AppContext);
 
