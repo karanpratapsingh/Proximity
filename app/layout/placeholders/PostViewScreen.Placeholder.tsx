@@ -43,13 +43,13 @@ const PostViewScreenPlaceholder = () => {
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          width={responsiveWidth(26)}
+          width={responsiveWidth(24)}
           style={styles.captionPlaceholder}
         />
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          width={responsiveWidth(26)}
+          width={responsiveWidth(24)}
           style={styles.captionPlaceholder}
         />
       </Placeholder>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   captionPlaceholder: {
-    marginTop: 5,
+    marginTop: 8,
     borderRadius: 10
   }
 });

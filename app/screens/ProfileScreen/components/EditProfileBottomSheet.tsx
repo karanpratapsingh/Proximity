@@ -138,7 +138,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
       />
       <View style={styles().content}>
         <ImageBackground
-          source={{ uri: editableAvatar }}
+          source={{ uri: editableAvatar ? editableAvatar : '' }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           <TouchableOpacity activeOpacity={0.9} onPress={onAvatarPick} style={styles(theme).avatarOverlay}>

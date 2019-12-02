@@ -126,6 +126,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   postImage: {
     ...PostDimensions.Large,
+    alignSelf: 'center',
     marginTop: 25,
     borderRadius: 10,
     backgroundColor: theme.placeholder
