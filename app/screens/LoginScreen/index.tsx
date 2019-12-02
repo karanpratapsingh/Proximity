@@ -2,19 +2,21 @@ import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
+import GoogleLogo from '../../../assets/svg/google-logo.svg';
+import LoginBanner from '../../../assets/svg/login-banner.svg';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
-import { Typography, ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types';
-import LoginBanner from '../../../assets/svg/login-banner.svg';
-import GoogleLogo from '../../../assets/svg/google-logo.svg';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { Button } from '../../layout';
+import { ThemeStatic, Typography } from '../../theme';
+import { ThemeColors } from '../../types';
+import { handleLoginError } from '../../utils/authentication';
+import { loadToken, saveToken } from '../../utils/storage';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -36,17 +38,12 @@ const LoginScreen: React.FC = () => {
 
   const initialize = async () => {
     try {
-      const isSignedIn = await GoogleSignin.isSignedIn();
-      SplashScreen.hide();
-      if (isSignedIn) {
-        const currentUser = await GoogleSignin.getCurrentUser();
-        if (currentUser) {
-          navigateToApp(currentUser.user.id);
-        }
-      }
-    } catch ({ message }) {
-      alert(JSON.stringify(message));
+      const token = await loadToken();
+      navigateToApp(token);
+    } catch ({ message, name: errorType }) {
+      handleLoginError(errorType);
     }
+    SplashScreen.hide();
   };
 
   useEffect(() => {
@@ -65,6 +62,7 @@ const LoginScreen: React.FC = () => {
       if (!userExists) {
         await createUser({ variables: { token: token, avatar: photo, name } });
       }
+      await saveToken(token);
       setLoading(false);
       navigateToApp(token);
     } catch ({ message }) {
