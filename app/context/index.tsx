@@ -1,6 +1,7 @@
 import React, { useState, createContext, } from 'react';
 import { Theme } from '../theme';
 import { ThemeColors } from '../types';
+import { saveThemeType } from '../utils/storage';
 
 type UserType = {
   id: string,
@@ -31,10 +32,10 @@ export const AppContextProvider = props => {
     setUser(user);
   };
 
-  const toggleTheme = type => {
+  const toggleTheme = (type: string) => {
     setTheme(Theme[type].colors);
     setThemeType(type);
-    //TODO: write to client cache or local storage for persistance
+    saveThemeType(type);
   };
 
   const value = {

@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 const storage = new Storage({
   size: 1000,
   storageBackend: AsyncStorage,
-  defaultExpires: 20000, // 7 days, eg: 1 day (1000 * 3600 * 24 milliseconds)
+  defaultExpires: 1000 * 3600 * 24, // 7 days, eg: 1 day (1000 * 3600 * 24 milliseconds)
   enableCache: true
 });
 
@@ -32,6 +32,18 @@ export const removeToken = () => {
   });
 };
 
+export const saveThemeType = (themeType: string) => {
+  return storage.save({
+    key: 'proximity:theme',
+    data: themeType,
+    expires: null // never expires until changed
+  });
+};
 
+export const loadThemeType = () => {
+  return storage.load({
+    key: 'proximity:theme'
+  });
+};
 
 export default storage;
