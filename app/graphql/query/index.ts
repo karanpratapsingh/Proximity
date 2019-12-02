@@ -135,6 +135,10 @@ export const QUERY_POST = gql`
         handle
         avatar
       }
+      comments {
+        body
+        createdAt
+      }
       uri
       likes
       caption
