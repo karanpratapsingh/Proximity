@@ -56,6 +56,6 @@ export const ThemeType = {
 };
 
 export const HandleAvailableColor = {
-  true: 'green',
-  false: 'red'
+  true: '#4caf50',
+  false: '#EF5350'
 };

@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -51,7 +50,7 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    messaging.onTokenRefresh(fcmToken => {
+    const onTokenRefreshListener = messaging.onTokenRefresh(fcmToken => {
       try {
         if (fcmToken) updateFcmToken({
           variables: {
@@ -63,6 +62,10 @@ const HomeScreen: React.FC = () => {
         alert(JSON.stringify(error));
       }
     });
+
+    return () => {
+      onTokenRefreshListener();
+    };
   }, []);
 
   useEffect(() => {
