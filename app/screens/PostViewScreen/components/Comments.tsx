@@ -13,11 +13,19 @@ const Comments = ({ comments }) => {
   const { theme } = useContext(AppContext);
 
   const renderItem = ({ item }) => {
-    const { body, createdAt } = item;
+    const {
+      author: {
+        avatar,
+        handle
+      },
+      body,
+      createdAt
+    } = item;
+
     return (
       <CommentCard
-        avatar={''}
-        handle={'@someone'}
+        avatar={avatar}
+        handle={handle}
         body={body}
         time={createdAt}
       />
@@ -36,6 +44,7 @@ const Comments = ({ comments }) => {
         </Text>
       }
       data={comments}
+      renderItem={renderItem}
       ListEmptyComponent={() =>
         <ListEmptyComponent
           placeholder='Be the first one to comment'
@@ -43,7 +52,6 @@ const Comments = ({ comments }) => {
           spacing={12}
         />
       }
-      renderItem={renderItem}
     />
   );
 };

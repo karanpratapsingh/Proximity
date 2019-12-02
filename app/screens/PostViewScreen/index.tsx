@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
@@ -17,11 +17,13 @@ const { FontWeights, FontSizes } = Typography;
 const CommentInput = () => {
   const { user, theme } = useContext(AppContext);
   const [comment, setComment] = useState('');
+  // const [addComment] = useMutation()
 
   const postComment = () => {
     if (comment.length < 1) return alert('[warning]: cannot be empty');
     if (comment.length > 200) return alert('[warning]: cannot be greater than 200');
     alert('dispatch mutation');
+    setComment('');
   };
 
   return (
@@ -53,7 +55,7 @@ const PostViewScreen = () => {
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
-  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId: 'ck3og929n0iak074969d25hau' } });
+  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
 
   const navigateToProfile = userId => {
 

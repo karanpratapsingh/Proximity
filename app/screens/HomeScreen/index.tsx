@@ -48,7 +48,7 @@ const HomeScreen: React.FC = () => {
   };
 
   const dummyPost = {
-    "id": "ck3hf3vza001g0774mbx0929j",
+    "id": "ck3ooh0mv01cm071409ltw0xk",
     "uri": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     "createdAt": "2019-11-27T14:58:01.133Z",

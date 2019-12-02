@@ -137,6 +137,10 @@ export const QUERY_POST = gql`
       }
       comments {
         body
+        author {
+          avatar
+          handle
+        }
         createdAt
       }
       uri
