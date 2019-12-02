@@ -62,10 +62,11 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       if (!isHandleAvailable) {
         setHandleError('username not available');
       } else {
-        setHandleError('');
+        if (!editableHandle) setHandleError('username cannot be empty')
+        else setHandleError('');
       }
     }
-  }, [isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
+  }, [editableHandle, isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
 
   const onAvatarPick = async () => {
     //@ts-ignore
@@ -78,6 +79,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     const { isHandleAvailable } = isHandleAvailableData;
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
+    if (!editableHandle) return;
 
     setIsUploading(true);
 
@@ -101,6 +103,11 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     //@ts-ignore
     ref.current.close();
   };
+
+  const setHandle = (handle: string) => {
+    if (!handle) setHandleError('username cannot be empty');
+    setEditableHandle(handle);
+  }
 
   let content = (
     <View>
@@ -150,7 +157,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           placeholder='example: doggo'
           error={handleError}
           value={editableHandle}
-          onChangeText={setEditableHandle}>
+          onChangeText={setHandle}>
           {content}
         </FormInput>
         <FormInput

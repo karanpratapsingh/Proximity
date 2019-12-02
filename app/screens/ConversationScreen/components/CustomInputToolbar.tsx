@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: 0
+    borderTopWidth: 0,
+    backgroundColor: 'transparent'
   },
   primary: {
     alignItems: 'center',
