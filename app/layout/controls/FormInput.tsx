@@ -24,6 +24,7 @@ const FormInput: React.FC<FormInputType> = ({ label, placeholder, value, onChang
     <TextField
       error={error}
       autoCorrect={false}
+      autoCapitalize='none'
       tintColor={theme.accent}
       baseColor={theme.accent}
       fontSize={FontSizes.Body.fontSize}
@@ -34,6 +35,7 @@ const FormInput: React.FC<FormInputType> = ({ label, placeholder, value, onChang
       activeLineWidth={0}
       label={label}
       placeholder={placeholder}
+      placeholderTextColor={theme.text02}
       onChangeText={onChangeText}
       value={value}
       multiline={multiline || false}
