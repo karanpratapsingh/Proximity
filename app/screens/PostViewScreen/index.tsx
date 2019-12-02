@@ -34,13 +34,17 @@ const CommentInput = () => {
 
 const PostViewScreen = () => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
 
-  const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
+  const navigateToProfile = userId => {
+
+    if (userId === user.id) return;
+    navigate(Routes.ProfileViewScreen, { userId });
+  };
 
   let content = <PostViewScreenPlaceholder />;
 
