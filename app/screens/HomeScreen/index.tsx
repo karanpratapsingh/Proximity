@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -11,8 +11,9 @@ import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
 import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
-import { messaging } from '../../utils/firebase';
+import { messaging, notifications } from '../../utils/firebase';
 import PostCard from './components/PostCard';
+import firebase from 'react-native-firebase';
 
 const HomeScreen: React.FC = () => {
 
@@ -22,6 +23,16 @@ const HomeScreen: React.FC = () => {
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
   const initializeFCM = async () => {
+    if (Platform.OS === 'android') {
+      const channel = new firebase
+        .notifications
+        .Android
+        .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
+        .setDescription('Proximity Notification Channel')
+        .setSound('default');
+
+      notifications.android.createChannel(channel);
+    }
     const hasPermission = await messaging.hasPermission();
     if (!hasPermission) {
       await messaging.requestPermission();
