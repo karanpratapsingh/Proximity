@@ -23,7 +23,8 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
   const { theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
-    variables: { userId, type }
+    variables: { userId, type },
+    pollInterval: 2000
   });
 
   let content = <ConnectionsPlaceholder />;

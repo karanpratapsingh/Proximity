@@ -1,9 +1,12 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { TabBarRoutes, StackRoutes } from './Routes'
+import { StackRoutes, TabBarRoutes } from './Routes';
 import TabBarComponent from './TabBarComponent';
+import getSlideFromRightTransitionConfig from './Transition';
 
 const TabNavigator = createBottomTabNavigator({
   HomeScreen: {
@@ -51,15 +54,18 @@ const AppStack = createStackNavigator({
   PostViewScreen: {
     screen: StackRoutes.PostViewScreen
   }
-}, { headerMode: 'none' });
+}, {
+  headerMode: 'none',
+  transitionConfig: Platform.OS === 'ios' ? undefined : getSlideFromRightTransitionConfig
+});
 
-const SwitchNavigator = createSwitchNavigator({
+const SwitchNavigator = createAnimatedSwitchNavigator({
   Auth: AuthStack,
   App: AppStack
 }, {
   initialRouteName: 'Auth'
 });
 
-const AppNavigator = createAppContainer(SwitchNavigator);
+const AppNavigator = createAppContainer(SwitchNavigator as any);
 
 export default AppNavigator;

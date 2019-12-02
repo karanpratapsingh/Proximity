@@ -3,6 +3,7 @@ import { generateUUID } from './shared';
 
 export const storage = firebase.storage();
 export const messaging = firebase.messaging();
+export const notifications = firebase.notifications();
 
 export const uploadToStorage = (path: string, uri: string) => {
   const [type] = uri.split('.').slice(-1);

@@ -84,4 +84,4 @@ export const getImageFromLibrary = async (height: number, width: number, circula
   };
 
   return ImagePicker.openPicker(options);
-}
+};

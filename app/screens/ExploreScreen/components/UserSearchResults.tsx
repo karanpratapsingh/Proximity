@@ -6,11 +6,11 @@ import { ListEmptyComponent } from '../../../layout';
 import { UserCard } from '../../../layout';
 import { AppContext } from '../../../context';
 
-interface UserSearchResultsType {
+interface UserSearchResultsProps {
   searchResults: any[]
 };
 
-const UserSearchResults: React.FC<UserSearchResultsType> = ({ searchResults }) => {
+const UserSearchResults: React.FC<UserSearchResultsProps> = ({ searchResults }) => {
   const { user } = useContext(AppContext);
 
   const filteredSearchResults = [...searchResults].filter(result => result.id !== user.id);

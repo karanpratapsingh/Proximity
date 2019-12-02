@@ -7,7 +7,7 @@ import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface FormInputType {
+interface FormInputProps {
   label: string,
   placeholder: string,
   value: string,
@@ -18,12 +18,13 @@ interface FormInputType {
   error?: string
 };
 
-const FormInput: React.FC<FormInputType> = ({ label, placeholder, value, onChangeText, children, multiline, characterRestriction, error }) => {
+const FormInput: React.FC<FormInputProps> = ({ label, placeholder, value, onChangeText, children, multiline, characterRestriction, error }) => {
   const { theme } = useContext(AppContext);
   return (
     <TextField
       error={error}
       autoCorrect={false}
+      autoCapitalize='none'
       tintColor={theme.accent}
       baseColor={theme.accent}
       fontSize={FontSizes.Body.fontSize}
@@ -34,6 +35,7 @@ const FormInput: React.FC<FormInputType> = ({ label, placeholder, value, onChang
       activeLineWidth={0}
       label={label}
       placeholder={placeholder}
+      placeholderTextColor={theme.text02}
       onChangeText={onChangeText}
       value={value}
       multiline={multiline || false}

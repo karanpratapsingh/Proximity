@@ -9,13 +9,13 @@ import { ThemeStatic } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface ConnectionsType {
+interface ConnectionsProps {
   total: string,
   type: string,
   onPress: any
 };
 
-const Connections: React.FC<ConnectionsType> = ({ total, type, onPress }) => {
+const Connections: React.FC<ConnectionsProps> = ({ total, type, onPress }) => {
   const { theme } = useContext(AppContext);
   return (
     <TouchableOpacity activeOpacity={0.95} onPress={onPress} style={styles(theme).connections}>
@@ -25,11 +25,11 @@ const Connections: React.FC<ConnectionsType> = ({ total, type, onPress }) => {
   );
 };
 
-interface EditProfileTYpe {
+interface EditProfileProps {
   onEdit: any
 };
 
-const EditProfile: React.FC<EditProfileTYpe> = ({ onEdit }) => {
+const EditProfile: React.FC<EditProfileProps> = ({ onEdit }) => {
   const { theme } = useContext(AppContext);
   return (
     <TouchableOpacity activeOpacity={1} onPress={onEdit} style={styles(theme).editProfile}>
@@ -38,7 +38,7 @@ const EditProfile: React.FC<EditProfileTYpe> = ({ onEdit }) => {
   );
 };
 
-interface ProfileCardType {
+interface ProfileCardProps {
   avatar: string,
   editable?: boolean,
   onEdit?: any,
@@ -52,14 +52,14 @@ interface ProfileCardType {
   about: string
 };
 
-const ProfileCard: React.FC<ProfileCardType> = ({ avatar, editable, onEdit, onFollowingOpen, onFollowersOpen, following, followers, name, handle, renderInteractions, about }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ avatar, editable, onEdit, onFollowingOpen, onFollowersOpen, following, followers, name, handle, renderInteractions, about }) => {
   const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>
       <View style={styles(theme).info}>
         <Connections onPress={onFollowingOpen} total={parseConnectionsCount(following)} type='FOLLOWING' />
         <ImageBackground
-          source={{ uri: avatar }}
+          source={{ uri: avatar ? avatar : '' }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           {editable && <EditProfile onEdit={onEdit} />}

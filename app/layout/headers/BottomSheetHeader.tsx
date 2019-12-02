@@ -6,12 +6,12 @@ import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface BottomSheetHeaderType {
+interface BottomSheetHeaderProps {
   heading: string,
   subHeading: string
 };
 
-const BottomSheetHeader: React.FC<BottomSheetHeaderType> = ({ heading, subHeading }) => {
+const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({ heading, subHeading }) => {
   const { theme } = useContext(AppContext);
   return (
     <View style={styles(theme).container}>

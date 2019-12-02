@@ -8,12 +8,12 @@ import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface GoBackHeaderType {
+interface GoBackHeaderProps {
   title?: string,
   iconSize: number
 };
 
-const GoBackHeader: React.FC<GoBackHeaderType> = ({ title, iconSize }) => {
+const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, iconSize }) => {
 
   const { theme } = useContext(AppContext);
   const { goBack } = useNavigation();

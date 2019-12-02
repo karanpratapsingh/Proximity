@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { ThemeType } from './app/constants';
@@ -8,12 +8,23 @@ import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
 import { ThemeColors } from './app/types';
+import { loadThemeType } from './app/utils/storage';
 
 GoogleSignin.configure();
 
 const SafeAreaApp = () => {
-  const { theme, themeType, updateUser } = useContext(AppContext);
+  const { theme, themeType, toggleTheme } = useContext(AppContext);
   const dynamicBarStyle = `${themeType === ThemeType.light ? ThemeType.dark : ThemeType.light}-content`;
+
+  const initializeTheme = async () => {
+    try {
+      const themeType = await loadThemeType();
+      toggleTheme(themeType);
+    } catch { }
+  };
+  useEffect(() => {
+    initializeTheme();
+  }, []);
 
   return (
     <SafeAreaView style={styles(theme).container}>

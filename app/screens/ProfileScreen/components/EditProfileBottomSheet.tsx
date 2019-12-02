@@ -13,7 +13,7 @@ import { ThemeColors } from '../../../types';
 import { getImageFromLibrary } from '../../../utils/shared';
 import { uploadToStorage } from '../../../utils/firebase';
 
-interface EditProfileBottomSheetType {
+interface EditProfileBottomSheetProps {
   ref: React.Ref<any>,
   avatar: string,
   name: string,
@@ -21,7 +21,7 @@ interface EditProfileBottomSheetType {
   about: string
 };
 
-const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
+const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forwardRef(({ avatar, name, handle, about }, ref) => {
 
   const { user, updateUser: updateUserContext, theme } = useContext(AppContext);
 
@@ -62,10 +62,11 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       if (!isHandleAvailable) {
         setHandleError('username not available');
       } else {
-        setHandleError('');
+        if (!editableHandle) setHandleError('username cannot be empty')
+        else setHandleError('');
       }
     }
-  }, [isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
+  }, [editableHandle, isHandleAvailableLoading, isHandleAvailableCalled, isHandleAvailableData]);
 
   const onAvatarPick = async () => {
     //@ts-ignore
@@ -78,6 +79,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     const { isHandleAvailable } = isHandleAvailableData;
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
+    if (!editableHandle) return;
 
     setIsUploading(true);
 
@@ -101,6 +103,11 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
     //@ts-ignore
     ref.current.close();
   };
+
+  const setHandle = (handle: string) => {
+    if (!handle) setHandleError('username cannot be empty');
+    setEditableHandle(handle);
+  }
 
   let content = (
     <View>
@@ -131,7 +138,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
       />
       <View style={styles().content}>
         <ImageBackground
-          source={{ uri: editableAvatar }}
+          source={{ uri: editableAvatar ? editableAvatar : '' }}
           style={styles(theme).avatar}
           imageStyle={styles(theme).avatarImage}>
           <TouchableOpacity activeOpacity={0.9} onPress={onAvatarPick} style={styles(theme).avatarOverlay}>
@@ -150,7 +157,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetType> = React.forwa
           placeholder='example: doggo'
           error={handleError}
           value={editableHandle}
-          onChangeText={setEditableHandle}>
+          onChangeText={setHandle}>
           {content}
         </FormInput>
         <FormInput

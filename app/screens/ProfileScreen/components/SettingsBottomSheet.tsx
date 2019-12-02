@@ -5,24 +5,24 @@ import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, ThemeType, Routes } from '../../../constants';
+import { useNavigation } from 'react-navigation-hooks';
+import { IconSizes, Routes, ThemeType } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
-import { GoogleSignin } from '@react-native-community/google-signin';
-import { useNavigation } from 'react-navigation-hooks';
+import { signOut } from '../../../utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface OptionType {
+interface OptionProps {
   label?: string,
   iconName: string,
   onPress?: any,
   children?: any
 };
 
-const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) => {
+const Option: React.FC<OptionProps> = ({ label, iconName, onPress, children }) => {
   const { theme } = useContext(AppContext);
 
   if (children)
@@ -41,11 +41,11 @@ const Option: React.FC<OptionType> = ({ label, iconName, onPress, children }) =>
   );
 };
 
-interface SettingsBottomSheetType {
+interface SettingsBottomSheetProps {
   ref: React.Ref<any>
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef((_, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef((_, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -61,12 +61,12 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
     setIsChecked(checked);
   };
 
-  const signOut = async () => {
+  const logOut = async () => {
     try {
-      await GoogleSignin.signOut();
+      await signOut();
       navigate(Routes.Auth);
-    } catch (error) {
-      alert(JSON.stringify(error));
+    } catch ({ message }) {
+      alert(JSON.stringify(message));
     }
   };
 
@@ -96,7 +96,7 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetType> = React.forwardRef(
         <Option
           label='Logout'
           iconName='ios-log-out'
-          onPress={signOut}
+          onPress={logOut}
         />
       </View>
     </Modalize>

@@ -7,13 +7,13 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface ListEmptyComponentType {
+interface ListEmptyComponentProps {
   listType?: string,
   spacing: number,
   placeholder?: string
 };
 
-const ListEmptyComponent: React.FC<ListEmptyComponentType> = ({ listType, spacing, placeholder }) => {
+const ListEmptyComponent: React.FC<ListEmptyComponentProps> = ({ listType, spacing, placeholder }) => {
   const { theme } = useContext(AppContext);
   let content = `No ${listType} yet`;
   if (placeholder) {

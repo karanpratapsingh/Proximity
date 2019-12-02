@@ -6,14 +6,14 @@ import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface SvgBannerType {
+interface SvgBannerProps {
   Svg: any,
   placeholder: string,
   topSpacing?: number,
   textStyle?: StyleProp<TextStyle>
 };
 
-const SvgBanner: React.FC<SvgBannerType> = ({ Svg, placeholder, topSpacing, textStyle }) => {
+const SvgBanner: React.FC<SvgBannerProps> = ({ Svg, placeholder, topSpacing, textStyle }) => {
   const { theme } = useContext(AppContext);
 
   return (

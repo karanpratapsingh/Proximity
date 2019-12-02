@@ -2,19 +2,21 @@ import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../constants';
+import GoogleLogo from '../../../assets/svg/google-logo.svg';
+import LoginBanner from '../../../assets/svg/login-banner.svg';
+import { Routes, IconSizes } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
-import { Typography, ThemeStatic } from '../../theme';
+import { Button, LoadingIndicator } from '../../layout';
+import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types';
-import LoginBanner from '../../../assets/svg/login-banner.svg';
-import GoogleLogo from '../../../assets/svg/google-logo.svg';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-import { Button } from '../../layout';
+import { handleLoginError } from '../../utils/authentication';
+import { loadToken, saveToken } from '../../utils/storage';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -22,6 +24,7 @@ const LoginScreen: React.FC = () => {
   const { theme, updateUser } = useContext(AppContext);
   const { navigate } = useNavigation();
   const [createUser] = useMutation(MUTATION_CREATE_USER);
+  const [initializing, setInitializing] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const navigateToApp = async (token: string) => {
@@ -36,17 +39,13 @@ const LoginScreen: React.FC = () => {
 
   const initialize = async () => {
     try {
-      const isSignedIn = await GoogleSignin.isSignedIn();
-      SplashScreen.hide();
-      if (isSignedIn) {
-        const currentUser = await GoogleSignin.getCurrentUser();
-        if (currentUser) {
-          navigateToApp(currentUser.user.id);
-        }
-      }
-    } catch ({ message }) {
-      alert(JSON.stringify(message));
+      const token = await loadToken();
+      navigateToApp(token);
+    } catch ({ message, name: errorType }) {
+      handleLoginError(errorType);
+      setInitializing(false);
     }
+    SplashScreen.hide();
   };
 
   useEffect(() => {
@@ -65,6 +64,7 @@ const LoginScreen: React.FC = () => {
       if (!userExists) {
         await createUser({ variables: { token: token, avatar: photo, name } });
       }
+      await saveToken(token);
       setLoading(false);
       navigateToApp(token);
     } catch ({ message }) {
@@ -73,35 +73,44 @@ const LoginScreen: React.FC = () => {
     }
   };
 
+  let content = <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x1} />;
+
+  if (!initializing) {
+    content = (
+      <>
+        <View style={styles(theme).content}>
+          <Text style={styles(theme).titleText}>Proximity</Text>
+          <Text style={styles(theme).subtitleText}>
+            Welcome to a open
+            source social media where you are
+            more than a statistics
+        </Text>
+        </View>
+        <View style={styles(theme).banner}>
+          <LoginBanner />
+          <View>
+            <Button
+              Icon={GoogleLogo}
+              label='Sign in with Google'
+              onPress={onGoogleSignIn}
+              containerStyle={styles(theme).loginButton}
+              labelStyle={styles(theme).loginButtonText}
+              indicatorColor={ThemeStatic.accent}
+              loading={loading}
+            />
+            <TouchableOpacity
+              onPress={() => null}
+              style={styles(theme).terms}>
+              <Text style={styles(theme).termsText}>Terms and conditions</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </>
+    );
+  }
   return (
     <View style={styles(theme).container}>
-      <View style={styles(theme).content}>
-        <Text style={styles(theme).titleText}>Proximity</Text>
-        <Text style={styles(theme).subtitleText}>
-          Welcome to a open
-          source social media where you are
-          more than a statistics
-        </Text>
-      </View>
-      <View style={styles(theme).banner}>
-        <LoginBanner />
-        <View>
-          <Button
-            Icon={GoogleLogo}
-            label='Sign in with Google'
-            onPress={onGoogleSignIn}
-            containerStyle={styles(theme).loginButton}
-            labelStyle={styles(theme).loginButtonText}
-            indicatorColor={ThemeStatic.accent}
-            loading={loading}
-          />
-          <TouchableOpacity
-            onPress={() => null}
-            style={styles(theme).terms}>
-            <Text style={styles(theme).termsText}>Terms and conditions</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      {content}
     </View>
   );
 };
