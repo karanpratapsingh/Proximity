@@ -51,6 +51,21 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
+    messaging.onTokenRefresh(fcmToken => {
+      try {
+        if (fcmToken) updateFcmToken({
+          variables: {
+            userId: user.id,
+            fcmToken
+          }
+        });
+      } catch (error) {
+        alert(JSON.stringify(error));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     initializeFCM();
     setTimeout(() => {
       setLoading(false);
