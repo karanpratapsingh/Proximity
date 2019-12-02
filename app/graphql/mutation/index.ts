@@ -94,3 +94,11 @@ export const MUTATION_CREATE_USER = gql`
     }
   }
 `;
+
+export const MUTATION_ADD_COMMENT = gql`
+  mutation AddComment($userId: String!, $postId: String!, $body: String!) {
+    addComment(userId: $userId, postId: $postId, body: $body) {
+      id
+    }
+  }
+`;

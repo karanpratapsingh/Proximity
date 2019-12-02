@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types';
 import { Typography } from '../../theme';
@@ -10,11 +10,12 @@ const { FontWeights, FontSizes } = Typography;
 interface ListEmptyComponentProps {
   listType?: string,
   spacing: number,
+  style?: StyleProp<ViewStyle>,
   placeholder?: string,
   placeholderStyle?: StyleProp<TextStyle>
 };
 
-const ListEmptyComponent: React.FC<ListEmptyComponentProps> = ({ listType, spacing, placeholder, placeholderStyle }) => {
+const ListEmptyComponent: React.FC<ListEmptyComponentProps> = ({ listType, spacing, style, placeholder, placeholderStyle }) => {
   const { theme } = useContext(AppContext);
   let content = `No ${listType} yet`;
   if (placeholder) {
@@ -22,7 +23,7 @@ const ListEmptyComponent: React.FC<ListEmptyComponentProps> = ({ listType, spaci
   }
 
   return (
-    <View style={[styles().container, { height: responsiveHeight(spacing) }]}>
+    <View style={[styles().container, { height: responsiveHeight(spacing) }, style]}>
       <Text style={[styles(theme).placeholderText, placeholderStyle]}>{content}</Text>
     </View>
   );

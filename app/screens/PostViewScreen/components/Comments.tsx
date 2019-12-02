@@ -49,7 +49,7 @@ const Comments = ({ comments }) => {
         <ListEmptyComponent
           placeholder='Be the first one to comment'
           placeholderStyle={styles().placeholderStyle}
-          spacing={12}
+          spacing={10}
         />
       }
     />
