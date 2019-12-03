@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
 import { IconSizes, Routes } from '../../constants';
@@ -80,6 +80,7 @@ const ConversationScreen = () => {
     content = (
       <GiftedChat
         isAnimated
+        alwaysShowSend
         inverted={false}
         maxInputLength={200}
         messages={transform}
@@ -92,6 +93,7 @@ const ConversationScreen = () => {
         onSend={onSend}
         onPressAvatar={onPressAvatar}
         user={{ _id: user.id }}
+        bottomOffset={-10}
         keyboardShouldPersistTaps={null}
         listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
