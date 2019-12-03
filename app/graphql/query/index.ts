@@ -85,7 +85,7 @@ export const QUERY_CHAT = gql`
       participants {
         id
       }
-      messages(last: 20) {
+      messages(last: 40) {
         id
         body
         createdAt
