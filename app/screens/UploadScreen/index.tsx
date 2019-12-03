@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { ScrollView, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from 'react-navigation-hooks';
@@ -22,6 +22,8 @@ const UploadScreen: React.FC = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [createPost] = useMutation(MUTATION_CREATE_POST);
 
+  const captionInputRef = useRef();
+
   const uploadImage = async () => {
     if (!pickedAsset) return;
     if (caption.length < 20) return; //? TODO: show alert or success
@@ -40,6 +42,8 @@ const UploadScreen: React.FC = () => {
     setIsUploading(false);
     setPickedAsset('')
     setCaption('');
+    // @ts-ignore
+    captionInputRef.current.clear();
     navigate(Routes.PostViewScreen, { postId });
   };
 
@@ -51,6 +55,7 @@ const UploadScreen: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
         <UploadBanner pickedAsset={pickedAsset} onAsset={setPickedAsset} />
         <FormInput
+          ref={captionInputRef}
           multiline
           label='Caption'
           placeholder='Write a caption...'
