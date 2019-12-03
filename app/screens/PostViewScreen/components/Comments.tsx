@@ -61,7 +61,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     color: theme.text01
   },
   listStyle: {
-    marginBottom: 20
+    marginBottom: 10
   },
   placeholderStyle: {
     ...FontSizes.Body

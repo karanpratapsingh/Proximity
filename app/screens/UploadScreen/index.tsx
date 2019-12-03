@@ -84,7 +84,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingHorizontal: 20
   },
   uploadButton: {
-    marginVertical: 20
+    marginVertical: 20,
+    marginBottom: 40
   }
 });
 

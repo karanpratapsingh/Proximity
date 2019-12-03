@@ -83,10 +83,11 @@ const ConversationScreen = () => {
         renderBubble={CustomBubble}
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
-        onSend={updatedMessages => onSend(updatedMessages)}
+        onSend={onSend}
+        // onPressAvatar
         user={{ _id: user.id }}
         keyboardShouldPersistTaps={null}
-        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
+        listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }

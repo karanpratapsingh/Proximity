@@ -34,8 +34,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginBottom: 20
   },
   avatarImage: {
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     borderRadius: 50,
     backgroundColor: theme.placeholder
   },
@@ -58,7 +58,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Caption,
     color: theme.text02,
-    paddingTop: 5
+    paddingTop: 2
   }
 });
 

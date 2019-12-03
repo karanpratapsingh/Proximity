@@ -40,6 +40,7 @@ const ConnectionsPlaceholder: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
     paddingBottom: 0
   },
   cardContainer: {

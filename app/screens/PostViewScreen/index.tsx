@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
@@ -66,14 +66,16 @@ const PostViewScreen: React.FC = () => {
     );
   }
 
+  const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;
+
   return (
-    <View style={styles(theme).container}>
+    <KeyboardAvoidingView behavior={keyboardBehavior} keyboardVerticalOffset={20} style={styles(theme).container}>
       <GoBackHeader iconSize={IconSizes.x7} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
         {content}
       </ScrollView>
       <CommentInput postId={postId} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
