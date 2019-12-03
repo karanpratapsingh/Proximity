@@ -2,8 +2,8 @@ import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks'
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes } from '../../constants';
+import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
@@ -21,6 +21,7 @@ const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
+  const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
@@ -66,6 +67,11 @@ const ConversationScreen = () => {
     });
   };
 
+  const onPressAvatar = () => {
+    const [participant] = chatQueryData.chat.participants.filter(({ id }) => id !== user.id);
+    navigate(Routes.ProfileViewScreen, { userId: participant.id });
+  };
+
   let content = <ConversationScreenPlaceholder />
 
   if (chatQueryCalled && !chatQueryLoading && !chatQueryError) {
@@ -84,7 +90,7 @@ const ConversationScreen = () => {
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
         onSend={onSend}
-        // onPressAvatar
+        onPressAvatar={onPressAvatar}
         user={{ _id: user.id }}
         keyboardShouldPersistTaps={null}
         listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
