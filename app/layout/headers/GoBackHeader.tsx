@@ -18,6 +18,7 @@ const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, iconSize }) => {
   const { theme } = useContext(AppContext);
   const { goBack } = useNavigation();
   const navigateBack = () => goBack();
+
   return (
     <View style={styles(theme).container}>
       <Entypo onPress={navigateBack} name='chevron-thin-left' size={iconSize} color={theme.text01} />
@@ -30,8 +31,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 10,
-    paddingHorizontal: 10
+    padding: 10
   },
   title: {
     ...FontWeights.Bold,
