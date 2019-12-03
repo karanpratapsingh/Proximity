@@ -73,7 +73,7 @@ const ProfileScreen: React.FC = () => {
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
           items={posts}
-          ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={20} />}
+          ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={30} />}
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}

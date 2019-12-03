@@ -1,7 +1,7 @@
 import ImagePicker from "react-native-image-crop-picker";
 import { ThemeStatic } from "../theme";
 
-export const createAsyncDelay = duration => {
+export const createAsyncDelay = (duration: number) => {
 
   return new Promise((resolve, _) => setTimeout(() => { resolve(); }, duration));
 };
