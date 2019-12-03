@@ -1,16 +1,16 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes } from '../../constants';
+import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types';
-import { transformMessages } from '../../utils/shared';
+import { transformMessages, filterChatParticipants } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
@@ -21,6 +21,7 @@ const ConversationScreen = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');
+  const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
@@ -66,6 +67,11 @@ const ConversationScreen = () => {
     });
   };
 
+  const onPressAvatar = () => {
+    const [participant] = filterChatParticipants(user.id, chatQueryData.chat.participants);
+    navigate(Routes.ProfileViewScreen, { userId: participant.id });
+  };
+
   let content = <ConversationScreenPlaceholder />
 
   if (chatQueryCalled && !chatQueryLoading && !chatQueryError) {
@@ -74,6 +80,7 @@ const ConversationScreen = () => {
     content = (
       <GiftedChat
         isAnimated
+        alwaysShowSend
         inverted={false}
         maxInputLength={200}
         messages={transform}
@@ -83,10 +90,12 @@ const ConversationScreen = () => {
         renderBubble={CustomBubble}
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
-        onSend={updatedMessages => onSend(updatedMessages)}
+        onSend={onSend}
+        onPressAvatar={onPressAvatar}
         user={{ _id: user.id }}
+        bottomOffset={-10}
         keyboardShouldPersistTaps={null}
-        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
+        listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }

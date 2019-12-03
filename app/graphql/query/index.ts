@@ -82,7 +82,10 @@ export const QUERY_CHATS = gql`
 export const QUERY_CHAT = gql`
   query Chat($chatId: String!) {
     chat(chatId: $chatId) {
-      messages(last: 20) {
+      participants {
+        id
+      }
+      messages(last: 40) {
         id
         body
         createdAt
@@ -134,6 +137,14 @@ export const QUERY_POST = gql`
         id
         handle
         avatar
+      }
+      comments {
+        body
+        author {
+          avatar
+          handle
+        }
+        createdAt
       }
       uri
       likes

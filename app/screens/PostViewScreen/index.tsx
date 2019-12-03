@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
@@ -9,38 +9,27 @@ import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layo
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types';
 import { parseTimeElapsed } from '../../utils/shared';
+import CommentInput from './components/CommentInput';
+import Comments from './components/Comments';
 
 const { FontWeights, FontSizes } = Typography;
 
-const CommentInput = () => {
+const PostViewScreen: React.FC = () => {
+
   const { user, theme } = useContext(AppContext);
-
-  return (
-    <View style={styles().commentInput}>
-      <NativeImage
-        uri={user.avatar}
-        style={styles(theme).commentAvatarImage}
-      />
-      <TextInput
-        autoCorrect={false}
-        style={styles(theme).commentTextInput}
-        value=''
-        placeholder={`Add a comment as ${user.handle}...`}
-        placeholderTextColor={theme.text02}
-        onChangeText={text => null} />
-    </View>
-  );
-};
-
-const PostViewScreen = () => {
-
-  const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
-  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, { variables: { postId } });
+  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, {
+    variables: { postId },
+    pollInterval: 2000
+  });
 
-  const navigateToProfile = userId => navigate(Routes.ProfileViewScreen, { userId });
+  const navigateToProfile = userId => {
+
+    if (userId === user.id) return;
+    navigate(Routes.ProfileViewScreen, { userId });
+  };
 
   let content = <PostViewScreenPlaceholder />;
 
@@ -52,6 +41,7 @@ const PostViewScreen = () => {
           avatar,
           handle
         },
+        comments,
         uri,
         likes,
         caption,
@@ -62,33 +52,30 @@ const PostViewScreen = () => {
     content = (
       <>
         <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
-          <NativeImage
-            uri={avatar}
-            style={styles(theme).avatarImage}
-          />
+          <NativeImage uri={avatar} style={styles(theme).avatarImage} />
           <View>
             <Text style={styles(theme).handleText}>{handle}</Text>
-            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)} ago</Text>
+            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)}</Text>
           </View>
         </TouchableOpacity>
-        <NativeImage
-          uri={uri}
-          style={styles(theme).postImage}
-        />
+        <NativeImage uri={uri} style={styles(theme).postImage} />
         <Text style={styles(theme).likesText}>{likes} likes</Text>
         <Text style={styles(theme).captionText}>{caption}</Text>
+        <Comments comments={comments} />
       </>
     );
   }
 
+  const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;
+
   return (
-    <View style={styles(theme).container}>
+    <KeyboardAvoidingView behavior={keyboardBehavior} keyboardVerticalOffset={20} style={styles(theme).container}>
       <GoBackHeader iconSize={IconSizes.x7} />
-      <ScrollView style={styles().content}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
         {content}
       </ScrollView>
-      <CommentInput />
-    </View>
+      <CommentInput postId={postId} />
+    </KeyboardAvoidingView>
   );
 };
 
@@ -143,33 +130,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     color: theme.text01,
     marginTop: 5,
     marginBottom: 20
-  },
-  commentInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderTopColor: 'rgba(0, 0, 0, 0.1)',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    backgroundColor: theme.base
-  },
-  commentAvatarImage: {
-    height: 40,
-    width: 40,
-    backgroundColor: theme.placeholder,
-    marginRight: 10,
-    borderRadius: 50
-  },
-  commentTextInput: {
-    flex: 1,
-    ...FontWeights.Light,
-    ...FontSizes.Body,
-    paddingVertical: Platform.select({ ios: 8, android: 6 }),
-    paddingHorizontal: 20,
-    backgroundColor: theme.placeholder,
-    color: theme.text01,
-    borderRadius: 20,
-    marginVertical: 5
   }
 });
 

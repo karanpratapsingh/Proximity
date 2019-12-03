@@ -41,7 +41,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
         />
         <View>
           <Text style={styles.handleText}>{author.handle}</Text>
-          <Text style={styles.timeText}>{parseTimeElapsed(time)} ago</Text>
+          <Text style={styles.timeText}>{parseTimeElapsed(time)}</Text>
         </View>
       </View>
 
