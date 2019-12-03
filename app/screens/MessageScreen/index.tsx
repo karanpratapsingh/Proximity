@@ -9,6 +9,7 @@ import { QUERY_CHATS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
 import { ThemeColors } from '../../types';
 import MessageCard from './components/MessageCard';
+import { filterChatParticipants } from '../../utils/shared';
 
 const MessageScreen: React.FC = () => {
 
@@ -28,7 +29,7 @@ const MessageScreen: React.FC = () => {
   const renderItem = ({ item }) => {
 
     const { id, participants, messages } = item;
-    const [participant] = participants.filter(({ id }) => user.id !== id);
+    const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
     return (
@@ -46,12 +47,21 @@ const MessageScreen: React.FC = () => {
 
   if (called && !loading && !error) {
     const { chats } = data;
+    const filteredChats = chats.filter(({ participants }) => {
+      const [participant] = filterChatParticipants(user.id, participants);
+      if (chatSearch === '') return true;
+      return participant
+        .handle
+        .toLowerCase()
+        .includes(chatSearch.toLocaleLowerCase());
+    });
+
     content = (
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={chats}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyMessages} topSpacing={responsiveHeight(16)} placeholder='No messages yet' />}
+        items={filteredChats}
+        ListEmptyComponent={() => <SvgBannerType Svg={EmptyMessages} topSpacing={responsiveHeight(16)} placeholder='No messages' />}
         style={styles().messagesList}
         spacing={20}
         renderItem={renderItem}

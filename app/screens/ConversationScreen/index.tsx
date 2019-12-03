@@ -10,7 +10,7 @@ import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types';
-import { transformMessages } from '../../utils/shared';
+import { transformMessages, filterChatParticipants } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
@@ -68,7 +68,7 @@ const ConversationScreen = () => {
   };
 
   const onPressAvatar = () => {
-    const [participant] = chatQueryData.chat.participants.filter(({ id }) => id !== user.id);
+    const [participant] = filterChatParticipants(user.id, chatQueryData.chat.participants);
     navigate(Routes.ProfileViewScreen, { userId: participant.id });
   };
 

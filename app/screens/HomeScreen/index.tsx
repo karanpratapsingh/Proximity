@@ -109,8 +109,8 @@ const HomeScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={[dummyPost]}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='your feed is empty' />}
+        items={[]}
+        ListEmptyComponent={() => <SvgBannerType Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='Your feed is empty' />}
         style={styles().postList}
         spacing={20}
         renderItem={renderItem}
