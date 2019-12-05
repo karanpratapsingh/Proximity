@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Placeholder, PlaceholderLine } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
+import { PostDimensions } from '../../constants';
 
 const PostCardPlaceholder = () => {
   const { theme } = useContext(AppContext);
@@ -17,7 +18,7 @@ const PostCardPlaceholder = () => {
               noMargin
               color={theme.placeholder}
               key={index}
-              height={340}
+              height={PostDimensions.Large.height}
               style={styles.card}
             />
           )}

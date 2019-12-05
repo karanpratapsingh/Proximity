@@ -14,6 +14,7 @@ interface PostThumbnailProps {
     width: number
   }
 };
+
 const PostThumbnail: React.FC<PostThumbnailProps> = ({ id, uri, dimensions }) => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();

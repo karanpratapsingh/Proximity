@@ -1,13 +1,14 @@
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { AppContext } from '../../context';
-import { QUERY_SEARCH_USERS } from '../../graphql/query';
-import { ExploreScreenPlaceholder, Header, AnimatedSearchBar, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
-import UserSearchResults from './components/UserSearchResults';
-import SearchUsersBanner from '../../../assets/svg/search-users.svg';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
+import SearchUsersBanner from '../../../assets/svg/search-users.svg';
+import { AppContext } from '../../context';
+import { QUERY_POSTS, QUERY_SEARCH_USERS } from '../../graphql/query';
+import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
+import { ThemeColors } from '../../types';
+import ExploreGrid from './components/ExploreGrid';
+import UserSearchResults from './components/UserSearchResults';
 
 const ExploreScreen: React.FC = () => {
 
@@ -21,6 +22,13 @@ const ExploreScreen: React.FC = () => {
     called: querySearchUsersCalled,
     error: querySearchUsersError
   }] = useLazyQuery(QUERY_SEARCH_USERS);
+  const {
+    data: postsData,
+    loading: postsLoading,
+    error: postsError
+  } = useQuery(QUERY_POSTS, {
+    pollInterval: 5 * 60 * 1000
+  });
 
   useEffect(() => {
     if (userSearch !== '') querySearchUsers({ variables: { name: userSearch } });
@@ -34,6 +42,11 @@ const ExploreScreen: React.FC = () => {
   const onBlur = () => setIsSearchFocused(false);
 
   let content = <ExploreScreenPlaceholder />;
+
+  if (!postsLoading && !postsError) {
+    const { posts } = postsData;
+    content = <ExploreGrid posts={posts} />;
+  }
 
   if (isSearchFocused) {
     let subContent;

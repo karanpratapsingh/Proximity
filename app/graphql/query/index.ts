@@ -155,3 +155,12 @@ export const QUERY_POST = gql`
     }
   }
 `;
+
+export const QUERY_POSTS = gql`
+  query Posts {
+    posts {
+      id
+      uri
+    }
+  }
+`;

@@ -27,7 +27,7 @@ const ExploreScreenPlaceholder: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 5,
     paddingHorizontal: 20
   },
   postContainer: {
