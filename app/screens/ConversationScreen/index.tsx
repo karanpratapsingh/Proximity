@@ -79,7 +79,6 @@ const ConversationScreen = () => {
 
     content = (
       <GiftedChat
-        isAnimated
         alwaysShowSend
         inverted={false}
         maxInputLength={200}
@@ -95,7 +94,7 @@ const ConversationScreen = () => {
         user={{ _id: user.id }}
         bottomOffset={-10}
         keyboardShouldPersistTaps={null}
-        listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
+        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }
