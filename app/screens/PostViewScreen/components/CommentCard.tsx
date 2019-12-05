@@ -1,20 +1,28 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AppContext } from '../../../context';
 import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils/shared';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
 
-const CommentCard = ({ avatar, handle, body, time }) => {
+const CommentCard = ({ userId, avatar, handle, body, time }) => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
+  const { navigate } = useNavigation();
   const timeElapsed = parseTimeElapsed(time);
 
+  const navigateToProfile = () => {
+    if (userId === user.id) return;
+    navigate(Routes.ProfileViewScreen, { userId });
+  };
+
   return (
-    <View style={styles().container}>
+    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
       <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).commentText}>
@@ -23,7 +31,7 @@ const CommentCard = ({ avatar, handle, body, time }) => {
         </Text>
         <Text style={styles(theme).timeText}>{timeElapsed}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

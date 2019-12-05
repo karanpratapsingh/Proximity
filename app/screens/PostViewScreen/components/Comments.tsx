@@ -14,6 +14,7 @@ const Comments = ({ comments }) => {
   const renderItem = ({ item }) => {
     const {
       author: {
+        id: userId,
         avatar,
         handle
       },
@@ -23,6 +24,7 @@ const Comments = ({ comments }) => {
 
     return (
       <CommentCard
+        userId={userId}
         avatar={avatar}
         handle={handle}
         body={body}

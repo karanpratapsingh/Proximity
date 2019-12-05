@@ -53,6 +53,7 @@ export const QUERY_NOTIFICATION = gql`
   query Notifications($userId: String!) {
     notifications(userId: $userId) {
       actionUser {
+        id
         avatar
         handle
       }
@@ -141,6 +142,7 @@ export const QUERY_POST = gql`
       comments {
         body
         author {
+          id
           avatar
           handle
         }

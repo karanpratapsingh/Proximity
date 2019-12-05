@@ -23,6 +23,7 @@ const NotificationScreen: React.FC = () => {
 
     return (
       <NotificationCard
+        userId={actionUser.id}
         avatar={actionUser.avatar}
         handle={actionUser.handle}
         type={type}
