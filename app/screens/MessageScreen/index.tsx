@@ -10,6 +10,7 @@ import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../.
 import { ThemeColors } from '../../types';
 import MessageCard from './components/MessageCard';
 import { filterChatParticipants } from '../../utils/shared';
+import { PollIntervals } from '../../constants';
 
 const MessageScreen: React.FC = () => {
 
@@ -18,7 +19,7 @@ const MessageScreen: React.FC = () => {
   const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
     variables: { userId: user.id },
     fetchPolicy: 'network-only',
-    pollInterval: 4000
+    pollInterval: PollIntervals.messages
   });
   const [chatSearch, setChatSearch] = useState('');
 

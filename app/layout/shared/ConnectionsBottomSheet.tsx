@@ -6,7 +6,7 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import { FlatGrid } from 'react-native-super-grid';
 import { BottomSheetHeader, ConnectionsPlaceholder, SvgBannerType } from '..';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
-import { ConnectionsType } from '../../constants';
+import { ConnectionsType, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
 import { ThemeColors } from '../../types';
@@ -26,7 +26,7 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
 
   const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
     variables: { userId, type },
-    pollInterval: 2000
+    pollInterval: PollIntervals.connections
   });
 
   let content = <ConnectionsPlaceholder />;

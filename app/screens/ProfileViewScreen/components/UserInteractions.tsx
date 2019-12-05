@@ -2,7 +2,7 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { FollowInteractionType, IconSizes, Routes } from '../../../constants';
+import { FollowInteractionType, IconSizes, Routes, PollIntervals } from '../../../constants';
 import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
 import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
@@ -19,7 +19,7 @@ const UserInteractions = ({ targetId, handle }) => {
   const { user, theme } = useContext(AppContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
     variables: { userId: user.id, targetId },
-    pollInterval: 500
+    pollInterval: PollIntervals.interaction
   });
 
   const [chatExistsQuery] = useLazyQuery(QUERY_CHAT_EXISTS);

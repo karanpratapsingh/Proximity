@@ -9,6 +9,7 @@ import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceho
 import { ThemeColors } from '../../types';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
+import { PollIntervals } from '../../constants';
 
 const ExploreScreen: React.FC = () => {
 
@@ -27,7 +28,7 @@ const ExploreScreen: React.FC = () => {
     loading: postsLoading,
     error: postsError
   } = useQuery(QUERY_POSTS, {
-    pollInterval: 5 * 60 * 1000
+    pollInterval: PollIntervals.explore
   });
 
   useEffect(() => {

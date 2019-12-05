@@ -3,7 +3,7 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
+import { IconSizes, PostDimensions, ConnectionsType, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
@@ -16,7 +16,7 @@ const ProfileViewScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId },
-    pollInterval: 1000
+    pollInterval: PollIntervals.profileView
   });
 
   const followingBottomSheetRef = useRef();

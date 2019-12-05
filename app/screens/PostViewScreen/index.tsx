@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, Routes } from '../../constants';
+import { IconSizes, PostDimensions, Routes, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_POST } from '../../graphql/query';
 import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layout';
@@ -22,7 +22,7 @@ const PostViewScreen: React.FC = () => {
 
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, {
     variables: { postId },
-    pollInterval: 2000
+    pollInterval: PollIntervals.postView
   });
 
   const navigateToProfile = userId => {

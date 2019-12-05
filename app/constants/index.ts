@@ -59,3 +59,14 @@ export const HandleAvailableColor = {
   true: '#4caf50',
   false: '#EF5350'
 };
+
+export const PollIntervals = {
+  messages: 4000,
+  explore: 5 * 60 * 1000,
+  profile: 1000,
+  postView: 2000,
+  profileView: 1000,
+  connections: 2000,
+  interaction: 1000,
+  notification: 2000,
+};
