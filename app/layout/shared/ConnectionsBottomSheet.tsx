@@ -14,11 +14,13 @@ import UserCard from './UserCard';
 
 interface ConnectionsBottomSheetProps {
   ref: React.Ref<any>,
+  viewMode?: boolean,
   userId: string,
+  handle?: string,
   type: string
 };
 
-const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ userId, type }, ref) => {
+const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ viewMode, userId, handle, type }, ref) => {
 
   const { theme } = useContext(AppContext);
 
@@ -33,10 +35,18 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
 
   if (type === ConnectionsType.FOLLOWING) {
     heading = 'Following';
-    subHeading = 'People you are following'
+    if (viewMode) {
+      subHeading = `People ${handle} is following`;
+    } else {
+      subHeading = 'People you are following';
+    }
   } else if (type === ConnectionsType.FOLLOWERS) {
     heading = 'Followers';
-    subHeading = 'People who are following you'
+    if (viewMode) {
+      subHeading = `People who are following ${handle}`;
+    } else {
+      subHeading = 'People who are following you';
+    }
   }
 
   const ListEmptyComponent = () => (
