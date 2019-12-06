@@ -25,6 +25,11 @@ export const FollowInteractionType = {
   UNFOLLOW: 'UNFOLLOW'
 };
 
+export const LikeActionType = {
+  LIKE: 'LIKE',
+  UNLIKE: 'UNLIKE'
+};
+
 export const ConnectionsType = {
   FOLLOWING: 'FOLLOWING',
   FOLLOWERS: 'FOLLOWERS'
