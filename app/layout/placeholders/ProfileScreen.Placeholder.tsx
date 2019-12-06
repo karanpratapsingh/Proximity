@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
+import { PostDimensions } from '../../constants';
 
 interface ProfileScreenPlaceholderProps {
   viewMode?: boolean
@@ -80,15 +81,15 @@ const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderProps> = ({ vie
                 noMargin
                 color={theme.placeholder}
                 style={styles.postPlaceholder}
-                width={48.5}
-                height={150}
+                width={48}
+                height={PostDimensions.Medium.height}
               />
               <PlaceholderLine
                 noMargin
                 color={theme.placeholder}
                 style={styles.postPlaceholder}
-                width={48.5}
-                height={150}
+                width={48}
+                height={PostDimensions.Medium.height}
               />
             </View>
           )}
