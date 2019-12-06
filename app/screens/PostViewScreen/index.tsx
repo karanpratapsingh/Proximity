@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, PostDimensions, Routes, PollIntervals } from '../../constants';
@@ -20,6 +20,8 @@ const PostViewScreen: React.FC = () => {
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
+  const [lastTap, setLastTap] = useState(Date.now());
+
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, {
     variables: { postId },
     pollInterval: PollIntervals.postView
@@ -29,6 +31,17 @@ const PostViewScreen: React.FC = () => {
 
     if (userId === user.id) return;
     navigate(Routes.ProfileViewScreen, { userId });
+  };
+
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    const DOUBLE_PRESS_DELAY = 500;
+    if (now - lastTap < DOUBLE_PRESS_DELAY) {
+      // if liked then unlike
+      // if not like then like
+    } else {
+      setLastTap(now);
+    }
   };
 
   let content = <PostViewScreenPlaceholder />;
@@ -58,7 +71,9 @@ const PostViewScreen: React.FC = () => {
             <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)}</Text>
           </View>
         </TouchableOpacity>
-        <NativeImage uri={uri} style={styles(theme).postImage} />
+        <TouchableOpacity onPress={handleDoubleTap} activeOpacity={1}>
+          <NativeImage uri={uri} style={styles(theme).postImage} />
+        </TouchableOpacity>
         <Text style={styles(theme).likesText}>{likes.length} likes</Text>
         <Text style={styles(theme).captionText}>{caption}</Text>
         <Comments comments={comments} />
