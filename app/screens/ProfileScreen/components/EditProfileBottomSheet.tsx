@@ -80,6 +80,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
     if (editableAbout.trim().length > 200) return;
     if (!isHandleAvailable) return;
     if (!editableHandle) return;
+    if (editableHandle.split(' ').length > 1) return;
 
     setIsUploading(true);
 

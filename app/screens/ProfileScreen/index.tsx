@@ -72,7 +72,7 @@ const ProfileScreen: React.FC = () => {
         <FlatGrid
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
-          items={[...posts, ...posts, ...posts, ...posts]}
+          items={posts}
           ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={30} />}
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}
