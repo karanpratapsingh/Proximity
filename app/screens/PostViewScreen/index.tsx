@@ -59,7 +59,7 @@ const PostViewScreen: React.FC = () => {
           </View>
         </TouchableOpacity>
         <NativeImage uri={uri} style={styles(theme).postImage} />
-        <Text style={styles(theme).likesText}>{likes} likes</Text>
+        <Text style={styles(theme).likesText}>{likes.length} likes</Text>
         <Text style={styles(theme).captionText}>{caption}</Text>
         <Comments comments={comments} />
       </>

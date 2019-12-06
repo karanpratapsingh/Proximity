@@ -57,7 +57,7 @@ const HomeScreen: React.FC = () => {
       "avatar": "https://animals.net/wp-content/uploads/2018/07/Pembroke-Welsh-Corgi-7-650x425.jpg",
       "handle": "@doggo"
     },
-    "likes": 12
+    "likes": []
   };
 
   useEffect(() => {

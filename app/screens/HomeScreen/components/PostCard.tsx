@@ -17,7 +17,7 @@ interface PostCardProps {
   },
   time: string,
   uri: string,
-  likes: number,
+  likes: string[],
   caption: string
 };
 
@@ -46,7 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
       </View>
 
       <View style={styles.lowerContent}>
-        <Text style={styles.likesText}>{likes} likes</Text>
+        <Text style={styles.likesText}>{likes.length} likes</Text>
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.captionText}>{caption}</Text>
       </View>
     </TouchableOpacity>
