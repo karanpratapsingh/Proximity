@@ -15,9 +15,9 @@ export const Routes = {
 };
 
 export const NotificationText = {
-  'FOLLOW': 'has started following you!',
-  'COMMENT': 'commented on your post!!',
-  'LIKE': 'liked your post!',
+  'FOLLOW': 'has started following you',
+  'COMMENT': 'commented on your post',
+  'LIKE': 'liked your post',
 };
 
 export const FollowInteractionType = {

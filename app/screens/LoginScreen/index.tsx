@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
@@ -147,7 +147,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     width: responsiveWidth(90),
     alignSelf: 'center',
     marginBottom: 10,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: Platform.select({ ios: StyleSheet.hairlineWidth, android: 0.8 }),
     borderColor: theme.accent,
     backgroundColor: theme.base
   },

@@ -26,7 +26,7 @@ const UploadScreen: React.FC = () => {
 
   const uploadImage = async () => {
     if (!pickedAsset) return;
-    if (caption.length < 20) return; //? TODO: show alert or success
+    if (caption.length > 200) return; //? TODO: show alert or success
 
     setIsUploading(true);
     const { downloadURL: uri } = await uploadToStorage('posts', pickedAsset);
