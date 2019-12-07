@@ -13,7 +13,12 @@ import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-const UserInteractions = ({ targetId, handle }) => {
+interface UserInteractionsProps {
+  targetId: string,
+  handle: string
+};
+
+const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, handle }) => {
 
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);

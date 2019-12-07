@@ -12,28 +12,6 @@ import MessageCard from './components/MessageCard';
 import { filterChatParticipants } from '../../utils/shared';
 import { PollIntervals } from '../../constants';
 
-type Participant = {
-  id: string,
-  avatar: string,
-  handle: string,
-};
-
-type Message = {
-  id: string,
-  body: string,
-  seen: boolean,
-  author: {
-    id: string
-  },
-  createdAt: string
-};
-
-type Chat = {
-  id: string,
-  participants: Participant[],
-  messages: Message[]
-};
-
 const MessageScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
@@ -49,7 +27,7 @@ const MessageScreen: React.FC = () => {
     queryChats();
   }, []);
 
-  const renderItem = ({ item }: { item: Chat }) => {
+  const renderItem = ({ item }) => {
 
     const { id: chatId, participants, messages } = item;
     const [participant] = filterChatParticipants(user.id, participants);

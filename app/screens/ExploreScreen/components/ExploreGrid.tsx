@@ -3,19 +3,15 @@ import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
-
-type Post = {
-  id: string,
-  uri: string
-};
+import { ExplorePost } from '../../../types/screens';
 
 interface ExploreGridProps {
-  posts: Post[]
+  posts: ExplorePost[]
 };
 
 const ExploreGrid: React.FC<ExploreGridProps> = ({ posts }) => {
 
-  const renderItem = ({ item }: { item: Post }) => {
+  const renderItem = ({ item }) => {
     const { id: postId, uri } = item;
 
     return <ExplorePostCard

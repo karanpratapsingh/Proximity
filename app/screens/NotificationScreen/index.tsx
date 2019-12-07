@@ -11,19 +11,6 @@ import { ThemeColors } from '../../types/theme';
 import NotificationCard from './components/NotificationCard';
 import { PollIntervals } from '../../constants';
 
-type ActionUser = {
-  id: string,
-  avatar: string,
-  handle: string
-};
-
-type Notification = {
-  actionUser: ActionUser,
-  type: any, // FIXME:
-  createdAt: string
-};
-
-
 const NotificationScreen: React.FC = () => {
   const { user, theme } = useContext(AppContext);
 
@@ -32,7 +19,7 @@ const NotificationScreen: React.FC = () => {
     pollInterval: PollIntervals.notification
   });
 
-  const renderItem = ({ item }: { item: Notification }) => {
+  const renderItem = ({ item }) => {
     const { actionUser, type, createdAt } = item;
 
     return (

@@ -6,13 +6,15 @@ import { AppContext } from '../../context';
 import { ThemeColors } from '../../types/theme';
 import NativeImage from '../misc/NativeImage';
 
+type Dimensions = { // FIXME: to constsnats
+  height: number,
+  width: number
+};
+
 interface PostThumbnailProps {
   id: string,
   uri: string,
-  dimensions: {
-    height: number,
-    width: number
-  }
+  dimensions: Dimensions
 };
 
 const PostThumbnail: React.FC<PostThumbnailProps> = ({ id, uri, dimensions }) => {

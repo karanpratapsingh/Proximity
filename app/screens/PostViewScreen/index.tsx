@@ -17,26 +17,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const { FontWeights, FontSizes } = Typography;
 
-// FIXME: MOVE TO Types
-// author {
-//   id
-//   handle
-//   avatar
-// }
-// comments {
-//   body
-//   author {
-//     id
-//     avatar
-//     handle
-//   }
-//   createdAt
-// }
-// uri
-// likes
-// caption
-// createdAt
-
 const PostViewScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);

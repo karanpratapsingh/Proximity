@@ -5,20 +5,9 @@ import { ListEmptyComponent } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import CommentCard from './CommentCard';
+import { Comment } from '../../../types/screens';
 
 const { FontWeights, FontSizes } = Typography;
-
-type Author = {
-  id: string,
-  avatar: string,
-  handle: string
-};
-
-type Comment = {
-  author: Author,
-  body: string,
-  createdAt: string
-};
 
 interface CommentsProps {
   comments: Comment[]
@@ -27,7 +16,7 @@ interface CommentsProps {
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
   const { theme } = useContext(AppContext);
 
-  const renderItem = ({ item }: { item: Comment }) => {
+  const renderItem = ({ item }) => {
     const {
       author: {
         id: userId,
