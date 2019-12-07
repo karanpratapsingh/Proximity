@@ -3,7 +3,7 @@ import { StyleSheet, Text, FlatList } from 'react-native';
 import { AppContext } from '../../../context';
 import { ListEmptyComponent } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import CommentCard from './CommentCard';
 
 const { FontWeights, FontSizes } = Typography;

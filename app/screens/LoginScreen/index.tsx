@@ -14,7 +14,7 @@ import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
 import { Button, LoadingIndicator } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { handleLoginError } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
 

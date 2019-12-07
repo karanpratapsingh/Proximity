@@ -7,7 +7,7 @@ import { AppContext } from '../../context';
 import { QUERY_POST } from '../../graphql/query';
 import { GoBackHeader, NativeImage, PostViewScreenPlaceholder, IconButton } from '../../layout';
 import { Typography, ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';

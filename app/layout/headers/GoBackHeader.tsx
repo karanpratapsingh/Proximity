@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Typography } from '../../theme';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from 'react-navigation-hooks';
 

@@ -9,7 +9,7 @@ import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
 import { ConnectionsType, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import UserCard from './UserCard';
 
 interface ConnectionsBottomSheetProps {

@@ -7,7 +7,7 @@ import { AppContext } from '../../../context';
 import { MUTATION_ADD_COMMENT } from '../../../graphql/mutation';
 import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

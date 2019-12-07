@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import TabIcon from './TabIcon';
 import { TabBarRoutes } from '../Routes';
 import { AppContext } from '../../context';

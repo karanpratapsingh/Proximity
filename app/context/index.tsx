@@ -1,6 +1,6 @@
 import React, { useState, createContext, } from 'react';
 import { Theme } from '../theme';
-import { ThemeColors } from '../types';
+import { ThemeColors } from '../types/theme';
 import { saveThemeType } from '../utils/storage';
 
 type UserType = {

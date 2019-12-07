@@ -10,7 +10,7 @@ import { IconSizes, Routes, ThemeType } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { signOut } from '../../../utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;

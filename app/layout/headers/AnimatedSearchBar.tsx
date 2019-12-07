@@ -3,7 +3,7 @@ import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput } fro
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

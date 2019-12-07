@@ -7,7 +7,7 @@ import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
 import { AppContext } from '../../context';
 import { QUERY_NOTIFICATION } from '../../graphql/query';
 import { Header, NotificationScreenPlaceholder, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import NotificationCard from './components/NotificationCard';
 import { PollIntervals } from '../../constants';
 

@@ -3,7 +3,7 @@ import { StyleSheet, Platform } from 'react-native';
 import { Composer } from 'react-native-gifted-chat';
 import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

@@ -8,7 +8,7 @@ import { AppContext } from '../../context';
 import { MUTATION_CREATE_POST } from '../../graphql/mutation';
 import { Button, FormInput, Header } from '../../layout';
 import { ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { uploadToStorage } from '../../utils/firebase';
 import UploadBanner from './components/UploadBanner';
 

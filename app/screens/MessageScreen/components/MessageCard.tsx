@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';

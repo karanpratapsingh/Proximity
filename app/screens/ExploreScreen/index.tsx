@@ -6,7 +6,7 @@ import SearchUsersBanner from '../../../assets/svg/search-users.svg';
 import { AppContext } from '../../context';
 import { QUERY_POSTS, QUERY_SEARCH_USERS } from '../../graphql/query';
 import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
 import { PollIntervals } from '../../constants';

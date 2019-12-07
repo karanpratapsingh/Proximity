@@ -3,7 +3,7 @@
  * This contains all the color config for the application
  */
 
-import { ThemeType } from '../types';
+import { ThemeType } from '../types/theme';
 
 export const ThemeStatic = {
   accent: '#846BE2',

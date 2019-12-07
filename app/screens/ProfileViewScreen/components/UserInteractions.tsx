@@ -9,7 +9,7 @@ import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../..
 import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
 import { LoadingIndicator } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

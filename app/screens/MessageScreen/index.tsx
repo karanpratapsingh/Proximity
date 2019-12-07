@@ -7,7 +7,7 @@ import EmptyMessages from '../../../assets/svg/empty-messages.svg';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import MessageCard from './components/MessageCard';
 import { filterChatParticipants } from '../../utils/shared';
 import { PollIntervals } from '../../constants';

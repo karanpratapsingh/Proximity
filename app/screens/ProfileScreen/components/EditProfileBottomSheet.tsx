@@ -9,7 +9,7 @@ import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
 import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
 import { ThemeStatic } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { getImageFromLibrary } from '../../../utils/shared';
 import { uploadToStorage } from '../../../utils/firebase';
 

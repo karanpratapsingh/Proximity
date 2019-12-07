@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import NativeImage from '../misc/NativeImage';
 
 interface PostThumbnailProps {

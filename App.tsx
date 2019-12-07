@@ -7,7 +7,7 @@ import { ThemeType } from './app/constants';
 import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
-import { ThemeColors } from './app/types';
+import { ThemeColors } from './app/types/theme';
 import { loadThemeType } from './app/utils/storage';
 
 GoogleSignin.configure();

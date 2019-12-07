@@ -9,7 +9,7 @@ import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../grap
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { filterChatParticipants, transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';

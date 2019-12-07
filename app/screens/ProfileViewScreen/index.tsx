@@ -7,7 +7,7 @@ import { IconSizes, PostDimensions, ConnectionsType, PollIntervals } from '../..
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import UserInteractions from './components/UserInteractions';
 
 const ProfileViewScreen: React.FC = () => {

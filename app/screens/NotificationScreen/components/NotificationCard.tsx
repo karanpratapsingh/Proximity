@@ -4,7 +4,7 @@ import { NotificationText, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
 
