@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import SplashScreen from 'react-native-splash-screen';
@@ -17,6 +17,7 @@ import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { handleLoginError } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
+import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet'
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -26,6 +27,8 @@ const LoginScreen: React.FC = () => {
   const [createUser] = useMutation(MUTATION_CREATE_USER);
   const [initializing, setInitializing] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  const termsAndConditionsBottomSheetRef = useRef();
 
   const navigateToApp = async (token: string) => {
     const { data: { signIn: { id, avatar, handle } } } = await client
@@ -99,7 +102,8 @@ const LoginScreen: React.FC = () => {
               loading={loading}
             />
             <TouchableOpacity
-              onPress={() => null}
+              // @ts-ignore
+              onPress={termsAndConditionsBottomSheetRef.current.open}
               style={styles(theme).terms}>
               <Text style={styles(theme).termsText}>Terms and conditions</Text>
             </TouchableOpacity>
@@ -111,6 +115,7 @@ const LoginScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       {content}
+      <TermsAndConditionsBottomSheet ref={termsAndConditionsBottomSheetRef} />
     </View>
   );
 };
