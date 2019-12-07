@@ -64,3 +64,6 @@ buck-out/
 
 # Config
 /ios/Config.xcconfig
+
+# App
+/app/config/index.ts
