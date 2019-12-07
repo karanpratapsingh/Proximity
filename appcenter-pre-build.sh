@@ -11,3 +11,5 @@ if [[ ! -z "$GOOGLE_SERVICES_PLIST" ]]; then
     echo "$XCCONFIG" | base64 --decode > ios/Config.xcconfig
 fi
 
+mkdir app/config
+echo "$APP_CONFIG" | base64 --decode > app/config/index.ts
