@@ -1,8 +1,8 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
@@ -10,7 +10,7 @@ import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types';
-import { transformMessages, filterChatParticipants } from '../../utils/shared';
+import { filterChatParticipants, transformMessages } from '../../utils/shared';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
@@ -33,6 +33,10 @@ const ConversationScreen = () => {
   });
   const [addMessage] = useMutation(MUTATION_ADD_MESSAGE);
   const [connectChat] = useMutation(MUTATION_CONNECT_CHAT_TO_USERS);
+
+  useEffect(() => {
+    // set seen
+  }, []);
 
   useEffect(() => {
     if (!chatSubscriptionLoading) {

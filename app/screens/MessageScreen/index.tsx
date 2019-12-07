@@ -38,7 +38,9 @@ const MessageScreen: React.FC = () => {
         chatId={id}
         avatar={participant.avatar}
         handle={participant.handle}
-        lastMessage={lastMessage.body}
+        authorId={lastMessage.author.id}
+        messageId={lastMessage.id}
+        messageBody={lastMessage.body}
         time={lastMessage.createdAt}
       />
     );

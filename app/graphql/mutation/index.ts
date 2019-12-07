@@ -110,3 +110,11 @@ export const MUTATION_LIKE_INTERACTION = gql`
     }
   }
 `;
+
+export const MUTATION_SEEN_MESSAGE = gql`
+  mutation MessageSeen($messageId: String!) {
+    messageSeen(messageId: $messageId) {
+      id
+    }
+  }
+`;

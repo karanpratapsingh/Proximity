@@ -73,7 +73,11 @@ export const QUERY_CHATS = gql`
         handle
       }
       messages(last: 1) {
+        id
         body
+        author {
+          id
+        }
         createdAt
       }
     }

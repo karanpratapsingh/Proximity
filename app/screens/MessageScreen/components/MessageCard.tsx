@@ -6,17 +6,27 @@ import { ThemeColors } from '../../../types';
 import { parseTimeElapsed } from '../../../utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
 
 const { FontWeights, FontSizes } = Typography;
 
-const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
+const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody, time }) => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
+  const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
+
+  const setSeenAndNavigate = () => {
+    if (authorId !== user.id) {
+      messageSeen({ variables: { messageId } });
+    }
+    navigate(Routes.ConversationScreen, { chatId, handle })
+  };
 
   return (
-    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ConversationScreen, { chatId, handle })} style={styles().container}>
+    <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
       <Image
         source={{ uri: avatar }}
         style={styles(theme).avatarImage}
@@ -25,7 +35,7 @@ const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
         <View style={styles(theme).time}>
           <Text numberOfLines={1} ellipsizeMode='tail' style={styles(theme).messageText}>
-            {lastMessage}
+            {messageBody}
           </Text>
           <Text style={styles(theme).timeText}>
             {` · ${timeElapsed}`}
