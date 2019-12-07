@@ -75,6 +75,7 @@ export const QUERY_CHATS = gql`
       messages(last: 1) {
         id
         body
+        seen
         author {
           id
         }

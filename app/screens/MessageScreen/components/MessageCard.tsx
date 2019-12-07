@@ -11,7 +11,7 @@ import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
 
 const { FontWeights, FontSizes } = Typography;
 
-const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody, time }) => {
+const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time }) => {
 
   const { user, theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);
@@ -25,6 +25,13 @@ const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody,
     navigate(Routes.ConversationScreen, { chatId, handle })
   };
 
+  const isHighlighted = authorId !== user.id && !seen;
+
+  const highlightStyle = isHighlighted ? {
+    ...FontWeights.Regular,
+    color: theme.text01
+  } : null;
+
   return (
     <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
       <Image
@@ -33,11 +40,11 @@ const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody,
       />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-        <View style={styles(theme).time}>
-          <Text numberOfLines={1} ellipsizeMode='tail' style={styles(theme).messageText}>
+        <View style={styles(theme).content}>
+          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
             {messageBody}
           </Text>
-          <Text style={styles(theme).timeText}>
+          <Text style={[styles(theme).timeText, highlightStyle]}>
             {` · ${timeElapsed}`}
           </Text>
         </View>
@@ -67,9 +74,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     color: theme.text01
   },
-  time: {
+  content: {
     flexDirection: 'row',
-    paddingTop: 5,
+    paddingTop: 5
   },
   messageText: {
     ...FontWeights.Light,

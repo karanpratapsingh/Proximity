@@ -29,19 +29,29 @@ const MessageScreen: React.FC = () => {
 
   const renderItem = ({ item }) => {
 
-    const { id, participants, messages } = item;
+    const { id: chatId, participants, messages } = item;
     const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
+    const { avatar, handle } = participant;
+    const {
+      id: messageId,
+      author: { id: authorId },
+      seen,
+      body: messageBody,
+      createdAt: time
+    } = lastMessage;
+
     return (
       <MessageCard
-        chatId={id}
-        avatar={participant.avatar}
-        handle={participant.handle}
-        authorId={lastMessage.author.id}
-        messageId={lastMessage.id}
-        messageBody={lastMessage.body}
-        time={lastMessage.createdAt}
+        chatId={chatId}
+        avatar={avatar}
+        handle={handle}
+        authorId={authorId}
+        messageId={messageId}
+        messageBody={messageBody}
+        seen={seen}
+        time={time}
       />
     );
   };
