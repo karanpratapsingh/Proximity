@@ -5,16 +5,13 @@ import { onError } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
+import Config from '../../config';
 
-const httpLink = new HttpLink({
-  uri: 'https://social-app-node-graphql.herokuapp.com/'
-});
+const httpLink = new HttpLink({ uri: Config.url.https });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://social-app-node-graphql.herokuapp.com/`,
-  options: {
-    reconnect: true
-  }
+  uri: Config.url.wss,
+  options: { reconnect: true }
 });
 
 const link = split(
