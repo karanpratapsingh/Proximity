@@ -8,10 +8,26 @@ import CommentCard from './CommentCard';
 
 const { FontWeights, FontSizes } = Typography;
 
-const Comments = ({ comments }) => {
+type Author = {
+  id: string,
+  avatar: string,
+  handle: string
+};
+
+type Comment = {
+  author: Author,
+  body: string,
+  createdAt: string
+};
+
+interface CommentsProps {
+  comments: Comment[]
+};
+
+const Comments: React.FC<CommentsProps> = ({ comments }) => {
   const { theme } = useContext(AppContext);
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: Comment }) => {
     const {
       author: {
         id: userId,

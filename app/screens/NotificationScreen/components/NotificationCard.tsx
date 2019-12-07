@@ -10,9 +10,17 @@ import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes } = Typography;
 
-const NotificationCard = ({ userId, avatar, handle, type, time }) => {
+interface NotificationCardPros {
+  userId: string,
+  avatar: string,
+  handle: string,
+  type: any, // FIXME:
+  time: string
+};
 
-  const { user, theme } = useContext(AppContext);
+const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, handle, type, time }) => {
+
+  const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
   const timeElapsed = parseTimeElapsed(time);

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Bubble } from 'react-native-gifted-chat';
 import { ThemeStatic } from '../../../theme';
 
-const CustomBubble = bubbleProps => (
+const CustomBubble: React.FC = bubbleProps => (
   <Bubble
     {...bubbleProps}
     // @ts-ignore 

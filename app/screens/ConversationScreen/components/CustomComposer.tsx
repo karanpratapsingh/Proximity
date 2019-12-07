@@ -7,7 +7,7 @@ import { ThemeColors } from '../../../types';
 
 const { FontWeights, FontSizes } = Typography;
 
-const CustomComposer = composerProps => {
+const CustomComposer: React.FC = composerProps => {
   const { theme } = useContext(AppContext);
   return (
     <Composer

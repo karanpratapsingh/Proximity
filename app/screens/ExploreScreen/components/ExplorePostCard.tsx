@@ -4,7 +4,12 @@ import { useNavigation } from 'react-navigation-hooks';
 import { Routes, PostDimensions } from '../../../constants';
 import { NativeImage } from '../../../layout';
 
-const ExplorePostCard = ({ postId, uri }) => {
+interface ExplorePostCardProps {
+  postId: string,
+  uri: string
+};
+
+const ExplorePostCard: React.FC<ExplorePostCardProps> = ({ postId, uri }) => {
   const { navigate } = useNavigation();
 
   const navigateToPost = () => {

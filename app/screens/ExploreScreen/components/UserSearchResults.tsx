@@ -6,8 +6,15 @@ import { ListEmptyComponent } from '../../../layout';
 import { UserCard } from '../../../layout';
 import { AppContext } from '../../../context';
 
+type SearchResult = {
+  id: string,
+  avatar: string,
+  name: string,
+  handle: string
+};
+
 interface UserSearchResultsProps {
-  searchResults: any[]
+  searchResults: SearchResult[]
 };
 
 const UserSearchResults: React.FC<UserSearchResultsProps> = ({ searchResults }) => {
@@ -15,7 +22,7 @@ const UserSearchResults: React.FC<UserSearchResultsProps> = ({ searchResults }) 
 
   const filteredSearchResults = [...searchResults].filter(result => result.id !== user.id);
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: SearchResult }) => {
     const { id, avatar, handle, name } = item;
     return (
       <UserCard

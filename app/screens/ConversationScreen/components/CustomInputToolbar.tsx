@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { InputToolbar } from 'react-native-gifted-chat';
 import { ThemeStatic } from '../../../theme';
 
-const CustomInputToolbar = inputToolbarProps => (
+const CustomInputToolbar: React.FC = inputToolbarProps => (
   <InputToolbar
     {...inputToolbarProps}
     containerStyle={styles.container}

@@ -1,13 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
-import { FlatGrid } from 'react-native-super-grid';
 
-const ExploreGrid = ({ posts }) => {
+type Post = {
+  id: string,
+  uri: string
+};
 
-  const renderItem = ({ item }) => {
+interface ExploreGridProps {
+  posts: Post[]
+};
+
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts }) => {
+
+  const renderItem = ({ item }: { item: Post }) => {
     const { id: postId, uri } = item;
+
     return <ExplorePostCard
       postId={postId}
       uri={uri}

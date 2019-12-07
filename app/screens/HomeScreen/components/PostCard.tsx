@@ -8,13 +8,15 @@ import { parseTimeElapsed } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
+type Author = {
+  id: string,
+  avatar: string,
+  handle: string
+};
+
 interface PostCardProps {
   id: string,
-  author: {
-    id: string,
-    avatar: string,
-    handle: string
-  },
+  author: Author,
   time: string,
   uri: string,
   likes: string[],

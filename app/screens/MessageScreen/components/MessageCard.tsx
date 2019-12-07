@@ -11,7 +11,18 @@ import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
 
 const { FontWeights, FontSizes } = Typography;
 
-const MessageCard = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time }) => {
+interface MessageCardProps {
+  chatId: string,
+  avatar: string,
+  handle: string,
+  authorId: string,
+  messageId: string,
+  messageBody: string,
+  seen: boolean,
+  time: string
+};
+
+const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time }) => {
 
   const { user, theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);

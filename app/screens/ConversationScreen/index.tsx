@@ -17,7 +17,7 @@ import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 
-const ConversationScreen = () => {
+const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
   const targetId = useNavigationParam('targetId');

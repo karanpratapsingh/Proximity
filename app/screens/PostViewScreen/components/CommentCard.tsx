@@ -10,7 +10,15 @@ import { Routes } from '../../../constants';
 
 const { FontWeights, FontSizes } = Typography;
 
-const CommentCard = ({ userId, avatar, handle, body, time }) => {
+interface CommentCardProps {
+  userId: string,
+  avatar: string,
+  handle: string,
+  body: string,
+  time: string
+};
+
+const CommentCard: React.FC<CommentCardProps> = ({ userId, avatar, handle, body, time }) => {
 
   const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
