@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { Typography } from '../../theme';
 import { AppContext } from '../../context';
 import { parseConnectionsCount } from '../../utils/shared';

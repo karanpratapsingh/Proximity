@@ -2,32 +2,60 @@ import React, { useContext } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AppContext } from '../../../context';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
 
 const { FontWeights, FontSizes } = Typography;
 
-const MessageCard = ({ chatId, avatar, handle, lastMessage, time }) => {
+interface MessageCardProps {
+  chatId: string,
+  avatar: string,
+  handle: string,
+  authorId: string,
+  messageId: string,
+  messageBody: string,
+  seen: boolean,
+  time: string
+};
 
-  const { theme } = useContext(AppContext);
+const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time }) => {
+
+  const { user, theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
+  const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
+
+  const setSeenAndNavigate = () => {
+    if (authorId !== user.id) {
+      messageSeen({ variables: { messageId } });
+    }
+    navigate(Routes.ConversationScreen, { chatId, avatar, handle })
+  };
+
+  const isHighlighted = authorId !== user.id && !seen;
+
+  const highlightStyle = isHighlighted ? {
+    ...FontWeights.Regular,
+    color: theme.text01
+  } : null;
 
   return (
-    <TouchableOpacity activeOpacity={0.90} onPress={() => navigate(Routes.ConversationScreen, { chatId, handle })} style={styles().container}>
+    <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
       <Image
         source={{ uri: avatar }}
         style={styles(theme).avatarImage}
       />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-        <View style={styles(theme).time}>
-          <Text numberOfLines={1} ellipsizeMode='tail' style={styles(theme).messageText}>
-            {lastMessage}
+        <View style={styles(theme).content}>
+          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
+            {messageBody}
           </Text>
-          <Text style={styles(theme).timeText}>
+          <Text style={[styles(theme).timeText, highlightStyle]}>
             {` · ${timeElapsed}`}
           </Text>
         </View>
@@ -57,9 +85,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     color: theme.text01
   },
-  time: {
+  content: {
     flexDirection: 'row',
-    paddingTop: 5,
+    paddingTop: 5
   },
   messageText: {
     ...FontWeights.Light,

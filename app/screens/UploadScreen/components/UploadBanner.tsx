@@ -8,8 +8,6 @@ import SvgBanner from '../../../layout/misc/SvgBannerType';
 import { ThemeStatic } from '../../../theme';
 import { getImageFromLibrary } from '../../../utils/shared';
 
-console.disableYellowBox = true;
-
 interface UploadBannerProps {
   pickedAsset: string,
   onAsset: (path: string) => void

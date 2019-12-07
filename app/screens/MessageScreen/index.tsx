@@ -7,9 +7,10 @@ import EmptyMessages from '../../../assets/svg/empty-messages.svg';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import MessageCard from './components/MessageCard';
 import { filterChatParticipants } from '../../utils/shared';
+import { PollIntervals } from '../../constants';
 
 const MessageScreen: React.FC = () => {
 
@@ -18,7 +19,7 @@ const MessageScreen: React.FC = () => {
   const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
     variables: { userId: user.id },
     fetchPolicy: 'network-only',
-    pollInterval: 4000
+    pollInterval: PollIntervals.messages
   });
   const [chatSearch, setChatSearch] = useState('');
 
@@ -28,17 +29,29 @@ const MessageScreen: React.FC = () => {
 
   const renderItem = ({ item }) => {
 
-    const { id, participants, messages } = item;
+    const { id: chatId, participants, messages } = item;
     const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
+    const { avatar, handle } = participant;
+    const {
+      id: messageId,
+      author: { id: authorId },
+      seen,
+      body: messageBody,
+      createdAt: time
+    } = lastMessage;
+
     return (
       <MessageCard
-        chatId={id}
-        avatar={participant.avatar}
-        handle={participant.handle}
-        lastMessage={lastMessage.body}
-        time={lastMessage.createdAt}
+        chatId={chatId}
+        avatar={avatar}
+        handle={handle}
+        authorId={authorId}
+        messageId={messageId}
+        messageBody={messageBody}
+        seen={seen}
+        time={time}
       />
     );
   };

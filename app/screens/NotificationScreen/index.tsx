@@ -7,15 +7,16 @@ import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
 import { AppContext } from '../../context';
 import { QUERY_NOTIFICATION } from '../../graphql/query';
 import { Header, NotificationScreenPlaceholder, SvgBannerType } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import NotificationCard from './components/NotificationCard';
+import { PollIntervals } from '../../constants';
 
 const NotificationScreen: React.FC = () => {
   const { user, theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_NOTIFICATION, {
     variables: { userId: user.id },
-    pollInterval: 2000
+    pollInterval: PollIntervals.notification
   });
 
   const renderItem = ({ item }) => {
@@ -23,6 +24,7 @@ const NotificationScreen: React.FC = () => {
 
     return (
       <NotificationCard
+        userId={actionUser.id}
         avatar={actionUser.avatar}
         handle={actionUser.handle}
         type={type}

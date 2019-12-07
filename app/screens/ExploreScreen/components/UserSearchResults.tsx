@@ -5,9 +5,10 @@ import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import { UserCard } from '../../../layout';
 import { AppContext } from '../../../context';
+import { SearchResult } from '../../../types/screens';
 
 interface UserSearchResultsProps {
-  searchResults: any[]
+  searchResults: SearchResult[]
 };
 
 const UserSearchResults: React.FC<UserSearchResultsProps> = ({ searchResults }) => {

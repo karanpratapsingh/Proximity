@@ -6,11 +6,11 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes, ThemeType } from '../../../constants';
+import { IconSizes, Routes, ThemeVariant } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { signOut } from '../../../utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;
@@ -52,12 +52,12 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
-    setIsChecked(themeType === ThemeType.dark);
+    setIsChecked(themeType === ThemeVariant.dark);
   }, []);
 
   const onChange = ({ checked }) => {
-    if (checked) toggleTheme(ThemeType.dark);
-    else toggleTheme(ThemeType.light);
+    if (checked) toggleTheme(ThemeVariant.dark);
+    else toggleTheme(ThemeVariant.light);
     setIsChecked(checked);
   };
 

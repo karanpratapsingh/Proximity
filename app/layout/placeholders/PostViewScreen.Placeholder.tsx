@@ -4,6 +4,7 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
+import { PostDimensions } from '../../constants';
 
 const PostViewScreenPlaceholder = () => {
   const { theme } = useContext(AppContext);
@@ -31,7 +32,7 @@ const PostViewScreenPlaceholder = () => {
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          height={340}
+          height={PostDimensions.Large.height}
           style={styles.card}
         />
         <PlaceholderLine

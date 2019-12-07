@@ -3,18 +3,22 @@
  * This contains all the color config for the application
  */
 
-import { ThemeType } from '../types';
+import { ThemeType, ThemeStaticType, ThemeVariantType } from '../types/theme';
 
-export const ThemeStatic = {
+export const ThemeStatic: ThemeStaticType = {
   accent: '#846BE2',
   white: '#FFFFFF',
   black: '#000000',
   text01: '#000000',
   text02: '#BBBBBB',
-  placeholder: '#F4F4F4'
+  placeholder: '#F4F4F4',
+  like: '#E24359',
+  unlike: '#ddd'
 };
 
-export const Theme = {
+export const Theme: {
+  [key: string]: ThemeType
+} = {
   light: {
     type: 'light',
     colors: {
@@ -25,7 +29,7 @@ export const Theme = {
       placeholder: '#F4F4F4',
       white: '#FFFFFF'
     }
-  } as ThemeType,
+  },
   dark: {
     type: 'dark',
     colors: {
@@ -36,7 +40,7 @@ export const Theme = {
       placeholder: '#222',
       white: '#FFFFFF'
     }
-  } as ThemeType
+  }
 };
 
 /**

@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { IconSizes } from '../../../constants';
 import { ThemeStatic } from '../../../theme';
 
-const CustomSend = sendProps => (
+const CustomSend: React.FC = sendProps => (
   <Send
     {...sendProps}
     containerStyle={styles.container}>

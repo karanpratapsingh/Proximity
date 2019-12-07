@@ -8,7 +8,7 @@ import { AppContext } from '../../context';
 import { MUTATION_CREATE_POST } from '../../graphql/mutation';
 import { Button, FormInput, Header } from '../../layout';
 import { ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { uploadToStorage } from '../../utils/firebase';
 import UploadBanner from './components/UploadBanner';
 
@@ -26,7 +26,7 @@ const UploadScreen: React.FC = () => {
 
   const uploadImage = async () => {
     if (!pickedAsset) return;
-    if (caption.length < 20) return; //? TODO: show alert or success
+    if (caption.length > 200) return; //? TODO: show alert or success
 
     setIsUploading(true);
     const { downloadURL: uri } = await uploadToStorage('posts', pickedAsset);

@@ -6,37 +6,47 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import { FlatGrid } from 'react-native-super-grid';
 import { BottomSheetHeader, ConnectionsPlaceholder, SvgBannerType } from '..';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
-import { ConnectionsType } from '../../constants';
+import { Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import UserCard from './UserCard';
 
 interface ConnectionsBottomSheetProps {
   ref: React.Ref<any>,
+  viewMode?: boolean,
   userId: string,
+  handle?: string,
   type: string
 };
 
-const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ userId, type }, ref) => {
+const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ viewMode, userId, handle, type }, ref) => {
 
   const { theme } = useContext(AppContext);
 
   const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
     variables: { userId, type },
-    pollInterval: 2000
+    pollInterval: PollIntervals.connections
   });
 
   let content = <ConnectionsPlaceholder />;
   let heading;
   let subHeading;
 
-  if (type === ConnectionsType.FOLLOWING) {
+  if (type === Connections.FOLLOWING) {
     heading = 'Following';
-    subHeading = 'People you are following'
-  } else if (type === ConnectionsType.FOLLOWERS) {
+    if (viewMode) {
+      subHeading = `People ${handle} is following`;
+    } else {
+      subHeading = 'People you are following';
+    }
+  } else if (type === Connections.FOLLOWERS) {
     heading = 'Followers';
-    subHeading = 'People who are following you'
+    if (viewMode) {
+      subHeading = `People who are following ${handle}`;
+    } else {
+      subHeading = 'People who are following you';
+    }
   }
 
   const ListEmptyComponent = () => (

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StyleProp, TextProps, TextStyle } from 'react-native';
 import { Typography } from '../../theme';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from 'react-navigation-hooks';
 
@@ -10,10 +10,12 @@ const { FontWeights, FontSizes } = Typography;
 
 interface GoBackHeaderProps {
   title?: string,
-  iconSize: number
+  ContentLeft?: React.FC,
+  iconSize: number,
+  titleStyle?: StyleProp<TextStyle>
 };
 
-const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, iconSize }) => {
+const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, ContentLeft, iconSize, titleStyle }) => {
 
   const { theme } = useContext(AppContext);
   const { goBack } = useNavigation();
@@ -22,7 +24,8 @@ const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, iconSize }) => {
   return (
     <View style={styles(theme).container}>
       <Entypo onPress={navigateBack} name='chevron-thin-left' size={iconSize} color={theme.text01} />
-      {title && <Text style={styles(theme).title}>{title}</Text>}
+      {ContentLeft && <ContentLeft />}
+      {title && <Text style={[styles(theme).title, titleStyle]}>{title}</Text>}
     </View>
   );
 };
@@ -35,7 +38,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   title: {
     ...FontWeights.Bold,
-    ...FontSizes.SubHeading,
+    ...FontSizes.Label,
     color: theme.text01,
     marginLeft: 20
   },

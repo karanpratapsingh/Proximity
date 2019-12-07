@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;

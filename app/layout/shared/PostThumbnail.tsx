@@ -3,17 +3,16 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
+import { Dimensions } from '../../types/constants';
 import NativeImage from '../misc/NativeImage';
 
 interface PostThumbnailProps {
   id: string,
   uri: string,
-  dimensions: {
-    height: number,
-    width: number
-  }
+  dimensions: Dimensions
 };
+
 const PostThumbnail: React.FC<PostThumbnailProps> = ({ id, uri, dimensions }) => {
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();

@@ -1,16 +1,19 @@
-import { useQuery } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import React, { useContext, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, Routes } from '../../constants';
+import { IconSizes, PostDimensions, Routes, PollIntervals, LikeAction } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_POST } from '../../graphql/query';
-import { GoBackHeader, NativeImage, PostViewScreenPlaceholder } from '../../layout';
-import { Typography } from '../../theme';
-import { ThemeColors } from '../../types';
+import { GoBackHeader, NativeImage, PostViewScreenPlaceholder, IconButton } from '../../layout';
+import { Typography, ThemeStatic } from '../../theme';
+import { ThemeColors } from '../../types/theme';
 import { parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
+import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
+
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -20,15 +23,45 @@ const PostViewScreen: React.FC = () => {
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
+  const [lastTap, setLastTap] = useState(Date.now());
+
   const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, {
     variables: { postId },
-    pollInterval: 2000
+    pollInterval: PollIntervals.postView
   });
 
-  const navigateToProfile = userId => {
+  const [likeInteraction, { loading: likeInteractionLoading }] = useMutation(MUTATION_LIKE_INTERACTION);
+
+  const navigateToProfile = (userId: string) => {
 
     if (userId === user.id) return;
     navigate(Routes.ProfileViewScreen, { userId });
+  };
+
+  const handleDoubleTap = async (isLiked: boolean) => {
+    const now = Date.now();
+    const DOUBLE_PRESS_DELAY = 500;
+    if (now - lastTap < DOUBLE_PRESS_DELAY) {
+      likeInteractionHandler(isLiked);
+    } else {
+      setLastTap(now);
+    }
+  };
+
+  const likeInteractionHandler = (isLiked: boolean) => {
+    if (likeInteractionLoading) return;
+
+    const variables = {
+      postId,
+      userId: user.id,
+      action: LikeAction.LIKE
+    };
+
+    if (isLiked) {
+      variables.action = LikeAction.UNLIKE
+    }
+
+    return likeInteraction({ variables });
   };
 
   let content = <PostViewScreenPlaceholder />;
@@ -49,6 +82,8 @@ const PostViewScreen: React.FC = () => {
       }
     } = postData;
 
+    const isLiked = likes.includes(user.id);
+
     content = (
       <>
         <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
@@ -58,9 +93,27 @@ const PostViewScreen: React.FC = () => {
             <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)}</Text>
           </View>
         </TouchableOpacity>
-        <NativeImage uri={uri} style={styles(theme).postImage} />
-        <Text style={styles(theme).likesText}>{likes} likes</Text>
-        <Text style={styles(theme).captionText}>{caption}</Text>
+        <TouchableOpacity onPress={() => handleDoubleTap(isLiked)} activeOpacity={1}>
+          <NativeImage uri={uri} style={styles(theme).postImage} />
+        </TouchableOpacity>
+        <View style={styles().likes}>
+          <IconButton
+            style={{ width: undefined }}
+            Icon={() =>
+              <AntDesign
+                name='heart'
+                color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
+                size={IconSizes.x5}
+              />
+            }
+            onPress={() => likeInteractionHandler(isLiked)}
+          />
+          <Text style={styles(theme).likesText}>{likes.length} likes</Text>
+        </View>
+        <Text style={styles(theme).captionText}>
+          <Text style={styles(theme).handleText}>{handle}{'  '}</Text>
+          {caption}
+        </Text>
         <Comments comments={comments} />
       </>
     );
@@ -118,10 +171,14 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     borderRadius: 10,
     backgroundColor: theme.placeholder
   },
+  likes: {
+    flexDirection: 'row',
+    marginTop: 20
+  },
   likesText: {
     ...FontWeights.Regular,
     ...FontSizes.Body,
-    marginTop: 20,
+    marginLeft: 10,
     color: theme.text01
   },
   captionText: {

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { Typography } from '../../theme';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 

@@ -1,22 +1,36 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NotificationText } from '../../../constants';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { NotificationText, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
+import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes } = Typography;
 
-const NotificationCard = ({ avatar, handle, type, time }) => {
+interface NotificationCardPros {
+  userId: string,
+  avatar: string,
+  handle: string,
+  type: any, // FIXME:
+  time: string
+};
+
+const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, handle, type, time }) => {
 
   const { theme } = useContext(AppContext);
+  const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
   const timeElapsed = parseTimeElapsed(time);
 
+  const navigateToProfile = () => {
+    navigate(Routes.ProfileViewScreen, { userId });
+  };
+
   return (
-    <View style={styles().container}>
+    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
       <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).notificationText}>
@@ -25,7 +39,7 @@ const NotificationCard = ({ avatar, handle, type, time }) => {
         </Text>
         <Text style={styles(theme).timeText}>{timeElapsed}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

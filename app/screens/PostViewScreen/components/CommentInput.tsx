@@ -7,7 +7,7 @@ import { AppContext } from '../../../context';
 import { MUTATION_ADD_COMMENT } from '../../../graphql/mutation';
 import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -29,7 +29,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
   };
 
   let content = (
-    <View style={{ marginLeft: 10 }}>
+    <View style={styles().loading}>
       <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x00} />
     </View>
   );
@@ -71,15 +71,15 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 20,
     borderTopColor: 'rgba(0, 0, 0, 0.1)',
     borderTopWidth: StyleSheet.hairlineWidth,
     backgroundColor: theme.base
   },
   commentAvatarImage: {
-    height: 40,
-    width: 40,
+    height: 36,
+    width: 36,
     backgroundColor: theme.placeholder,
     marginRight: 10,
     borderRadius: 50
@@ -94,6 +94,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     color: theme.text01,
     borderRadius: 20,
     marginVertical: 5
+  },
+  loading: {
+    marginLeft: 10
   },
   postButton: {
     width: undefined,

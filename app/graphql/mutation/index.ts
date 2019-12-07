@@ -102,3 +102,19 @@ export const MUTATION_ADD_COMMENT = gql`
     }
   }
 `;
+
+export const MUTATION_LIKE_INTERACTION = gql`
+  mutation LikeInteraction($postId: String!, $userId: String!, $action: LikeAction!) {
+    likeInteraction(postId: $postId, userId: $userId, action: $action) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_SEEN_MESSAGE = gql`
+  mutation MessageSeen($messageId: String!) {
+    messageSeen(messageId: $messageId) {
+      id
+    }
+  }
+`;

@@ -53,6 +53,7 @@ export const QUERY_NOTIFICATION = gql`
   query Notifications($userId: String!) {
     notifications(userId: $userId) {
       actionUser {
+        id
         avatar
         handle
       }
@@ -72,7 +73,12 @@ export const QUERY_CHATS = gql`
         handle
       }
       messages(last: 1) {
+        id
         body
+        seen
+        author {
+          id
+        }
         createdAt
       }
     }
@@ -141,6 +147,7 @@ export const QUERY_POST = gql`
       comments {
         body
         author {
+          id
           avatar
           handle
         }
@@ -150,6 +157,15 @@ export const QUERY_POST = gql`
       likes
       caption
       createdAt
+    }
+  }
+`;
+
+export const QUERY_POSTS = gql`
+  query Posts {
+    posts {
+      id
+      uri
     }
   }
 `;

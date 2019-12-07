@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { Typography } from '../../theme';
 
 const { FontWeights, FontSizes } = Typography;
@@ -29,8 +29,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     color: theme.text01
   },
   subHeading: {
-    ...FontWeights.Light,
+    ...FontWeights.Regular,
     ...FontSizes.Body,
+    marginTop: 2,
     color: theme.text02
   }
 });

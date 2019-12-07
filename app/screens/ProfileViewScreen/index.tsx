@@ -3,11 +3,11 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, ConnectionsType } from '../../constants';
+import { IconSizes, PostDimensions, Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import UserInteractions from './components/UserInteractions';
 
 const ProfileViewScreen: React.FC = () => {
@@ -16,7 +16,7 @@ const ProfileViewScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId },
-    pollInterval: 1000
+    pollInterval: PollIntervals.profileView
   });
 
   const followingBottomSheetRef = useRef();
@@ -38,7 +38,7 @@ const ProfileViewScreen: React.FC = () => {
         followers={followers.length}
         name={name}
         handle={handle}
-        renderInteractions={() => <UserInteractions targetId={userId} handle={handle} />}
+        renderInteractions={() => <UserInteractions targetId={userId} avatar={avatar} handle={handle} />}
         about={about}
       />
     );
@@ -58,7 +58,7 @@ const ProfileViewScreen: React.FC = () => {
   let content = <ProfileScreenPlaceholder viewMode />;
 
   if (!loading && !error) {
-    const { user: { id, posts } } = data;
+    const { user: { id, handle, posts } } = data;
     content = (
       <>
         <FlatGrid
@@ -73,12 +73,16 @@ const ProfileViewScreen: React.FC = () => {
         <ConnectionsBottomSheet
           ref={followingBottomSheetRef}
           userId={id}
-          type={ConnectionsType.FOLLOWING}
+          viewMode
+          handle={handle}
+          type={Connections.FOLLOWING}
         />
         <ConnectionsBottomSheet
           ref={followersBottomSheetRef}
           userId={id}
-          type={ConnectionsType.FOLLOWERS}
+          viewMode
+          handle={handle}
+          type={Connections.FOLLOWERS}
         />
       </>
     );

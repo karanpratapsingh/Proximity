@@ -3,11 +3,11 @@ import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput } fro
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-interface SearchBarProps {
+interface AnimatedSearchBarProps {
   value: string,
   onChangeText: any,
   onFocus?: any,
@@ -16,7 +16,7 @@ interface SearchBarProps {
   style?: object
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
+const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
 
   const { theme } = useContext(AppContext);
 
@@ -53,7 +53,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onFocus, onB
       <TextInput
         autoCorrect={false}
         onFocus={onOpen}
-        style={[styles(theme).searchBar, { width: `${barWidth}%` }, style]}
+        style={[styles(theme).animatedSearchBar, { width: `${barWidth}%` }, style]}
         value={value}
         placeholder={placeholder}
         placeholderTextColor={theme.text02}
@@ -72,9 +72,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onFocus, onB
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 5
   },
-  searchBar: {
+  animatedSearchBar: {
     ...FontWeights.Light,
     ...FontSizes.Body,
     marginLeft: 20,
@@ -96,4 +97,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default SearchBar;
+export default AnimatedSearchBar;

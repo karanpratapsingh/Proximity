@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
-import { ThemeColors } from '../../types';
+import { ThemeColors } from '../../types/theme';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
 import { NativeImage } from '..';
@@ -19,13 +19,16 @@ interface UserCardProps {
 
 const UserCard: React.FC<UserCardProps> = ({ userId, avatar, handle, name, style }) => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
 
-  const navigateToProfile = () => navigate(Routes.ProfileViewScreen, { userId });
+  const navigateToProfile = () => {
+    if (userId === user.id) return;
+    navigate(Routes.ProfileViewScreen, { userId });
+  };
 
   return (
-    <TouchableOpacity activeOpacity={0.90} onPress={navigateToProfile} style={[styles().container, style]}>
+    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={[styles().container, style]}>
       <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}</Text>

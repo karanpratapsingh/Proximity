@@ -3,17 +3,23 @@ import { StyleSheet, Text, FlatList } from 'react-native';
 import { AppContext } from '../../../context';
 import { ListEmptyComponent } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 import CommentCard from './CommentCard';
+import { Comment } from '../../../types/screens';
 
 const { FontWeights, FontSizes } = Typography;
 
-const Comments = ({ comments }) => {
+interface CommentsProps {
+  comments: Comment[]
+};
+
+const Comments: React.FC<CommentsProps> = ({ comments }) => {
   const { theme } = useContext(AppContext);
 
   const renderItem = ({ item }) => {
     const {
       author: {
+        id: userId,
         avatar,
         handle
       },
@@ -23,6 +29,7 @@ const Comments = ({ comments }) => {
 
     return (
       <CommentCard
+        userId={userId}
         avatar={avatar}
         handle={handle}
         body={body}

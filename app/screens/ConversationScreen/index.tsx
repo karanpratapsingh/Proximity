@@ -1,25 +1,27 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { useNavigationParam, useNavigation } from 'react-navigation-hooks';
+import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_ADD_MESSAGE, MUTATION_CONNECT_CHAT_TO_USERS } from '../../graphql/mutation';
 import { QUERY_CHAT } from '../../graphql/query';
 import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
-import { ThemeColors } from '../../types';
-import { transformMessages, filterChatParticipants } from '../../utils/shared';
+import { ThemeColors } from '../../types/theme';
+import { filterChatParticipants, transformMessages } from '../../utils/shared';
+import ChatHeaderAvatar from './components/ChatHeaderAvatar';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 
-const ConversationScreen = () => {
+const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
+  const avatar = useNavigationParam('avatar');
   const targetId = useNavigationParam('targetId');
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
@@ -33,6 +35,10 @@ const ConversationScreen = () => {
   });
   const [addMessage] = useMutation(MUTATION_ADD_MESSAGE);
   const [connectChat] = useMutation(MUTATION_CONNECT_CHAT_TO_USERS);
+
+  useEffect(() => {
+    // set seen
+  }, []);
 
   useEffect(() => {
     if (!chatSubscriptionLoading) {
@@ -79,7 +85,6 @@ const ConversationScreen = () => {
 
     content = (
       <GiftedChat
-        isAnimated
         alwaysShowSend
         inverted={false}
         maxInputLength={200}
@@ -95,14 +100,19 @@ const ConversationScreen = () => {
         user={{ _id: user.id }}
         bottomOffset={-10}
         keyboardShouldPersistTaps={null}
-        listViewProps={{ keyboardVerticalOffset: 20, showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
+        listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
     );
   }
 
   return (
     <View style={styles(theme).container}>
-      <GoBackHeader title={handle} iconSize={IconSizes.x6} />
+      <GoBackHeader
+        title={handle}
+        iconSize={IconSizes.x7}
+        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={onPressAvatar} />}
+        titleStyle={styles().headerTitleStyle}
+      />
       {content}
     </View>
   );
@@ -112,6 +122,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.base
+  },
+  headerTitleStyle: {
+    marginLeft: 0
   }
 });
 

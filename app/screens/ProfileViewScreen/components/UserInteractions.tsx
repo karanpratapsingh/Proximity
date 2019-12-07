@@ -2,27 +2,32 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { FollowInteractionType, IconSizes, Routes } from '../../../constants';
+import { FollowInteraction, IconSizes, Routes, PollIntervals } from '../../../constants';
 import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
 import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
 import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
 import { LoadingIndicator } from '../../../layout';
 import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types';
+import { ThemeColors } from '../../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 
-const UserInteractions = ({ targetId, handle }) => {
+interface UserInteractionsProps {
+  targetId: string,
+  avatar: string,
+  handle: string
+};
+
+const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, handle }) => {
 
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
   const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
     variables: { userId: user.id, targetId },
-    pollInterval: 500
+    pollInterval: PollIntervals.interaction
   });
 
-  const [chatExistsQuery] = useLazyQuery(QUERY_CHAT_EXISTS);
   const [updateFollowing, { loading: updateFollowingLoading }] = useMutation(MUTATION_UPDATE_FOLLOWING);
   const [createTemporaryChat] = useMutation(MUTATION_CREATE_TEMPORARY_CHAT);
 
@@ -46,14 +51,14 @@ const UserInteractions = ({ targetId, handle }) => {
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: FollowInteractionType.UNFOLLOW
+          action: FollowInteraction.UNFOLLOW
         }
       });
     } else {
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: FollowInteractionType.FOLLOW
+          action: FollowInteraction.FOLLOW
         }
       });
     }
@@ -67,10 +72,10 @@ const UserInteractions = ({ targetId, handle }) => {
       });
 
       if (chatExists) {
-        navigate(Routes.ConversationScreen, { chatId: chatExists.id, handle, targetId: null });
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
       } else {
         const { data } = await createTemporaryChat();
-        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, handle, targetId });
+        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });
       }
     } catch {
       // do something or show error
