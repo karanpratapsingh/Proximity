@@ -1,7 +1,16 @@
 {
   "name": "Proximity",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "private": true,
+  "author": {
+    "name": "Karan Pratap Singh",
+    "email": "karan.pratapsingh686@gmail.com",
+    "url": "http://karanpratapsingh.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karanpratapsingh/Proximity.git"
+  },
   "scripts": {
     "start": "react-native start",
     "test": "jest",

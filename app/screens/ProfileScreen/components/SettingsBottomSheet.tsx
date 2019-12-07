@@ -95,14 +95,14 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
           />
         </Option>
         <Option
+          label='About'
+          iconName='ios-information-circle-outline'
+          onPress={onAboutPress}
+        />
+        <Option
           label='Logout'
           iconName='ios-log-out'
           onPress={logOut}
-        />
-        <Option
-          label='About'
-          iconName='ios-log-out'
-          onPress={onAboutPress}
         />
       </View>
     </Modalize>
