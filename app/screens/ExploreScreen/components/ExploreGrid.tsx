@@ -26,7 +26,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts }) => {
         itemDimension={100}
         showsVerticalScrollIndicator={false}
         items={posts.reverse()}
-        ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={50} />}
+        ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
         spacing={6}
         renderItem={renderItem}
       />

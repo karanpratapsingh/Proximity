@@ -6,7 +6,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import EmptyMessages from '../../../assets/svg/empty-messages.svg';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
-import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
+import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import MessageCard from './components/MessageCard';
 import { filterChatParticipants } from '../../utils/shared';
@@ -74,7 +74,7 @@ const MessageScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={filteredChats}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyMessages} topSpacing={responsiveHeight(16)} placeholder='No messages' />}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyMessages} spacing={16} placeholder='No messages' />}
         style={styles().messagesList}
         spacing={20}
         renderItem={renderItem}

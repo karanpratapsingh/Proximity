@@ -9,7 +9,7 @@ import EmptyFeed from '../../../assets/svg/empty-feed.svg';
 import { IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
-import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../layout';
+import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import { messaging, notifications } from '../../utils/firebase';
 import PostCard from './components/PostCard';
@@ -110,7 +110,7 @@ const HomeScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={[dummyPost]}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='Your feed is empty' />}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder='Your feed is empty' />}
         style={styles().postList}
         spacing={20}
         renderItem={renderItem}

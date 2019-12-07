@@ -6,7 +6,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
 import { AppContext } from '../../context';
 import { QUERY_NOTIFICATION } from '../../graphql/query';
-import { Header, NotificationScreenPlaceholder, SvgBannerType } from '../../layout';
+import { Header, NotificationScreenPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import NotificationCard from './components/NotificationCard';
 import { PollIntervals } from '../../constants';
@@ -42,7 +42,7 @@ const NotificationScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={notifications.reverse()}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyNotifications} topSpacing={responsiveHeight(20)} placeholder='No notifications yet' />}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyNotifications} spacing={20} placeholder='No notifications yet' />}
         style={styles().notificationList}
         spacing={20}
         renderItem={renderItem}

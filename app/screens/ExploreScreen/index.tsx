@@ -5,7 +5,7 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 import SearchUsersBanner from '../../../assets/svg/search-users.svg';
 import { AppContext } from '../../context';
 import { QUERY_POSTS, QUERY_SEARCH_USERS } from '../../graphql/query';
-import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
+import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
@@ -54,7 +54,7 @@ const ExploreScreen: React.FC = () => {
     if (querySearchUsersCalled && querySearchUsersLoading) {
       subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <SvgBannerType Svg={SearchUsersBanner} topSpacing={responsiveHeight(16)} placeholder='Search users' />
+      subContent = <SvgBanner Svg={SearchUsersBanner} spacing={16} placeholder='Search users' />
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
       subContent = <UserSearchResults searchResults={searchResults} />;
     }
