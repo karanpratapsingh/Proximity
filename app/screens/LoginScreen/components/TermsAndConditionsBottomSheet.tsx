@@ -53,7 +53,7 @@ const TermsAndConditionsBottomSheet: React.FC<TermsAndConditionsBottomSheetProps
 
         <Text style={styles(theme).termsTitleText}>Data Usage</Text>
         <Text style={styles(theme).termsText}>
-          As mentioned Proximity is open source app with it's source code
+          As mentioned Proximity is an open source app with it's source code
           hosted on github, the data you generate is not used against you
           in any shape or form like sharing with 3rd parties, or targeting
           you for ads using machine learning algorithms
@@ -168,12 +168,14 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Body,
     marginBottom: 10,
+    textAlign: 'justify',
     color: theme.text01
   },
   subPoints: {
     ...FontWeights.Regular,
     ...FontSizes.Body,
     marginBottom: 10,
+    textAlign: 'justify',
     color: theme.text01
   }
 });

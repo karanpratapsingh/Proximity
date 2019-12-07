@@ -42,10 +42,11 @@ const Option: React.FC<OptionProps> = ({ label, iconName, onPress, children }) =
 };
 
 interface SettingsBottomSheetProps {
-  ref: React.Ref<any>
+  ref: React.Ref<any>,
+  onAboutPress: any
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef((_, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef(({ onAboutPress }, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -97,6 +98,11 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
           label='Logout'
           iconName='ios-log-out'
           onPress={logOut}
+        />
+        <Option
+          label='About'
+          iconName='ios-log-out'
+          onPress={onAboutPress}
         />
       </View>
     </Modalize>

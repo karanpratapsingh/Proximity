@@ -18,7 +18,7 @@ const SvgBanner: React.FC<SvgBannerProps> = ({ Svg, placeholder, spacing, textSt
   const { theme } = useContext(AppContext);
 
   return (
-    <View style={[styles().container, { marginTop: responsiveHeight(spacing) }]}>
+    <View style={[styles().container, { marginTop: responsiveHeight(spacing) || undefined }]}>
       <Svg />
       <Text style={[styles(theme).placeholderText, textStyle]}>{placeholder}</Text>
     </View>
