@@ -79,7 +79,7 @@ export const getImageFromLibrary = async (height: number, width: number, circula
     cropperActiveWidgetColor: ThemeStatic.accent,
     cropperStatusBarColor: ThemeStatic.accent,
     cropperToolbarColor: ThemeStatic.accent,
-    compressImageQuality: 0.5,
+    compressImageQuality: 0.6,
     mediaType: 'photo'
   };
 
