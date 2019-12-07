@@ -1,6 +1,18 @@
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  ConnectionsType,
+  FollowInteractionType,
+  HandleAvailableColorType,
+  IconSizesType,
+  LikeActionType,
+  NotificationTextType,
+  PollIntervalsType,
+  PostDimensionsType,
+  RoutesType
+} from '../types/constants';
+import { ThemeVariantType } from '../types/theme';
 
-export const Routes = {
+export const Routes: RoutesType = {
   App: 'App',
   Auth: 'Auth',
   HomeScreen: 'HomeScreen,',
@@ -16,28 +28,28 @@ export const Routes = {
   LoginScreen: 'LoginScreen'
 };
 
-export const NotificationText = {
+export const NotificationText: NotificationTextType = {
   FOLLOW: 'has started following you',
   COMMENT: 'commented on your post',
   LIKE: 'liked your post',
 };
 
-export const FollowInteractionType = {
+export const FollowInteraction: FollowInteractionType = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW'
 };
 
-export const LikeActionType = {
+export const LikeAction: LikeActionType = {
   LIKE: 'LIKE',
   UNLIKE: 'UNLIKE'
 };
 
-export const ConnectionsType = {
+export const Connections: ConnectionsType = {
   FOLLOWING: 'FOLLOWING',
   FOLLOWERS: 'FOLLOWERS'
 };
 
-export const IconSizes = {
+export const IconSizes: IconSizesType = {
   x00: 4,
   x0: 6,
   x1: 10,
@@ -51,29 +63,29 @@ export const IconSizes = {
   x9: 40
 };
 
-// export const PostDimensions = {
+// export const PostDimensions: PostDimensionsType = {
 //   Small: { height: 105, width: 105 },
 //   Medium: { height: 160, width: 160 },
 //   Large: { height: 340, width: 340 }
 // };
 
-export const PostDimensions = {
+export const PostDimensions: PostDimensionsType = {
   Small: { height: responsiveWidth(28.5), width: responsiveWidth(28.5) },
   Medium: { height: responsiveWidth(43), width: responsiveWidth(43) },
   Large: { height: responsiveWidth(90), width: responsiveWidth(90) }
 };
 
-export const ThemeType = {
+export const ThemeVariant: ThemeVariantType = {
   light: 'light',
   dark: 'dark'
 };
 
-export const HandleAvailableColor = {
+export const HandleAvailableColor: HandleAvailableColorType = {
   true: '#4caf50',
   false: '#EF5350'
 };
 
-export const PollIntervals = {
+export const PollIntervals: PollIntervalsType = {
   messages: 4000,
   explore: 5 * 60 * 1000,
   profile: 1000,

@@ -4,12 +4,8 @@ import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { ThemeColors } from '../../types/theme';
+import { Dimensions } from '../../types/constants';
 import NativeImage from '../misc/NativeImage';
-
-type Dimensions = { // FIXME: to constsnats
-  height: number,
-  width: number
-};
 
 interface PostThumbnailProps {
   id: string,

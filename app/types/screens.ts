@@ -1,4 +1,7 @@
-// Notifications Screen
+import { NotificationTextType } from "./constants";
+
+// Notification Screen
+
 export type ActionUser = {
   id: string,
   avatar: string,
@@ -7,7 +10,7 @@ export type ActionUser = {
 
 export type Notification = {
   actionUser: ActionUser,
-  type: any, // FIXME:
+  type: keyof NotificationTextType,
   createdAt: string
 };
 

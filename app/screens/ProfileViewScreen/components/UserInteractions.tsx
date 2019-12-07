@@ -2,7 +2,7 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { FollowInteractionType, IconSizes, Routes, PollIntervals } from '../../../constants';
+import { FollowInteraction, IconSizes, Routes, PollIntervals } from '../../../constants';
 import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
 import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
@@ -51,14 +51,14 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, handle })
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: FollowInteractionType.UNFOLLOW
+          action: FollowInteraction.UNFOLLOW
         }
       });
     } else {
       updateFollowing({
         variables: {
           ...updateFollowingArgs,
-          action: FollowInteractionType.FOLLOW
+          action: FollowInteraction.FOLLOW
         }
       });
     }

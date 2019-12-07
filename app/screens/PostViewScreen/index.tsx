@@ -2,7 +2,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, Routes, PollIntervals, LikeActionType } from '../../constants';
+import { IconSizes, PostDimensions, Routes, PollIntervals, LikeAction } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_POST } from '../../graphql/query';
 import { GoBackHeader, NativeImage, PostViewScreenPlaceholder, IconButton } from '../../layout';
@@ -54,11 +54,11 @@ const PostViewScreen: React.FC = () => {
     const variables = {
       postId,
       userId: user.id,
-      action: LikeActionType.LIKE
+      action: LikeAction.LIKE
     };
 
     if (isLiked) {
-      variables.action = LikeActionType.UNLIKE
+      variables.action = LikeAction.UNLIKE
     }
 
     return likeInteraction({ variables });

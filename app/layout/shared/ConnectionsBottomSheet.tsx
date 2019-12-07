@@ -6,7 +6,7 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import { FlatGrid } from 'react-native-super-grid';
 import { BottomSheetHeader, ConnectionsPlaceholder, SvgBannerType } from '..';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
-import { ConnectionsType, PollIntervals } from '../../constants';
+import { Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
 import { ThemeColors } from '../../types/theme';
@@ -33,14 +33,14 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
   let heading;
   let subHeading;
 
-  if (type === ConnectionsType.FOLLOWING) {
+  if (type === Connections.FOLLOWING) {
     heading = 'Following';
     if (viewMode) {
       subHeading = `People ${handle} is following`;
     } else {
       subHeading = 'People you are following';
     }
-  } else if (type === ConnectionsType.FOLLOWERS) {
+  } else if (type === Connections.FOLLOWERS) {
     heading = 'Followers';
     if (viewMode) {
       subHeading = `People who are following ${handle}`;

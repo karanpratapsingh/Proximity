@@ -3,7 +3,7 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { IconSizes, PostDimensions, ConnectionsType, PollIntervals } from '../../constants';
+import { IconSizes, PostDimensions, Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
@@ -81,12 +81,12 @@ const ProfileScreen: React.FC = () => {
         <ConnectionsBottomSheet
           ref={followingBottomSheetRef}
           userId={user.id}
-          type={ConnectionsType.FOLLOWING}
+          type={Connections.FOLLOWING}
         />
         <ConnectionsBottomSheet
           ref={followersBottomSheetRef}
           userId={user.id}
-          type={ConnectionsType.FOLLOWERS}
+          type={Connections.FOLLOWERS}
         />
         <EditProfileBottomSheet
           ref={editProfileBottomSheetRef}

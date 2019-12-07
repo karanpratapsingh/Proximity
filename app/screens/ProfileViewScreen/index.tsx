@@ -3,7 +3,7 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, ConnectionsType, PollIntervals } from '../../constants';
+import { IconSizes, PostDimensions, Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
 import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
@@ -75,14 +75,14 @@ const ProfileViewScreen: React.FC = () => {
           userId={id}
           viewMode
           handle={handle}
-          type={ConnectionsType.FOLLOWING}
+          type={Connections.FOLLOWING}
         />
         <ConnectionsBottomSheet
           ref={followersBottomSheetRef}
           userId={id}
           viewMode
           handle={handle}
-          type={ConnectionsType.FOLLOWERS}
+          type={Connections.FOLLOWERS}
         />
       </>
     );

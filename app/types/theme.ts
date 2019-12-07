@@ -1,3 +1,14 @@
+export type ThemeStaticType = {
+  accent: string,
+  white: string,
+  black: string,
+  text01: string,
+  text02: string,
+  placeholder: string,
+  like: string,
+  unlike: string
+};
+
 export type ThemeColors = {
   accent: string,
   base: string,
@@ -7,8 +18,12 @@ export type ThemeColors = {
   white: string
 };
 
-export type ThemeType = {
-  type: string,
-  colors: ThemeColors
+export type ThemeVariantType = {
+  light: string,
+  dark: string
 };
 
+export type ThemeType = {
+  type: keyof ThemeVariantType,
+  colors: ThemeColors
+};
