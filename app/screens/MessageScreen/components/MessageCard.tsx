@@ -33,7 +33,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });
     }
-    navigate(Routes.ConversationScreen, { chatId, handle })
+    navigate(Routes.ConversationScreen, { chatId, avatar, handle })
   };
 
   const isHighlighted = authorId !== user.id && !seen;

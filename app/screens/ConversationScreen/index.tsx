@@ -11,6 +11,7 @@ import { SUBSCRIPTION_CHAT } from '../../graphql/subscription';
 import { ConversationScreenPlaceholder, GoBackHeader } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import { filterChatParticipants, transformMessages } from '../../utils/shared';
+import ChatHeaderAvatar from './components/ChatHeaderAvatar';
 import CustomBubble from './components/CustomBubble';
 import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
@@ -20,6 +21,7 @@ import CustomSend from './components/CustomSend';
 const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
   const handle = useNavigationParam('handle');
+  const avatar = useNavigationParam('avatar');
   const targetId = useNavigationParam('targetId');
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
@@ -105,7 +107,12 @@ const ConversationScreen: React.FC = () => {
 
   return (
     <View style={styles(theme).container}>
-      <GoBackHeader title={handle} iconSize={IconSizes.x6} />
+      <GoBackHeader
+        title={handle}
+        iconSize={IconSizes.x7}
+        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={onPressAvatar} />}
+        titleStyle={styles().headerTitleStyle}
+      />
       {content}
     </View>
   );
@@ -115,6 +122,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.base
+  },
+  headerTitleStyle: {
+    marginLeft: 0
   }
 });
 

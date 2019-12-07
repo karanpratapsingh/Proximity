@@ -15,10 +15,11 @@ const { FontWeights, FontSizes } = Typography;
 
 interface UserInteractionsProps {
   targetId: string,
+  avatar: string,
   handle: string
 };
 
-const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, handle }) => {
+const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, handle }) => {
 
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
@@ -27,7 +28,6 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, handle })
     pollInterval: PollIntervals.interaction
   });
 
-  const [chatExistsQuery] = useLazyQuery(QUERY_CHAT_EXISTS);
   const [updateFollowing, { loading: updateFollowingLoading }] = useMutation(MUTATION_UPDATE_FOLLOWING);
   const [createTemporaryChat] = useMutation(MUTATION_CREATE_TEMPORARY_CHAT);
 
@@ -72,10 +72,10 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, handle })
       });
 
       if (chatExists) {
-        navigate(Routes.ConversationScreen, { chatId: chatExists.id, handle, targetId: null });
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
       } else {
         const { data } = await createTemporaryChat();
-        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, handle, targetId });
+        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });
       }
     } catch {
       // do something or show error

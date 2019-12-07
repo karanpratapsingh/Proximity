@@ -38,7 +38,7 @@ const ProfileViewScreen: React.FC = () => {
         followers={followers.length}
         name={name}
         handle={handle}
-        renderInteractions={() => <UserInteractions targetId={userId} handle={handle} />}
+        renderInteractions={() => <UserInteractions targetId={userId} avatar={avatar} handle={handle} />}
         about={about}
       />
     );
