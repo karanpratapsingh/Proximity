@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View, Linking } from 'react-native';
+import { Image, Linking, StyleSheet, Text, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import ProximityLogo from '../../../../assets/images/proximity-logo.png';
 import Config from '../../../config';
 import { AppContext } from '../../../context';
@@ -19,7 +19,7 @@ const AboutAction = ({ iconName, label, onPress }) => {
     <Button
       loading={false}
       Icon={() =>
-        <Ionicons name={iconName}
+        <AntDesign name={iconName}
           size={20}
           color={ThemeStatic.accent}
         />}
@@ -51,7 +51,7 @@ const AboutBottomSheet: React.FC<AboutBottomSheetProps> = React.forwardRef((_, r
       ref={ref}
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}
-      adjustToContentHeight={false}>
+      adjustToContentHeight>
       <BottomSheetHeader
         heading='About'
         subHeading='About Proximity'
@@ -73,13 +73,13 @@ const AboutBottomSheet: React.FC<AboutBottomSheetProps> = React.forwardRef((_, r
 
         <View style={styles().actions}>
           <AboutAction
-            iconName='ios-contact'
+            iconName='link'
             label='Contact me'
             onPress={() => openLink(url)}
           />
 
           <AboutAction
-            iconName='logo-github'
+            iconName='github'
             label='Source code'
             onPress={() => openLink(repository)}
           />
@@ -123,10 +123,11 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginTop: 20
   },
   aboutActionLabel: {
+    marginLeft: 10,
     color: theme.accent
   },
   aboutActionContainer: {
-    marginVertical: 6,
+    marginVertical: 10,
     backgroundColor: 'transparent',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: theme.accent
