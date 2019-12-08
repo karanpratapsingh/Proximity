@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { HandleAvailableColor, IconSizes } from '../../../constants';
+import { HandleAvailableColor, IconSizes, Asset } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
@@ -93,7 +93,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
     };
 
     if (avatar !== editableAvatar) {
-      const { downloadURL } = await uploadToStorage('avatars', editableAvatar);
+      const { downloadURL } = await uploadToStorage(Asset.avatar, editableAvatar, user.id);
       //@ts-ignore
       updatedProfileData.avatar = downloadURL;
     }

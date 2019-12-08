@@ -1,15 +1,16 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, RefreshControl, ActivityIndicator } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
 import { ExplorePost } from '../../../types/screens';
 
 interface ExploreGridProps {
-  posts: ExplorePost[]
+  posts: ExplorePost[],
+  onRefresh: any
 };
 
-const ExploreGrid: React.FC<ExploreGridProps> = ({ posts }) => {
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
 
   const renderItem = ({ item }) => {
     const { id: postId, uri } = item;
@@ -20,9 +21,16 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts }) => {
     />;
   };
 
+  const refreshControl = () => (
+    <RefreshControl
+      refreshing={false}
+      onRefresh={onRefresh} />
+  );
+
   return (
     <View style={styles.container}>
       <FlatGrid
+        refreshControl={refreshControl()}
         itemDimension={100}
         showsVerticalScrollIndicator={false}
         items={posts.reverse()}

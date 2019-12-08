@@ -67,11 +67,20 @@ export type HandleAvailableColorType = {
 
 export type PollIntervalsType = {
   messages: number,
-  explore: number,
   profile: number,
   postView: number,
   profileView: number,
   connections: number,
   interaction: number,
   notification: number
+};
+
+export type StoragePathsType = {
+  avatars: string,
+  posts: string
+};
+
+export type AssetType = {
+  avatar: string,
+  post: string
 };

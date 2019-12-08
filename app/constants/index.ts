@@ -8,7 +8,9 @@ import {
   NotificationTextType,
   PollIntervalsType,
   PostDimensionsType,
-  RoutesType
+  RoutesType,
+  StoragePathsType,
+  AssetType
 } from '../types/constants';
 import { ThemeVariantType } from '../types/theme';
 
@@ -87,11 +89,20 @@ export const HandleAvailableColor: HandleAvailableColorType = {
 
 export const PollIntervals: PollIntervalsType = {
   messages: 4000,
-  explore: 5 * 60 * 1000,
   profile: 1000,
   postView: 2000,
   profileView: 1000,
   connections: 2000,
   interaction: 1000,
   notification: 2000,
+};
+
+export const StoragePaths: StoragePathsType = {
+  avatars: 'avatars',
+  posts: 'posts'
+};
+
+export const Asset: AssetType = {
+  avatar: 'avatar',
+  post: 'post'
 };

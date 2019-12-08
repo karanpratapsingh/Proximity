@@ -3,7 +3,7 @@ import React, { useContext, useState, useRef } from 'react';
 import { ScrollView, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes } from '../../constants';
+import { IconSizes, Routes, Asset } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_CREATE_POST } from '../../graphql/mutation';
 import { Button, FormInput, Header } from '../../layout';
@@ -29,7 +29,7 @@ const UploadScreen: React.FC = () => {
     if (caption.length > 200) return; //? TODO: show alert or success
 
     setIsUploading(true);
-    const { downloadURL: uri } = await uploadToStorage('posts', pickedAsset);
+    const { downloadURL: uri } = await uploadToStorage(Asset.post, pickedAsset, user.id);
 
     // @ts-ignore
     const { data: { createPost: { id: postId } } } = await createPost({
