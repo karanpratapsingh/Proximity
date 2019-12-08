@@ -91,8 +91,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     position: 'absolute',
     width: 10,
     height: 10,
-    bottom: 2,
-    right: 2,
+    bottom: 2.5,
+    right: 2.5,
     borderRadius: 10
   },
   info: {
