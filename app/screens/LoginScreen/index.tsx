@@ -19,6 +19,7 @@ import { handleLoginError } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet'
 import { crashlytics } from '../../utils/firebase';
+import { welcomeNotification } from '../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -68,6 +69,7 @@ const LoginScreen: React.FC = () => {
       const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
       if (!userExists) {
         await createUser({ variables: { token: token, avatar: photo, name, email } });
+        welcomeNotification();
       }
       await saveToken(token);
       setLoading(false);

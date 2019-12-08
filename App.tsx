@@ -10,8 +10,9 @@ import AppNavigator from './app/navigation';
 import { ThemeColors } from './app/types/theme';
 import { loadThemeType } from './app/utils/storage';
 import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
-import { ThemeVariant } from './app/theme';
+import { ThemeVariant, Typography, ThemeStatic } from './app/theme';
 import { crashlytics } from './app/utils/firebase';
+import FlashMessage from 'react-native-flash-message';
 
 GoogleSignin.configure();
 
@@ -49,6 +50,7 @@ const SafeAreaApp = () => {
     <SafeAreaView style={styles(theme).container}>
       <StatusBar animated barStyle={dynamicBarStyle as any} />
       <AppNavigator />
+      <FlashMessage titleStyle={styles().flashMessageTitle} floating position='bottom' />
     </SafeAreaView>
   );
 };
@@ -67,6 +69,11 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.base
+  },
+  flashMessageTitle: {
+    ...Typography.FontWeights.Regular,
+    ...Typography.FontSizes.Body,
+    color: ThemeStatic.white
   }
 });
 

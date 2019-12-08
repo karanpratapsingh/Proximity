@@ -1,15 +1,16 @@
 import { useMutation } from '@apollo/react-hooks';
-import React, { useContext, useState, useRef } from 'react';
-import { ScrollView, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
+import React, { useContext, useRef, useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes, Asset } from '../../constants';
+import { Asset, IconSizes, Routes, Errors } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_CREATE_POST } from '../../graphql/mutation';
 import { Button, FormInput, Header } from '../../layout';
 import { ThemeStatic } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { uploadToStorage } from '../../utils/firebase';
+import { uploadToStorage, crashlytics } from '../../utils/firebase';
+import { inputLimitErrorNotification, noAssetInfoNotification, postUploadedNotification, uploadErrorNotification } from '../../utils/notifications';
 import UploadBanner from './components/UploadBanner';
 
 const UploadScreen: React.FC = () => {
@@ -25,26 +26,39 @@ const UploadScreen: React.FC = () => {
   const captionInputRef = useRef();
 
   const uploadImage = async () => {
-    if (!pickedAsset) return;
-    if (caption.length > 200) return; //? TODO: show alert or success
 
-    setIsUploading(true);
-    const { downloadURL: uri } = await uploadToStorage(Asset.post, pickedAsset, user.id);
+    if (!pickedAsset) {
+      noAssetInfoNotification();
+      return;
+    }
 
-    // @ts-ignore
-    const { data: { createPost: { id: postId } } } = await createPost({
-      variables: {
-        userId: user.id,
-        uri,
-        caption
-      }
-    });
-    setIsUploading(false);
-    setPickedAsset('')
-    setCaption('');
-    // @ts-ignore
-    captionInputRef.current.clear();
-    navigate(Routes.PostViewScreen, { postId });
+    if (caption.length > 200) {
+      inputLimitErrorNotification('Caption', 'less', 200);
+      return;
+    }
+    try {
+      setIsUploading(true);
+      const { downloadURL: uri } = await uploadToStorage(Asset.post, pickedAsset, user.id);
+
+      // @ts-ignore
+      const { data: { createPost: { id: postId } } } = await createPost({
+        variables: {
+          userId: user.id,
+          uri,
+          caption
+        }
+      });
+      setIsUploading(false);
+      setPickedAsset('')
+      setCaption('');
+      // @ts-ignore
+      captionInputRef.current.clear();
+      postUploadedNotification();
+      navigate(Routes.PostViewScreen, { postId });
+    } catch ({ message }) {
+      uploadErrorNotification('Post');
+      crashlytics.recordCustomError(Errors.ASSET_UPLOAD, message);
+    }
   };
 
   const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;

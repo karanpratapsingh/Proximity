@@ -1,6 +1,7 @@
 import ImagePicker from "react-native-image-crop-picker";
 import { ThemeStatic } from "../theme";
 import { Timeouts } from "../constants";
+import { noPermissionNotification } from "./notifications";
 
 export const createAsyncDelay = (duration: number) => {
 
@@ -84,7 +85,12 @@ export const getImageFromLibrary = async (height: number, width: number, circula
     mediaType: 'photo'
   };
 
-  return ImagePicker.openPicker(options);
+  try {
+    const assetData = await ImagePicker.openPicker(options);
+    return assetData;
+  } catch ({ message }) {
+    noPermissionNotification();
+  }
 };
 
 export const isUserOnline = (lastSeen: number) => {

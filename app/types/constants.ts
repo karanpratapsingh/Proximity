@@ -91,5 +91,6 @@ export type ErrorsType = {
   UPDATE_LAST_SEEN: string,
   LOAD_THEME: string,
   INITIALIZE_FCM: string,
-  UPDATE_FCM_TOKEN: string
+  UPDATE_FCM_TOKEN: string,
+  ASSET_UPLOAD: string
 };

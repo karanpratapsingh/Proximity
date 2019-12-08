@@ -8,6 +8,7 @@ import { MUTATION_ADD_COMMENT } from '../../../graphql/mutation';
 import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
+import { inputLimitErrorNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -22,8 +23,14 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
   const [addComment, { loading }] = useMutation(MUTATION_ADD_COMMENT);
 
   const postComment = async () => {
-    if (comment.length < 1) return alert('[warning]: cannot be empty');
-    if (comment.length > 200) return alert('[warning]: cannot be greater than 200');
+    if (comment.length < 1) {
+      inputLimitErrorNotification('Comment', 'more', 1);
+      return;
+    }
+    if (comment.length > 200) {
+      inputLimitErrorNotification('Comment', 'less', 200);
+      return;
+    }
     await addComment({ variables: { userId: user.id, postId, body: comment } });
     setComment('');
   };

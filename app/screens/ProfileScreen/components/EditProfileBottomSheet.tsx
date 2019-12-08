@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, Asset } from '../../../constants';
+import { IconSizes, Asset, Errors } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
 import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
@@ -11,7 +11,8 @@ import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../..
 import { ThemeStatic, HandleAvailableColor } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { getImageFromLibrary } from '../../../utils/shared';
-import { uploadToStorage } from '../../../utils/firebase';
+import { uploadToStorage, crashlytics } from '../../../utils/firebase';
+import { inputLimitErrorNotification, showErrorNotification, uploadErrorNotification, somethingWentWrongErrorNotification } from '../../../utils/notifications';
 
 interface EditProfileBottomSheetProps {
   ref: React.Ref<any>,
@@ -75,34 +76,61 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
   };
 
   const onDone = async () => {
-    //?TODO-Later: show error in fields
     const { isHandleAvailable } = isHandleAvailableData;
-    if (editableAbout.trim().length > 200) return;
-    if (!isHandleAvailable) return;
-    if (!editableHandle) return;
-    if (editableHandle.split(' ').length > 1) return;
 
-    setIsUploading(true);
-
-    const updatedProfileData = {
-      userId: user.id,
-      avatar: editableAvatar,
-      name: editableName.trim(),
-      handle: editableHandle.trim(),
-      about: editableAbout.trim()
-    };
-
-    if (avatar !== editableAvatar) {
-      const { downloadURL } = await uploadToStorage(Asset.avatar, editableAvatar, user.id);
-      //@ts-ignore
-      updatedProfileData.avatar = downloadURL;
+    if (!editableName.trim().length) {
+      showErrorNotification('Name cannot be empty');
+      return;
+    }
+    if (editableAbout.trim().length > 200) {
+      inputLimitErrorNotification('About', 'less', 200);
+      return;
+    }
+    if (!isHandleAvailable) {
+      showErrorNotification('Username is not available');
+      return;
+    }
+    if (!editableHandle) {
+      showErrorNotification('Username cannot be empty');
+      return;
+    }
+    if (editableHandle.split(' ').length > 1) {
+      showErrorNotification('Username cannot contain blank spaces');
+      return;
     }
 
-    const { data: { updateUser: { id, avatar: updatedAvatar, handle: updatedHandle } } } = await updateUser({ variables: updatedProfileData });
-    updateUserContext({ id, avatar: updatedAvatar, handle: updatedHandle });
-    setIsUploading(false);
-    //@ts-ignore
-    ref.current.close();
+    const avatarChanged = avatar !== editableAvatar;
+
+    try {
+      setIsUploading(true);
+
+      const updatedProfileData = {
+        userId: user.id,
+        avatar: editableAvatar,
+        name: editableName.trim(),
+        handle: editableHandle.trim(),
+        about: editableAbout.trim()
+      };
+
+      if (avatarChanged) {
+        const { downloadURL } = await uploadToStorage(Asset.avatar, editableAvatar, user.id);
+        //@ts-ignore
+        updatedProfileData.avatar = downloadURL;
+      }
+
+      const { data: { updateUser: { id, avatar: updatedAvatar, handle: updatedHandle } } } = await updateUser({ variables: updatedProfileData });
+      updateUserContext({ id, avatar: updatedAvatar, handle: updatedHandle });
+      setIsUploading(false);
+      //@ts-ignore
+      ref.current.close();
+    } catch ({ message }) {
+      if (avatarChanged) {
+        uploadErrorNotification('Avatar');
+      } else {
+        somethingWentWrongErrorNotification();
+      }
+      crashlytics.recordCustomError(Errors.ASSET_UPLOAD, message);
+    }
   };
 
   const setHandle = (handle: string) => {
@@ -148,12 +176,14 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
         </ImageBackground>
 
         <FormInput
+          ref={null}
           label='Name'
           placeholder='example: Doggo'
           value={editableName}
           onChangeText={setEditableName}
         />
         <FormInput
+          ref={null}
           label='Username'
           placeholder='example: doggo'
           error={handleError}
@@ -162,6 +192,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
           {content}
         </FormInput>
         <FormInput
+          ref={null}
           label='About'
           placeholder='example: hey, I am a doggo'
           value={editableAbout}
