@@ -85,3 +85,7 @@ export type AssetType = {
   avatar: string,
   post: string
 };
+
+export type TimeoutsType = {
+  online: number
+};

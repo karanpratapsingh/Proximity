@@ -6,7 +6,6 @@ export const QUERY_SIGNIN = gql`
       id
       avatar
       handle
-      lastSeen
     }
   }
 `;
@@ -72,6 +71,7 @@ export const QUERY_CHATS = gql`
         id
         avatar
         handle
+        lastSeen
       }
       messages(last: 1) {
         id

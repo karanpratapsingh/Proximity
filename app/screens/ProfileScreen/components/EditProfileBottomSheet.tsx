@@ -98,8 +98,8 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
       updatedProfileData.avatar = downloadURL;
     }
 
-    const { data: { updateUser: { id, avatar: updatedAvatar, handle: updatedHandle, lastSeen } } } = await updateUser({ variables: updatedProfileData });
-    updateUserContext({ id, avatar: updatedAvatar, handle: updatedHandle, lastSeen });
+    const { data: { updateUser: { id, avatar: updatedAvatar, handle: updatedHandle } } } = await updateUser({ variables: updatedProfileData });
+    updateUserContext({ id, avatar: updatedAvatar, handle: updatedHandle });
     setIsUploading(false);
     //@ts-ignore
     ref.current.close();

@@ -36,7 +36,7 @@ const SafeAreaApp = () => {
       if (user.id) {
         try {
           const { data: { updateLastSeen: { lastSeen } } } = await updateLastSeen({ variables: { userId: user.id } });
-          console.log(lastSeen);
+          // console.log(lastSeen);
         } catch {
           // ERROR: update last seen
         }

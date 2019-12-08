@@ -10,7 +10,8 @@ import {
   PostDimensionsType,
   RoutesType,
   StoragePathsType,
-  AssetType
+  AssetType,
+  TimeoutsType
 } from '../types/constants';
 import { ThemeVariantType } from '../types/theme';
 
@@ -106,4 +107,8 @@ export const StoragePaths: StoragePathsType = {
 export const Asset: AssetType = {
   avatar: 'avatar',
   post: 'post'
+};
+
+export const Timeouts: TimeoutsType = {
+  online: 120
 };
