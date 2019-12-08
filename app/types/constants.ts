@@ -72,7 +72,8 @@ export type PollIntervalsType = {
   profileView: number,
   connections: number,
   interaction: number,
-  notification: number
+  notification: number,
+  lastSeen: number
 };
 
 export type StoragePathsType = {

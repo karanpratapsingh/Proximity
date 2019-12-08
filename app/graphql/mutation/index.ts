@@ -86,8 +86,8 @@ export const MUTATION_UPDATE_FCM_TOKEN = gql`
 `;
 
 export const MUTATION_CREATE_USER = gql`
-  mutation CreateUser($token: String!, $avatar: String, $name: String!) {
-    createUser(token: $token, avatar: $avatar, name: $name) {
+  mutation CreateUser($token: String!, $avatar: String, $name: String!, $email: String!) {
+    createUser(token: $token, avatar: $avatar, name: $name, email: $email) {
       id
       avatar
       handle
@@ -115,6 +115,14 @@ export const MUTATION_SEEN_MESSAGE = gql`
   mutation MessageSeen($messageId: String!) {
     messageSeen(messageId: $messageId) {
       id
+    }
+  }
+`;
+
+export const MUTATION_LAST_SEEN = gql`
+  mutation LastSeen($userId: String!) {
+    updateLastSeen(userId: $userId) {
+      lastSeen
     }
   }
 `;

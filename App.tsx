@@ -1,20 +1,22 @@
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { ThemeVariant } from './app/constants';
+import { ThemeVariant, PollIntervals } from './app/constants';
 import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
 import { ThemeColors } from './app/types/theme';
 import { loadThemeType } from './app/utils/storage';
+import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
 
 GoogleSignin.configure();
 
 const SafeAreaApp = () => {
-  const { theme, themeType, toggleTheme } = useContext(AppContext);
+  const { user, theme, themeType, toggleTheme } = useContext(AppContext);
   const dynamicBarStyle = `${themeType === ThemeVariant.light ? ThemeVariant.dark : ThemeVariant.light}-content`;
+  const [updateLastSeen] = useMutation(MUTATION_LAST_SEEN);
 
   const initializeTheme = async () => {
     try {
@@ -22,9 +24,22 @@ const SafeAreaApp = () => {
       toggleTheme(themeType);
     } catch { }
   };
+
   useEffect(() => {
     initializeTheme();
   }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      if (user.id) {
+        try {
+          updateLastSeen({ variables: { userId: user.id } });
+        } catch {
+          // ERROR: update last seen
+        }
+      }
+    }, PollIntervals.lastSeen);
+  }, [user.id]);
 
   return (
     <SafeAreaView style={styles(theme).container}>

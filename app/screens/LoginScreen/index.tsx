@@ -62,10 +62,11 @@ const LoginScreen: React.FC = () => {
     try {
       setLoading(true);
       const data = await GoogleSignin.signIn();
-      const { user: { id: token, name, photo } } = data;
+      const { user: { id: token, name, photo, email } } = data;
+
       const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
       if (!userExists) {
-        await createUser({ variables: { token: token, avatar: photo, name } });
+        await createUser({ variables: { token: token, avatar: photo, name, email } });
       }
       await saveToken(token);
       setLoading(false);

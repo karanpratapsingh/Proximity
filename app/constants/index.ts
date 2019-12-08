@@ -95,6 +95,7 @@ export const PollIntervals: PollIntervalsType = {
   connections: 2000,
   interaction: 1000,
   notification: 2000,
+  lastSeen: 10000
 };
 
 export const StoragePaths: StoragePathsType = {
