@@ -1,5 +1,29 @@
 import gql from 'graphql-tag';
 
+export const SUBSCRIPTION_CHATS = gql`
+  subscription Chats($userId: String!) {
+    user(userId: $userId) {
+      chats {
+        id
+        participants {
+          id
+          avatar
+          handle
+        }
+        messages(last: 1) {
+          id
+          body
+          seen
+          author {
+            id
+          }
+          createdAt
+        }
+      }  
+    }
+  }
+`;
+
 export const SUBSCRIPTION_CHAT = gql`
   subscription Chat($chatId: String!) {
     chat(chatId: $chatId) {

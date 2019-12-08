@@ -1,20 +1,19 @@
-import { useQuery, useMutation, useSubscription, useLazyQuery } from '@apollo/react-hooks';
-import React, { useContext, useState, useEffect } from 'react';
+import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
+import React, { useContext, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, Routes, PollIntervals, LikeAction } from '../../constants';
+import { IconSizes, LikeAction, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
+import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
 import { QUERY_POST } from '../../graphql/query';
-import { GoBackHeader, NativeImage, PostViewScreenPlaceholder, IconButton } from '../../layout';
-import { Typography, ThemeStatic } from '../../theme';
+import { SUBSCRIPTION_POST } from '../../graphql/subscription';
+import { GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
+import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
-import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
-
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { SUBSCRIPTION_POST } from '../../graphql/subscription';
 
 const { FontWeights, FontSizes } = Typography;
 
