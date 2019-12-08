@@ -84,3 +84,12 @@ export type AssetType = {
 export type TimeoutsType = {
   online: number
 };
+
+export type ErrorsType = {
+  SIGN_IN: string,
+  SIGN_OUT: string,
+  UPDATE_LAST_SEEN: string,
+  LOAD_THEME: string,
+  INITIALIZE_FCM: string,
+  UPDATE_FCM_TOKEN: string
+};

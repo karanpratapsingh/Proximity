@@ -7,7 +7,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
 import GoogleLogo from '../../../assets/svg/google-logo.svg';
 import LoginBanner from '../../../assets/svg/login-banner.svg';
-import { Routes, IconSizes } from '../../constants';
+import { Routes, IconSizes, Errors } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
@@ -18,6 +18,7 @@ import { ThemeColors } from '../../types/theme';
 import { handleLoginError } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet'
+import { crashlytics } from '../../utils/firebase';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -73,8 +74,7 @@ const LoginScreen: React.FC = () => {
       navigateToApp(token);
     } catch ({ message }) {
       setLoading(false);
-      // Error: google signin
-      alert(JSON.stringify({ message }));
+      crashlytics.recordCustomError(Errors.SIGN_IN, message);
     }
   };
 

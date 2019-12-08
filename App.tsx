@@ -3,7 +3,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { PollIntervals } from './app/constants';
+import { PollIntervals, Errors } from './app/constants';
 import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
@@ -11,6 +11,7 @@ import { ThemeColors } from './app/types/theme';
 import { loadThemeType } from './app/utils/storage';
 import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
 import { ThemeVariant } from './app/theme';
+import { crashlytics } from './app/utils/firebase';
 
 GoogleSignin.configure();
 
@@ -23,8 +24,8 @@ const SafeAreaApp = () => {
     try {
       const themeType = await loadThemeType();
       toggleTheme(themeType);
-    } catch {
-      // Error: load theme theme
+    } catch ({ message }) {
+      crashlytics.recordCustomError(Errors.LOAD_THEME, message);
     }
   };
 
@@ -37,8 +38,8 @@ const SafeAreaApp = () => {
       if (user.id) {
         try {
           updateLastSeen({ variables: { userId: user.id } });
-        } catch {
-          // ERROR: update last seen
+        } catch ({ message }) {
+          crashlytics.recordCustomError(Errors.UPDATE_LAST_SEEN, message);
         }
       }
     }, PollIntervals.lastSeen);

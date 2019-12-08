@@ -10,7 +10,8 @@ import {
   RoutesType,
   StoragePathsType,
   AssetType,
-  TimeoutsType
+  TimeoutsType,
+  ErrorsType
 } from '../types/constants';
 
 export const Routes: RoutesType = {
@@ -99,4 +100,13 @@ export const Asset: AssetType = {
 
 export const Timeouts: TimeoutsType = {
   online: 120
+};
+
+export const Errors: ErrorsType = {
+  SIGN_IN: 'SIGN_IN',
+  SIGN_OUT: 'SIGN_OUT',
+  UPDATE_LAST_SEEN: 'UPDATE_LAST_SEEN',
+  LOAD_THEME: 'LOAD_THEME',
+  INITIALIZE_FCM: 'INITIALIZE_FCM',
+  UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN'
 };

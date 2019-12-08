@@ -6,12 +6,12 @@ import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { IconSizes, Routes } from '../../constants';
+import { IconSizes, Routes, Errors } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
 import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { messaging, notifications } from '../../utils/firebase';
+import { messaging, notifications, crashlytics } from '../../utils/firebase';
 import PostCard from './components/PostCard';
 import firebase from 'react-native-firebase';
 
@@ -46,8 +46,8 @@ const HomeScreen: React.FC = () => {
           }
         });
       }
-    } catch {
-      // Error: initialize fcm error
+    } catch ({ message }) {
+      crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message)
     }
   };
 
@@ -73,9 +73,8 @@ const HomeScreen: React.FC = () => {
             fcmToken
           }
         });
-      } catch (error) {
-        // Error: FCM token update error
-        alert(JSON.stringify(error));
+      } catch ({ message }) {
+        crashlytics.recordCustomError(Errors.UPDATE_FCM_TOKEN, message)
       }
     });
 

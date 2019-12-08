@@ -5,6 +5,7 @@ import { Asset, StoragePaths } from '../constants';
 export const storage = firebase.storage();
 export const messaging = firebase.messaging();
 export const notifications = firebase.notifications();
+export const crashlytics = firebase.crashlytics();
 
 export const uploadToStorage = (asset: string, uri: string, userId: string) => {
   const [type] = getMediaType(uri);
