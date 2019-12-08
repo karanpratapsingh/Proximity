@@ -3,7 +3,12 @@
  * This contains all the color config for the application
  */
 
-import { ThemeType, ThemeStaticType, OnlineDotColorType, HandleAvailableColorType } from '../types/theme';
+import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType } from '../types/theme';
+
+export const ThemeVariant: ThemeVariantType = {
+  light: 'light',
+  dark: 'dark'
+};
 
 export const ThemeStatic: ThemeStaticType = {
   accent: '#846BE2',

@@ -3,13 +3,14 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { ThemeVariant, PollIntervals } from './app/constants';
+import { PollIntervals } from './app/constants';
 import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
 import AppNavigator from './app/navigation';
 import { ThemeColors } from './app/types/theme';
 import { loadThemeType } from './app/utils/storage';
 import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
+import { ThemeVariant } from './app/theme';
 
 GoogleSignin.configure();
 

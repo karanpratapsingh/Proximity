@@ -2,7 +2,6 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import {
   ConnectionsType,
   FollowInteractionType,
-  HandleAvailableColorType,
   IconSizesType,
   LikeActionType,
   NotificationTextType,
@@ -13,7 +12,6 @@ import {
   AssetType,
   TimeoutsType
 } from '../types/constants';
-import { ThemeVariantType } from '../types/theme';
 
 export const Routes: RoutesType = {
   App: 'App',
@@ -76,11 +74,6 @@ export const PostDimensions: PostDimensionsType = {
   Small: { height: responsiveWidth(28.5), width: responsiveWidth(28.5) },
   Medium: { height: responsiveWidth(43), width: responsiveWidth(43) },
   Large: { height: responsiveWidth(90), width: responsiveWidth(90) }
-};
-
-export const ThemeVariant: ThemeVariantType = {
-  light: 'light',
-  dark: 'dark'
 };
 
 export const PollIntervals: PollIntervalsType = {

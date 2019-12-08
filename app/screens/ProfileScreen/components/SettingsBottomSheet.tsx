@@ -6,10 +6,10 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes, ThemeVariant } from '../../../constants';
+import { IconSizes, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
+import { ThemeStatic, ThemeVariant, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { signOut } from '../../../utils/authentication';
 
