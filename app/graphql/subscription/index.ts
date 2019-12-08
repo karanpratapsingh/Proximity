@@ -16,3 +16,50 @@ export const SUBSCRIPTION_CHAT = gql`
     }
   }
 `;
+
+export const SUBSCRIPTION_POST = gql`
+  subscription Post($postId: String!) {
+    post(postId: $postId) {
+      author {
+        id
+        handle
+        avatar
+      }
+      comments {
+        body
+        author {
+          id
+          avatar
+          handle
+        }
+        createdAt
+      }
+      uri
+      likes
+      caption
+      createdAt
+    }
+  }
+`;
+
+export const SUBSCRIPTION_USER = gql`
+ subscription User($userId: String!) {
+    user(userId: $userId) {
+      id
+      avatar
+      name
+      handle
+      about
+      following {
+        id
+      }
+      followers {
+        id
+      }
+      posts {
+        id
+        uri
+      }
+    }
+  }
+`;

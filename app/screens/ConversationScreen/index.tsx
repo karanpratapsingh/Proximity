@@ -23,10 +23,17 @@ const ConversationScreen: React.FC = () => {
   const handle = useNavigationParam('handle');
   const avatar = useNavigationParam('avatar');
   const targetId = useNavigationParam('targetId');
+
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
-  const [queryChat, { called: chatQueryCalled, data: chatQueryData, loading: chatQueryLoading, error: chatQueryError }] = useLazyQuery(QUERY_CHAT, {
+
+  const [queryChat, {
+    called: chatQueryCalled,
+    data: chatQueryData,
+    loading: chatQueryLoading,
+    error: chatQueryError
+  }] = useLazyQuery(QUERY_CHAT, {
     variables: { chatId },
     fetchPolicy: 'network-only'
   });
@@ -35,10 +42,6 @@ const ConversationScreen: React.FC = () => {
   });
   const [addMessage] = useMutation(MUTATION_ADD_MESSAGE);
   const [connectChat] = useMutation(MUTATION_CONNECT_CHAT_TO_USERS);
-
-  useEffect(() => {
-    // set seen
-  }, []);
 
   useEffect(() => {
     if (!chatSubscriptionLoading) {

@@ -1,5 +1,5 @@
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import React, { useContext, useState } from 'react';
+import { useQuery, useMutation, useSubscription, useLazyQuery } from '@apollo/react-hooks';
+import React, { useContext, useState, useEffect } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, PostDimensions, Routes, PollIntervals, LikeAction } from '../../constants';
@@ -14,6 +14,7 @@ import Comments from './components/Comments';
 import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { SUBSCRIPTION_POST } from '../../graphql/subscription';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -23,12 +24,30 @@ const PostViewScreen: React.FC = () => {
   const { navigate } = useNavigation();
   const postId = useNavigationParam('postId');
 
+  const [postData, setPostData] = useState(null);
   const [lastTap, setLastTap] = useState(Date.now());
 
-  const { data: postData, loading: postLoading, error: postError } = useQuery(QUERY_POST, {
-    variables: { postId },
-    pollInterval: PollIntervals.postView
-  });
+  const [
+    queryPost, {
+      data: postQueryData,
+      called: postQueryCalled,
+      loading: postQueryLoading,
+      error: postQueryError
+    }] = useLazyQuery(QUERY_POST, { variables: { postId } });
+
+  const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
+
+  useEffect(() => {
+    if (!postSubscriptionLoading) {
+      setPostData(postSubscriptionData);
+    } else if (postSubscriptionLoading) {
+      if (postQueryCalled && !postQueryLoading) {
+        setPostData(postQueryData);
+      } else if (!postQueryCalled) {
+        queryPost();
+      }
+    }
+  }, [postQueryData, postQueryCalled, postQueryLoading, postSubscriptionData, postSubscriptionLoading]);
 
   const [likeInteraction, { loading: likeInteractionLoading }] = useMutation(MUTATION_LIKE_INTERACTION);
 
@@ -66,8 +85,10 @@ const PostViewScreen: React.FC = () => {
 
   let content = <PostViewScreenPlaceholder />;
 
-  if (!postLoading && !postError) {
+  if (postQueryCalled && !postQueryLoading && !postQueryError && postData) {
+
     const {
+      // @ts-ignore
       post: {
         author: {
           id: userId,
@@ -185,7 +206,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontWeights.Light,
     ...FontSizes.Body,
     color: theme.text01,
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 20
   }
 });
