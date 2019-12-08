@@ -65,6 +65,7 @@ export const MUTATION_UPDATE_USER = gql`
       id
       avatar
       handle
+      lastSeen
     }
   }
 `;

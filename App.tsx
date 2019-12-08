@@ -22,7 +22,9 @@ const SafeAreaApp = () => {
     try {
       const themeType = await loadThemeType();
       toggleTheme(themeType);
-    } catch { }
+    } catch {
+      // Error: load theme theme
+    }
   };
 
   useEffect(() => {
@@ -30,10 +32,11 @@ const SafeAreaApp = () => {
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
+    setInterval(async () => {
       if (user.id) {
         try {
-          updateLastSeen({ variables: { userId: user.id } });
+          const { data: { updateLastSeen: { lastSeen } } } = await updateLastSeen({ variables: { userId: user.id } });
+          console.log(lastSeen);
         } catch {
           // ERROR: update last seen
         }

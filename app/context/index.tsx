@@ -6,7 +6,8 @@ import { saveThemeType } from '../utils/storage';
 type UserType = {
   id: string,
   avatar: string,
-  handle: string
+  handle: string,
+  lastSeen: number
 };
 
 type AppContextType = {
@@ -23,7 +24,8 @@ export const AppContextProvider = props => {
   const [user, setUser] = useState({
     id: '',
     avatar: '',
-    handle: ''
+    handle: '',
+    lastSeen: 0
   });
   const [theme, setTheme] = useState(Theme.light.colors);
   const [themeType, setThemeType] = useState(Theme.light.type);

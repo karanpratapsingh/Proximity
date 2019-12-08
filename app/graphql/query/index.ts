@@ -6,6 +6,7 @@ export const QUERY_SIGNIN = gql`
       id
       avatar
       handle
+      lastSeen
     }
   }
 `;

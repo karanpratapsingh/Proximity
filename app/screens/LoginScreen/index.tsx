@@ -31,12 +31,12 @@ const LoginScreen: React.FC = () => {
   const termsAndConditionsBottomSheetRef = useRef();
 
   const navigateToApp = async (token: string) => {
-    const { data: { signIn: { id, avatar, handle } } } = await client
+    const { data: { signIn: { id, avatar, handle, lastSeen } } } = await client
       .query({
         query: QUERY_SIGNIN,
         variables: { token }
       });
-    updateUser({ id, avatar, handle });
+    updateUser({ id, avatar, handle, lastSeen });
     navigate(Routes.App);
   };
 

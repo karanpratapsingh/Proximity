@@ -24,6 +24,6 @@ export type ThemeVariantType = {
 };
 
 export type ThemeType = {
-  type: keyof ThemeVariantType,
+  type: string,
   colors: ThemeColors
 };
