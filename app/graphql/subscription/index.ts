@@ -1,29 +1,5 @@
 import gql from 'graphql-tag';
 
-export const SUBSCRIPTION_CHATS = gql`
-  subscription Chats($userId: String!) {
-    user(userId: $userId) {
-      chats {
-        id
-        participants {
-          id
-          avatar
-          handle
-        }
-        messages(last: 1) {
-          id
-          body
-          seen
-          author {
-            id
-          }
-          createdAt
-        }
-      }  
-    }
-  }
-`;
-
 export const SUBSCRIPTION_CHAT = gql`
   subscription Chat($chatId: String!) {
     chat(chatId: $chatId) {
@@ -66,24 +42,25 @@ export const SUBSCRIPTION_POST = gql`
   }
 `;
 
-export const SUBSCRIPTION_USER = gql`
- subscription User($userId: String!) {
-    user(userId: $userId) {
-      id
-      avatar
-      name
-      handle
-      about
-      following {
-        id
-      }
-      followers {
-        id
-      }
-      posts {
-        id
-        uri
-      }
-    }
-  }
-`;
+// Legacy
+// export const SUBSCRIPTION_USER = gql`
+//  subscription User($userId: String!) {
+//     user(userId: $userId) {
+//       id
+//       avatar
+//       name
+//       handle
+//       about
+//       following {
+//         id
+//       }
+//       followers {
+//         id
+//       }
+//       posts {
+//         id
+//         uri
+//       }
+//     }
+//   }
+// `;

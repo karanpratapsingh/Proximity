@@ -1,5 +1,5 @@
-import { useQuery, useSubscription, useLazyQuery } from '@apollo/react-hooks';
-import React, { useContext, useRef, useState, useEffect } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -11,29 +11,15 @@ import { ThemeColors } from '../../types/theme';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
 import AboutBottomSheet from './components/AboutBottomSheet';
-import { SUBSCRIPTION_USER } from '../../graphql/subscription';
 
 const ProfileScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
-  const [userData, setUserData] = useState(null);
 
-  const [queryUser, { data: userQueryData, called: userQueryCalled, loading: userQueryLoading, error: userQueryError }] = useLazyQuery(QUERY_USER, { variables: { userId: user.id } });
-
-  const { data: userSubscriptionData, loading: userSubscriptionLoading } = useSubscription(SUBSCRIPTION_USER, { variables: { userId: user.id } });
-
-  useEffect(() => {
-    if (!userSubscriptionLoading) {
-      setUserData(userSubscriptionData);
-    } else if (userSubscriptionLoading) {
-      if (userQueryCalled && !userQueryLoading) {
-        setUserData(userQueryData);
-      } else if (!userQueryCalled) {
-        queryUser();
-      }
-    }
-  }, [userQueryData, userQueryCalled, userQueryLoading, userSubscriptionData, userSubscriptionLoading]);
-
+  const { data, loading, error } = useQuery(QUERY_USER, {
+    variables: { userId: user.id },
+    pollInterval: PollIntervals.profile
+  });
 
   const editProfileBottomSheetRef = useRef();
   const settingsBottomSheetRef = useRef();
@@ -55,11 +41,10 @@ const ProfileScreen: React.FC = () => {
     settingsBottomSheetRef.current.close()
     // @ts-ignore
     aboutBottomSheetRef.current.open();
-  };
+  }
 
   const ListHeaderComponent = () => {
-    // @ts-ignore
-    const { user: { avatar, following, followers, name, handle, about } } = userData;
+    const { user: { avatar, following, followers, name, handle, about } } = data;
     return (
       <ProfileCard
         editable
@@ -89,9 +74,8 @@ const ProfileScreen: React.FC = () => {
 
   let content = <ProfileScreenPlaceholder />;
 
-  if (userQueryCalled && !userQueryLoading && !userQueryError && userData) {
-    // @ts-ignore
-    const { user: { avatar, name, handle, about, posts } } = userData;
+  if (!loading && !error) {
+    const { user: { avatar, name, handle, about, posts } } = data;
     content = (
       <>
         <FlatGrid
