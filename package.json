@@ -17,7 +17,8 @@
     "cocoapods": "cd ios && pod install && cd ..",
     "ios": "react-native run-ios --simulator=\"iPhone 8\"",
     "device": "react-native run-ios --device=\"iPhone\"",
-    "android": "emulator @PIXEL_API_28 && react-native run-android"
+    "android": "react-native run-android",
+    "emulator": "emulator @PIXEL_API_28"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
