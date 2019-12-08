@@ -1,5 +1,6 @@
 import ImagePicker from "react-native-image-crop-picker";
 import { ThemeStatic } from "../theme";
+import { Timeouts } from "../constants";
 
 export const createAsyncDelay = (duration: number) => {
 
@@ -85,3 +86,9 @@ export const getImageFromLibrary = async (height: number, width: number, circula
 
   return ImagePicker.openPicker(options);
 };
+
+export const isUserOnline = (lastSeen: number) => {
+
+  const now = (Date.now() / 100);
+  return (now - lastSeen) < Timeouts.online;
+}

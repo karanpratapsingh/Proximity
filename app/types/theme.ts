@@ -27,3 +27,13 @@ export type ThemeType = {
   type: string,
   colors: ThemeColors
 };
+
+export type HandleAvailableColorType = {
+  true: string,
+  false: string
+};
+
+export type OnlineDotColorType = {
+  true: string,
+  false: string
+};

@@ -3,7 +3,7 @@
  * This contains all the color config for the application
  */
 
-import { ThemeType, ThemeStaticType, ThemeVariantType } from '../types/theme';
+import { ThemeType, ThemeStaticType, OnlineDotColorType, HandleAvailableColorType } from '../types/theme';
 
 export const ThemeStatic: ThemeStaticType = {
   accent: '#846BE2',
@@ -41,6 +41,16 @@ export const Theme: {
       white: '#FFFFFF'
     }
   }
+};
+
+export const HandleAvailableColor: HandleAvailableColorType = {
+  true: '#05b714',
+  false: '#EF5350'
+};
+
+export const OnlineDotColor: OnlineDotColorType = {
+  true: '#4caf50',
+  false: '#BBBBBB'
 };
 
 /**

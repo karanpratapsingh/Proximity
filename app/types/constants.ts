@@ -60,11 +60,6 @@ export type PostDimensionsType = {
   Large: Dimensions
 };
 
-export type HandleAvailableColorType = {
-  true: string,
-  false: string
-};
-
 export type PollIntervalsType = {
   messages: number,
   profile: number,

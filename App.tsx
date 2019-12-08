@@ -32,11 +32,10 @@ const SafeAreaApp = () => {
   }, []);
 
   useEffect(() => {
-    setInterval(async () => {
+    setInterval(() => {
       if (user.id) {
         try {
-          const { data: { updateLastSeen: { lastSeen } } } = await updateLastSeen({ variables: { userId: user.id } });
-          // console.log(lastSeen);
+          updateLastSeen({ variables: { userId: user.id } });
         } catch {
           // ERROR: update last seen
         }

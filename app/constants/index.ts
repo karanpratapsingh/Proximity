@@ -83,11 +83,6 @@ export const ThemeVariant: ThemeVariantType = {
   dark: 'dark'
 };
 
-export const HandleAvailableColor: HandleAvailableColorType = {
-  true: '#4caf50',
-  false: '#EF5350'
-};
-
 export const PollIntervals: PollIntervalsType = {
   messages: 4000,
   profile: 1000,

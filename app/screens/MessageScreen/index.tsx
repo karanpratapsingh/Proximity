@@ -9,7 +9,7 @@ import { QUERY_CHATS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import MessageCard from './components/MessageCard';
-import { filterChatParticipants } from '../../utils/shared';
+import { filterChatParticipants, isUserOnline } from '../../utils/shared';
 import { PollIntervals, Timeouts } from '../../constants';
 
 const MessageScreen: React.FC = () => {
@@ -41,7 +41,9 @@ const MessageScreen: React.FC = () => {
       body: messageBody,
       createdAt: time
     } = lastMessage;
-    console.log((Date.now() / 100) - lastSeen > Timeouts.online)
+
+    const isOnline = isUserOnline(lastSeen);
+
     return (
       <MessageCard
         chatId={chatId}
@@ -52,6 +54,7 @@ const MessageScreen: React.FC = () => {
         messageBody={messageBody}
         seen={seen}
         time={time}
+        isOnline={isOnline}
       />
     );
   };

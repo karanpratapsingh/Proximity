@@ -1,4 +1,4 @@
-import { Theme, ThemeStatic, MaterialColors } from './Colors';
+import { Theme, ThemeStatic, MaterialColors, HandleAvailableColor, OnlineDotColor } from './Colors';
 import Typography from './Typography';
 
-export { Theme, ThemeStatic, MaterialColors, Typography };
+export { Theme, ThemeStatic, MaterialColors, HandleAvailableColor, OnlineDotColor, Typography };
