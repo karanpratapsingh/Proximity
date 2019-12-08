@@ -23,27 +23,31 @@ const HomeScreen: React.FC = () => {
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
   const initializeFCM = async () => {
-    if (Platform.OS === 'android') {
-      const channel = new firebase
-        .notifications
-        .Android
-        .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
-        .setDescription('Proximity Notification Channel')
-        .setSound('default');
+    try {
+      if (Platform.OS === 'android') {
+        const channel = new firebase
+          .notifications
+          .Android
+          .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
+          .setDescription('Proximity Notification Channel')
+          .setSound('default');
 
-      notifications.android.createChannel(channel);
-    }
-    const hasPermission = await messaging.hasPermission();
-    if (!hasPermission) {
-      await messaging.requestPermission();
-    } else if (hasPermission) {
-      const fcmToken = await messaging.getToken();
-      updateFcmToken({
-        variables: {
-          userId: user.id,
-          fcmToken
-        }
-      });
+        notifications.android.createChannel(channel);
+      }
+      const hasPermission = await messaging.hasPermission();
+      if (!hasPermission) {
+        await messaging.requestPermission();
+      } else if (hasPermission) {
+        const fcmToken = await messaging.getToken();
+        updateFcmToken({
+          variables: {
+            userId: user.id,
+            fcmToken
+          }
+        });
+      }
+    } catch {
+      // Error: initialize fcm error
     }
   };
 
@@ -70,6 +74,7 @@ const HomeScreen: React.FC = () => {
           }
         });
       } catch (error) {
+        // Error: FCM token update error
         alert(JSON.stringify(error));
       }
     });
@@ -109,7 +114,7 @@ const HomeScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={[dummyPost]}
+        items={[]}
         ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder='Your feed is empty' />}
         style={styles().postList}
         spacing={20}

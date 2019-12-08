@@ -16,6 +16,11 @@ export const handleLoginError = async (errorType: string) => {
 };
 
 export const signOut = async () => {
-  await messaging.deleteToken();
-  await removeToken();
+  try {
+    await messaging.deleteToken();
+    await removeToken();
+  } catch ({ message }) {
+    // Error: signout
+    alert(JSON.stringify(message));
+  }
 };

@@ -17,10 +17,7 @@
     "cocoapods": "cd ios && pod install && cd ..",
     "ios": "react-native run-ios --simulator=\"iPhone 8\"",
     "device": "react-native run-ios --device=\"iPhone\"",
-    "android": "react-native run-android",
-    "rename": "react-native-rename",
-    "redux:remove": "yarn remove redux react-redux redux-thunk",
-    "typescript:add": "sh typescript.sh"
+    "android": "emulator @PIXEL_API_28 && react-native run-android"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
@@ -75,7 +72,6 @@
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
-    "react-native-rename": "^2.4.1",
     "react-native-svg-transformer": "^0.14.0",
     "react-test-renderer": "16.8.1"
   },

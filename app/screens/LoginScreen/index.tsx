@@ -73,6 +73,7 @@ const LoginScreen: React.FC = () => {
       navigateToApp(token);
     } catch ({ message }) {
       setLoading(false);
+      // Error: google signin
       alert(JSON.stringify({ message }));
     }
   };

@@ -63,12 +63,8 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
   };
 
   const logOut = async () => {
-    try {
-      await signOut();
-      navigate(Routes.Auth);
-    } catch ({ message }) {
-      alert(JSON.stringify(message));
-    }
+    await signOut();
+    navigate(Routes.Auth);
   };
 
   return (
