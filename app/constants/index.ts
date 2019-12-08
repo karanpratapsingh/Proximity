@@ -2,15 +2,17 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import {
   ConnectionsType,
   FollowInteractionType,
-  HandleAvailableColorType,
   IconSizesType,
   LikeActionType,
   NotificationTextType,
   PollIntervalsType,
   PostDimensionsType,
-  RoutesType
+  RoutesType,
+  StoragePathsType,
+  AssetType,
+  TimeoutsType,
+  ErrorsType
 } from '../types/constants';
-import { ThemeVariantType } from '../types/theme';
 
 export const Routes: RoutesType = {
   App: 'App',
@@ -75,23 +77,37 @@ export const PostDimensions: PostDimensionsType = {
   Large: { height: responsiveWidth(90), width: responsiveWidth(90) }
 };
 
-export const ThemeVariant: ThemeVariantType = {
-  light: 'light',
-  dark: 'dark'
-};
-
-export const HandleAvailableColor: HandleAvailableColorType = {
-  true: '#4caf50',
-  false: '#EF5350'
-};
-
 export const PollIntervals: PollIntervalsType = {
   messages: 4000,
-  explore: 5 * 60 * 1000,
   profile: 1000,
   postView: 2000,
   profileView: 1000,
   connections: 2000,
   interaction: 1000,
   notification: 2000,
+  lastSeen: 10000
+};
+
+export const StoragePaths: StoragePathsType = {
+  avatars: 'avatars',
+  posts: 'posts'
+};
+
+export const Asset: AssetType = {
+  avatar: 'avatar',
+  post: 'post'
+};
+
+export const Timeouts: TimeoutsType = {
+  online: 120
+};
+
+export const Errors: ErrorsType = {
+  SIGN_IN: 'SIGN_IN',
+  SIGN_OUT: 'SIGN_OUT',
+  UPDATE_LAST_SEEN: 'UPDATE_LAST_SEEN',
+  LOAD_THEME: 'LOAD_THEME',
+  INITIALIZE_FCM: 'INITIALIZE_FCM',
+  UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN',
+  ASSET_UPLOAD: 'ASSET_UPLOAD'
 };

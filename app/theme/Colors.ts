@@ -3,7 +3,12 @@
  * This contains all the color config for the application
  */
 
-import { ThemeType, ThemeStaticType, ThemeVariantType } from '../types/theme';
+import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType } from '../types/theme';
+
+export const ThemeVariant: ThemeVariantType = {
+  light: 'light',
+  dark: 'dark'
+};
 
 export const ThemeStatic: ThemeStaticType = {
   accent: '#846BE2',
@@ -13,7 +18,8 @@ export const ThemeStatic: ThemeStaticType = {
   text02: '#BBBBBB',
   placeholder: '#F4F4F4',
   like: '#E24359',
-  unlike: '#ddd'
+  unlike: '#ddd',
+  translucent: 'rgba(0, 0, 0, 0.1)'
 };
 
 export const Theme: {
@@ -41,6 +47,16 @@ export const Theme: {
       white: '#FFFFFF'
     }
   }
+};
+
+export const HandleAvailableColor: HandleAvailableColorType = {
+  true: '#05b714',
+  false: '#EF5350'
+};
+
+export const OnlineDotColor: OnlineDotColorType = {
+  true: '#4caf50',
+  false: '#BBBBBB'
 };
 
 /**

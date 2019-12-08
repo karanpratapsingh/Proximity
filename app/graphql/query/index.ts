@@ -71,6 +71,7 @@ export const QUERY_CHATS = gql`
         id
         avatar
         handle
+        lastSeen
       }
       messages(last: 1) {
         id

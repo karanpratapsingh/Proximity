@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import LoadingIndicator from '../misc/LoadingIndicator';
 import { ThemeStatic, Typography } from '../../theme';
 
@@ -10,8 +10,8 @@ interface ButtonProps {
   label: string,
   onPress: any,
   loading: boolean,
-  containerStyle?: any,
-  labelStyle?: any,
+  containerStyle?: StyleProp<ViewStyle>,
+  labelStyle?: StyleProp<TextStyle>,
   indicatorColor?: string
 };
 

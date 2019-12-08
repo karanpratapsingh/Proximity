@@ -60,18 +60,37 @@ export type PostDimensionsType = {
   Large: Dimensions
 };
 
-export type HandleAvailableColorType = {
-  true: string,
-  false: string
-};
-
 export type PollIntervalsType = {
   messages: number,
-  explore: number,
   profile: number,
   postView: number,
   profileView: number,
   connections: number,
   interaction: number,
-  notification: number
+  notification: number,
+  lastSeen: number
+};
+
+export type StoragePathsType = {
+  avatars: string,
+  posts: string
+};
+
+export type AssetType = {
+  avatar: string,
+  post: string
+};
+
+export type TimeoutsType = {
+  online: number
+};
+
+export type ErrorsType = {
+  SIGN_IN: string,
+  SIGN_OUT: string,
+  UPDATE_LAST_SEEN: string,
+  LOAD_THEME: string,
+  INITIALIZE_FCM: string,
+  UPDATE_FCM_TOKEN: string,
+  ASSET_UPLOAD: string
 };

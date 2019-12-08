@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
 import GoogleLogo from '../../../assets/svg/google-logo.svg';
 import LoginBanner from '../../../assets/svg/login-banner.svg';
-import { Routes, IconSizes } from '../../constants';
+import { Routes, IconSizes, Errors } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
@@ -17,6 +17,9 @@ import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { handleLoginError } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
+import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet'
+import { crashlytics } from '../../utils/firebase';
+import { welcomeNotification } from '../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -26,6 +29,8 @@ const LoginScreen: React.FC = () => {
   const [createUser] = useMutation(MUTATION_CREATE_USER);
   const [initializing, setInitializing] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  const termsAndConditionsBottomSheetRef = useRef();
 
   const navigateToApp = async (token: string) => {
     const { data: { signIn: { id, avatar, handle } } } = await client
@@ -59,17 +64,19 @@ const LoginScreen: React.FC = () => {
     try {
       setLoading(true);
       const data = await GoogleSignin.signIn();
-      const { user: { id: token, name, photo } } = data;
+      const { user: { id: token, name, photo, email } } = data;
+
       const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
       if (!userExists) {
-        await createUser({ variables: { token: token, avatar: photo, name } });
+        await createUser({ variables: { token: token, avatar: photo, name, email } });
+        welcomeNotification();
       }
       await saveToken(token);
       setLoading(false);
       navigateToApp(token);
     } catch ({ message }) {
       setLoading(false);
-      alert(JSON.stringify({ message }));
+      crashlytics.recordCustomError(Errors.SIGN_IN, message);
     }
   };
 
@@ -99,7 +106,8 @@ const LoginScreen: React.FC = () => {
               loading={loading}
             />
             <TouchableOpacity
-              onPress={() => null}
+              // @ts-ignore
+              onPress={termsAndConditionsBottomSheetRef.current.open}
               style={styles(theme).terms}>
               <Text style={styles(theme).termsText}>Terms and conditions</Text>
             </TouchableOpacity>
@@ -111,6 +119,7 @@ const LoginScreen: React.FC = () => {
   return (
     <View style={styles(theme).container}>
       {content}
+      <TermsAndConditionsBottomSheet ref={termsAndConditionsBottomSheetRef} />
     </View>
   );
 };

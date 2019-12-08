@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { BottomSheetHeader, ConnectionsPlaceholder, SvgBannerType } from '..';
+import { BottomSheetHeader, ConnectionsPlaceholder, SvgBanner } from '..';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
 import { Connections, PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
@@ -50,10 +50,10 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
   }
 
   const ListEmptyComponent = () => (
-    <SvgBannerType
+    <SvgBanner
       Svg={EmptyConnectionsBanner}
       placeholder='No users found'
-      topSpacing={responsiveHeight(16)}
+      spacing={16}
     />
   );
 

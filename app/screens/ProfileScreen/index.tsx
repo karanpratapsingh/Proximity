@@ -10,6 +10,7 @@ import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, Con
 import { ThemeColors } from '../../types/theme';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
+import AboutBottomSheet from './components/AboutBottomSheet';
 
 const ProfileScreen: React.FC = () => {
 
@@ -24,6 +25,7 @@ const ProfileScreen: React.FC = () => {
   const settingsBottomSheetRef = useRef();
   const followingBottomSheetRef = useRef();
   const followersBottomSheetRef = useRef();
+  const aboutBottomSheetRef = useRef();
 
   // @ts-ignore
   const onFollowingOpen = () => followingBottomSheetRef.current.open();
@@ -33,6 +35,13 @@ const ProfileScreen: React.FC = () => {
   const onEdit = () => editProfileBottomSheetRef.current.open();
   // @ts-ignore
   const onSettings = () => settingsBottomSheetRef.current.open();
+
+  const onAbout = () => {
+    // @ts-ignore
+    settingsBottomSheetRef.current.close()
+    // @ts-ignore
+    aboutBottomSheetRef.current.open();
+  }
 
   const ListHeaderComponent = () => {
     const { user: { avatar, following, followers, name, handle, about } } = data;
@@ -115,7 +124,8 @@ const ProfileScreen: React.FC = () => {
         IconRight={IconRight}
       />
       {content}
-      <SettingsBottomSheet ref={settingsBottomSheetRef} />
+      <AboutBottomSheet ref={aboutBottomSheetRef} />
+      <SettingsBottomSheet ref={settingsBottomSheetRef} onAboutPress={onAbout} />
     </View>
   );
 };

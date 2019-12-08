@@ -6,12 +6,12 @@ import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { IconSizes, Routes } from '../../constants';
+import { IconSizes, Routes, Errors } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
-import { Header, IconButton, PostCardPlaceholder, SvgBannerType } from '../../layout';
+import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { messaging, notifications } from '../../utils/firebase';
+import { messaging, notifications, crashlytics } from '../../utils/firebase';
 import PostCard from './components/PostCard';
 import firebase from 'react-native-firebase';
 
@@ -23,27 +23,31 @@ const HomeScreen: React.FC = () => {
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
   const initializeFCM = async () => {
-    if (Platform.OS === 'android') {
-      const channel = new firebase
-        .notifications
-        .Android
-        .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
-        .setDescription('Proximity Notification Channel')
-        .setSound('default');
+    try {
+      if (Platform.OS === 'android') {
+        const channel = new firebase
+          .notifications
+          .Android
+          .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
+          .setDescription('Proximity Notification Channel')
+          .setSound('default');
 
-      notifications.android.createChannel(channel);
-    }
-    const hasPermission = await messaging.hasPermission();
-    if (!hasPermission) {
-      await messaging.requestPermission();
-    } else if (hasPermission) {
-      const fcmToken = await messaging.getToken();
-      updateFcmToken({
-        variables: {
-          userId: user.id,
-          fcmToken
-        }
-      });
+        notifications.android.createChannel(channel);
+      }
+      const hasPermission = await messaging.hasPermission();
+      if (!hasPermission) {
+        await messaging.requestPermission();
+      } else if (hasPermission) {
+        const fcmToken = await messaging.getToken();
+        updateFcmToken({
+          variables: {
+            userId: user.id,
+            fcmToken
+          }
+        });
+      }
+    } catch ({ message }) {
+      crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message)
     }
   };
 
@@ -69,8 +73,8 @@ const HomeScreen: React.FC = () => {
             fcmToken
           }
         });
-      } catch (error) {
-        alert(JSON.stringify(error));
+      } catch ({ message }) {
+        crashlytics.recordCustomError(Errors.UPDATE_FCM_TOKEN, message)
       }
     });
 
@@ -109,8 +113,8 @@ const HomeScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={[dummyPost]}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyFeed} topSpacing={responsiveHeight(20)} placeholder='Your feed is empty' />}
+        items={[]}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder={`Let's follow someone`} />}
         style={styles().postList}
         spacing={20}
         renderItem={renderItem}

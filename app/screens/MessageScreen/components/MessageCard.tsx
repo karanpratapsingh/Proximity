@@ -8,6 +8,8 @@ import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
+import { NativeImage } from '../../../layout';
+import { OnlineDotColor } from '../../../theme';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -19,16 +21,17 @@ interface MessageCardProps {
   messageId: string,
   messageBody: string,
   seen: boolean,
-  time: string
+  time: string,
+  isOnline: boolean
 };
 
-const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time }) => {
+const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
 
   const { user, theme } = useContext(AppContext);
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
-
+  console.log(isOnline);
   const setSeenAndNavigate = () => {
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });
@@ -43,12 +46,18 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
     color: theme.text01
   } : null;
 
+  const onlineDotColor = OnlineDotColor[isOnline as any];
+
   return (
     <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
-      <Image
-        source={{ uri: avatar }}
-        style={styles(theme).avatarImage}
-      />
+      <View style={styles().avatar}>
+        <NativeImage
+          uri={avatar}
+          style={styles(theme).avatarImage}
+        />
+        <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
+      </View>
+
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}{' '}</Text>
         <View style={styles(theme).content}>
@@ -69,11 +78,22 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 5
   },
-  avatarImage: {
+  avatar: {
     height: 50,
-    width: 50,
+    width: 50
+  },
+  avatarImage: {
+    flex: 1,
     borderRadius: 50,
     backgroundColor: theme.placeholder
+  },
+  onlineDot: {
+    position: 'absolute',
+    width: 10,
+    height: 10,
+    bottom: 2.5,
+    right: 2.5,
+    borderRadius: 10
   },
   info: {
     flex: 1,

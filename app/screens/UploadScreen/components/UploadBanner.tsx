@@ -4,7 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import UploadSvg from '../../../../assets/svg/upload.svg';
 import { IconSizes, PostDimensions } from '../../../constants';
 import { IconButton } from '../../../layout';
-import SvgBanner from '../../../layout/misc/SvgBannerType';
+import SvgBanner from '../../../layout/misc/SvgBanner';
 import { ThemeStatic } from '../../../theme';
 import { getImageFromLibrary } from '../../../utils/shared';
 

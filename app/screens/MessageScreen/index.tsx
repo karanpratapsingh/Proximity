@@ -6,11 +6,11 @@ import { FlatGrid } from 'react-native-super-grid';
 import EmptyMessages from '../../../assets/svg/empty-messages.svg';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
-import { Header, MessageScreenPlaceholder, SearchBar, SvgBannerType } from '../../layout';
+import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import MessageCard from './components/MessageCard';
-import { filterChatParticipants } from '../../utils/shared';
-import { PollIntervals } from '../../constants';
+import { filterChatParticipants, isUserOnline } from '../../utils/shared';
+import { PollIntervals, Timeouts } from '../../constants';
 
 const MessageScreen: React.FC = () => {
 
@@ -33,7 +33,7 @@ const MessageScreen: React.FC = () => {
     const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
-    const { avatar, handle } = participant;
+    const { avatar, handle, lastSeen } = participant;
     const {
       id: messageId,
       author: { id: authorId },
@@ -41,6 +41,8 @@ const MessageScreen: React.FC = () => {
       body: messageBody,
       createdAt: time
     } = lastMessage;
+
+    const isOnline = isUserOnline(lastSeen);
 
     return (
       <MessageCard
@@ -52,6 +54,7 @@ const MessageScreen: React.FC = () => {
         messageBody={messageBody}
         seen={seen}
         time={time}
+        isOnline={isOnline}
       />
     );
   };
@@ -74,7 +77,7 @@ const MessageScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={filteredChats}
-        ListEmptyComponent={() => <SvgBannerType Svg={EmptyMessages} topSpacing={responsiveHeight(16)} placeholder='No messages' />}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyMessages} spacing={16} placeholder='No messages' />}
         style={styles().messagesList}
         spacing={20}
         renderItem={renderItem}

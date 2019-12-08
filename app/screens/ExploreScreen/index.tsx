@@ -1,15 +1,13 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
 import SearchUsersBanner from '../../../assets/svg/search-users.svg';
 import { AppContext } from '../../context';
 import { QUERY_POSTS, QUERY_SEARCH_USERS } from '../../graphql/query';
-import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBannerType } from '../../layout';
+import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
-import { PollIntervals } from '../../constants';
 
 const ExploreScreen: React.FC = () => {
 
@@ -23,13 +21,16 @@ const ExploreScreen: React.FC = () => {
     called: querySearchUsersCalled,
     error: querySearchUsersError
   }] = useLazyQuery(QUERY_SEARCH_USERS);
-  const {
-    data: postsData,
-    loading: postsLoading,
-    error: postsError
-  } = useQuery(QUERY_POSTS, {
-    pollInterval: PollIntervals.explore
-  });
+  const [queryPost, {
+    data: postsQueryData,
+    called: postsQueryCalled,
+    loading: postsQueryLoading,
+    error: postsQueryError
+  }] = useLazyQuery(QUERY_POSTS);
+
+  useEffect(() => {
+    queryPost();
+  }, []);
 
   useEffect(() => {
     if (userSearch !== '') querySearchUsers({ variables: { name: userSearch } });
@@ -44,9 +45,9 @@ const ExploreScreen: React.FC = () => {
 
   let content = <ExploreScreenPlaceholder />;
 
-  if (!postsLoading && !postsError) {
-    const { posts } = postsData;
-    content = <ExploreGrid posts={posts} />;
+  if (postsQueryCalled && !postsQueryLoading && !postsQueryError) {
+    const { posts } = postsQueryData;
+    content = <ExploreGrid posts={posts} onRefresh={queryPost} />;
   }
 
   if (isSearchFocused) {
@@ -54,7 +55,7 @@ const ExploreScreen: React.FC = () => {
     if (querySearchUsersCalled && querySearchUsersLoading) {
       subContent = <SearchUsersPlaceholder />;
     } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <SvgBannerType Svg={SearchUsersBanner} topSpacing={responsiveHeight(16)} placeholder='Search users' />
+      subContent = <SvgBanner Svg={SearchUsersBanner} spacing={16} placeholder='Search users' />
     } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
       subContent = <UserSearchResults searchResults={searchResults} />;
     }

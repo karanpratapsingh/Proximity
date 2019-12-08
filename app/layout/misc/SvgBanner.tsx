@@ -1,23 +1,24 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { AppContext } from '../../context';
-import { ThemeColors } from '../../types/theme';
 import { Typography } from '../../theme';
+import { ThemeColors } from '../../types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface SvgBannerProps {
   Svg: any,
   placeholder: string,
-  topSpacing?: number,
+  spacing?: number,
   textStyle?: StyleProp<TextStyle>
 };
 
-const SvgBanner: React.FC<SvgBannerProps> = ({ Svg, placeholder, topSpacing, textStyle }) => {
+const SvgBanner: React.FC<SvgBannerProps> = ({ Svg, placeholder, spacing, textStyle }) => {
   const { theme } = useContext(AppContext);
 
   return (
-    <View style={[styles().container, { marginTop: topSpacing }]}>
+    <View style={[styles().container, { marginTop: responsiveHeight(spacing) || undefined }]}>
       <Svg />
       <Text style={[styles(theme).placeholderText, textStyle]}>{placeholder}</Text>
     </View>

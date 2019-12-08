@@ -6,10 +6,10 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes, ThemeVariant } from '../../../constants';
+import { IconSizes, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
+import { ThemeStatic, ThemeVariant, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { signOut } from '../../../utils/authentication';
 
@@ -42,10 +42,11 @@ const Option: React.FC<OptionProps> = ({ label, iconName, onPress, children }) =
 };
 
 interface SettingsBottomSheetProps {
-  ref: React.Ref<any>
+  ref: React.Ref<any>,
+  onAboutPress: any
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef((_, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef(({ onAboutPress }, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -62,12 +63,8 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
   };
 
   const logOut = async () => {
-    try {
-      await signOut();
-      navigate(Routes.Auth);
-    } catch ({ message }) {
-      alert(JSON.stringify(message));
-    }
+    await signOut();
+    navigate(Routes.Auth);
   };
 
   return (
@@ -93,6 +90,11 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
             uncheckedComponent={<MaterialIcons name='done' size={IconSizes.x6} color={ThemeStatic.text02} />}
           />
         </Option>
+        <Option
+          label='About'
+          iconName='ios-information-circle-outline'
+          onPress={onAboutPress}
+        />
         <Option
           label='Logout'
           iconName='ios-log-out'

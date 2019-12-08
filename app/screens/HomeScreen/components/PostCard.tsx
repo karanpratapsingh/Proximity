@@ -79,12 +79,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)'
+    backgroundColor: ThemeStatic.translucent
   },
   lowerContent: {
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)'
+    backgroundColor: ThemeStatic.translucent
   },
   handleText: {
     ...FontWeights.Bold,

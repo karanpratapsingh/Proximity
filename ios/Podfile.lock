@@ -362,7 +362,9 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - Crashlytics (~> 3.14.0)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Fabric (~> 1.10.2)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Firebase/Core (~> 6.3.0)
@@ -564,6 +566,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: b089eeb6b3b5089e599cc46ec380aa7186b24c99
+PODFILE CHECKSUM: 247699f7396420e0e23d56cd8db4b33dd6f815e8
 
 COCOAPODS: 1.8.4

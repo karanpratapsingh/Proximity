@@ -1,5 +1,7 @@
 import ImagePicker from "react-native-image-crop-picker";
 import { ThemeStatic } from "../theme";
+import { Timeouts } from "../constants";
+import { noPermissionNotification } from "./notifications";
 
 export const createAsyncDelay = (duration: number) => {
 
@@ -79,9 +81,20 @@ export const getImageFromLibrary = async (height: number, width: number, circula
     cropperActiveWidgetColor: ThemeStatic.accent,
     cropperStatusBarColor: ThemeStatic.accent,
     cropperToolbarColor: ThemeStatic.accent,
-    compressImageQuality: 0.5,
+    compressImageQuality: 0.6,
     mediaType: 'photo'
   };
 
-  return ImagePicker.openPicker(options);
+  try {
+    const assetData = await ImagePicker.openPicker(options);
+    return assetData;
+  } catch ({ message }) {
+    noPermissionNotification();
+  }
 };
+
+export const isUserOnline = (lastSeen: number) => {
+
+  const now = (Date.now() / 100);
+  return (now - lastSeen) < Timeouts.online;
+}

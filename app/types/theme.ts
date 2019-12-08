@@ -6,7 +6,8 @@ export type ThemeStaticType = {
   text02: string,
   placeholder: string,
   like: string,
-  unlike: string
+  unlike: string,
+  translucent: string
 };
 
 export type ThemeColors = {
@@ -24,6 +25,16 @@ export type ThemeVariantType = {
 };
 
 export type ThemeType = {
-  type: keyof ThemeVariantType,
+  type: string,
   colors: ThemeColors
+};
+
+export type HandleAvailableColorType = {
+  true: string,
+  false: string
+};
+
+export type OnlineDotColorType = {
+  true: string,
+  false: string
 };
