@@ -18,7 +18,8 @@ export const ThemeStatic: ThemeStaticType = {
   text02: '#BBBBBB',
   placeholder: '#F4F4F4',
   like: '#E24359',
-  unlike: '#ddd'
+  unlike: '#ddd',
+  translucent: 'rgba(0, 0, 0, 0.1)'
 };
 
 export const Theme: {

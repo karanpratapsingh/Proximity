@@ -73,7 +73,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 20,
-    borderTopColor: 'rgba(0, 0, 0, 0.1)',
+    borderTopColor: ThemeStatic.translucent,
     borderTopWidth: StyleSheet.hairlineWidth,
     backgroundColor: theme.base
   },
