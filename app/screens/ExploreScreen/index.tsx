@@ -46,9 +46,15 @@ const ExploreScreen: React.FC = () => {
 
   let content = <ExploreScreenPlaceholder />;
 
+  const onRefresh = () => {
+    try {
+      postsQueryRefetch();
+    } catch { }
+  };
+
   if (postsQueryCalled && !postsQueryLoading && !postsQueryError) {
     const { posts } = postsQueryData;
-    content = <ExploreGrid posts={posts} onRefresh={postsQueryRefetch} />;
+    content = <ExploreGrid posts={posts} onRefresh={onRefresh} />;
   }
 
   if (isSearchFocused) {

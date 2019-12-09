@@ -1,19 +1,18 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect } from 'react';
-import { Platform, StyleSheet, View, RefreshControl } from 'react-native';
-import firebase from 'react-native-firebase';
+import { RefreshControl, StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { Errors, IconSizes, PollIntervals, Routes } from '../../constants';
+import { Errors, IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
 import { QUERY_USER_FEED } from '../../graphql/query';
 import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { crashlytics, messaging, notifications } from '../../utils/firebase';
+import { crashlytics, initializeFCM, messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
 
 const HomeScreen: React.FC = () => {
@@ -28,32 +27,15 @@ const HomeScreen: React.FC = () => {
   } = useQuery(QUERY_USER_FEED, { variables: { userId: user.id }, fetchPolicy: 'network-only' });
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
-  const initializeFCM = async () => {
-    try {
-      if (Platform.OS === 'android') {
-        const channel = new firebase
-          .notifications
-          .Android
-          .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
-          .setDescription('Proximity Notification Channel')
-          .setSound('default');
-
-        notifications.android.createChannel(channel);
-      }
-      const hasPermission = await messaging.hasPermission();
-      if (!hasPermission) {
-        await messaging.requestPermission();
-      } else if (hasPermission) {
-        const fcmToken = await messaging.getToken();
-        updateFcmToken({
-          variables: {
-            userId: user.id,
-            fcmToken
-          }
-        });
-      }
-    } catch ({ message }) {
-      crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message)
+  const initialize = async () => {
+    const fcmToken = await initializeFCM();
+    if (fcmToken) {
+      updateFcmToken({
+        variables: {
+          userId: user.id,
+          fcmToken
+        }
+      });
     }
   };
 
@@ -77,17 +59,25 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    initializeFCM();
+    initialize();
   }, [])
 
   const navigateToMessages = () => navigate(Routes.MessageScreen);
 
-  const refreshControl = () => (
-    <RefreshControl
-      refreshing={userFeedQueryLoading}
-      onRefresh={userFeedRefetch}
-    />
-  );
+  const refreshControl = () => {
+    const onRefresh = () => {
+      try {
+        userFeedRefetch();
+      } catch { }
+    };
+
+    return (
+      <RefreshControl
+        refreshing={userFeedQueryLoading}
+        onRefresh={onRefresh}
+      />
+    );
+  };
 
   const renderItem = ({ item }) => {
 

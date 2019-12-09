@@ -63,7 +63,7 @@ const AboutBottomSheet: React.FC<AboutBottomSheetProps> = React.forwardRef((_, r
           Proximity is an Open Source social media app I designed and
           developed in my free time, this app is fully open source and
           doesn't use your data against you in any shape or form. The
-          code for the mobile is fully open source on github.
+          code for the mobile apps is fully open source on github.
         </Text>
         <Text style={styles(theme).aboutText}>
           Curious how I build this? which tech stack I used? Feel free
