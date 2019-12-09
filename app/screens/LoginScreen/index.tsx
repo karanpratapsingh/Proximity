@@ -40,6 +40,7 @@ const LoginScreen: React.FC = () => {
           variables: { token }
         });
       updateUser({ id, avatar, handle });
+      welcomeNotification();
       navigate(Routes.App);
     } catch {
       if (!__DEV__) {
@@ -75,7 +76,6 @@ const LoginScreen: React.FC = () => {
       const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
       if (!userExists) {
         await createUser({ variables: { token: token, avatar: photo, name, email } });
-        welcomeNotification();
       }
       await saveToken(token);
       setLoading(false);
