@@ -101,6 +101,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginBottom: responsiveHeight(10)
   },
   logoImage: {
+    resizeMode: 'contain',
+    height: 40,
+    width: '100%',
     marginTop: 20,
     marginBottom: 10,
     alignSelf: 'center'

@@ -71,7 +71,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   flashMessageTitle: {
-    ...Typography.FontWeights.Regular,
+    ...Typography.FontWeights.Light,
     ...Typography.FontSizes.Body,
     color: ThemeStatic.white
   }
