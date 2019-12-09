@@ -1,15 +1,16 @@
+import { useMutation } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AppContext } from '../../../context';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { parseTimeElapsed } from '../../../utils/shared';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
-import { useMutation } from '@apollo/react-hooks';
+import { AppContext } from '../../../context';
 import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
 import { NativeImage } from '../../../layout';
-import { OnlineDotColor } from '../../../theme';
+import { OnlineDotColor, Typography } from '../../../theme';
+import { ThemeColors } from '../../../types/theme';
+import { parseTimeElapsed } from '../../../utils/shared';
+import MessageCardRightActions from './MessageCardRightActions';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -48,28 +49,43 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
 
   const onlineDotColor = OnlineDotColor[isOnline as any];
 
-  return (
-    <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
-      <View style={styles().avatar}>
-        <NativeImage
-          uri={avatar}
-          style={styles(theme).avatarImage}
-        />
-        <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
-      </View>
+  const onDelete = () => {
+    alert('lets delete: ' + chatId)
+  };
 
-      <View style={styles().info}>
-        <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-        <View style={styles(theme).content}>
-          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
-            {messageBody}
-          </Text>
-          <Text style={[styles(theme).timeText, highlightStyle]}>
-            {` · ${timeElapsed}`}
-          </Text>
+  const renderRightActions = (progress, dragX) => (
+    <MessageCardRightActions
+      progress={progress}
+      dragX={dragX}
+      onDelete={onDelete}
+    />
+  );
+
+  return (
+    <Swipeable rightThreshold={-80} renderRightActions={renderRightActions}>
+
+      <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
+        <View style={styles().avatar}>
+          <NativeImage
+            uri={avatar}
+            style={styles(theme).avatarImage}
+          />
+          <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
         </View>
-      </View>
-    </TouchableOpacity>
+
+        <View style={styles().info}>
+          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+          <View style={styles(theme).content}>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
+              {messageBody}
+            </Text>
+            <Text style={[styles(theme).timeText, highlightStyle]}>
+              {` · ${timeElapsed}`}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 };
 
