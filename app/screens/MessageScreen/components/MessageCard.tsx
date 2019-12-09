@@ -31,7 +31,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
-  console.log(isOnline);
+
   const setSeenAndNavigate = () => {
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });

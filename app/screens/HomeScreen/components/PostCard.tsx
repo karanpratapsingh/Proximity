@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     ...PostDimensions.Large
   },
   avatarImage: {
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     backgroundColor: ThemeStatic.placeholder,
-    borderRadius: 50,
+    borderRadius: 40,
     marginRight: 12
   },
   upperContent: {

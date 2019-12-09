@@ -27,9 +27,7 @@ export const MUTATION_UPDATE_FOLLOWING = gql`
       userId: $userId
       targetId: $targetId
       action: $action
-    ) {
-      id
-    }
+    )
   }
 `;
 
