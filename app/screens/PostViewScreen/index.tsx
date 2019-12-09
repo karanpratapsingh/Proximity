@@ -133,7 +133,7 @@ const PostViewScreen: React.FC = () => {
           <Text style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>
-          <Text style={styles(theme).handleText}>{handle}{'  '}</Text>
+          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {caption}
         </Text>
         <Comments comments={comments} />
