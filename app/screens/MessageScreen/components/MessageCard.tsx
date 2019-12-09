@@ -11,6 +11,7 @@ import { OnlineDotColor, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
 import MessageCardRightActions from './MessageCardRightActions';
+import { deleteChatNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -32,7 +33,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
-  const [deleteChat, { loading: deleteChatLoading }] = useMutation(MUTATION_DELETE_CHAT);
+  const [deleteChat, { loading: deleteChatLoading, called: deleteChatCalled }] = useMutation(MUTATION_DELETE_CHAT);
 
   const setSeenAndNavigate = () => {
     if (authorId !== user.id) {
@@ -51,8 +52,8 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const onlineDotColor = OnlineDotColor[isOnline as any];
 
   const onDelete = () => {
-    if (!deleteChatLoading) {
-      deleteChat({ variables: { chatId } });
+    if (!deleteChatLoading && !deleteChatCalled) {
+      deleteChatNotification(() => deleteChat({ variables: { chatId } }));
     }
   };
 

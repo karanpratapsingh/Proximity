@@ -13,25 +13,30 @@ const MessageCardRightActions = ({ progress, dragX, onDelete }) => {
   const slideEffect = { opacity: progress, transform: [{ translateX }] };
 
   return (
-    <Animated.View style={[styles.rightActions, slideEffect]}>
+    <Animated.View style={[styles.container, slideEffect]}>
       <MaterialIcons
         onPress={onDelete}
         name='delete-forever'
         color={ThemeStatic.white}
         size={IconSizes.x6}
+        style={styles.delete}
       />
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  rightActions: {
+  container: {
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: ThemeStatic.delete,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5
+  },
+  delete: {
+    width: 50,
+    textAlign: 'center'
   }
 });
 
