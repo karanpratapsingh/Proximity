@@ -1,16 +1,16 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import EmptyMessages from '../../../assets/svg/empty-messages.svg';
+import { PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_CHATS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import MessageCard from './components/MessageCard';
 import { filterChatParticipants, isUserOnline } from '../../utils/shared';
-import { PollIntervals, Timeouts } from '../../constants';
+import MessageCard from './components/MessageCard';
 
 const MessageScreen: React.FC = () => {
 

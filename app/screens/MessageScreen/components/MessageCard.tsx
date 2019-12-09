@@ -5,7 +5,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
 import { AppContext } from '../../../context';
-import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
+import { MUTATION_SEEN_MESSAGE, MUTATION_DELETE_CHAT } from '../../../graphql/mutation';
 import { NativeImage } from '../../../layout';
 import { OnlineDotColor, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
@@ -32,6 +32,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
+  const [deleteChat, { loading: deleteChatLoading }] = useMutation(MUTATION_DELETE_CHAT);
 
   const setSeenAndNavigate = () => {
     if (authorId !== user.id) {
@@ -50,7 +51,9 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const onlineDotColor = OnlineDotColor[isOnline as any];
 
   const onDelete = () => {
-    alert('lets delete: ' + chatId)
+    if (!deleteChatLoading) {
+      deleteChat({ variables: { chatId } });
+    }
   };
 
   const renderRightActions = (progress, dragX) => (

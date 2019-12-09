@@ -124,3 +124,11 @@ export const MUTATION_LAST_SEEN = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_CHAT = gql`
+  mutation DeleteChat($chatId: String!) {
+    deleteChat(chatId: $chatId) {
+      id
+    }
+  }
+`;
