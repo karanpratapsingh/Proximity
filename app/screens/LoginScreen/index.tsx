@@ -15,7 +15,7 @@ import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
 import { Button, LoadingIndicator } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { handleLoginError } from '../../utils/authentication';
+import { handleLoginError, signOut } from '../../utils/authentication';
 import { loadToken, saveToken } from '../../utils/storage';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet'
 import { crashlytics } from '../../utils/firebase';
@@ -33,13 +33,20 @@ const LoginScreen: React.FC = () => {
   const termsAndConditionsBottomSheetRef = useRef();
 
   const navigateToApp = async (token: string) => {
-    const { data: { signIn: { id, avatar, handle } } } = await client
-      .query({
-        query: QUERY_SIGNIN,
-        variables: { token }
-      });
-    updateUser({ id, avatar, handle });
-    navigate(Routes.App);
+    try {
+      const { data: { signIn: { id, avatar, handle } } } = await client
+        .query({
+          query: QUERY_SIGNIN,
+          variables: { token }
+        });
+      updateUser({ id, avatar, handle });
+      welcomeNotification();
+      navigate(Routes.App);
+    } catch {
+      if (!__DEV__) {
+        signOut();
+      }
+    }
   };
 
   const initialize = async () => {
@@ -69,7 +76,6 @@ const LoginScreen: React.FC = () => {
       const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
       if (!userExists) {
         await createUser({ variables: { token: token, avatar: photo, name, email } });
-        welcomeNotification();
       }
       await saveToken(token);
       setLoading(false);

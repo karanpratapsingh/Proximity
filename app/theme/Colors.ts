@@ -19,7 +19,8 @@ export const ThemeStatic: ThemeStaticType = {
   placeholder: '#F4F4F4',
   like: '#E24359',
   unlike: '#ddd',
-  translucent: 'rgba(0, 0, 0, 0.1)'
+  translucent: 'rgba(0, 0, 0, 0.1)',
+  delete: '#f44336'
 };
 
 export const Theme: {

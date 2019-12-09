@@ -170,3 +170,20 @@ export const QUERY_POSTS = gql`
     }
   }
 `;
+
+export const QUERY_USER_FEED = gql`
+  query UserFeed($userId: String!) {
+    userFeed(userId: $userId) {
+      id
+      uri
+      caption
+      createdAt
+      author {
+        id
+        avatar
+        handle
+      }
+      likes
+    }
+  }
+`;

@@ -1,15 +1,17 @@
+import { useMutation } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AppContext } from '../../../context';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { parseTimeElapsed } from '../../../utils/shared';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
-import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_SEEN_MESSAGE } from '../../../graphql/mutation';
+import { AppContext } from '../../../context';
+import { MUTATION_SEEN_MESSAGE, MUTATION_DELETE_CHAT } from '../../../graphql/mutation';
 import { NativeImage } from '../../../layout';
-import { OnlineDotColor } from '../../../theme';
+import { OnlineDotColor, Typography } from '../../../theme';
+import { ThemeColors } from '../../../types/theme';
+import { parseTimeElapsed } from '../../../utils/shared';
+import MessageCardRightActions from './MessageCardRightActions';
+import { deleteChatNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -31,7 +33,8 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   const timeElapsed = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
-  console.log(isOnline);
+  const [deleteChat, { loading: deleteChatLoading, called: deleteChatCalled }] = useMutation(MUTATION_DELETE_CHAT);
+
   const setSeenAndNavigate = () => {
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });
@@ -48,28 +51,45 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
 
   const onlineDotColor = OnlineDotColor[isOnline as any];
 
-  return (
-    <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
-      <View style={styles().avatar}>
-        <NativeImage
-          uri={avatar}
-          style={styles(theme).avatarImage}
-        />
-        <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
-      </View>
+  const onDelete = () => {
+    if (!deleteChatLoading && !deleteChatCalled) {
+      deleteChatNotification(() => deleteChat({ variables: { chatId } }));
+    }
+  };
 
-      <View style={styles().info}>
-        <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-        <View style={styles(theme).content}>
-          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
-            {messageBody}
-          </Text>
-          <Text style={[styles(theme).timeText, highlightStyle]}>
-            {` · ${timeElapsed}`}
-          </Text>
+  const renderRightActions = (progress, dragX) => (
+    <MessageCardRightActions
+      progress={progress}
+      dragX={dragX}
+      onDelete={onDelete}
+    />
+  );
+
+  return (
+    <Swipeable rightThreshold={-80} renderRightActions={renderRightActions}>
+
+      <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
+        <View style={styles().avatar}>
+          <NativeImage
+            uri={avatar}
+            style={styles(theme).avatarImage}
+          />
+          <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
         </View>
-      </View>
-    </TouchableOpacity>
+
+        <View style={styles().info}>
+          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+          <View style={styles(theme).content}>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={[styles(theme).messageText, highlightStyle]}>
+              {messageBody}
+            </Text>
+            <Text style={[styles(theme).timeText, highlightStyle]}>
+              {` · ${timeElapsed}`}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 };
 

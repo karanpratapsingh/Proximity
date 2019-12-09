@@ -78,14 +78,14 @@ export const PostDimensions: PostDimensionsType = {
 };
 
 export const PollIntervals: PollIntervalsType = {
-  messages: 4000,
+  messages: 4 * 1000,
   profile: 1000,
-  postView: 2000,
   profileView: 1000,
-  connections: 2000,
+  postView: 2 * 1000,
+  connections: 2 * 1000,
   interaction: 1000,
-  notification: 2000,
-  lastSeen: 10000
+  notification: 4 * 1000,
+  lastSeen: 10 * 1000
 };
 
 export const StoragePaths: StoragePathsType = {

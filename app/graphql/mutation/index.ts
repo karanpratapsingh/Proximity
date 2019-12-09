@@ -27,9 +27,7 @@ export const MUTATION_UPDATE_FOLLOWING = gql`
       userId: $userId
       targetId: $targetId
       action: $action
-    ) {
-      id
-    }
+    )
   }
 `;
 
@@ -123,6 +121,14 @@ export const MUTATION_LAST_SEEN = gql`
   mutation LastSeen($userId: String!) {
     updateLastSeen(userId: $userId) {
       lastSeen
+    }
+  }
+`;
+
+export const MUTATION_DELETE_CHAT = gql`
+  mutation DeleteChat($chatId: String!) {
+    deleteChat(chatId: $chatId) {
+      id
     }
   }
 `;

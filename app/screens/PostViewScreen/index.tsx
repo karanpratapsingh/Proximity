@@ -11,7 +11,7 @@ import { SUBSCRIPTION_POST } from '../../graphql/subscription';
 import { GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { parseTimeElapsed } from '../../utils/shared';
+import { parseTimeElapsed, parseLikes } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
 
@@ -32,7 +32,7 @@ const PostViewScreen: React.FC = () => {
       called: postQueryCalled,
       loading: postQueryLoading,
       error: postQueryError
-    }] = useLazyQuery(QUERY_POST, { variables: { postId } });
+    }] = useLazyQuery(QUERY_POST, { variables: { postId }, fetchPolicy: 'network-only' });
 
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
 
@@ -104,6 +104,8 @@ const PostViewScreen: React.FC = () => {
 
     const isLiked = likes.includes(user.id);
 
+    const readableLikes = parseLikes(likes.length);
+
     content = (
       <>
         <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
@@ -128,10 +130,10 @@ const PostViewScreen: React.FC = () => {
             }
             onPress={() => likeInteractionHandler(isLiked)}
           />
-          <Text style={styles(theme).likesText}>{likes.length} likes</Text>
+          <Text style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>
-          <Text style={styles(theme).handleText}>{handle}{'  '}</Text>
+          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {caption}
         </Text>
         <Comments comments={comments} />

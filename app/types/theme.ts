@@ -7,7 +7,8 @@ export type ThemeStaticType = {
   placeholder: string,
   like: string,
   unlike: string,
-  translucent: string
+  translucent: string,
+  delete: string
 };
 
 export type ThemeColors = {

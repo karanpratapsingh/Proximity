@@ -1,67 +1,42 @@
-import { useMutation } from '@apollo/react-hooks';
-import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import React, { useContext, useEffect } from 'react';
+import { RefreshControl, StyleSheet, View } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
 import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { IconSizes, Routes, Errors } from '../../constants';
+import { Errors, IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
+import { QUERY_USER_FEED } from '../../graphql/query';
 import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { messaging, notifications, crashlytics } from '../../utils/firebase';
+import { crashlytics, initializeFCM, messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
-import firebase from 'react-native-firebase';
 
 const HomeScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
-  const [loading, setLoading] = useState(true);
+  const {
+    data: userFeedQueryData,
+    loading: userFeedQueryLoading,
+    error: userFeedQueryError,
+    refetch: userFeedRefetch
+  } = useQuery(QUERY_USER_FEED, { variables: { userId: user.id }, fetchPolicy: 'network-only' });
   const [updateFcmToken] = useMutation(MUTATION_UPDATE_FCM_TOKEN);
 
-  const initializeFCM = async () => {
-    try {
-      if (Platform.OS === 'android') {
-        const channel = new firebase
-          .notifications
-          .Android
-          .Channel('proximity-channel', 'Notification Channel', firebase.notifications.Android.Importance.Max)
-          .setDescription('Proximity Notification Channel')
-          .setSound('default');
-
-        notifications.android.createChannel(channel);
-      }
-      const hasPermission = await messaging.hasPermission();
-      if (!hasPermission) {
-        await messaging.requestPermission();
-      } else if (hasPermission) {
-        const fcmToken = await messaging.getToken();
-        updateFcmToken({
-          variables: {
-            userId: user.id,
-            fcmToken
-          }
-        });
-      }
-    } catch ({ message }) {
-      crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message)
+  const initialize = async () => {
+    const fcmToken = await initializeFCM();
+    if (fcmToken) {
+      updateFcmToken({
+        variables: {
+          userId: user.id,
+          fcmToken
+        }
+      });
     }
-  };
-
-  const dummyPost = {
-    "id": "ck3ooh0mv01cm071409ltw0xk",
-    "uri": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
-    "caption": "This post won't load, just a placeholder",
-    "createdAt": "2019-11-27T14:58:01.133Z",
-    "author": {
-      "id": "ck2ojhiw1002v0765ou6bdsl8",
-      "avatar": "https://animals.net/wp-content/uploads/2018/07/Pembroke-Welsh-Corgi-7-650x425.jpg",
-      "handle": "@doggo"
-    },
-    "likes": []
   };
 
   useEffect(() => {
@@ -84,13 +59,25 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    initializeFCM();
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    initialize();
   }, [])
 
   const navigateToMessages = () => navigate(Routes.MessageScreen);
+
+  const refreshControl = () => {
+    const onRefresh = () => {
+      try {
+        userFeedRefetch();
+      } catch { }
+    };
+
+    return (
+      <RefreshControl
+        refreshing={userFeedQueryLoading}
+        onRefresh={onRefresh}
+      />
+    );
+  };
 
   const renderItem = ({ item }) => {
 
@@ -108,12 +95,14 @@ const HomeScreen: React.FC = () => {
 
   let content = <PostCardPlaceholder />;
 
-  if (!loading) {
+  if (!userFeedQueryLoading && !userFeedQueryError) {
+    const { userFeed } = userFeedQueryData;
     content = (
       <FlatGrid
+        refreshControl={refreshControl()}
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={[]}
+        items={userFeed}
         ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder={`Let's follow someone`} />}
         style={styles().postList}
         spacing={20}
@@ -123,13 +112,13 @@ const HomeScreen: React.FC = () => {
   }
 
   const IconRight = () => <IconButton
+    onPress={navigateToMessages}
     Icon={() =>
       <FontAwesome
         name='send'
         size={IconSizes.x5}
         color={theme.text01}
       />}
-    onPress={navigateToMessages}
   />
 
   return (

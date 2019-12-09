@@ -63,8 +63,8 @@ export type PostDimensionsType = {
 export type PollIntervalsType = {
   messages: number,
   profile: number,
-  postView: number,
   profileView: number,
+  postView: number,
   connections: number,
   interaction: number,
   notification: number,

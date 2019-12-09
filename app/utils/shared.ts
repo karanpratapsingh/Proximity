@@ -8,13 +8,14 @@ export const createAsyncDelay = (duration: number) => {
   return new Promise((resolve, _) => setTimeout(() => { resolve(); }, duration));
 };
 
-export const parseConnectionsCount = connectionCount => {
+export const parseConnectionsCount = (connectionCount: number) => {
+  // parse larger numbers here
   return connectionCount.toString();
 };
 
-export const parseTimeElapsed = utcTime => {
+export const parseTimeElapsed = (utcTime: string) => {
 
-  let timeElapsedFormatted = '...';
+  const defaultPlaceholderTime = '...';
   const timeNow = new Date().getTime();
   const actionTime = new Date(utcTime).getTime();
 
@@ -34,12 +35,30 @@ export const parseTimeElapsed = utcTime => {
   const elapsedMinutes = parseInt(difference / minutesInMs as any, 10);
   difference = difference % minutesInMs;
 
-  if (elapsedDays >= 1) return `${elapsedDays} days`;
-  if (elapsedHours >= 1) return `${elapsedHours} hrs`;
-  if (elapsedMinutes >= 1) return `${elapsedMinutes} mins`;
+  if (elapsedDays >= 1) {
+    if (elapsedDays === 1) {
+      return `${elapsedDays} day`
+    }
+    return `${elapsedDays} days`;
+  }
+
+  if (elapsedHours >= 1) {
+    if (elapsedHours === 1) {
+      return `${elapsedHours} hr`
+    }
+    return `${elapsedHours} hrs`;
+  }
+
+  if (elapsedMinutes >= 1) {
+    if (elapsedMinutes === 1) {
+      return `${elapsedMinutes} min`
+    }
+    return `${elapsedMinutes} mins`;
+  }
+
   if (elapsedMinutes < 1) return 'just now';
 
-  return timeElapsedFormatted;
+  return defaultPlaceholderTime;
 };
 
 export const generateUUID = () => {
@@ -88,8 +107,10 @@ export const getImageFromLibrary = async (height: number, width: number, circula
   try {
     const assetData = await ImagePicker.openPicker(options);
     return assetData;
-  } catch ({ message }) {
-    noPermissionNotification();
+  } catch ({ code }) {
+    if (!code.includes('CANCELLED')) {
+      noPermissionNotification();
+    }
   }
 };
 
@@ -97,4 +118,8 @@ export const isUserOnline = (lastSeen: number) => {
 
   const now = (Date.now() / 100);
   return (now - lastSeen) < Timeouts.online;
-}
+};
+
+export const parseLikes = (likeCount: number) => {
+  return likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`;
+};

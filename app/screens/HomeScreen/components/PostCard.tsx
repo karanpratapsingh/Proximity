@@ -4,7 +4,7 @@ import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes, PostDimensions } from '../../../constants';
-import { parseTimeElapsed } from '../../../utils/shared';
+import { parseTimeElapsed, parseLikes } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -29,6 +29,10 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
 
   const navigateToPost = () => navigate(Routes.PostViewScreen, { postId: id });
 
+  const parsedTime = parseTimeElapsed(time);
+  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+  const readableLikes = parseLikes(likes.length);
+
   return (
     <TouchableOpacity onPress={navigateToPost} activeOpacity={0.9} style={styles.container}>
       <NativeImage
@@ -43,12 +47,12 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
         />
         <View>
           <Text style={styles.handleText}>{author.handle}</Text>
-          <Text style={styles.timeText}>{parseTimeElapsed(time)}</Text>
+          <Text style={styles.timeText}>{readableTime}</Text>
         </View>
       </View>
 
       <View style={styles.lowerContent}>
-        <Text style={styles.likesText}>{likes.length} likes</Text>
+        <Text style={styles.likesText}>{readableLikes}</Text>
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.captionText}>{caption}</Text>
       </View>
     </TouchableOpacity>
@@ -69,21 +73,21 @@ const styles = StyleSheet.create({
     ...PostDimensions.Large
   },
   avatarImage: {
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     backgroundColor: ThemeStatic.placeholder,
-    borderRadius: 50,
+    borderRadius: 40,
     marginRight: 12
   },
   upperContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    padding: 16,
     backgroundColor: ThemeStatic.translucent
   },
   lowerContent: {
     justifyContent: 'center',
-    padding: 20,
+    padding: 16,
     backgroundColor: ThemeStatic.translucent
   },
   handleText: {
