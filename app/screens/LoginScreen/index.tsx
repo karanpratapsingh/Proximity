@@ -42,7 +42,9 @@ const LoginScreen: React.FC = () => {
       updateUser({ id, avatar, handle });
       navigate(Routes.App);
     } catch {
-      signOut();
+      if (!__DEV__) {
+        signOut();
+      }
     }
   };
 

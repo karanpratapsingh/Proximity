@@ -25,8 +25,9 @@ const ExploreScreen: React.FC = () => {
     data: postsQueryData,
     called: postsQueryCalled,
     loading: postsQueryLoading,
-    error: postsQueryError
-  }] = useLazyQuery(QUERY_POSTS);
+    error: postsQueryError,
+    refetch: postsQueryRefetch
+  }] = useLazyQuery(QUERY_POSTS, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
     queryPost();
@@ -47,7 +48,7 @@ const ExploreScreen: React.FC = () => {
 
   if (postsQueryCalled && !postsQueryLoading && !postsQueryError) {
     const { posts } = postsQueryData;
-    content = <ExploreGrid posts={posts} onRefresh={queryPost} />;
+    content = <ExploreGrid posts={posts} onRefresh={postsQueryRefetch} />;
   }
 
   if (isSearchFocused) {

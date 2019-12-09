@@ -88,8 +88,10 @@ export const getImageFromLibrary = async (height: number, width: number, circula
   try {
     const assetData = await ImagePicker.openPicker(options);
     return assetData;
-  } catch ({ message }) {
-    noPermissionNotification();
+  } catch ({ code }) {
+    if (!code.includes('CANCELLED')) {
+      noPermissionNotification();
+    }
   }
 };
 

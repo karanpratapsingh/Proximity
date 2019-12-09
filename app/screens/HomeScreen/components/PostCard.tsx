@@ -43,7 +43,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
         />
         <View>
           <Text style={styles.handleText}>{author.handle}</Text>
-          <Text style={styles.timeText}>{parseTimeElapsed(time)}</Text>
+          <Text style={styles.timeText}>{parseTimeElapsed(time)} ago</Text>
         </View>
       </View>
 
@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
   upperContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    padding: 16,
     backgroundColor: ThemeStatic.translucent
   },
   lowerContent: {
     justifyContent: 'center',
-    padding: 20,
+    padding: 16,
     backgroundColor: ThemeStatic.translucent
   },
   handleText: {

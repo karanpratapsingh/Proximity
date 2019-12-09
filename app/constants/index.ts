@@ -78,6 +78,7 @@ export const PostDimensions: PostDimensionsType = {
 };
 
 export const PollIntervals: PollIntervalsType = {
+  feed: 2 * 60 * 1000,
   messages: 4000,
   profile: 1000,
   postView: 2000,
