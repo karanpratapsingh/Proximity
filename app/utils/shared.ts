@@ -37,21 +37,21 @@ export const parseTimeElapsed = (utcTime: string) => {
 
   if (elapsedDays >= 1) {
     if (elapsedDays === 1) {
-      return `${elapsedDays} day`
+      return `${elapsedDays} day`;
     }
     return `${elapsedDays} days`;
   }
 
   if (elapsedHours >= 1) {
     if (elapsedHours === 1) {
-      return `${elapsedHours} hr`
+      return `${elapsedHours} hr`;
     }
     return `${elapsedHours} hrs`;
   }
 
   if (elapsedMinutes >= 1) {
     if (elapsedMinutes === 1) {
-      return `${elapsedMinutes} min`
+      return `${elapsedMinutes} min`;
     }
     return `${elapsedMinutes} mins`;
   }
@@ -116,7 +116,7 @@ export const getImageFromLibrary = async (height: number, width: number, circula
 
 export const isUserOnline = (lastSeen: number) => {
 
-  const now = (Date.now() / 100);
+  const now = (Date.now() / 1000);
   return (now - lastSeen) < Timeouts.online;
 };
 

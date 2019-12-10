@@ -98,7 +98,7 @@ export const Asset: AssetType = {
 };
 
 export const Timeouts: TimeoutsType = {
-  online: 120
+  online: 12
 };
 
 export const Errors: ErrorsType = {

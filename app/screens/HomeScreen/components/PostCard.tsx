@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: ThemeStatic.translucent
   },
   handleText: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.Body,
     color: ThemeStatic.white
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   likesText: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.Body,
     color: ThemeStatic.white
   },
