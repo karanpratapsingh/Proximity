@@ -58,7 +58,7 @@ const ProfileViewScreen: React.FC = () => {
   let content = <ProfileScreenPlaceholder viewMode />;
 
   if (!loading && !error) {
-    const { user: { id, handle, posts } } = data;
+    const { user: { handle, following, followers, posts } } = data;
     content = (
       <>
         <FlatGrid
@@ -71,16 +71,16 @@ const ProfileViewScreen: React.FC = () => {
           renderItem={renderItem}
         />
         <ConnectionsBottomSheet
-          ref={followingBottomSheetRef}
-          userId={id}
           viewMode
+          ref={followingBottomSheetRef}
+          data={following}
           handle={handle}
           type={Connections.FOLLOWING}
         />
         <ConnectionsBottomSheet
-          ref={followersBottomSheetRef}
-          userId={id}
           viewMode
+          ref={followersBottomSheetRef}
+          data={followers}
           handle={handle}
           type={Connections.FOLLOWERS}
         />
