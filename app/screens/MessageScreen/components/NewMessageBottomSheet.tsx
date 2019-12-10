@@ -1,0 +1,108 @@
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Modalize from 'react-native-modalize';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { FlatGrid } from 'react-native-super-grid';
+import EmptyConnectionsBanner from '../../../../assets/svg/empty-connections.svg';
+
+import { AppContext } from '../../../context';
+import { BottomSheetHeader, SvgBanner, ConnectionsPlaceholder, UserCard } from '../../../layout';
+import { ThemeColors } from '../../../types/theme';
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_USER_CONNECTIONS } from '../../../graphql/query';
+import { Connections } from '../../../constants';
+
+interface ConnectionsBottomSheetProps {
+  ref: React.Ref<any>,
+  onConnectionSelect: (targetId: string, avatar: string, handle: string) => void
+};
+
+const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ onConnectionSelect }, ref) => {
+
+  const { user, theme } = useContext(AppContext);
+
+  const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
+    variables: { userId: user.id, type: Connections.FOLLOWING },
+    fetchPolicy: 'network-only'
+  });
+
+  let content = <ConnectionsPlaceholder />;
+
+  const ListEmptyComponent = () => (
+    <SvgBanner
+      Svg={EmptyConnectionsBanner}
+      placeholder={`You're not following anyone`}
+      spacing={16}
+    />
+  );
+
+  const renderItem = ({ item }) => {
+    const { id, avatar, handle, name } = item;
+    return (
+      <UserCard
+        userId={id}
+        avatar={avatar}
+        handle={handle}
+        name={name}
+        onPress={() => onConnectionSelect(id, avatar, handle)}
+      />
+    );
+  };
+
+  if (!loading && !error) {
+    const { userConnections } = data;
+    content = (
+      <FlatGrid
+        bounces={false}
+        itemDimension={responsiveWidth(85)}
+        showsVerticalScrollIndicator={false}
+        items={userConnections}
+        itemContainerStyle={styles().listItemContainer}
+        contentContainerStyle={styles().listContentContainer}
+        ListEmptyComponent={ListEmptyComponent}
+        style={styles().listContainer}
+        spacing={20}
+        renderItem={renderItem}
+      />
+    );
+  }
+
+  return (
+    <Modalize
+      //@ts-ignore
+      ref={ref}
+      scrollViewProps={{ showsVerticalScrollIndicator: false }}
+      modalStyle={styles(theme).container}>
+      <BottomSheetHeader
+        heading={`Let's talk`}
+        subHeading='Connect with your friends'
+      />
+      <View style={styles(theme).content}>
+        {content}
+      </View>
+    </Modalize>
+  );
+});
+
+const styles = (theme = {} as ThemeColors) => StyleSheet.create({
+  container: {
+    marginTop: 40,
+    padding: 20,
+    backgroundColor: theme.base
+  },
+  content: {
+    flex: 1
+  },
+  listContainer: {
+    flex: 1
+  },
+  listItemContainer: {
+    width: '106%'
+  },
+  listContentContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  }
+});
+
+export default ConnectionsBottomSheet;

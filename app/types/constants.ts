@@ -65,7 +65,6 @@ export type PollIntervalsType = {
   profile: number,
   profileView: number,
   postView: number,
-  connections: number,
   interaction: number,
   notification: number,
   lastSeen: number
@@ -91,6 +90,7 @@ export type ErrorsType = {
   UPDATE_LAST_SEEN: string,
   LOAD_THEME: string,
   INITIALIZE_FCM: string,
+  INITIALIZE_CHAT: string,
   UPDATE_FCM_TOKEN: string,
   ASSET_UPLOAD: string
 };

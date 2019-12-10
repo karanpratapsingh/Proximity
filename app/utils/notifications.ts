@@ -66,3 +66,10 @@ export const deleteChatNotification = (onLongPress) => showMessage({
   duration: 4000,
   onLongPress
 });
+
+export const tryAgainLaterNotification = () => showMessage({
+  message: 'Please try again later',
+  icon: 'danger',
+  type: 'danger',
+  duration: 4000
+});

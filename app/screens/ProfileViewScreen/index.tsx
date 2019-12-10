@@ -16,7 +16,8 @@ const ProfileViewScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId },
-    pollInterval: PollIntervals.profileView
+    pollInterval: PollIntervals.profileView,
+    fetchPolicy: 'network-only'
   });
 
   const followingBottomSheetRef = useRef();

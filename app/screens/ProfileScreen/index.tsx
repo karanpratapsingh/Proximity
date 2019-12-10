@@ -18,7 +18,8 @@ const ProfileScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId: user.id },
-    pollInterval: PollIntervals.profile
+    pollInterval: PollIntervals.profile,
+    fetchPolicy: 'network-only'
   });
 
   const editProfileBottomSheetRef = useRef();
