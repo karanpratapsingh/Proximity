@@ -51,6 +51,7 @@
     "react-native-material-textfield": "^0.16.1",
     "react-native-modalize": "^1.2.3",
     "react-native-modest-checkbox": "^3.3.0",
+    "react-native-pose": "^0.9.1",
     "react-native-reanimated": "^1.4.0",
     "react-native-responsive-dimensions": "^3.0.0",
     "react-native-splash-screen": "^3.2.0",

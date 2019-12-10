@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
+import { PollIntervals } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_NOTIFICATION } from '../../graphql/query';
 import { Header, NotificationScreenPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import NotificationCard from './components/NotificationCard';
-import { PollIntervals } from '../../constants';
 
 const NotificationScreen: React.FC = () => {
   const { user, theme } = useContext(AppContext);

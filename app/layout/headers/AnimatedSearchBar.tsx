@@ -1,6 +1,6 @@
-import React, { useContext, useRef, useState } from 'react';
-import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput, StyleProp, ViewStyle } from 'react-native';
-import { Transition, Transitioning } from 'react-native-reanimated';
+import React, { useContext, useState } from 'react';
+import { Keyboard, Platform, StyleProp, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from 'react-native';
+import posed from 'react-native-pose';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
@@ -16,59 +16,55 @@ interface AnimatedSearchBarProps {
   style?: StyleProp<ViewStyle>
 };
 
+const PosedInput = posed(TextInput)({
+  focused: { width: '75%' },
+  notFocused: { width: '90%' }
+});
+
+const PosedTouchableOpacity = posed(TouchableOpacity)({
+  focused: { width: 70 },
+  notFocused: { width: 0 }
+});
+
 const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
 
   const { theme } = useContext(AppContext);
-
-  const [barWidth, setBarWidth] = useState(90);
-  const [cancelWidth, setCancelWidth] = useState(0);
-  const transitionRef = useRef();
-
-  const scaleAnimation = () => {
-    // @ts-ignore
-    transitionRef.current.animateNextTransition();
-  };
+  const [focused, setFocused] = useState(false);
 
   const onOpen = () => {
-    scaleAnimation();
-    setBarWidth(75);
-    setCancelWidth(70);
+    setFocused(true);
     onFocus();
   };
 
   const onCancel = () => {
-    scaleAnimation();
-    setBarWidth(90);
-    setCancelWidth(0);
+    setFocused(false);
     Keyboard.dismiss();
     onChangeText('');
     onBlur();
   };
 
-  const transition = <Transition.Change interpolation='easeInOut' />;
+  const pose = focused ? 'focused' : 'notFocused';
 
   return (
-    <Transitioning.View
-      style={styles().container}
-      // @ts-ignore
-      ref={transitionRef}
-      transition={transition}>
-      <TextInput
+    <View style={styles().container}>
+      <PosedInput
+        pose={pose}
         autoCorrect={false}
         onFocus={onOpen}
-        style={[styles(theme).animatedSearchBar, { width: `${barWidth}%` }, style]}
+        style={[styles(theme).animatedSearchBar, style]}
         value={value}
         placeholder={placeholder}
         placeholderTextColor={theme.text02}
         onChangeText={onChangeText}
       />
-      <TouchableOpacity
+      <PosedTouchableOpacity
+        pose={pose}
         activeOpacity={0.90}
         onPress={onCancel}
-        style={[styles().cancel, { width: cancelWidth }]}>
-        <Text style={[styles(theme).cancelText, { color: cancelWidth ? theme.text01 : theme.white }]}>Cancel</Text>
-      </TouchableOpacity>
-    </Transitioning.View>
+        style={[styles().cancel]}>
+        <Text style={styles(theme).cancelText}>Cancel</Text>
+      </PosedTouchableOpacity>
+    </View>
   );
 };
 
@@ -95,6 +91,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     justifyContent: 'center'
   },
   cancelText: {
+    height: 20,
     ...FontWeights.Light,
     ...FontSizes.Body
   }
