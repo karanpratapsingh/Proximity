@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput } from 'react-native';
+import { Platform, Keyboard, TouchableOpacity, StyleSheet, Text, TextInput, StyleProp, ViewStyle } from 'react-native';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
@@ -13,7 +13,7 @@ interface AnimatedSearchBarProps {
   onFocus?: any,
   onBlur?: any,
   placeholder: string,
-  style?: object
+  style?: StyleProp<ViewStyle>
 };
 
 const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeText, onFocus, onBlur, placeholder, style }) => {
@@ -24,17 +24,20 @@ const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeTe
   const [cancelWidth, setCancelWidth] = useState(0);
   const transitionRef = useRef();
 
-  const onOpen = () => {
+  const scaleAnimation = () => {
     // @ts-ignore
     transitionRef.current.animateNextTransition();
+  };
+
+  const onOpen = () => {
+    scaleAnimation();
     setBarWidth(75);
     setCancelWidth(70);
     onFocus();
   };
 
   const onCancel = () => {
-    // @ts-ignore
-    transitionRef.current.animateNextTransition();
+    scaleAnimation();
     setBarWidth(90);
     setCancelWidth(0);
     Keyboard.dismiss();
