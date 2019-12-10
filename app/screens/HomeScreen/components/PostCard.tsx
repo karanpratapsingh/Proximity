@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     ...PostDimensions.Large
   },
   avatarImage: {
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
     backgroundColor: ThemeStatic.placeholder,
-    borderRadius: 40,
-    marginRight: 12
+    borderRadius: 50,
+    marginRight: 10
   },
   upperContent: {
     flexDirection: 'row',
