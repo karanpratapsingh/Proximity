@@ -9,19 +9,19 @@ const { FontWeights, FontSizes } = Typography;
 
 interface AnimatedSearchBarProps {
   value: string,
-  onChangeText: any,
+  onChangeText: (text: string) => void,
   onFocus?: any,
   onBlur?: any,
   placeholder: string,
   style?: StyleProp<ViewStyle>
 };
 
-const PosedInput = posed(TextInput)({
+const TransitionInput = posed(TextInput)({
   focused: { width: '75%' },
   notFocused: { width: '90%' }
 });
 
-const PosedTouchableOpacity = posed(TouchableOpacity)({
+const TransitionTouchableOpacity = posed(TouchableOpacity)({
   focused: { width: 70 },
   notFocused: { width: 0 }
 });
@@ -47,7 +47,7 @@ const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeTe
 
   return (
     <View style={styles().container}>
-      <PosedInput
+      <TransitionInput
         pose={pose}
         autoCorrect={false}
         onFocus={onOpen}
@@ -57,13 +57,13 @@ const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeTe
         placeholderTextColor={theme.text02}
         onChangeText={onChangeText}
       />
-      <PosedTouchableOpacity
+      <TransitionTouchableOpacity
         pose={pose}
         activeOpacity={0.90}
         onPress={onCancel}
         style={[styles().cancel]}>
         <Text style={styles(theme).cancelText}>Cancel</Text>
-      </PosedTouchableOpacity>
+      </TransitionTouchableOpacity>
     </View>
   );
 };

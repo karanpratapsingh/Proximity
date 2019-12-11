@@ -9,17 +9,24 @@ import { ThemeColors } from '../../types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
 
+import posed, { Transition } from 'react-native-pose';
+
+const FadeView = posed.View({
+  enter: { opacity: 1 },
+  exit: { opacity: 0.25 }
+});
+
 const ExploreScreen: React.FC = () => {
 
   const { theme } = useContext(AppContext);
   const [userSearch, setUserSearch] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [querySearchUsers, {
-    data: querySearchUsersData,
-    loading: querySearchUsersLoading,
-    called: querySearchUsersCalled,
-    error: querySearchUsersError
+  const [searchUsersQuery, {
+    data: searchUsersQueryData,
+    loading: searchUsersQueryLoading,
+    called: searchUsersQueryCalled,
+    error: searchUsersQueryError
   }] = useLazyQuery(QUERY_SEARCH_USERS);
   const [queryPost, {
     data: postsQueryData,
@@ -34,12 +41,12 @@ const ExploreScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (userSearch !== '') querySearchUsers({ variables: { name: userSearch } });
-    if (querySearchUsersCalled && !querySearchUsersLoading) {
-      const { searchUsers } = querySearchUsersData;
+    if (userSearch !== '') searchUsersQuery({ variables: { name: userSearch } });
+    if (searchUsersQueryCalled && !searchUsersQueryLoading) {
+      const { searchUsers } = searchUsersQueryData;
       setSearchResults(searchUsers);
     }
-  }, [userSearch, querySearchUsersData, querySearchUsersCalled, querySearchUsersLoading]);
+  }, [userSearch, searchUsersQueryData, searchUsersQueryCalled, searchUsersQueryLoading]);
 
   const onFocus = () => setIsSearchFocused(true);
   const onBlur = () => setIsSearchFocused(false);
@@ -59,18 +66,20 @@ const ExploreScreen: React.FC = () => {
 
   if (isSearchFocused) {
     let subContent;
-    if (querySearchUsersCalled && querySearchUsersLoading) {
+    if (searchUsersQueryCalled && searchUsersQueryLoading) {
       subContent = <SearchUsersPlaceholder />;
-    } else if (!querySearchUsersLoading && userSearch === '') {
-      subContent = <SvgBanner Svg={SearchUsersBanner} spacing={16} placeholder='Search users' />
-    } else if (querySearchUsersCalled && !querySearchUsersLoading && !querySearchUsersError) {
+    } else if (!searchUsersQueryLoading && userSearch === '') {
+      subContent = <SvgBanner Svg={SearchUsersBanner} spacing={16} placeholder='Search for users...' />
+    } else if (searchUsersQueryCalled && !searchUsersQueryLoading && !searchUsersQueryError) {
       subContent = <UserSearchResults searchResults={searchResults} />;
     }
 
     content = (
-      <>
-        {subContent}
-      </>
+      <Transition animateOnMount>
+        <FadeView style={{ flex: 1 }} key='search-content'>
+          {subContent}
+        </FadeView>
+      </Transition>
     );
   }
 

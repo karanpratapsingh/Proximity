@@ -41,7 +41,7 @@ const NotificationScreen: React.FC = () => {
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={notifications.reverse()}
+        items={notifications}
         ListEmptyComponent={() => <SvgBanner Svg={EmptyNotifications} spacing={20} placeholder='No notifications yet' />}
         style={styles().notificationList}
         spacing={20}
