@@ -76,7 +76,7 @@ const ExploreScreen: React.FC = () => {
 
     content = (
       <Transition animateOnMount>
-        <FadeView style={{ flex: 1 }} key='search-content'>
+        <FadeView style={styles().fadeView} key='search-content'>
           {subContent}
         </FadeView>
       </Transition>
@@ -106,6 +106,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
+    flex: 1
+  },
+  fadeView: {
     flex: 1
   }
 });

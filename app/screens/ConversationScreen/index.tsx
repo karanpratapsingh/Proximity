@@ -88,6 +88,7 @@ const ConversationScreen: React.FC = () => {
 
     content = (
       <GiftedChat
+        scrollToBottom
         alwaysShowSend
         inverted={false}
         maxInputLength={200}
