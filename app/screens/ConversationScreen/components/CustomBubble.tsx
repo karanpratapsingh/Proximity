@@ -6,18 +6,18 @@ import posed, { Transition } from 'react-native-pose';
 
 const TransitionBubble = posed.View({
   enter: { opacity: 1, x: 0 },
-  exit: { opacity: 0.5, x: ({ delta }) => delta }
+  exit: { opacity: 0.5, x: ({ offset }) => offset }
 });
 
 const CustomBubble: React.FC = bubbleProps => {
   // @ts-ignore
   const { user: { _id: authorId }, currentMessage: { user: { _id: currentId } } } = bubbleProps;
 
-  const delta = authorId === currentId ? 20 : -20;
+  const offset = authorId === currentId ? 20 : -20;
 
   return (
-    <Transition delta={delta} animateOnMount>
-      <TransitionBubble key='message-bubble' style={{ flex: 1, }}>
+    <Transition offset={offset} animateOnMount>
+      <TransitionBubble key='message-bubble' style={styles.container}>
         <Bubble
           {...bubbleProps}
           // @ts-ignore
@@ -26,10 +26,14 @@ const CustomBubble: React.FC = bubbleProps => {
       </TransitionBubble>
     </Transition>
   );
-}
+};
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   right: {
-    marginVertical: 20,
+    marginVertical: 10,
     backgroundColor: ThemeStatic.accent
   }
 });
