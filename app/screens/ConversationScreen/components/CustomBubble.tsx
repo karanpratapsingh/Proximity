@@ -29,6 +29,7 @@ const CustomBubble: React.FC = bubbleProps => {
 }
 const styles = StyleSheet.create({
   right: {
+    marginVertical: 20,
     backgroundColor: ThemeStatic.accent
   }
 });
