@@ -136,7 +136,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
-    marginTop: 40,
+    marginTop: responsiveHeight(12),
     marginHorizontal: 20
   },
   titleText: {
