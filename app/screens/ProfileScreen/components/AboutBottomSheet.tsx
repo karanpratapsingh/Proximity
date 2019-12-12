@@ -94,7 +94,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: theme.base,
-    marginTop: 20
+    marginTop: responsiveHeight(8)
   },
   content: {
     flex: 1,
@@ -124,7 +124,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     color: theme.text01
   },
   actions: {
-    marginTop: 20
+    marginTop: 10
   },
   aboutActionLabel: {
     marginLeft: 10,
