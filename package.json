@@ -18,7 +18,9 @@
     "ios": "react-native run-ios --simulator=\"iPhone 8\"",
     "device": "react-native run-ios --device=\"iPhone\"",
     "android": "react-native run-android",
-    "emulator": "emulator @PIXEL_API_28"
+    "emulator": "emulator @PIXEL_API_28",
+    "codepush:ios": "appcenter codepush release-react -a Karan-Pratap-Singh/Proximity -d Production",
+    "codepush:android": "appcenter codepush release-react -a Karan-Pratap-Singh/Proximity-Android -d Production"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
