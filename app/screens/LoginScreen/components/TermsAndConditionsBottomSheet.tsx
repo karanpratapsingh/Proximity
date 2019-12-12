@@ -55,7 +55,7 @@ const TermsAndConditionsBottomSheet: React.FC<TermsAndConditionsBottomSheetProps
         <Text style={styles(theme).termsText}>
           As mentioned Proximity is an open source app with it's source code
           hosted on github, the data you generate is not used against you
-          in any shape or form like sharing with 3rd parties, or targeting
+          in any shape or form like sharing with 3rd parties or targeting
           you for ads using machine learning algorithms
         </Text>
 
