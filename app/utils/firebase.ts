@@ -28,7 +28,7 @@ export const initializeFCM = async () => {
       return await messaging.getToken();
     }
   } catch ({ message }) {
-    crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message)
+    crashlytics.recordCustomError(Errors.INITIALIZE_FCM, message);
   }
 };
 
@@ -37,9 +37,9 @@ export const uploadToStorage = (asset: string, uri: string, userId: string) => {
   let storageRef;
 
   if (asset === Asset.avatar) {
-    storageRef = `${StoragePaths.avatars}/${userId}.${type}`
+    storageRef = `${StoragePaths.avatars}/${userId}.${type}`;
   } else if (asset === Asset.post) {
-    storageRef = `${StoragePaths.posts}/${userId}/${generateUUID()}.${type}`
+    storageRef = `${StoragePaths.posts}/${userId}/${generateUUID()}.${type}`;
   }
 
   return storage

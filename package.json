@@ -1,6 +1,6 @@
 {
   "name": "Proximity",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Karan Pratap Singh",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
-    "@react-native-community/async-storage": "react-native-community/react-native-async-storage",
+    "@react-native-community/async-storage": "^1.7.0",
     "@react-native-community/google-signin": "^3.0.3",
     "@types/jest": "^24.0.21",
     "@types/react": "^16.9.11",

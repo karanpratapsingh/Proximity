@@ -122,6 +122,7 @@ const LoginScreen: React.FC = () => {
       </>
     );
   }
+
   return (
     <View style={styles(theme).container}>
       {content}

@@ -70,11 +70,16 @@ export const generateUUID = () => {
 
 export const transformMessages = messages =>
   messages.map(message => {
-    const { id, body, createdAt, author: {
-      id: authorId,
-      name,
-      avatar
-    } } = message;
+    const {
+      id,
+      body,
+      createdAt,
+      author: {
+        id: authorId,
+        name,
+        avatar
+      }
+    } = message;
 
     return {
       _id: id,
@@ -88,7 +93,7 @@ export const transformMessages = messages =>
     };
   });
 
-export const filterChatParticipants = (userId, participants) =>
+export const filterChatParticipants = (userId: string, participants) =>
   participants.filter(participant => userId !== participant.id);
 
 export const getImageFromLibrary = async (height: number, width: number, circular: boolean = false) => {
