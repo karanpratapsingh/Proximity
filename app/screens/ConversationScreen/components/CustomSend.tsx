@@ -9,7 +9,11 @@ const CustomSend: React.FC = sendProps => (
   <Send
     {...sendProps}
     containerStyle={styles.container}>
-    <FontAwesome name='send' size={IconSizes.x5} color={ThemeStatic.accent} />
+    <FontAwesome
+      name='send'
+      size={IconSizes.x5}
+      color={ThemeStatic.accent}
+    />
   </Send>
 );
 

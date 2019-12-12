@@ -13,6 +13,8 @@ import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
 import { ThemeVariant, Typography, ThemeStatic } from './app/theme';
 import { crashlytics } from './app/utils/firebase';
 import FlashMessage from 'react-native-flash-message';
+import codePush from 'react-native-code-push';
+import Config from './app/config';
 
 GoogleSignin.configure();
 
@@ -77,4 +79,9 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default App;
+const CodepushApp = codePush({
+  deploymentKey: Config.codepush.production,
+  checkFrequency: codePush.CheckFrequency.ON_APP_START
+})(App);
+
+export default CodepushApp;

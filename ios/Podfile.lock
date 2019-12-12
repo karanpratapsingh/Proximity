@@ -4,7 +4,13 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.3.0)
   - AppAuth/Core (1.3.0)
   - AppAuth/ExternalUserAgent (1.3.0)
+  - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
+  - CodePush (6.0.0):
+    - Base64 (~> 1.1)
+    - JWT (~> 3.0.0-beta.7)
+    - React
+    - SSZipArchive (~> 2.1)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - DoubleConversion (1.1.6)
@@ -105,6 +111,8 @@ PODS:
   - GTMSessionFetcher/Core (1.3.0)
   - GTMSessionFetcher/Full (1.3.0):
     - GTMSessionFetcher/Core (= 1.3.0)
+  - JWT (3.0.0-beta.12):
+    - Base64 (~> 1.1.2)
   - libwebp (1.0.3):
     - libwebp/demux (= 1.0.3)
     - libwebp/mux (= 1.0.3)
@@ -359,9 +367,11 @@ PODS:
   - SDWebImageWebPCoder (0.2.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.0)
+  - SSZipArchive (2.2.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - CodePush (from `../node_modules/react-native-code-push`)
   - Crashlytics (~> 3.14.0)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Fabric (~> 1.10.2)
@@ -409,6 +419,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
+    - Base64
     - boost-for-react-native
     - Crashlytics
     - Fabric
@@ -425,6 +436,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - JWT
     - libwebp
     - nanopb
     - Protobuf
@@ -432,8 +444,11 @@ SPEC REPOS:
     - RSKImageCropper
     - SDWebImage
     - SDWebImageWebPCoder
+    - SSZipArchive
 
 EXTERNAL SOURCES:
+  CodePush:
+    :path: "../node_modules/react-native-code-push"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -507,7 +522,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CodePush: 58d8b6595f46057ca1f49c55fb6860ad7fd38ce3
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
@@ -528,6 +545,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 547a86735c6f0ee30ad17e94df4fc21f616b71cb
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
+  JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
   libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Protobuf: 394b2bf29ec303f4325e3ee4892c09e675647152
@@ -564,6 +582,7 @@ SPEC CHECKSUMS:
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   SDWebImage: 6ac2eb96571bff96ecde31a987172c5934a0eb7d
   SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
+  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 247699f7396420e0e23d56cd8db4b33dd6f815e8

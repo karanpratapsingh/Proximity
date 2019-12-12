@@ -78,11 +78,10 @@ export const PostDimensions: PostDimensionsType = {
 };
 
 export const PollIntervals: PollIntervalsType = {
-  messages: 4 * 1000,
+  messages: 2 * 1000,
   profile: 1000,
   profileView: 1000,
   postView: 2 * 1000,
-  connections: 2 * 1000,
   interaction: 1000,
   notification: 4 * 1000,
   lastSeen: 10 * 1000
@@ -99,7 +98,7 @@ export const Asset: AssetType = {
 };
 
 export const Timeouts: TimeoutsType = {
-  online: 120
+  online: 12
 };
 
 export const Errors: ErrorsType = {
@@ -108,6 +107,7 @@ export const Errors: ErrorsType = {
   UPDATE_LAST_SEEN: 'UPDATE_LAST_SEEN',
   LOAD_THEME: 'LOAD_THEME',
   INITIALIZE_FCM: 'INITIALIZE_FCM',
+  INITIALIZE_CHAT: 'INITIALIZE_CHAT',
   UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN',
   ASSET_UPLOAD: 'ASSET_UPLOAD'
 };

@@ -1,19 +1,28 @@
-import { useLazyQuery } from '@apollo/react-hooks';
-import React, { useContext, useEffect, useState } from 'react';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import EmptyMessages from '../../../assets/svg/empty-messages.svg';
-import { PollIntervals } from '../../constants';
+import { PollIntervals, IconSizes, Routes, Errors } from '../../constants';
 import { AppContext } from '../../context';
-import { QUERY_CHATS } from '../../graphql/query';
-import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner } from '../../layout';
+import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '../../graphql/query';
+import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import { filterChatParticipants, isUserOnline } from '../../utils/shared';
 import MessageCard from './components/MessageCard';
+import NewMessageBottomSheet from './components/NewMessageBottomSheet';
+
+import Entypo from 'react-native-vector-icons/Entypo';
+import client from '../../graphql/client';
+import { MUTATION_CREATE_TEMPORARY_CHAT } from '../../graphql/mutation';
+import { useNavigation } from 'react-navigation-hooks';
+import { crashlytics } from '../../utils/firebase';
+import { tryAgainLaterNotification } from '../../utils/notifications';
 
 const MessageScreen: React.FC = () => {
 
+  const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
 
   const [queryChats, { called, data, loading, error }] = useLazyQuery(QUERY_CHATS, {
@@ -21,7 +30,10 @@ const MessageScreen: React.FC = () => {
     fetchPolicy: 'network-only',
     pollInterval: PollIntervals.messages
   });
+  const [createTemporaryChat] = useMutation(MUTATION_CREATE_TEMPORARY_CHAT);
+
   const [chatSearch, setChatSearch] = useState('');
+  const newMessageBottomSheetRef = useRef();
 
   useEffect(() => {
     queryChats();
@@ -85,15 +97,55 @@ const MessageScreen: React.FC = () => {
     );
   }
 
+  const onConnectionSelect = async (targetId: string, avatar: string, handle: string) => {
+    try {
+
+      const { data: { chatExists } } = await client.query({
+        query: QUERY_CHAT_EXISTS,
+        variables: { userId: user.id, targetId }
+      });
+
+      // @ts-ignore
+      newMessageBottomSheetRef.current.close();
+      if (chatExists) {
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
+      } else {
+        const { data } = await createTemporaryChat();
+        navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });
+      }
+    } catch ({ message }) {
+      tryAgainLaterNotification();
+      crashlytics.recordCustomError(Errors.INITIALIZE_CHAT, message);
+    }
+  };
+
+  const IconRight = () => <IconButton
+    // @ts-ignore
+    onPress={() => newMessageBottomSheetRef.current.open()}
+    Icon={() =>
+      <Entypo
+        name='add-to-list'
+        size={IconSizes.x6}
+        color={theme.text01}
+      />}
+  />
+
   return (
     <View style={styles(theme).container}>
-      <Header title='Messages' />
+      <Header
+        title='Messages'
+        IconRight={IconRight}
+      />
       <SearchBar
         value={chatSearch}
         onChangeText={setChatSearch}
         placeholder='Search for chats...'
       />
       {content}
+      <NewMessageBottomSheet
+        ref={newMessageBottomSheetRef}
+        onConnectionSelect={onConnectionSelect}
+      />
     </View>
   );
 };

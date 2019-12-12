@@ -14,10 +14,11 @@ interface UserCardProps {
   avatar: string,
   handle: string,
   name: string,
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>,
+  onPress?: any
 };
 
-const UserCard: React.FC<UserCardProps> = ({ userId, avatar, handle, name, style }) => {
+const UserCard: React.FC<UserCardProps> = ({ userId, avatar, handle, name, onPress, style }) => {
 
   const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -28,7 +29,7 @@ const UserCard: React.FC<UserCardProps> = ({ userId, avatar, handle, name, style
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={[styles().container, style]}>
+    <TouchableOpacity activeOpacity={0.95} onPress={onPress || navigateToProfile} style={[styles().container, style]}>
       <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).handleText}>{handle}</Text>

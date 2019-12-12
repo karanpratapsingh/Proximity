@@ -37,7 +37,7 @@ const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, hand
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {notificationText}
         </Text>
-        <Text style={styles(theme).timeText}>{timeElapsed}</Text>
+        <Text style={styles(theme).timeText}>{timeElapsed} ago</Text>
       </View>
     </TouchableOpacity>
   );

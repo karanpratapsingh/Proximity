@@ -2,7 +2,7 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { FollowInteraction, IconSizes, Routes, PollIntervals } from '../../../constants';
+import { FollowInteraction, IconSizes, Routes, PollIntervals, Errors } from '../../../constants';
 import { AppContext } from '../../../context';
 import client from '../../../graphql/client';
 import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
@@ -10,6 +10,8 @@ import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
 import { LoadingIndicator } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
+import { crashlytics } from '../../../utils/firebase';
+import { tryAgainLaterNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -23,7 +25,11 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, h
 
   const { navigate } = useNavigation();
   const { user, theme } = useContext(AppContext);
-  const { data: doesFollowData, loading: doesFollowLoading, error: doesFollowError } = useQuery(QUERY_DOES_FOLLOW, {
+  const {
+    data: doesFollowData,
+    loading: doesFollowLoading,
+    error: doesFollowError
+  } = useQuery(QUERY_DOES_FOLLOW, {
     variables: { userId: user.id, targetId },
     pollInterval: PollIntervals.interaction
   });
@@ -77,8 +83,9 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, h
         const { data } = await createTemporaryChat();
         navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });
       }
-    } catch {
-      // do something or show error
+    } catch ({ message }) {
+      tryAgainLaterNotification();
+      crashlytics.recordCustomError(Errors.INITIALIZE_CHAT, message);
     }
   };
 

@@ -1,4 +1,13 @@
-import { NotificationTextType } from "./constants";
+import { NotificationTextType } from './constants';
+
+// Profile Screen
+
+export type Connection = {
+  id: string,
+  avatar: string,
+  name: string,
+  handle: string
+}
 
 // Notification Screen
 

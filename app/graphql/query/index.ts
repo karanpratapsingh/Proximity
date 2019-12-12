@@ -20,9 +20,15 @@ export const QUERY_USER = gql`
       about
       following {
         id
+        avatar
+        name
+        handle
       }
       followers {
         id
+        avatar
+        name
+        handle
       }
       posts {
         id

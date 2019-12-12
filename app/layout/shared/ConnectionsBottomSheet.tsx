@@ -1,35 +1,28 @@
-import { useQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { BottomSheetHeader, ConnectionsPlaceholder, SvgBanner } from '..';
+import { BottomSheetHeader, SvgBanner } from '..';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
-import { Connections, PollIntervals } from '../../constants';
+import { Connections } from '../../constants';
 import { AppContext } from '../../context';
-import { QUERY_USER_CONNECTIONS } from '../../graphql/query';
 import { ThemeColors } from '../../types/theme';
 import UserCard from './UserCard';
+import { Connection } from '../../types/screens';
 
 interface ConnectionsBottomSheetProps {
   ref: React.Ref<any>,
   viewMode?: boolean,
-  userId: string,
+  data: Connection[],
   handle?: string,
   type: string
 };
 
-const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ viewMode, userId, handle, type }, ref) => {
+const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ viewMode, handle, data, type }, ref) => {
 
   const { theme } = useContext(AppContext);
 
-  const { data, loading, error } = useQuery(QUERY_USER_CONNECTIONS, {
-    variables: { userId, type },
-    pollInterval: PollIntervals.connections
-  });
-
-  let content = <ConnectionsPlaceholder />;
   let heading;
   let subHeading;
 
@@ -69,24 +62,6 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
     );
   };
 
-  if (!loading && !error) {
-    const { userConnections } = data;
-    content = (
-      <FlatGrid
-        bounces={false}
-        itemDimension={responsiveWidth(85)}
-        showsVerticalScrollIndicator={false}
-        items={userConnections}
-        itemContainerStyle={styles().listItemContainer}
-        contentContainerStyle={styles().listContentContainer}
-        ListEmptyComponent={ListEmptyComponent}
-        style={styles().listContainer}
-        spacing={20}
-        renderItem={renderItem}
-      />
-    );
-  }
-
   return (
     <Modalize
       //@ts-ignore
@@ -98,7 +73,18 @@ const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forw
         subHeading={subHeading}
       />
       <View style={styles(theme).content}>
-        {content}
+        <FlatGrid
+          bounces={false}
+          itemDimension={responsiveWidth(85)}
+          showsVerticalScrollIndicator={false}
+          items={data}
+          itemContainerStyle={styles().listItemContainer}
+          contentContainerStyle={styles().listContentContainer}
+          ListEmptyComponent={ListEmptyComponent}
+          style={styles().listContainer}
+          spacing={20}
+          renderItem={renderItem}
+        />
       </View>
     </Modalize>
   );

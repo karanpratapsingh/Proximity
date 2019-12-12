@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NativeImage } from '../../../layout';
 import { Typography, ThemeStatic } from '../../../theme';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes, PostDimensions } from '../../../constants';
+import { Routes, PostDimensions, IconSizes } from '../../../constants';
 import { parseTimeElapsed, parseLikes } from '../../../utils/shared';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { AppContext } from '../../../context';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -26,12 +28,14 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, caption }) => {
 
   const { navigate } = useNavigation();
+  const { user } = useContext(AppContext);
 
   const navigateToPost = () => navigate(Routes.PostViewScreen, { postId: id });
 
   const parsedTime = parseTimeElapsed(time);
   const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
   const readableLikes = parseLikes(likes.length);
+  const isLiked = likes.includes(user.id);
 
   return (
     <TouchableOpacity onPress={navigateToPost} activeOpacity={0.9} style={styles.container}>
@@ -52,8 +56,21 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
       </View>
 
       <View style={styles.lowerContent}>
-        <Text style={styles.likesText}>{readableLikes}</Text>
-        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.captionText}>{caption}</Text>
+        <View style={styles.likeContent}>
+          <AntDesign
+            name='heart'
+            color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
+            size={IconSizes.x5}
+          />
+          <Text style={styles.likesText}>{readableLikes}</Text>
+        </View>
+
+        <Text
+          numberOfLines={1}
+          ellipsizeMode='tail'
+          style={styles.captionText}>
+          {caption}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -73,11 +90,11 @@ const styles = StyleSheet.create({
     ...PostDimensions.Large
   },
   avatarImage: {
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
     backgroundColor: ThemeStatic.placeholder,
-    borderRadius: 40,
-    marginRight: 12
+    borderRadius: 50,
+    marginRight: 10
   },
   upperContent: {
     flexDirection: 'row',
@@ -90,8 +107,11 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: ThemeStatic.translucent
   },
+  likeContent: {
+    flexDirection: 'row'
+  },
   handleText: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.Body,
     color: ThemeStatic.white
   },
@@ -102,8 +122,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   likesText: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.Body,
+    marginLeft: 8,
     color: ThemeStatic.white
   },
   captionText: {

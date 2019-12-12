@@ -16,7 +16,8 @@ const ProfileViewScreen: React.FC = () => {
 
   const { data, loading, error } = useQuery(QUERY_USER, {
     variables: { userId },
-    pollInterval: PollIntervals.profileView
+    pollInterval: PollIntervals.profileView,
+    fetchPolicy: 'network-only'
   });
 
   const followingBottomSheetRef = useRef();
@@ -58,7 +59,7 @@ const ProfileViewScreen: React.FC = () => {
   let content = <ProfileScreenPlaceholder viewMode />;
 
   if (!loading && !error) {
-    const { user: { id, handle, posts } } = data;
+    const { user: { handle, following, followers, posts } } = data;
     content = (
       <>
         <FlatGrid
@@ -71,16 +72,16 @@ const ProfileViewScreen: React.FC = () => {
           renderItem={renderItem}
         />
         <ConnectionsBottomSheet
-          ref={followingBottomSheetRef}
-          userId={id}
           viewMode
+          ref={followingBottomSheetRef}
+          data={following}
           handle={handle}
           type={Connections.FOLLOWING}
         />
         <ConnectionsBottomSheet
-          ref={followersBottomSheetRef}
-          userId={id}
           viewMode
+          ref={followersBottomSheetRef}
+          data={followers}
           handle={handle}
           type={Connections.FOLLOWERS}
         />

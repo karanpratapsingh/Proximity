@@ -60,9 +60,16 @@ export const noPermissionNotification = () => showMessage({
 });
 
 export const deleteChatNotification = (onLongPress) => showMessage({
-  message: 'Delete? long press this notification to confirm',
+  message: 'Delete? Long press this notification to confirm',
   icon: 'danger',
   type: 'danger',
   duration: 4000,
   onLongPress
+});
+
+export const tryAgainLaterNotification = () => showMessage({
+  message: 'Please try again later',
+  icon: 'danger',
+  type: 'danger',
+  duration: 4000
 });

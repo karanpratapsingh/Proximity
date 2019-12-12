@@ -33,7 +33,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
         refreshControl={refreshControl()}
         itemDimension={100}
         showsVerticalScrollIndicator={false}
-        items={posts.reverse()}
+        items={posts}
         ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
         spacing={6}
         renderItem={renderItem}
