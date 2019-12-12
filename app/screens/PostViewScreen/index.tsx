@@ -102,8 +102,9 @@ const PostViewScreen: React.FC = () => {
       }
     } = postData;
 
+    const parsedTime = parseTimeElapsed(createdAt);
+    const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
     const isLiked = likes.includes(user.id);
-
     const readableLikes = parseLikes(likes.length);
 
     content = (
@@ -112,7 +113,7 @@ const PostViewScreen: React.FC = () => {
           <NativeImage uri={avatar} style={styles(theme).avatarImage} />
           <View>
             <Text style={styles(theme).handleText}>{handle}</Text>
-            <Text style={styles(theme).timeText}>{parseTimeElapsed(createdAt)}</Text>
+            <Text style={styles(theme).timeText}>{readableTime}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDoubleTap(isLiked)} activeOpacity={1}>
