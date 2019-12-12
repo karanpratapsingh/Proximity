@@ -85,8 +85,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   commentAvatarImage: {
-    height: 35,
-    width: 35,
+    height: 36,
+    width: 36,
     backgroundColor: theme.placeholder,
     marginRight: 10,
     borderRadius: 50
