@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Proximity</string>
+    <!-- Codepush key [CUSTOM] -->
     <string moduleConfig="true" name="CodePushDeploymentKey">DeploymentKey</string>
 </resources>
