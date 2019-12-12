@@ -967,9 +967,10 @@
   resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.2.tgz#17d925c45b4bf44189e5a38038d149df42d8c0b4"
   integrity sha512-IkdW0TNmRnWTeWI7aGQIVDbKXPWHVEYdGgd5ZR4SH/Ty/61p63jCjrPxX1XrR7IGkl08bjhJROStD7j+RKgoIw==
 
-"@react-native-community/async-storage@react-native-community/react-native-async-storage":
-  version "1.6.3"
-  resolved "https://codeload.github.com/react-native-community/react-native-async-storage/tar.gz/b04ffbf1b80bdf5295cb36c21fc5ca62a7333e3c"
+"@react-native-community/async-storage@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.7.0.tgz#75e8795cfadef5005228fd1f8a0b0178d50924a2"
+  integrity sha512-6SdZhoS6ykkIPJeJkJ5pwxmRfdQbDILQxRlZLXVzsV0WA9wmcf7FutKXBEX9dlSPbYTbjo7L3xbXQkZXsMzZBA==
 
 "@react-native-community/cli-debugger-ui@^3.0.0":
   version "3.0.0"
