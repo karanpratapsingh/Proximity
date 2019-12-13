@@ -2,8 +2,7 @@
   <a href="https://proximity-mobile.web.app">
     <img width="100px" src="https://proximity-mobile.web.app/images/proximity-logo-round.png">
   </a>
-  <h1 align="center">Proximity</h1>
-  
+  <h1 align="center">Proximity</h1>  
 </p>
 
 <p align="center">
@@ -48,19 +47,12 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 **Please leave a :star: as motivation if you liked the idea :smile:**
 
 
-## :rocket: Technologies Used:
+## :rocket: Technologies Used
 <br />
 
 
- <img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/typescript-logo.png">
- <img width="64px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/react-logo.png">
-  <img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/nodejs-logo.png">
-   <img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/graphql-logo.png">
-   <img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/prisma-logo.png">
-   <img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/firebase-logo.png">
-     <img width="50px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/app-center-logo.png">
-<img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/heroku-logo.png">
-    <br/>
+ <img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/typescript-logo.png"><img width="64px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/react-logo.png"><img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/nodejs-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/graphql-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/prisma-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/firebase-logo.png"><img width="50px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/app-center-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/heroku-logo.png">
+<br/>
 <br />
 
 ## :zap: Features
@@ -83,8 +75,8 @@ I used this [Boilerplate](https://github.com/karanpratapsingh/react-native-boile
 Also, If you're interested in how I implemented the system design then feel free to reach out to me on twitter or instagram (i'm most active there), tho I am thinking of writing articles for it.
 
 <br />
-## :iphone: Screenshots:
-<p align="center" style="font-weight: 700; font-size: 24px">Light Mode</p>
+
+## :iphone: Screenshots
 <br />
 <img width="180px" style="margin: 10px 10px;" src="https://proximity-mobile.web.app/images/screenshots/Light/screenshot-1-Light.png">
 <img width="180px" style="margin: 10px 10px;" src="https://proximity-mobile.web.app/images/screenshots/Light/screenshot-2-Light.png">
@@ -121,7 +113,7 @@ Also, If you're interested in how I implemented the system design then feel free
 ## :raised_hands: Contributing:
 Want to contribute to this project? Please contact me if you're interested as only contributors are allowed to have sensitive keys for development which I've omitted due to use privacy risks
 
-##:lock_with_ink_pen: License 
+## :lock_with_ink_pen: License 
 
 * See [LICENSE](/LICENSE)
 
