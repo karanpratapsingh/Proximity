@@ -23,7 +23,8 @@ const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, hand
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
-  const timeElapsed = parseTimeElapsed(time);
+  const parsedTime = parseTimeElapsed(time);
+  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
 
   const navigateToProfile = () => {
     navigate(Routes.ProfileViewScreen, { userId });
@@ -37,7 +38,7 @@ const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, hand
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {notificationText}
         </Text>
-        <Text style={styles(theme).timeText}>{timeElapsed} ago</Text>
+        <Text style={styles(theme).timeText}>{readableTime}</Text>
       </View>
     </TouchableOpacity>
   );
