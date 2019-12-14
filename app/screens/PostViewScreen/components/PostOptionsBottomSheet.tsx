@@ -1,24 +1,29 @@
 import React, { useContext } from 'react';
-import { Image, Linking, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Config from '../../../config';
 import { AppContext } from '../../../context';
-import { BottomSheetHeader, Button } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
+import { BottomSheetHeader, Option } from '../../../layout';
 import { ThemeColors } from '../../../types/theme';
-
-const { FontWeights, FontSizes } = Typography;
-const { author: { url }, repository, version } = Config;
+import { postReportedNotification } from '../../../utils/notifications';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_REPORT_POST } from '../../../graphql/mutation';
 
 interface PostOptionsBottomSheetProps {
-  ref: React.Ref<any>
+  ref: React.Ref<any>,
+  postId: String
 };
 
-const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forwardRef((_, ref) => {
+const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forwardRef(({ postId }, ref) => {
 
   const { theme } = useContext(AppContext);
+  const [reportPost] = useMutation(MUTATION_REPORT_POST, { variables: { postId } });
+
+  const onPostReport = () => {
+    reportPost();
+    postReportedNotification();
+    // @ts-ignore
+    ref.current.close();
+  };
 
   return (
     <Modalize
@@ -27,8 +32,16 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
       modalStyle={styles(theme).container}
       adjustToContentHeight>
+      <BottomSheetHeader
+        heading='Actions'
+        subHeading='Tell us what you think'
+      />
       <View style={styles().content}>
-        <Text>WHDDUP</Text>
+        <Option
+          label='Report'
+          iconName='ios-flag'
+          onPress={onPostReport}
+        />
       </View>
     </Modalize >
   );
@@ -41,8 +54,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 10,
-    marginBottom: responsiveHeight(10)
+    paddingTop: 20,
+    paddingBottom: 20
   }
 });
 

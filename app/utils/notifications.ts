@@ -73,3 +73,11 @@ export const tryAgainLaterNotification = () => showMessage({
   type: 'danger',
   duration: 4000
 });
+
+export const postReportedNotification = () => showMessage({
+  message: 'Post has been reported and submitted for review',
+  icon: 'info',
+  type: 'info',
+  backgroundColor: ThemeStatic.accent,
+  duration: 4000
+});

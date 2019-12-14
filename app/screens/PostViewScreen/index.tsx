@@ -164,7 +164,7 @@ const PostViewScreen: React.FC = () => {
         {content}
       </ScrollView>
       <CommentInput postId={postId} />
-      <PostOptionsBottomSheet ref={postOptionsBottomSheetRef} />
+      <PostOptionsBottomSheet ref={postOptionsBottomSheetRef} postId={postId} />
     </KeyboardAvoidingView>
   );
 };
