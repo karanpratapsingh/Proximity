@@ -64,6 +64,7 @@ export const QUERY_NOTIFICATION = gql`
         handle
       }
       type
+      resourceId
       createdAt
     }
   }

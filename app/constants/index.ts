@@ -30,10 +30,16 @@ export const Routes: RoutesType = {
   LoginScreen: 'LoginScreen'
 };
 
+export const NotificationType: NotificationTextType = {
+  FOLLOW: 'FOLLOW',
+  COMMENT: 'COMMENT',
+  LIKE: 'LIKE'
+};
+
 export const NotificationText: NotificationTextType = {
   FOLLOW: 'has started following you',
   COMMENT: 'commented on your post',
-  LIKE: 'liked your post',
+  LIKE: 'liked your post'
 };
 
 export const FollowInteraction: FollowInteractionType = {
