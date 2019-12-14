@@ -93,7 +93,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   cancelText: {
     height: 20,
     ...FontWeights.Light,
-    ...FontSizes.Body
+    ...FontSizes.Body,
+    color: theme.text01
   }
 });
 

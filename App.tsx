@@ -15,12 +15,13 @@ import { crashlytics } from './app/utils/firebase';
 import FlashMessage from 'react-native-flash-message';
 import codePush from 'react-native-code-push';
 import Config from './app/config';
+import { DynamicStatusBar } from './app/theme/Colors';
 
 GoogleSignin.configure();
 
 const SafeAreaApp = () => {
   const { user, theme, themeType, toggleTheme } = useContext(AppContext);
-  const dynamicBarStyle = `${themeType === ThemeVariant.light ? ThemeVariant.dark : ThemeVariant.light}-content`;
+  const { barStyle, backgroundColor } = DynamicStatusBar[themeType];
   const [updateLastSeen] = useMutation(MUTATION_LAST_SEEN);
 
   const initializeTheme = async () => {
@@ -50,7 +51,7 @@ const SafeAreaApp = () => {
 
   return (
     <SafeAreaView style={styles(theme).container}>
-      <StatusBar animated barStyle={dynamicBarStyle as any} />
+      <StatusBar animated barStyle={barStyle} backgroundColor={backgroundColor} />
       <AppNavigator />
       <FlashMessage titleStyle={styles().flashMessageTitle} floating position='bottom' />
     </SafeAreaView>

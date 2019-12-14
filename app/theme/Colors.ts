@@ -3,11 +3,23 @@
  * This contains all the color config for the application
  */
 
-import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType } from '../types/theme';
+import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType, DynamicStatusBarType } from '../types/theme';
 
 export const ThemeVariant: ThemeVariantType = {
   light: 'light',
   dark: 'dark'
+};
+
+
+export const DynamicStatusBar: DynamicStatusBarType = {
+  light: {
+    barStyle: 'dark-content',
+    backgroundColor: '#FFFFFF'
+  },
+  dark: {
+    barStyle: 'light-content',
+    backgroundColor: '#121212'
+  }
 };
 
 export const ThemeStatic: ThemeStaticType = {

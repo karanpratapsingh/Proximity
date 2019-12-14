@@ -1,7 +1,8 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, LikeAction, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
@@ -14,6 +15,7 @@ import { ThemeColors } from '../../types/theme';
 import { parseTimeElapsed, parseLikes } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
+import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -35,6 +37,8 @@ const PostViewScreen: React.FC = () => {
     }] = useLazyQuery(QUERY_POST, { variables: { postId }, fetchPolicy: 'network-only' });
 
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
+
+  const postOptionsBottomSheetRef = useRef();
 
   useEffect(() => {
     if (!postSubscriptionLoading) {
@@ -111,10 +115,19 @@ const PostViewScreen: React.FC = () => {
       <>
         <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
           <NativeImage uri={avatar} style={styles(theme).avatarImage} />
-          <View>
+          <View style={{ flex: 1 }}>
             <Text style={styles(theme).handleText}>{handle}</Text>
             <Text style={styles(theme).timeText}>{readableTime}</Text>
           </View>
+          <IconButton
+            // @ts-ignore
+            onPress={postOptionsBottomSheetRef.current.open}
+            Icon={() => <Entypo
+              name='dots-three-vertical'
+              size={IconSizes.x5}
+              color={theme.text01}
+            />}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDoubleTap(isLiked)} activeOpacity={1}>
           <NativeImage uri={uri} style={styles(theme).postImage} />
@@ -151,6 +164,7 @@ const PostViewScreen: React.FC = () => {
         {content}
       </ScrollView>
       <CommentInput postId={postId} />
+      <PostOptionsBottomSheet ref={postOptionsBottomSheetRef} postId={postId} />
     </KeyboardAvoidingView>
   );
 };

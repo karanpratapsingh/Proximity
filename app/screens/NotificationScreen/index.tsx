@@ -20,14 +20,14 @@ const NotificationScreen: React.FC = () => {
   });
 
   const renderItem = ({ item }) => {
-    const { actionUser, type, createdAt } = item;
+    const { actionUser, type, resourceId, createdAt } = item;
 
     return (
       <NotificationCard
-        userId={actionUser.id}
         avatar={actionUser.avatar}
         handle={actionUser.handle}
         type={type}
+        resourceId={resourceId}
         time={createdAt}
       />
     );

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { NotificationText, Routes } from '../../../constants';
+import { NotificationType, NotificationText, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
@@ -11,33 +11,40 @@ import { useNavigation } from 'react-navigation-hooks';
 const { FontWeights, FontSizes } = Typography;
 
 interface NotificationCardPros {
-  userId: string,
   avatar: string,
   handle: string,
+  resourceId: string,
   type: any, // FIXME:
   time: string
 };
 
-const NotificationCard: React.FC<NotificationCardPros> = ({ userId, avatar, handle, type, time }) => {
+const NotificationCard: React.FC<NotificationCardPros> = ({ avatar, resourceId, handle, type, time }) => {
 
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
-  const timeElapsed = parseTimeElapsed(time);
+  const parsedTime = parseTimeElapsed(time); // TODO: just refactor to utils
+  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
 
-  const navigateToProfile = () => {
-    navigate(Routes.ProfileViewScreen, { userId });
+  const navigateAction = () => {
+    if (resourceId === '') return;
+
+    if (type === NotificationType.FOLLOW) {
+      navigate(Routes.ProfileViewScreen, { userId: resourceId });
+    } else if (type === NotificationType.LIKE || type === NotificationType.COMMENT) {
+      navigate(Routes.PostViewScreen, { postId: resourceId });
+    }
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
+    <TouchableOpacity activeOpacity={0.95} onPress={navigateAction} style={styles().container}>
       <NativeImage uri={avatar} style={styles(theme).avatarImage} />
       <View style={styles().info}>
         <Text style={styles(theme).notificationText}>
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {notificationText}
         </Text>
-        <Text style={styles(theme).timeText}>{timeElapsed} ago</Text>
+        <Text style={styles(theme).timeText}>{readableTime}</Text>
       </View>
     </TouchableOpacity>
   );

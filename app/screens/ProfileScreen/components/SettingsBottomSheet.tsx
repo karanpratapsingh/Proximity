@@ -1,45 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from 'react-navigation-hooks';
 import { IconSizes, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
-import { BottomSheetHeader } from '../../../layout';
+import { BottomSheetHeader, Option } from '../../../layout';
 import { ThemeStatic, ThemeVariant, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { signOut } from '../../../utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;
-
-interface OptionProps {
-  label?: string,
-  iconName: string,
-  onPress?: any,
-  children?: any
-};
-
-const Option: React.FC<OptionProps> = ({ label, iconName, onPress, children }) => {
-  const { theme } = useContext(AppContext);
-
-  if (children)
-    return (
-      <View style={styles().option}>
-        <Ionicons name={iconName} size={IconSizes.x5} color={theme.text01} />
-        {children}
-      </View>
-    );
-
-  return (
-    <TouchableOpacity style={styles().option} activeOpacity={0.9} onPress={onPress}>
-      <Ionicons name={iconName} size={IconSizes.x5} color={theme.text01} />
-      <Text style={styles(theme).optionLabel}>{label}</Text>
-    </TouchableOpacity>
-  );
-};
 
 interface SettingsBottomSheetProps {
   ref: React.Ref<any>,
@@ -119,17 +92,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     ...FontSizes.Body,
     width: responsiveWidth(74),
     color: theme.text01
-  },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 6
-  },
-  optionLabel: {
-    ...FontWeights.Light,
-    ...FontSizes.Body,
-    color: theme.text01,
-    marginLeft: 10
   }
 });
 

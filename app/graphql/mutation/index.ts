@@ -132,3 +132,11 @@ export const MUTATION_DELETE_CHAT = gql`
     }
   }
 `;
+
+export const MUTATION_REPORT_POST = gql`
+  mutation ReportPost($postId: String!) {
+    reportPost(postId: $postId) {
+      id
+    }
+  }
+`;

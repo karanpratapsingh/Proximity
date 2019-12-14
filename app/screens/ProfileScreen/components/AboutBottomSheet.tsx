@@ -98,7 +98,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 20,
     marginBottom: responsiveHeight(10)
   },
   logoImage: {
