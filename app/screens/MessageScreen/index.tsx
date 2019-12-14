@@ -30,6 +30,7 @@ const MessageScreen: React.FC = () => {
     fetchPolicy: 'network-only',
     pollInterval: PollIntervals.messages
   });
+
   const [createTemporaryChat] = useMutation(MUTATION_CREATE_TEMPORARY_CHAT);
 
   const [chatSearch, setChatSearch] = useState('');
