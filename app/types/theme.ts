@@ -1,3 +1,5 @@
+import { StatusBarStyle } from 'react-native'
+
 export type ThemeStaticType = {
   accent: string,
   white: string,
@@ -38,4 +40,11 @@ export type HandleAvailableColorType = {
 export type OnlineDotColorType = {
   true: string,
   false: string
+};
+
+export type DynamicStatusBarType = {
+  [key: string]: {
+    barStyle: StatusBarStyle,
+    backgroundColor: string
+  }
 };
