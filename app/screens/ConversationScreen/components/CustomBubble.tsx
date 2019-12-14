@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   right: {
-    marginVertical: 10,
+    marginVertical: 4,
     backgroundColor: ThemeStatic.accent
   }
 });
