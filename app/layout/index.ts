@@ -27,6 +27,7 @@ import PostThumbnail from './shared/PostThumbnail';
 import ProfileCard from './shared/ProfileCard';
 import UserCard from './shared/UserCard';
 import ConnectionsBottomSheet from './shared/ConnectionsBottomSheet';
+import Option from './shared/Option';
 
 export {
   Header,
@@ -49,6 +50,7 @@ export {
   ProfileCard,
   UserCard,
   ConnectionsBottomSheet,
+  Option,
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,
