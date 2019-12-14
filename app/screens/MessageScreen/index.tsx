@@ -9,7 +9,7 @@ import { AppContext } from '../../context';
 import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { filterChatParticipants, isUserOnline } from '../../utils/shared';
+import { filterChatParticipants, isUserOnline, searchQueryFilter, sortAscendingTime } from '../../utils/shared';
 import MessageCard from './components/MessageCard';
 import NewMessageBottomSheet from './components/NewMessageBottomSheet';
 
@@ -76,20 +76,23 @@ const MessageScreen: React.FC = () => {
 
   if (called && !loading && !error) {
     const { chats } = data;
-    const filteredChats = chats.filter(({ participants }) => {
-      const [participant] = filterChatParticipants(user.id, participants);
-      if (chatSearch === '') return true;
-      return participant
-        .handle
-        .toLowerCase()
-        .includes(chatSearch.toLocaleLowerCase());
-    });
+    searchQueryFilter
+    const filteredChats = searchQueryFilter(chats, user.id, chatSearch);
+    const sortedFilteredChats = sortAscendingTime(filteredChats);
+    //  chats.filter(({ participants }) => {
+    //   const [participant] = filterChatParticipants(user.id, participants);
+    //   if (chatSearch === '') return true;
+    //   return participant
+    //     .handle
+    //     .toLowerCase()
+    //     .includes(chatSearch.toLocaleLowerCase());
+    // });
 
     content = (
       <FlatGrid
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
-        items={filteredChats}
+        items={sortedFilteredChats}
         ListEmptyComponent={() => <SvgBanner Svg={EmptyMessages} spacing={16} placeholder='No messages' />}
         style={styles().messagesList}
         spacing={20}

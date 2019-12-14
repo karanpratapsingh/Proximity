@@ -128,3 +128,23 @@ export const isUserOnline = (lastSeen: number) => {
 export const parseLikes = (likeCount: number) => {
   return likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`;
 };
+
+export const searchQueryFilter = (array, userId: string, query: string, ) =>
+  [...array].filter(({ participants }) => {
+    const [participant] = filterChatParticipants(userId, participants);
+    if (query === '') return true;
+    return participant
+      .handle
+      .toLowerCase()
+      .includes(query.toLocaleLowerCase());
+  });
+
+export const sortAscendingTime = array =>
+  [...array].sort((a, b) => {
+
+    const [lastMessageA] = a.messages;
+    const [lastMessageB] = b.messages;
+
+    // @ts-ignore
+    return new Date(lastMessageB.createdAt) - new Date(lastMessageA.createdAt);
+  });
