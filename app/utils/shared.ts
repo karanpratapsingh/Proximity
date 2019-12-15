@@ -14,8 +14,6 @@ export const parseConnectionsCount = (connectionCount: number) => {
 };
 
 export const parseTimeElapsed = (utcTime: string) => {
-
-  const defaultPlaceholderTime = '...';
   const timeNow = new Date().getTime();
   const actionTime = new Date(utcTime).getTime();
 
@@ -35,30 +33,37 @@ export const parseTimeElapsed = (utcTime: string) => {
   const elapsedMinutes = parseInt(difference / minutesInMs as any, 10);
   difference = difference % minutesInMs;
 
+  let parsedTime = '...';
+
   if (elapsedDays >= 1) {
     if (elapsedDays === 1) {
-      return `${elapsedDays} day`;
+      parsedTime = `${elapsedDays} day`;
     }
-    return `${elapsedDays} days`;
+    parsedTime = `${elapsedDays} days`;
   }
 
   if (elapsedHours >= 1) {
     if (elapsedHours === 1) {
-      return `${elapsedHours} hr`;
+      parsedTime = `${elapsedHours} hr`;
     }
-    return `${elapsedHours} hrs`;
+    parsedTime = `${elapsedHours} hrs`;
   }
 
   if (elapsedMinutes >= 1) {
     if (elapsedMinutes === 1) {
-      return `${elapsedMinutes} min`;
+      parsedTime = `${elapsedMinutes} min`;
     }
-    return `${elapsedMinutes} mins`;
+    parsedTime = `${elapsedMinutes} mins`;
   }
 
-  if (elapsedMinutes < 1) return 'just now';
+  if (elapsedMinutes < 1) parsedTime = 'just now';
 
-  return defaultPlaceholderTime;
+  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+
+  return {
+    parsedTime,
+    readableTime
+  };
 };
 
 export const generateUUID = () => {

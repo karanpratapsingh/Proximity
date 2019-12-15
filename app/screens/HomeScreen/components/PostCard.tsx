@@ -32,8 +32,7 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, time, uri, likes, capti
 
   const navigateToPost = () => navigate(Routes.PostViewScreen, { postId: id });
 
-  const parsedTime = parseTimeElapsed(time);
-  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+  const { readableTime } = parseTimeElapsed(time);
   const readableLikes = parseLikes(likes.length);
   const isLiked = likes.includes(user.id);
 
