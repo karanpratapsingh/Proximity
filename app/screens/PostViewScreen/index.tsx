@@ -134,6 +134,7 @@ const PostViewScreen: React.FC = () => {
         <View style={styles().likes}>
           <IconButton
             style={{ width: undefined }}
+            onPress={() => likeInteractionHandler(isLiked)}
             Icon={() =>
               <AntDesign
                 name='heart'
@@ -141,7 +142,6 @@ const PostViewScreen: React.FC = () => {
                 size={IconSizes.x5}
               />
             }
-            onPress={() => likeInteractionHandler(isLiked)}
           />
           <Text style={styles(theme).likesText}>{readableLikes}</Text>
         </View>

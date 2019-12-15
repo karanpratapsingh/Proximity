@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, StyleProp, TouchableOpacityProps, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 
 interface IconButtonProps {
   Icon: React.FC,
-  onPress: any,
+  onPress: () => void,
   style?: StyleProp<ViewStyle>
 };
 
