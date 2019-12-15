@@ -76,17 +76,9 @@ const MessageScreen: React.FC = () => {
 
   if (called && !loading && !error) {
     const { chats } = data;
-    searchQueryFilter
+
     const filteredChats = searchQueryFilter(chats, user.id, chatSearch);
-    const sortedFilteredChats = sortAscendingTime(filteredChats);
-    //  chats.filter(({ participants }) => {
-    //   const [participant] = filterChatParticipants(user.id, participants);
-    //   if (chatSearch === '') return true;
-    //   return participant
-    //     .handle
-    //     .toLowerCase()
-    //     .includes(chatSearch.toLocaleLowerCase());
-    // });
+    const sortedFilteredChats = sortAscendingTime(filteredChats); 
 
     content = (
       <FlatGrid

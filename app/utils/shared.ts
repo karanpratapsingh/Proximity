@@ -38,25 +38,22 @@ export const parseTimeElapsed = (utcTime: string) => {
   if (elapsedDays >= 1) {
     if (elapsedDays === 1) {
       parsedTime = `${elapsedDays} day`;
+    } else {
+      parsedTime = `${elapsedDays} days`;
     }
-    parsedTime = `${elapsedDays} days`;
-  }
-
-  if (elapsedHours >= 1) {
+  } else if (elapsedHours >= 1) {
     if (elapsedHours === 1) {
       parsedTime = `${elapsedHours} hr`;
+    } else {
+      parsedTime = `${elapsedHours} hrs`;
     }
-    parsedTime = `${elapsedHours} hrs`;
-  }
-
-  if (elapsedMinutes >= 1) {
+  } else if (elapsedMinutes >= 1) {
     if (elapsedMinutes === 1) {
       parsedTime = `${elapsedMinutes} min`;
+    } else {
+      parsedTime = `${elapsedMinutes} mins`;
     }
-    parsedTime = `${elapsedMinutes} mins`;
-  }
-
-  if (elapsedMinutes < 1) parsedTime = 'just now';
+  } else if (elapsedMinutes < 1) parsedTime = 'just now';
 
   const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
 
