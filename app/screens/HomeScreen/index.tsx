@@ -73,6 +73,7 @@ const HomeScreen: React.FC = () => {
 
     return (
       <RefreshControl
+        tintColor={theme.text02}
         refreshing={userFeedQueryLoading}
         onRefresh={onRefresh}
       />

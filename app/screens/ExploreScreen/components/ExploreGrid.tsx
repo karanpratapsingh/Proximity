@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, RefreshControl, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
@@ -7,10 +7,11 @@ import { ExplorePost } from '../../../types/screens';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
-  onRefresh: any
+  onRefresh: () => void,
+  tintColor: string
 };
 
-const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
 
   const renderItem = ({ item }) => {
     const { id: postId, uri } = item;
@@ -23,6 +24,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
 
   const refreshControl = () => (
     <RefreshControl
+      tintColor={tintColor}
       refreshing={false}
       onRefresh={onRefresh} />
   );
