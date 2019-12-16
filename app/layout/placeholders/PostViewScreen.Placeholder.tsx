@@ -63,8 +63,7 @@ const styles = StyleSheet.create({
   },
   postHeader: {
     alignItems: 'center',
-    flexDirection: 'row',
-    width: 500
+    flexDirection: 'row'
   },
   author: {
     justifyContent: 'center',
