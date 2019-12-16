@@ -123,7 +123,7 @@ const PostViewScreen: React.FC = () => {
             onPress={postOptionsBottomSheetRef.current.open}
             Icon={() => <Entypo
               name='dots-three-vertical'
-              size={IconSizes.x5}
+              size={IconSizes.x4}
               color={theme.text01}
             />}
           />

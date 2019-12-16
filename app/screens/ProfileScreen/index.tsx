@@ -140,7 +140,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   postGrid: {
     flex: 1,
-    marginHorizontal: 12
+    marginHorizontal: 10
   }
 });
 
