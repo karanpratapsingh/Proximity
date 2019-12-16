@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigationParam } from 'react-navigation-hooks';
-import { IconSizes, PostDimensions, Connections, PollIntervals } from '../../constants';
+import { Connections, IconSizes, PollIntervals, PostDimensions } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
+import { ConnectionsBottomSheet, GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import UserInteractions from './components/UserInteractions';
 
@@ -63,6 +64,7 @@ const ProfileViewScreen: React.FC = () => {
     content = (
       <>
         <FlatGrid
+          staticDimension={responsiveWidth(94)}
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
           items={posts}
@@ -104,7 +106,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   postGrid: {
     flex: 1,
-    marginHorizontal: 10
+    marginHorizontal: 12
   }
 });
 
