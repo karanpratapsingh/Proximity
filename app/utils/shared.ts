@@ -150,3 +150,11 @@ export const sortAscendingTime = array =>
     // @ts-ignore
     return new Date(lastMessageB.createdAt) - new Date(lastMessageA.createdAt);
   });
+
+export const computeUnreadMessages = (chats, userId: string) =>
+  chats.filter(({ messages }) => {
+    const [lastMessage] = messages;
+    const { author, seen } = lastMessage;
+
+    return seen && author.id === userId;
+  }).length;
