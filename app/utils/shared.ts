@@ -156,5 +156,5 @@ export const computeUnreadMessages = (chats, userId: string) =>
     const [lastMessage] = messages;
     const { author, seen } = lastMessage;
 
-    return seen && author.id === userId;
+    return !seen && author.id !== userId;
   }).length;
