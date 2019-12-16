@@ -21,13 +21,13 @@ const MessageScreenPlaceholder: React.FC = () => {
                   noMargin
                   color={theme.placeholder}
                   style={styles.userChatPlaceholder}
-                  width={responsiveWidth(10)}
+                  width={40}
                 />
                 <PlaceholderLine
                   noMargin
                   color={theme.placeholder}
                   style={styles.userChatPlaceholder}
-                  width={responsiveWidth(20)}
+                  width={80}
                 />
               </View>
             </View>

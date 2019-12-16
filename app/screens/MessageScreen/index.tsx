@@ -78,7 +78,7 @@ const MessageScreen: React.FC = () => {
     const { chats } = data;
 
     const filteredChats = searchQueryFilter(chats, user.id, chatSearch);
-    const sortedFilteredChats = sortAscendingTime(filteredChats); 
+    const sortedFilteredChats = sortAscendingTime(filteredChats);
 
     content = (
       <FlatGrid
