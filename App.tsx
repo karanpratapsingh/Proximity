@@ -2,25 +2,26 @@ import { ApolloProvider, useMutation } from '@apollo/react-hooks';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import React, { useContext, useEffect } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
+import codePush from 'react-native-code-push';
+import FlashMessage from 'react-native-flash-message';
 import { SafeAreaView } from 'react-navigation';
-import { PollIntervals, Errors } from './app/constants';
+import Config from './app/config';
+import { Errors, PollIntervals } from './app/constants';
 import { AppContext, AppContextProvider } from './app/context';
 import client from './app/graphql/client';
-import AppNavigator from './app/navigation';
-import { ThemeColors } from './app/types/theme';
-import { loadThemeType } from './app/utils/storage';
 import { MUTATION_LAST_SEEN } from './app/graphql/mutation';
-import { ThemeVariant, Typography, ThemeStatic } from './app/theme';
-import { crashlytics } from './app/utils/firebase';
-import FlashMessage from 'react-native-flash-message';
-import codePush from 'react-native-code-push';
-import Config from './app/config';
+import AppNavigator from './app/navigation';
+import { ThemeStatic, Typography } from './app/theme';
 import { DynamicStatusBar } from './app/theme/Colors';
+import { ThemeColors } from './app/types/theme';
+import { crashlytics } from './app/utils/firebase';
+import { loadThemeType } from './app/utils/storage';
+import { computeUnreadMessages } from './app/utils/shared';
 
 GoogleSignin.configure();
 
 const SafeAreaApp = () => {
-  const { user, theme, themeType, toggleTheme } = useContext(AppContext);
+  const { user, theme, themeType, toggleTheme, updateUnreadMessages } = useContext(AppContext);
   const { barStyle, backgroundColor } = DynamicStatusBar[themeType];
   const [updateLastSeen] = useMutation(MUTATION_LAST_SEEN);
 
@@ -38,10 +39,13 @@ const SafeAreaApp = () => {
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
+    setInterval(async () => {
       if (user.id) {
         try {
-          updateLastSeen({ variables: { userId: user.id } });
+          const { data: { updateLastSeen: { chats } } } = await updateLastSeen({ variables: { userId: user.id } });
+          const unreadMessages = computeUnreadMessages(chats, user.id);
+
+          updateUnreadMessages(unreadMessages);
         } catch ({ message }) {
           crashlytics.recordCustomError(Errors.UPDATE_LAST_SEEN, message);
         }
