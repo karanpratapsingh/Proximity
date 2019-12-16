@@ -4,6 +4,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
 import { ExplorePost } from '../../../types/screens';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
@@ -32,6 +33,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
   return (
     <View style={styles.container}>
       <FlatGrid
+        staticDimension={responsiveWidth(92)}
         refreshControl={refreshControl()}
         itemDimension={100}
         showsVerticalScrollIndicator={false}
@@ -47,7 +49,8 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
