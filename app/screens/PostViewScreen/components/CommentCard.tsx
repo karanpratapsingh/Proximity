@@ -22,7 +22,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ userId, avatar, handle, body,
 
   const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
-  const timeElapsed = parseTimeElapsed(time);
+  const { parsedTime } = parseTimeElapsed(time);
 
   const navigateToProfile = () => {
     if (userId === user.id) return;
@@ -37,7 +37,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ userId, avatar, handle, body,
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           {body}
         </Text>
-        <Text style={styles(theme).timeText}>{timeElapsed}</Text>
+        <Text style={styles(theme).timeText}>{parsedTime}</Text>
       </View>
     </TouchableOpacity>
   );

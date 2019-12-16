@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine } from 'rn-placeholder';
-import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
+import PlaceholderAnimation from './PlaceholderAnimation';
 
 const ExploreScreenPlaceholder: React.FC = () => {
   const { theme } = useContext(AppContext);
@@ -14,9 +15,9 @@ const ExploreScreenPlaceholder: React.FC = () => {
           .fill({})
           .map((_, index) =>
             <View key={index} style={styles.postContainer}>
-              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
-              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
-              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32.5} height={100} />
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32} height={responsiveHeight(16.1)} />
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32} height={responsiveHeight(16.1)} />
+              <PlaceholderLine color={theme.placeholder} style={styles.postPlaceholder} noMargin width={32} height={responsiveHeight(16.1)} />
             </View>
           )}
       </Placeholder>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 5
+    marginBottom: 7
   },
   postPlaceholder: {
     borderRadius: 10

@@ -5,7 +5,7 @@ import { Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../constants';
-import { NativeImage } from '..';
+import NativeImage from '../misc/NativeImage';
 
 const { FontWeights, FontSizes } = Typography;
 

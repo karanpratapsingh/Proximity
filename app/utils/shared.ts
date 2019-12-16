@@ -14,8 +14,6 @@ export const parseConnectionsCount = (connectionCount: number) => {
 };
 
 export const parseTimeElapsed = (utcTime: string) => {
-
-  const defaultPlaceholderTime = '...';
   const timeNow = new Date().getTime();
   const actionTime = new Date(utcTime).getTime();
 
@@ -35,30 +33,34 @@ export const parseTimeElapsed = (utcTime: string) => {
   const elapsedMinutes = parseInt(difference / minutesInMs as any, 10);
   difference = difference % minutesInMs;
 
+  let parsedTime = '...';
+
   if (elapsedDays >= 1) {
     if (elapsedDays === 1) {
-      return `${elapsedDays} day`;
+      parsedTime = `${elapsedDays} day`;
+    } else {
+      parsedTime = `${elapsedDays} days`;
     }
-    return `${elapsedDays} days`;
-  }
-
-  if (elapsedHours >= 1) {
+  } else if (elapsedHours >= 1) {
     if (elapsedHours === 1) {
-      return `${elapsedHours} hr`;
+      parsedTime = `${elapsedHours} hr`;
+    } else {
+      parsedTime = `${elapsedHours} hrs`;
     }
-    return `${elapsedHours} hrs`;
-  }
-
-  if (elapsedMinutes >= 1) {
+  } else if (elapsedMinutes >= 1) {
     if (elapsedMinutes === 1) {
-      return `${elapsedMinutes} min`;
+      parsedTime = `${elapsedMinutes} min`;
+    } else {
+      parsedTime = `${elapsedMinutes} mins`;
     }
-    return `${elapsedMinutes} mins`;
-  }
+  } else if (elapsedMinutes < 1) parsedTime = 'just now';
 
-  if (elapsedMinutes < 1) return 'just now';
+  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
 
-  return defaultPlaceholderTime;
+  return {
+    parsedTime,
+    readableTime
+  };
 };
 
 export const generateUUID = () => {
@@ -148,3 +150,11 @@ export const sortAscendingTime = array =>
     // @ts-ignore
     return new Date(lastMessageB.createdAt) - new Date(lastMessageA.createdAt);
   });
+
+export const computeUnreadMessages = (chats, userId: string) =>
+  chats.filter(({ messages }) => {
+    const [lastMessage] = messages;
+    const { author, seen } = lastMessage;
+
+    return !seen && author.id !== userId;
+  }).length;

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { BottomSheetHeader, SvgBanner } from '..';
+import BottomSheetHeader from '../headers/BottomSheetHeader';
+import SvgBanner from '../misc/SvgBanner';
 import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
 import { Connections } from '../../constants';
 import { AppContext } from '../../context';
@@ -97,7 +98,8 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   content: {
-    flex: 1
+    flex: 1,
+    paddingBottom: responsiveHeight(5)
   },
   listContainer: {
     flex: 1

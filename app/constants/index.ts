@@ -71,12 +71,6 @@ export const IconSizes: IconSizesType = {
   x9: 40
 };
 
-// export const PostDimensions: PostDimensionsType = {
-//   Small: { height: 105, width: 105 },
-//   Medium: { height: 160, width: 160 },
-//   Large: { height: 340, width: 340 }
-// };
-
 export const PostDimensions: PostDimensionsType = {
   Small: { height: responsiveWidth(28.5), width: responsiveWidth(28.5) },
   Medium: { height: responsiveWidth(43), width: responsiveWidth(43) },

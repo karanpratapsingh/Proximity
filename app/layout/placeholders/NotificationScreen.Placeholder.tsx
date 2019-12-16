@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
 import { AppContext } from '../../context';
@@ -22,13 +21,13 @@ const NotificationScreenPlaceholder: React.FC = () => {
                   noMargin
                   color={theme.placeholder}
                   style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(24)}
+                  width={90}
                 />
                 <PlaceholderLine
                   noMargin
                   color={theme.placeholder}
                   style={styles.notificationCardPlaceholder}
-                  width={responsiveWidth(8)}
+                  width={30}
                 />
               </View>
             </View>
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flexDirection: 'row',
-    marginBottom: 10
+    marginBottom: 20
   },
   infoContainer: {
     flex: 1,

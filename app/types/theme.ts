@@ -10,7 +10,8 @@ export type ThemeStaticType = {
   like: string,
   unlike: string,
   translucent: string,
-  delete: string
+  delete: string,
+  badge: string
 };
 
 export type ThemeColors = {

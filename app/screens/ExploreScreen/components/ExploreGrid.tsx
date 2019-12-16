@@ -1,16 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, RefreshControl, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '../../../layout';
 import ExplorePostCard from './ExplorePostCard';
 import { ExplorePost } from '../../../types/screens';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
-  onRefresh: any
+  onRefresh: () => void,
+  tintColor: string
 };
 
-const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
 
   const renderItem = ({ item }) => {
     const { id: postId, uri } = item;
@@ -23,6 +25,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
 
   const refreshControl = () => (
     <RefreshControl
+      tintColor={tintColor}
       refreshing={false}
       onRefresh={onRefresh} />
   );
@@ -30,6 +33,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
   return (
     <View style={styles.container}>
       <FlatGrid
+        staticDimension={responsiveWidth(92)}
         refreshControl={refreshControl()}
         itemDimension={100}
         showsVerticalScrollIndicator={false}
@@ -45,7 +49,8 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

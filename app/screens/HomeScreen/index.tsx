@@ -17,7 +17,7 @@ import PostCard from './components/PostCard';
 
 const HomeScreen: React.FC = () => {
 
-  const { user, theme } = useContext(AppContext);
+  const { user, theme, unreadMessages } = useContext(AppContext);
   const { navigate } = useNavigation();
   const {
     data: userFeedQueryData,
@@ -73,6 +73,7 @@ const HomeScreen: React.FC = () => {
 
     return (
       <RefreshControl
+        tintColor={theme.text02}
         refreshing={userFeedQueryLoading}
         onRefresh={onRefresh}
       />
@@ -111,15 +112,20 @@ const HomeScreen: React.FC = () => {
     );
   }
 
-  const IconRight = () => <IconButton
-    onPress={navigateToMessages}
-    Icon={() =>
-      <FontAwesome
-        name='send'
-        size={IconSizes.x5}
-        color={theme.text01}
-      />}
-  />
+  const IconRight = () => {
+    const hasBadge = unreadMessages !== 0;
+    return <IconButton
+      hasBadge={hasBadge}
+      badgeCount={unreadMessages}
+      onPress={navigateToMessages}
+      Icon={() =>
+        <FontAwesome
+          name='send'
+          size={IconSizes.x5}
+          color={theme.text01}
+        />}
+    />;
+  };
 
   return (
     <View style={styles(theme).container}>

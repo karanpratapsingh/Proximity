@@ -23,8 +23,7 @@ const NotificationCard: React.FC<NotificationCardPros> = ({ avatar, resourceId, 
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
-  const parsedTime = parseTimeElapsed(time); // TODO: just refactor to utils
-  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+  const { readableTime } = parseTimeElapsed(time);
 
   const navigateAction = () => {
     if (resourceId === '') return;

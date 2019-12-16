@@ -61,7 +61,7 @@ const ExploreScreen: React.FC = () => {
 
   if (postsQueryCalled && !postsQueryLoading && !postsQueryError) {
     const { posts } = postsQueryData;
-    content = <ExploreGrid posts={posts} onRefresh={onRefresh} />;
+    content = <ExploreGrid posts={posts} onRefresh={onRefresh} tintColor={theme.text02} />;
   }
 
   if (isSearchFocused) {

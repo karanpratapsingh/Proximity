@@ -30,7 +30,7 @@ interface MessageCardProps {
 const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
 
   const { user, theme } = useContext(AppContext);
-  const timeElapsed = parseTimeElapsed(time);
+  const { parsedTime } = parseTimeElapsed(time);
   const { navigate } = useNavigation();
   const [messageSeen] = useMutation(MUTATION_SEEN_MESSAGE);
   const [deleteChat, { loading: deleteChatLoading, called: deleteChatCalled }] = useMutation(MUTATION_DELETE_CHAT);
@@ -84,7 +84,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
               {messageBody}
             </Text>
             <Text style={[styles(theme).timeText, highlightStyle]}>
-              {` · ${timeElapsed}`}
+              {` · ${parsedTime}`}
             </Text>
           </View>
         </View>

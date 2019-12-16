@@ -1,16 +1,17 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { IconSizes, PostDimensions, Connections, PollIntervals } from '../../constants';
+import { Connections, IconSizes, PollIntervals, PostDimensions } from '../../constants';
 import { AppContext } from '../../context';
 import { QUERY_USER } from '../../graphql/query';
-import { Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ConnectionsBottomSheet, ProfileScreenPlaceholder } from '../../layout';
+import { ConnectionsBottomSheet, Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types/theme';
+import AboutBottomSheet from './components/AboutBottomSheet';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
-import AboutBottomSheet from './components/AboutBottomSheet';
 
 const ProfileScreen: React.FC = () => {
 
@@ -80,6 +81,7 @@ const ProfileScreen: React.FC = () => {
     content = (
       <>
         <FlatGrid
+          staticDimension={responsiveWidth(94)}
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
           items={posts}

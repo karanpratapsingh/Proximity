@@ -34,14 +34,14 @@ const UploadBanner: React.FC<UploadBannerProps> = ({ pickedAsset, onAsset }) => 
     content = (
       <>
         <IconButton
+          onPress={discardImage}
+          style={styles.discardImageButton}
           Icon={() =>
             <AntDesign
               name='closecircle'
               color={ThemeStatic.white}
               size={IconSizes.x6}
             />}
-          onPress={discardImage}
-          style={styles.discardImageButton}
         />
         <Image source={{ uri: pickedAsset }} style={styles.pickedImage} />
       </>

@@ -106,8 +106,7 @@ const PostViewScreen: React.FC = () => {
       }
     } = postData;
 
-    const parsedTime = parseTimeElapsed(createdAt);
-    const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+    const { readableTime } = parseTimeElapsed(createdAt);
     const isLiked = likes.includes(user.id);
     const readableLikes = parseLikes(likes.length);
 
@@ -124,7 +123,7 @@ const PostViewScreen: React.FC = () => {
             onPress={postOptionsBottomSheetRef.current.open}
             Icon={() => <Entypo
               name='dots-three-vertical'
-              size={IconSizes.x5}
+              size={IconSizes.x4}
               color={theme.text01}
             />}
           />
@@ -135,6 +134,7 @@ const PostViewScreen: React.FC = () => {
         <View style={styles().likes}>
           <IconButton
             style={{ width: undefined }}
+            onPress={() => likeInteractionHandler(isLiked)}
             Icon={() =>
               <AntDesign
                 name='heart'
@@ -142,7 +142,6 @@ const PostViewScreen: React.FC = () => {
                 size={IconSizes.x5}
               />
             }
-            onPress={() => likeInteractionHandler(isLiked)}
           />
           <Text style={styles(theme).likesText}>{readableLikes}</Text>
         </View>

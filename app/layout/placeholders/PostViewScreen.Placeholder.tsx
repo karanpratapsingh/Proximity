@@ -18,13 +18,13 @@ const PostViewScreenPlaceholder = () => {
             <PlaceholderLine
               noMargin
               color={theme.placeholder}
-              width={responsiveWidth(20)}
+              width={60}
               style={styles.handlePlaceholder}
             />
             <PlaceholderLine
               noMargin
               color={theme.placeholder}
-              width={responsiveWidth(10)}
+              width={30}
               style={styles.timePlaceholder}
             />
           </View>
@@ -38,19 +38,19 @@ const PostViewScreenPlaceholder = () => {
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          width={responsiveWidth(5)}
+          width={25}
           style={styles.likesPlaceholder}
         />
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          width={responsiveWidth(24)}
+          width={90}
           style={styles.captionPlaceholder}
         />
         <PlaceholderLine
           noMargin
           color={theme.placeholder}
-          width={responsiveWidth(24)}
+          width={90}
           style={styles.captionPlaceholder}
         />
       </Placeholder>
@@ -63,12 +63,11 @@ const styles = StyleSheet.create({
   },
   postHeader: {
     alignItems: 'center',
-    flexDirection: 'row',
-    width: 500
+    flexDirection: 'row'
   },
   author: {
-    justifyContent: 'center',
-    width: responsiveWidth(50)
+    flex: 1,
+    justifyContent: 'center'
   },
   handlePlaceholder: {
     marginLeft: 12,

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Fade } from 'rn-placeholder';
+import { Shine, ShineOverlay } from 'rn-placeholder';
 import { AppContext } from '../../context';
+import { ThemeVariant } from '../../theme';
 
 const AnimationBackground = {
-  light: '#dfdfdf',
+  light: '#DFDFDF',
   dark: '#242424'
 };
 
@@ -11,7 +12,11 @@ const PlaceholderAnimation = props => {
   const { themeType } = useContext(AppContext);
   const backgroundColor = AnimationBackground[themeType];
 
-  return <Fade {...props} style={{ backgroundColor }} />;
+  if (themeType === ThemeVariant.light) {
+    return <ShineOverlay {...props} />;
+  }
+
+  return <Shine {...props} style={{ backgroundColor }} />;
 };
 
 export default PlaceholderAnimation;
