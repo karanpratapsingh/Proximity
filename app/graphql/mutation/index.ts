@@ -120,7 +120,14 @@ export const MUTATION_SEEN_MESSAGE = gql`
 export const MUTATION_LAST_SEEN = gql`
   mutation LastSeen($userId: String!) {
     updateLastSeen(userId: $userId) {
-      lastSeen
+      chats {
+        messages(last: 1) {
+          author {
+            id
+          }
+          seen
+        }
+      }
     }
   }
 `;
