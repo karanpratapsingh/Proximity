@@ -30,9 +30,10 @@ export const ThemeStatic: ThemeStaticType = {
   text02: '#BBBBBB',
   placeholder: '#F4F4F4',
   like: '#E24359',
-  unlike: '#ddd',
+  unlike: '#DDD',
   translucent: 'rgba(0, 0, 0, 0.1)',
-  delete: '#f44336'
+  delete: '#F44336',
+  badge: '#F24'
 };
 
 export const Theme: {
