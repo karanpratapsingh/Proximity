@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flexDirection: 'row',
-    marginBottom: 10
+    marginBottom: 20
   },
   infoContainer: {
     flex: 1,
