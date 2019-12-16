@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
-import { Platform, StyleSheet, TextInput, View } from 'react-native';
+import { Keyboard, Platform, StyleSheet, TextInput, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
@@ -32,6 +32,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
       return;
     }
     await addComment({ variables: { userId: user.id, postId, body: comment } });
+    Keyboard.dismiss();
     setComment('');
   };
 
