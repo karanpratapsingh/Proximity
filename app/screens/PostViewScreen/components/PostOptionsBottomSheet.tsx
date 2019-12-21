@@ -7,16 +7,21 @@ import { ThemeColors } from '../../../types/theme';
 import { postReportedNotification } from '../../../utils/notifications';
 import { useMutation } from '@apollo/react-hooks';
 import { MUTATION_REPORT_POST } from '../../../graphql/mutation';
+import { ThemeStatic } from '../../../theme';
 
 interface PostOptionsBottomSheetProps {
   ref: React.Ref<any>,
-  postId: String
+  authorId: string,
+  postId: string,
+  onPostEdit: () => void,
+  onPostDelete: () => void
 };
 
-const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forwardRef(({ postId }, ref) => {
+const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forwardRef(({ authorId, postId, onPostEdit, onPostDelete }, ref) => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const [reportPost] = useMutation(MUTATION_REPORT_POST, { variables: { postId } });
+  const isOwnPost = user.id === authorId;
 
   const onPostReport = () => {
     reportPost();
@@ -24,6 +29,33 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
     // @ts-ignore
     ref.current.close();
   };
+
+  let content = (
+    <Option
+      label='Report'
+      iconName='ios-flag'
+      color={ThemeStatic.delete}
+      onPress={onPostReport}
+    />
+  );
+
+  if (isOwnPost) {
+    content = (
+      <>
+        <Option
+          label='Edit'
+          iconName='md-create'
+          onPress={onPostEdit}
+        />
+        <Option
+          label='Delete'
+          iconName='md-trash'
+          color={ThemeStatic.delete}
+          onPress={onPostDelete}
+        />
+      </>
+    );
+  }
 
   return (
     <Modalize
@@ -37,11 +69,7 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
         subHeading='Tell us what you think'
       />
       <View style={styles().content}>
-        <Option
-          label='Report'
-          iconName='ios-flag'
-          onPress={onPostReport}
-        />
+        {content}
       </View>
     </Modalize >
   );
