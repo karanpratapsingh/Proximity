@@ -28,6 +28,7 @@ import ProfileCard from './shared/ProfileCard';
 import UserCard from './shared/UserCard';
 import ConnectionsBottomSheet from './shared/ConnectionsBottomSheet';
 import Option from './shared/Option';
+import ConfirmationModal from './shared/ConfirmationModal';
 
 export {
   Header,
@@ -51,6 +52,7 @@ export {
   UserCard,
   ConnectionsBottomSheet,
   Option,
+  ConfirmationModal,
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,
