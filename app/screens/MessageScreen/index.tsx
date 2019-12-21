@@ -9,7 +9,7 @@ import { AppContext } from '../../context';
 import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { filterChatParticipants, isUserOnline, searchQueryFilter, sortAscendingTime } from '../../utils/shared';
+import { filterChatParticipants, isUserOnline, searchQueryFilter, sortMessageAscendingTime } from '../../utils/shared';
 import MessageCard from './components/MessageCard';
 import NewMessageBottomSheet from './components/NewMessageBottomSheet';
 
@@ -78,7 +78,7 @@ const MessageScreen: React.FC = () => {
     const { chats } = data;
 
     const filteredChats = searchQueryFilter(chats, user.id, chatSearch);
-    const sortedFilteredChats = sortAscendingTime(filteredChats);
+    const sortedFilteredChats = sortMessageAscendingTime(filteredChats);
 
     content = (
       <FlatGrid
