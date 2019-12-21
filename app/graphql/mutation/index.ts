@@ -147,3 +147,11 @@ export const MUTATION_REPORT_POST = gql`
     }
   }
 `;
+
+export const MUTATION_EDIT_POST = gql`
+  mutation EditPost($postId: String!, $caption: String!) {
+    editPost(postId: $postId, caption: $caption) {
+      id
+    }
+  }
+`;
