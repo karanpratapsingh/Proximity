@@ -13,12 +13,13 @@ import { ConfirmationModal, GoBackHeader, IconButton, NativeImage, PostViewScree
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { deleteFromStorage } from '../../utils/firebase';
+import { postDeletedNotification } from '../../utils/notifications';
 import { parseLikes, parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
 import EditPostBottomSheet from './components/EditPostBottomSheet';
+import LikesBottomSheet from './components/LikesBottomSheet';
 import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
-import { postDeletedNotification } from '../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -48,6 +49,7 @@ const PostViewScreen: React.FC = () => {
 
   const postOptionsBottomSheetRef = useRef();
   const editPostBottomSheetRef = useRef();
+  const likesBottomSheetRef = useRef();
 
   useEffect(() => {
     if (!postSubscriptionLoading) {
@@ -81,6 +83,11 @@ const PostViewScreen: React.FC = () => {
   const closeOptions = () => {
     // @ts-ignore
     postOptionsBottomSheetRef.current.close();
+  };
+
+  const openLikes = () => {
+    // @ts-ignore
+    likesBottomSheetRef.current.open();
   };
 
   const handleDoubleTap = async (isLiked: boolean) => {
@@ -184,7 +191,7 @@ const PostViewScreen: React.FC = () => {
               />
             }
           />
-          <Text style={styles(theme).likesText}>{readableLikes}</Text>
+          <Text onPress={openLikes} style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
@@ -205,6 +212,7 @@ const PostViewScreen: React.FC = () => {
           id: authorId
         },
         uri,
+        likes,
         caption
       }
     } = postData;
@@ -231,6 +239,11 @@ const PostViewScreen: React.FC = () => {
           isVisible={isConfirmModalVisible}
           toggle={confirmationToggle}
           onConfirm={() => onDeleteConfirm(uri)}
+        />
+        <LikesBottomSheet
+          ref={likesBottomSheetRef}
+          likes={likes}
+          onUserPress={navigateToProfile}
         />
       </>
     );
