@@ -10,6 +10,7 @@ import { QUERY_USER } from '../../graphql/query';
 import { ConnectionsBottomSheet, GoBackHeader, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import UserInteractions from './components/UserInteractions';
+import { sortPostsAscendingTime } from '../../utils/shared';
 
 const ProfileViewScreen: React.FC = () => {
   const { theme } = useContext(AppContext);
@@ -61,13 +62,15 @@ const ProfileViewScreen: React.FC = () => {
 
   if (!loading && !error) {
     const { user: { handle, following, followers, posts } } = data;
+    const sortedPosts = sortPostsAscendingTime(posts);
+
     content = (
       <>
         <FlatGrid
           staticDimension={responsiveWidth(94)}
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
-          items={posts}
+          items={sortedPosts}
           ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={30} />}
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}

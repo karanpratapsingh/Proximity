@@ -33,6 +33,7 @@ export const QUERY_USER = gql`
       posts {
         id
         uri
+        createdAt
       }
     }
   }
