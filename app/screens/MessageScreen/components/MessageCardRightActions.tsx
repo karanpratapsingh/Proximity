@@ -16,7 +16,7 @@ const MessageCardRightActions = ({ progress, dragX, onDelete }) => {
     <Animated.View style={[styles.container, slideEffect]}>
       <MaterialIcons
         onPress={onDelete}
-        name='delete-forever'
+        name='delete'
         color={ThemeStatic.white}
         size={IconSizes.x6}
         style={styles.delete}
