@@ -155,3 +155,11 @@ export const MUTATION_EDIT_POST = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_POST = gql`
+  mutation DeletePost($postId: String!) {
+    deletePost(postId: $postId) {
+      id
+    }
+  }
+`;
