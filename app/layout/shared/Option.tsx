@@ -39,7 +39,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 6
+    marginVertical: 8
   },
   label: {
     ...FontWeights.Light,

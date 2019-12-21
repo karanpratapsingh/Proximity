@@ -1,32 +1,34 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, LikeAction, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
+import { MUTATION_DELETE_POST, MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
 import { QUERY_POST } from '../../graphql/query';
 import { SUBSCRIPTION_POST } from '../../graphql/subscription';
-import { GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
+import { ConfirmationModal, GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { parseTimeElapsed, parseLikes } from '../../utils/shared';
+import { deleteFromStorage } from '../../utils/firebase';
+import { parseLikes, parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
-import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
 import EditPostBottomSheet from './components/EditPostBottomSheet';
+import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
 
 const PostViewScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
-  const { navigate } = useNavigation();
+  const { navigate, goBack } = useNavigation();
   const postId = useNavigationParam('postId');
 
   const [postData, setPostData] = useState(null);
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [lastTap, setLastTap] = useState(Date.now());
 
   const [
@@ -35,9 +37,13 @@ const PostViewScreen: React.FC = () => {
       called: postQueryCalled,
       loading: postQueryLoading,
       error: postQueryError
-    }] = useLazyQuery(QUERY_POST, { variables: { postId }, fetchPolicy: 'network-only' });
+    }] = useLazyQuery(QUERY_POST, {
+      variables: { postId },
+      fetchPolicy: 'network-only'
+    });
 
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
+  const [deletePost] = useMutation(MUTATION_DELETE_POST);
 
   const postOptionsBottomSheetRef = useRef();
   const editPostBottomSheetRef = useRef();
@@ -55,6 +61,10 @@ const PostViewScreen: React.FC = () => {
   }, [postQueryData, postQueryCalled, postQueryLoading, postSubscriptionData, postSubscriptionLoading]);
 
   const [likeInteraction, { loading: likeInteractionLoading }] = useMutation(MUTATION_LIKE_INTERACTION);
+
+  const confirmationToggle = () => {
+    setIsConfirmModalVisible(!isConfirmModalVisible);
+  };
 
   const navigateToProfile = (userId: string) => {
 
@@ -103,9 +113,17 @@ const PostViewScreen: React.FC = () => {
     // @ts-ignore
     editPostBottomSheetRef.current.open();
   };
+
   const onPostDelete = () => {
-    // @ts-ignore
     closeOptions();
+    confirmationToggle();
+  };
+
+  const onDeleteConfirm = (uri: string) => {
+    confirmationToggle();
+    goBack();
+    deletePost({ variables: { postId } });
+    deleteFromStorage(uri);
   };
 
   let content = <PostViewScreenPlaceholder />;
@@ -184,6 +202,7 @@ const PostViewScreen: React.FC = () => {
         author: {
           id: authorId
         },
+        uri,
         caption
       }
     } = postData;
@@ -201,6 +220,15 @@ const PostViewScreen: React.FC = () => {
           ref={editPostBottomSheetRef}
           postId={postId}
           caption={caption}
+        />
+        <ConfirmationModal
+          label='Delete'
+          title='Delete post?'
+          description={`Do you want to delete the current post? Post won't be recoverable later`}
+          color={ThemeStatic.delete}
+          isVisible={isConfirmModalVisible}
+          toggle={confirmationToggle}
+          onConfirm={() => onDeleteConfirm(uri)}
         />
       </>
     );

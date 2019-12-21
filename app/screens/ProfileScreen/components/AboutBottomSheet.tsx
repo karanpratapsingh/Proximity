@@ -15,14 +15,16 @@ const { author: { url }, repository, version } = Config;
 
 const AboutAction = ({ iconName, label, onPress }) => {
   const { theme } = useContext(AppContext);
+  const Icon = () =>
+    <AntDesign name={iconName}
+      size={20}
+      color={ThemeStatic.accent}
+    />;
+
   return (
     <Button
       loading={false}
-      Icon={() =>
-        <AntDesign name={iconName}
-          size={20}
-          color={ThemeStatic.accent}
-        />}
+      Icon={Icon}
       label={label}
       onPress={onPress}
       labelStyle={styles(theme).aboutActionLabel}
