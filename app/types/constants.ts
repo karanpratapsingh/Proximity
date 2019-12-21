@@ -92,5 +92,6 @@ export type ErrorsType = {
   INITIALIZE_FCM: string,
   INITIALIZE_CHAT: string,
   UPDATE_FCM_TOKEN: string,
-  ASSET_UPLOAD: string
+  ASSET_UPLOAD: string,
+  EDIT_POST: string
 };

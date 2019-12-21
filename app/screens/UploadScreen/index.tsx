@@ -61,6 +61,12 @@ const UploadScreen: React.FC = () => {
     }
   };
 
+  const Icon = () => <Feather
+    name='upload-cloud'
+    color={ThemeStatic.white}
+    size={IconSizes.x5}
+  />;
+
   const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;
 
   return (
@@ -78,11 +84,7 @@ const UploadScreen: React.FC = () => {
           characterRestriction={200}
         />
         <Button
-          Icon={() => <Feather
-            name='upload-cloud'
-            color={ThemeStatic.white}
-            size={IconSizes.x5}
-          />}
+          Icon={Icon}
           label='Upload'
           onPress={uploadImage}
           loading={isUploading}

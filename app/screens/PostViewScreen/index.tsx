@@ -16,6 +16,7 @@ import { parseTimeElapsed, parseLikes } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
 import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
+import EditPostBottomSheet from './components/EditPostBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -39,6 +40,7 @@ const PostViewScreen: React.FC = () => {
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
 
   const postOptionsBottomSheetRef = useRef();
+  const editPostBottomSheetRef = useRef();
 
   useEffect(() => {
     if (!postSubscriptionLoading) {
@@ -58,6 +60,16 @@ const PostViewScreen: React.FC = () => {
 
     if (userId === user.id) return;
     navigate(Routes.ProfileViewScreen, { userId });
+  };
+
+  const openOptions = () => {
+    // @ts-ignore
+    postOptionsBottomSheetRef.current.open();
+  };
+
+  const closeOptions = () => {
+    // @ts-ignore
+    postOptionsBottomSheetRef.current.close();
   };
 
   const handleDoubleTap = async (isLiked: boolean) => {
@@ -86,6 +98,16 @@ const PostViewScreen: React.FC = () => {
     return likeInteraction({ variables });
   };
 
+  const onPostEdit = () => {
+    closeOptions();
+    // @ts-ignore
+    editPostBottomSheetRef.current.open();
+  };
+  const onPostDelete = () => {
+    // @ts-ignore
+    closeOptions();
+  };
+
   let content = <PostViewScreenPlaceholder />;
 
   if (postQueryCalled && !postQueryLoading && !postQueryError && postData) {
@@ -112,15 +134,14 @@ const PostViewScreen: React.FC = () => {
 
     content = (
       <>
-        <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
+        <TouchableOpacity activeOpacity={0.90} onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
           <NativeImage uri={avatar} style={styles(theme).avatarImage} />
           <View style={{ flex: 1 }}>
             <Text style={styles(theme).handleText}>{handle}</Text>
             <Text style={styles(theme).timeText}>{readableTime}</Text>
           </View>
           <IconButton
-            // @ts-ignore
-            onPress={postOptionsBottomSheetRef.current.open}
+            onPress={openOptions}
             Icon={() => <Entypo
               name='dots-three-vertical'
               size={IconSizes.x4}
@@ -154,6 +175,37 @@ const PostViewScreen: React.FC = () => {
     );
   }
 
+  let bottomSheets;
+
+  if (postQueryCalled && !postQueryLoading && !postQueryError && postData) {
+    const {
+      // @ts-ignore
+      post: {
+        author: {
+          id: authorId
+        },
+        caption
+      }
+    } = postData;
+
+    bottomSheets = (
+      <>
+        <PostOptionsBottomSheet
+          ref={postOptionsBottomSheetRef}
+          authorId={authorId}
+          postId={postId}
+          onPostEdit={onPostEdit}
+          onPostDelete={onPostDelete}
+        />
+        <EditPostBottomSheet
+          ref={editPostBottomSheetRef}
+          postId={postId}
+          caption={caption}
+        />
+      </>
+    );
+  }
+
   const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined;
 
   return (
@@ -163,7 +215,7 @@ const PostViewScreen: React.FC = () => {
         {content}
       </ScrollView>
       <CommentInput postId={postId} />
-      <PostOptionsBottomSheet ref={postOptionsBottomSheetRef} postId={postId} />
+      {bottomSheets}
     </KeyboardAvoidingView>
   );
 };

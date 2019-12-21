@@ -81,3 +81,10 @@ export const postReportedNotification = () => showMessage({
   backgroundColor: ThemeStatic.accent,
   duration: 4000
 });
+
+export const postUpdatedNotification = () => showMessage({
+  message: 'Post has been updated',
+  icon: 'success',
+  type: 'success',
+  duration: 2000
+});
