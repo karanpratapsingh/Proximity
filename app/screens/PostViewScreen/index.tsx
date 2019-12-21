@@ -18,6 +18,7 @@ import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
 import EditPostBottomSheet from './components/EditPostBottomSheet';
 import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
+import { postDeletedNotification } from '../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -122,6 +123,7 @@ const PostViewScreen: React.FC = () => {
   const onDeleteConfirm = (uri: string) => {
     confirmationToggle();
     goBack();
+    postDeletedNotification();
     deletePost({ variables: { postId } });
     deleteFromStorage(uri);
   };

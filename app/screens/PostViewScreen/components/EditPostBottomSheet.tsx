@@ -58,7 +58,7 @@ const EditPostBottomSheet: React.FC<EditPostBottomSheetProps> = React.forwardRef
         subHeading='Edit your post'
       />
       <View style={styles().content}>
-        {caption && <FormInput
+        <FormInput
           ref={editableCaptionRef}
           multiline
           label='Caption'
@@ -66,7 +66,7 @@ const EditPostBottomSheet: React.FC<EditPostBottomSheetProps> = React.forwardRef
           value={editableCaption}
           onChangeText={setEditableCaption}
           characterRestriction={200}
-        />}
+        />
         <Button
           Icon={Icon}
           label='Update'
@@ -90,8 +90,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingBottom: 20
   },
   updateButton: {
-    marginTop: 20,
-    marginBottom: 10
+    marginVertical: 20
   }
 });
 

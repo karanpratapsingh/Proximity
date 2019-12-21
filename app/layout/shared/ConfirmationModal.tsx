@@ -25,8 +25,8 @@ const ConfirmationModal: React.FC<ConfirmationModalModal> = ({ title, descriptio
   return (
     <Modal
       useNativeDriver
-      animationInTiming={500}
-      animationOutTiming={500}
+      animationInTiming={400}
+      animationOutTiming={400}
       hideModalContentWhileAnimating
       isVisible={isVisible}
       animationIn='fadeIn'

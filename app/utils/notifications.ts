@@ -88,3 +88,11 @@ export const postUpdatedNotification = () => showMessage({
   type: 'success',
   duration: 2000
 });
+
+export const postDeletedNotification = () => showMessage({
+  message: 'Post has been deleted',
+  icon: 'info',
+  type: 'info',
+  backgroundColor: ThemeStatic.accent,
+  duration: 2000
+});
