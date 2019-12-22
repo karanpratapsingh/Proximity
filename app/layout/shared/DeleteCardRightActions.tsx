@@ -1,10 +1,10 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes } from '../../../constants';
-import { ThemeStatic } from '../../../theme';
+import { IconSizes } from '../../constants';
+import { ThemeStatic } from '../../theme';
 
-const MessageCardRightActions = ({ progress, dragX, onDelete }) => {
+const DeleteCardRightActions = ({ progress, dragX, onDelete }) => {
   const translateX = dragX.interpolate({
     inputRange: [0, 80, 100, 101],
     outputRange: [-10, 0, 0, 1]
@@ -15,8 +15,8 @@ const MessageCardRightActions = ({ progress, dragX, onDelete }) => {
   return (
     <Animated.View style={[styles.container, slideEffect]}>
       <MaterialIcons
-        onPress={onDelete}
         name='delete'
+        onPress={onDelete}
         color={ThemeStatic.white}
         size={IconSizes.x6}
         style={styles.delete}
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MessageCardRightActions;
+export default DeleteCardRightActions;

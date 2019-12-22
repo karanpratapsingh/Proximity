@@ -6,11 +6,10 @@ import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_SEEN_MESSAGE, MUTATION_DELETE_CHAT } from '../../../graphql/mutation';
-import { NativeImage } from '../../../layout';
+import { NativeImage, DeleteCardRightActions } from '../../../layout';
 import { OnlineDotColor, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
-import MessageCardRightActions from './MessageCardRightActions';
 import { deleteChatNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
@@ -58,7 +57,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   };
 
   const renderRightActions = (progress, dragX) => (
-    <MessageCardRightActions
+    <DeleteCardRightActions
       progress={progress}
       dragX={dragX}
       onDelete={onDelete}
@@ -67,7 +66,6 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
 
   return (
     <Swipeable rightThreshold={-80} renderRightActions={renderRightActions}>
-
       <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
         <View style={styles().avatar}>
           <NativeImage
@@ -76,7 +74,6 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
           />
           <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
         </View>
-
         <View style={styles().info}>
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           <View style={styles(theme).content}>

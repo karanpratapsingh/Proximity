@@ -29,6 +29,7 @@ import UserCard from './shared/UserCard';
 import ConnectionsBottomSheet from './shared/ConnectionsBottomSheet';
 import Option from './shared/Option';
 import ConfirmationModal from './shared/ConfirmationModal';
+import DeleteCardRightActions from './shared/DeleteCardRightActions';
 
 export {
   Header,
@@ -53,6 +54,7 @@ export {
   ConnectionsBottomSheet,
   Option,
   ConfirmationModal,
+  DeleteCardRightActions,
   SearchUsersPlaceholder,
   ExploreScreenPlaceholder,
   PostCardPlaceholder,
