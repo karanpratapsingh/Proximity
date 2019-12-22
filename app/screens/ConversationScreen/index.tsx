@@ -17,6 +17,7 @@ import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
+import CustomScrollToBottom from './components/CustomScrollToBottom';
 
 const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
@@ -93,6 +94,7 @@ const ConversationScreen: React.FC = () => {
         inverted={false}
         maxInputLength={200}
         messages={transform}
+        scrollToBottomComponent={CustomScrollToBottom}
         textInputProps={{ disable: true }}
         renderComposer={composerProps => <CustomComposer {...composerProps} />}
         renderMessageText={CustomMessageText}

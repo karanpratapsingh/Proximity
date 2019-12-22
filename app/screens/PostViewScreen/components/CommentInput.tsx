@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
 import { Keyboard, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
@@ -36,6 +37,12 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
     setComment('');
   };
 
+  const Icon = () =>
+    <MaterialIcons name='done'
+      size={IconSizes.x6}
+      color={ThemeStatic.accent}
+    />;
+
   let content = (
     <View style={styles().loading}>
       <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x00} />
@@ -45,11 +52,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
   if (!loading) {
     content = (
       <IconButton
-        Icon={() =>
-          <MaterialIcons name='done'
-            size={IconSizes.x6}
-            color={ThemeStatic.accent}
-          />}
+        Icon={Icon}
         onPress={postComment}
         style={styles().postButton}
       />
@@ -83,7 +86,10 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingHorizontal: 20,
     borderTopColor: ThemeStatic.translucent,
     borderTopWidth: StyleSheet.hairlineWidth,
-    backgroundColor: theme.base
+    backgroundColor: theme.base,
+    ...ifIphoneX({
+      paddingBottom: 32
+    }, {})
   },
   commentAvatarImage: {
     height: 36,

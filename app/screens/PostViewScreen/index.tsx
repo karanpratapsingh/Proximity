@@ -194,7 +194,7 @@ const PostViewScreen: React.FC = () => {
           <Text onPress={openLikes} style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>
-          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+          <Text onPress={() => navigateToProfile(userId)} style={styles(theme).handleText}>{handle}{' '}</Text>
           {caption}
         </Text>
         <Comments comments={comments} />
