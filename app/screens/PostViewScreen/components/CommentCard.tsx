@@ -62,7 +62,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ postId, commentId, authorId, 
 
   return (
     // @ts-ignore
-    <Swipeable ref={swipeableRef} containerStyle={styles().swipeable} rightThreshold={-80} renderRightActions={renderRightActions}>
+    <Swipeable ref={swipeableRef} useNativeAnimations containerStyle={styles().swipeable} rightThreshold={-80} renderRightActions={renderRightActions}>
       <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
         <NativeImage uri={avatar} style={styles(theme).avatarImage} />
         <View style={styles().info}>

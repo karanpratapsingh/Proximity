@@ -71,7 +71,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
 
   return (
     // @ts-ignore
-    <Swipeable ref={swipeableRef} rightThreshold={-80} renderRightActions={renderRightActions}>
+    <Swipeable ref={swipeableRef} useNativeAnimations rightThreshold={-80} renderRightActions={renderRightActions}>
       <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
         <View style={styles().avatar}>
           <NativeImage
