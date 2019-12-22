@@ -10,7 +10,7 @@ import { NativeImage, DeleteCardRightActions } from '../../../layout';
 import { OnlineDotColor, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
-import { deleteChatNotification } from '../../../utils/notifications';
+import { longPressDeleteNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -52,7 +52,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
 
   const onDelete = () => {
     if (!deleteChatLoading && !deleteChatCalled) {
-      deleteChatNotification(() => deleteChat({ variables: { chatId } }));
+      longPressDeleteNotification(() => deleteChat({ variables: { chatId } }));
     }
   };
 
