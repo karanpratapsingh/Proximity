@@ -165,8 +165,8 @@ export const MUTATION_DELETE_POST = gql`
 `;
 
 export const MUTATION_DELETE_COMMENT = gql`
-  mutation DeleteComment($commentId: String!) {
-    deleteComment(commentId: $commentId) {
+  mutation DeleteComment($postId: String!, $commentId: String!) {
+    deleteComment(postId: $postId, commentId: $commentId) {
       id
     }
   }
