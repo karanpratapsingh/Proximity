@@ -47,6 +47,7 @@ const PostViewScreen: React.FC = () => {
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
   const [deletePost] = useMutation(MUTATION_DELETE_POST);
 
+  const scrollViewRef = useRef();
   const postOptionsBottomSheetRef = useRef();
   const editPostBottomSheetRef = useRef();
   const likesBottomSheetRef = useRef();
@@ -254,10 +255,14 @@ const PostViewScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView behavior={keyboardBehavior} keyboardVerticalOffset={20} style={styles(theme).container}>
       <GoBackHeader iconSize={IconSizes.x7} />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
+      <ScrollView
+        // @ts-ignore
+        ref={scrollViewRef}
+        showsVerticalScrollIndicator={false}
+        style={styles().content}>
         {content}
       </ScrollView>
-      <CommentInput postId={postId} />
+      <CommentInput postId={postId} scrollViewRef={scrollViewRef} />
       {bottomSheets}
     </KeyboardAvoidingView>
   );

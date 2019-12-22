@@ -10,14 +10,16 @@ import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { inputLimitErrorNotification } from '../../../utils/notifications';
+import { createAsyncDelay } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface CommentInputProps {
-  postId: string
+  postId: string,
+  scrollViewRef: React.MutableRefObject<any>
 };
 
-const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
+const CommentInput: React.FC<CommentInputProps> = ({ postId, scrollViewRef }) => {
 
   const { user, theme } = useContext(AppContext);
   const [comment, setComment] = useState('');
@@ -35,6 +37,8 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
     await addComment({ variables: { userId: user.id, postId, body: comment } });
     Keyboard.dismiss();
     setComment('');
+    await createAsyncDelay(1200);
+    scrollViewRef.current.scrollToEnd();
   };
 
   const Icon = () =>
