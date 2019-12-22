@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
@@ -49,10 +49,15 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   } : null;
 
   const onlineDotColor = OnlineDotColor[isOnline as any];
+  const swipeableRef = useRef();
 
   const onDelete = () => {
     if (!deleteChatLoading && !deleteChatCalled) {
-      longPressDeleteNotification(() => deleteChat({ variables: { chatId } }));
+      longPressDeleteNotification(() => {
+        // @ts-ignore
+        swipeableRef.current.close();
+        deleteChat({ variables: { chatId } });
+      });
     }
   };
 
@@ -65,7 +70,8 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   );
 
   return (
-    <Swipeable rightThreshold={-80} renderRightActions={renderRightActions}>
+    // @ts-ignore
+    <Swipeable ref={swipeableRef} rightThreshold={-80} renderRightActions={renderRightActions}>
       <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
         <View style={styles().avatar}>
           <NativeImage

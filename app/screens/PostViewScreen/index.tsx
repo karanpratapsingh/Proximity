@@ -198,7 +198,7 @@ const PostViewScreen: React.FC = () => {
           <Text onPress={() => navigateToProfile(userId)} style={styles(theme).handleText}>{handle}{' '}</Text>
           {caption}
         </Text>
-        <Comments comments={comments} />
+        <Comments postId={postId} comments={comments} />
       </>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, FlatList } from 'react-native';
 import { AppContext } from '../../../context';
 import { ListEmptyComponent } from '../../../layout';
@@ -10,10 +10,11 @@ import { Comment } from '../../../types/screens';
 const { FontWeights, FontSizes } = Typography;
 
 interface CommentsProps {
+  postId: string,
   comments: Comment[]
 };
 
-const Comments: React.FC<CommentsProps> = ({ comments }) => {
+const Comments: React.FC<CommentsProps> = ({ postId, comments }) => {
   const { theme } = useContext(AppContext);
 
   const renderItem = ({ item }) => {
@@ -30,6 +31,7 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
 
     return (
       <CommentCard
+        postId={postId}
         commentId={commentId}
         authorId={authorId}
         avatar={avatar}

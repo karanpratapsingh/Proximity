@@ -95,7 +95,6 @@ const MessageScreen: React.FC = () => {
 
   const onConnectionSelect = async (targetId: string, avatar: string, handle: string) => {
     try {
-
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
         variables: { userId: user.id, targetId }
