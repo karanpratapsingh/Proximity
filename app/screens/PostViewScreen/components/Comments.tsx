@@ -18,8 +18,9 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
 
   const renderItem = ({ item }) => {
     const {
+      id: commentId,
       author: {
-        id: userId,
+        id: authorId,
         avatar,
         handle
       },
@@ -29,7 +30,8 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
 
     return (
       <CommentCard
-        userId={userId}
+        commentId={commentId}
+        authorId={authorId}
         avatar={avatar}
         handle={handle}
         body={body}
