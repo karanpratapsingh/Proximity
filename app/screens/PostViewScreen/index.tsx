@@ -9,7 +9,7 @@ import { AppContext } from '../../context';
 import { MUTATION_DELETE_POST, MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
 import { QUERY_POST } from '../../graphql/query';
 import { SUBSCRIPTION_POST } from '../../graphql/subscription';
-import { ConfirmationModal, GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
+import { BounceView, ConfirmationModal, GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { deleteFromStorage } from '../../utils/firebase';
@@ -91,7 +91,7 @@ const PostViewScreen: React.FC = () => {
     likesBottomSheetRef.current.open();
   };
 
-  const handleDoubleTap = async (isLiked: boolean) => {
+  const handleDoubleTap = (isLiked: boolean) => {
     const now = Date.now();
     const DOUBLE_PRESS_DELAY = 500;
     if (now - lastTap < DOUBLE_PRESS_DELAY) {
@@ -181,17 +181,15 @@ const PostViewScreen: React.FC = () => {
           <NativeImage uri={uri} style={styles(theme).postImage} />
         </TouchableOpacity>
         <View style={styles().likes}>
-          <IconButton
-            style={{ width: undefined }}
-            onPress={() => likeInteractionHandler(isLiked)}
-            Icon={() =>
-              <AntDesign
-                name='heart'
-                color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
-                size={IconSizes.x5}
-              />
-            }
-          />
+          <BounceView
+            scale={1.50}
+            onPress={() => likeInteractionHandler(isLiked)}>
+            <AntDesign
+              name='heart'
+              color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
+              size={IconSizes.x5}
+            />
+          </BounceView>
           <Text onPress={openLikes} style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>

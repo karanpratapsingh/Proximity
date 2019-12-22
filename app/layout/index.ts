@@ -12,6 +12,7 @@ import SvgBanner from './misc/SvgBanner';
 import ListEmptyComponent from './misc/ListEmptyComponent';
 import LoadingIndicator from './misc/LoadingIndicator';
 import NativeImage from './misc/NativeImage';
+import BounceView from './misc/BounceView';
 
 import MessageScreenPlaceholder from './placeholders/MessageScreen.Placeholder';
 import ConversationScreenPlaceholder from './placeholders/ConversationScreen.Placeholder';
@@ -44,6 +45,7 @@ export {
   ListEmptyComponent,
   LoadingIndicator,
   NativeImage,
+  BounceView,
   MessageScreenPlaceholder,
   ConversationScreenPlaceholder,
   NotificationScreenPlaceholder,
