@@ -18,6 +18,7 @@ import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
 import CustomScrollToBottom from './components/CustomScrollToBottom';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
@@ -104,7 +105,7 @@ const ConversationScreen: React.FC = () => {
         onSend={onSend}
         onPressAvatar={onPressAvatar}
         user={{ _id: user.id }}
-        bottomOffset={-10}
+        bottomOffset={ifIphoneX(20, -12)}
         keyboardShouldPersistTaps={null}
         listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />

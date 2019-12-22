@@ -13,7 +13,7 @@ const CustomInputToolbar: React.FC = inputToolbarProps => (
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginBottom: 12,
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth: 0,
