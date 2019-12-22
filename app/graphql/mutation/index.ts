@@ -163,3 +163,11 @@ export const MUTATION_DELETE_POST = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_COMMENT = gql`
+  mutation DeleteComment($commentId: String!) {
+    deleteComment(commentId: $commentId) {
+      id
+    }
+  }
+`;

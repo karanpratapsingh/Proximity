@@ -154,6 +154,7 @@ export const QUERY_POST = gql`
         avatar
       }
       comments {
+        id
         body
         author {
           id
