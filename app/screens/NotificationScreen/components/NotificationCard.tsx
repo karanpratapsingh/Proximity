@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { NotificationType, NotificationText, Routes } from '../../../constants';
+import { useMutation } from '@apollo/react-hooks';
+import React, { useContext, useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { useNavigation } from 'react-navigation-hooks';
+import { NotificationText, NotificationType, Routes } from '../../../constants';
 import { AppContext } from '../../../context';
-import { NativeImage } from '../../../layout';
+import { MUTATION_DELETE_NOTIFICATION } from '../../../graphql/mutation';
+import { DeleteCardRightActions, NativeImage } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
-import { useNavigation } from 'react-navigation-hooks';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface NotificationCardPros {
+  notificationId: string,
   avatar: string,
   handle: string,
   resourceId: string,
@@ -18,12 +22,16 @@ interface NotificationCardPros {
   time: string
 };
 
-const NotificationCard: React.FC<NotificationCardPros> = ({ avatar, resourceId, handle, type, time }) => {
+const NotificationCard: React.FC<NotificationCardPros> = ({ notificationId, avatar, resourceId, handle, type, time }) => {
 
   const { theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const notificationText = NotificationText[type];
   const { readableTime } = parseTimeElapsed(time);
+
+  const [deleteNotification, { loading: deleteNotificationLoading, called: deleteNotificationCalled }] = useMutation(MUTATION_DELETE_NOTIFICATION);
+
+  const swipeableRef = useRef();
 
   const navigateAction = () => {
     if (resourceId === '') return;
@@ -35,17 +43,36 @@ const NotificationCard: React.FC<NotificationCardPros> = ({ avatar, resourceId, 
     }
   };
 
+  const onDelete = () => {
+    if (!deleteNotificationLoading && !deleteNotificationCalled) {
+      // @ts-ignore
+      swipeableRef.current.close();
+      deleteNotification({ variables: { notificationId } });
+    }
+  };
+
+  const renderRightActions = (progress, dragX) => (
+    <DeleteCardRightActions
+      progress={progress}
+      dragX={dragX}
+      onDelete={onDelete}
+    />
+  );
+
   return (
-    <TouchableOpacity activeOpacity={0.95} onPress={navigateAction} style={styles().container}>
-      <NativeImage uri={avatar} style={styles(theme).avatarImage} />
-      <View style={styles().info}>
-        <Text style={styles(theme).notificationText}>
-          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-          {notificationText}
-        </Text>
-        <Text style={styles(theme).timeText}>{readableTime}</Text>
-      </View>
-    </TouchableOpacity>
+    // @ts-ignore
+    <Swipeable ref={swipeableRef} useNativeAnimations rightThreshold={-80} renderRightActions={renderRightActions}>
+      <TouchableOpacity activeOpacity={0.95} onPress={navigateAction} style={styles().container}>
+        <NativeImage uri={avatar} style={styles(theme).avatarImage} />
+        <View style={styles().info}>
+          <Text style={styles(theme).notificationText}>
+            <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+            {notificationText}
+          </Text>
+          <Text style={styles(theme).timeText}>{readableTime}</Text>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 };
 
