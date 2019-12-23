@@ -1,6 +1,7 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
@@ -23,6 +24,11 @@ import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
 
+const AnimationValues = {
+  opacity: { initial: 0, final: 1 },
+  bounce: { initial: 0.4, final: 1 }
+};
+
 const PostViewScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
@@ -32,6 +38,9 @@ const PostViewScreen: React.FC = () => {
   const [postData, setPostData] = useState(null);
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [lastTap, setLastTap] = useState(Date.now());
+
+  const [likeOpacity] = useState(new Animated.Value(AnimationValues.opacity.initial));
+  const [likeBounce] = useState(new Animated.Value(AnimationValues.bounce.initial));
 
   const [
     queryPost, {
@@ -91,11 +100,44 @@ const PostViewScreen: React.FC = () => {
     likesBottomSheetRef.current.open();
   };
 
+  const animateLikeBounce = () => {
+
+    const opacityConfig = {
+      duration: 250,
+      useNativeDriver: true
+    };
+
+    const fadeInConfig = {
+      toValue: AnimationValues.opacity.final,
+      ...opacityConfig
+    };
+
+    const fadeOutConfig = {
+      toValue: AnimationValues.opacity.initial,
+      ...opacityConfig
+    };
+
+    const springConfig = {
+      toValue: AnimationValues.bounce.final,
+      friction: 2,
+      useNativeDriver: true
+    };
+
+    Animated.parallel([
+      Animated.spring(likeBounce, springConfig),
+      Animated.timing(likeOpacity, fadeInConfig)
+    ]).start(() => {
+      Animated.timing(likeOpacity, fadeOutConfig)
+        .start(() => likeBounce.setValue(AnimationValues.bounce.initial));
+    });
+  };
+
   const handleDoubleTap = (isLiked: boolean) => {
     const now = Date.now();
     const DOUBLE_PRESS_DELAY = 500;
     if (now - lastTap < DOUBLE_PRESS_DELAY) {
       likeInteractionHandler(isLiked);
+      animateLikeBounce();
     } else {
       setLastTap(now);
     }
@@ -179,6 +221,16 @@ const PostViewScreen: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDoubleTap(isLiked)} activeOpacity={1}>
           <NativeImage uri={uri} style={styles(theme).postImage} />
+          <Animated.View style={[styles().likesAnimation, {
+            opacity: likeOpacity,
+            transform: [{ scale: likeBounce }]
+          }]}>
+            <AntDesign
+              name='heart'
+              color={ThemeStatic.white}
+              size={IconSizes.x12}
+            />
+          </Animated.View>
         </TouchableOpacity>
         <View style={styles().likes}>
           <BounceView
@@ -304,6 +356,13 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     marginTop: 25,
     borderRadius: 10,
     backgroundColor: theme.placeholder
+  },
+  likesAnimation: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: responsiveHeight(18),
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   likes: {
     flexDirection: 'row',
