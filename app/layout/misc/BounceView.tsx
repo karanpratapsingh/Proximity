@@ -18,7 +18,7 @@ class BounceView extends Component {
     scale: new Animated.Value(1)
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: truthy,
       onStartShouldSetPanResponderCapture: truthy,

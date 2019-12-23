@@ -68,7 +68,10 @@ export const IconSizes: IconSizesType = {
   x6: 24,
   x7: 28,
   x8: 32,
-  x9: 40
+  x9: 40,
+  x10: 50,
+  x11: 60,
+  x12: 100
 };
 
 export const PostDimensions: PostDimensionsType = {
