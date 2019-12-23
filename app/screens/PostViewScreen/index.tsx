@@ -98,8 +98,6 @@ const PostViewScreen: React.FC = () => {
     const DOUBLE_PRESS_DELAY = 500;
     if (now - lastTap < DOUBLE_PRESS_DELAY) {
       likeInteractionHandler(isLiked);
-      // @ts-ignore
-      likeBounceAnimationRef.current.animate();
     } else {
       setLastTap(now);
     }
@@ -117,7 +115,8 @@ const PostViewScreen: React.FC = () => {
     if (isLiked) {
       variables.action = LikeAction.UNLIKE
     }
-
+    // @ts-ignore
+    likeBounceAnimationRef.current.animate();
     return likeInteraction({ variables });
   };
 
