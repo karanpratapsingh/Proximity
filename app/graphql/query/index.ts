@@ -59,6 +59,7 @@ export const QUERY_USER_EXISTS = gql`
 export const QUERY_NOTIFICATION = gql`
   query Notifications($userId: String!) {
     notifications(userId: $userId) {
+      id
       actionUser {
         id
         avatar

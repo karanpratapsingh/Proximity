@@ -171,3 +171,11 @@ export const MUTATION_DELETE_COMMENT = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_NOTIFICATION = gql`
+  mutation DeleteNotification($notificationId: String!) {
+    deleteNotification(notificationId: $notificationId) {
+      id
+    }
+  }
+`;
