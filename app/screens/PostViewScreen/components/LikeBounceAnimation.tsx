@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { IconSizes } from '../../../constants';
+import { IconSizes, PostDimensions } from '../../../constants';
 import { ThemeStatic } from '../../../theme';
 
 const AnimationValues = {
@@ -16,12 +15,16 @@ interface LikeBounceAnimationProps {
 
 const LikeBounceAnimation: React.FC<LikeBounceAnimationProps> = React.forwardRef((_, ref) => {
 
+  const [animating, setAnimating] = useState(false);
   const [likeOpacity] = useState(new Animated.Value(AnimationValues.opacity.initial));
   const [likeBounce] = useState(new Animated.Value(AnimationValues.bounce.initial));
 
   // @ts-ignore
   ref.current = {
     animate: () => {
+
+      if (animating) return;
+
       const opacityConfig = {
         duration: 250,
         useNativeDriver: true
@@ -43,12 +46,20 @@ const LikeBounceAnimation: React.FC<LikeBounceAnimationProps> = React.forwardRef
         useNativeDriver: true
       };
 
-      Animated.parallel([
+      setAnimating(true);
+
+      const parallelAnimations = [
         Animated.spring(likeBounce, springConfig),
         Animated.timing(likeOpacity, fadeInConfig)
-      ]).start(() => {
-        Animated.timing(likeOpacity, fadeOutConfig)
-          .start(() => likeBounce.setValue(AnimationValues.bounce.initial));
+      ];
+      
+      Animated.parallel(parallelAnimations).start(() => {
+        Animated
+          .timing(likeOpacity, fadeOutConfig)
+          .start(() => {
+            likeBounce.setValue(AnimationValues.bounce.initial);
+            setAnimating(false);
+          });
       });
     }
   };
@@ -70,8 +81,8 @@ const LikeBounceAnimation: React.FC<LikeBounceAnimationProps> = React.forwardRef
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
+    top: PostDimensions.Large.height / 2.25,
     alignSelf: 'center',
-    top: responsiveHeight(18),
     alignItems: 'center',
     justifyContent: 'center'
   }

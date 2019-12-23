@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: ThemeStatic.delete,
-    borderTopRightRadius: 5,
-    borderBottomRightRadius: 5
+    borderTopRightRadius: 2.5,
+    borderBottomRightRadius: 2.5
   },
   delete: {
     width: 50,
