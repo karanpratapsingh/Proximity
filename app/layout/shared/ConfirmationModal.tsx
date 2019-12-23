@@ -60,17 +60,17 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     backgroundColor: theme.base
   },
   heading: {
-    ...FontWeights.Bold,
+    ...FontWeights.Regular,
     ...FontSizes.Label,
     color: theme.text01
   },
   subHeading: {
-    ...FontWeights.Regular,
+    ...FontWeights.Light,
     ...FontSizes.Body,
     marginTop: 10,
     color: theme.text02
   },
-  confirm: { marginTop: 60 },
+  confirm: { marginTop: 40 },
   cancel: { marginTop: 10 }
 });
 
