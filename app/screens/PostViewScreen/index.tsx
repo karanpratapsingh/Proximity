@@ -114,9 +114,11 @@ const PostViewScreen: React.FC = () => {
 
     if (isLiked) {
       variables.action = LikeAction.UNLIKE
+    } else {
+      // @ts-ignore
+      likeBounceAnimationRef.current.animate();
     }
-    // @ts-ignore
-    likeBounceAnimationRef.current.animate();
+
     return likeInteraction({ variables });
   };
 
