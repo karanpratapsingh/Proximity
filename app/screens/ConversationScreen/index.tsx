@@ -78,7 +78,7 @@ const ConversationScreen: React.FC = () => {
     });
   };
 
-  const onPressAvatar = () => {
+  const navigateToProfile = () => {
     navigate(Routes.ProfileViewScreen, { userId: targetId });
   };
 
@@ -102,7 +102,7 @@ const ConversationScreen: React.FC = () => {
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
         onSend={onSend}
-        onPressAvatar={onPressAvatar}
+        onPressAvatar={navigateToProfile}
         user={{ _id: user.id }}
         bottomOffset={ifIphoneX(20, -12)}
         keyboardShouldPersistTaps={null}
@@ -115,8 +115,9 @@ const ConversationScreen: React.FC = () => {
     <View style={styles(theme).container}>
       <GoBackHeader
         title={handle}
+        onTitlePress={navigateToProfile}
         iconSize={IconSizes.x7}
-        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={onPressAvatar} />}
+        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={navigateToProfile} />}
         titleStyle={styles().headerTitleStyle}
       />
       {content}
