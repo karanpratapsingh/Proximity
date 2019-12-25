@@ -49,7 +49,6 @@ const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = ({ value, onChangeTe
     <View style={styles().container}>
       <TransitionInput
         pose={pose}
-        autoCorrect={false}
         onFocus={onOpen}
         style={[styles(theme).animatedSearchBar, style]}
         value={value}

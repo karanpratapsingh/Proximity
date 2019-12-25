@@ -70,7 +70,6 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId, scrollViewRef }) =>
         style={styles(theme).commentAvatarImage}
       />
       <TextInput
-        autoCorrect={false}
         style={styles(theme).commentTextInput}
         value={comment}
         placeholder={`Add a comment as ${user.handle}...`}
