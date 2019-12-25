@@ -43,7 +43,6 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   title: {
     ...FontWeights.Light,
     ...FontSizes.Heading,
-    marginTop: 2,
     color: theme.text01
   }
 });
