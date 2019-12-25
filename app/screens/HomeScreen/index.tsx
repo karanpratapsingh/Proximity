@@ -10,7 +10,7 @@ import { Errors, IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
 import { QUERY_USER_FEED } from '../../graphql/query';
-import { Header, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
+import { HomeHeader, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
 import { ThemeColors } from '../../types/theme';
 import { crashlytics, initializeFCM, messaging } from '../../utils/firebase';
 import PostCard from './components/PostCard';
@@ -129,10 +129,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles(theme).container}>
-      <Header
-        title='Home'
-        IconRight={IconRight}
-      />
+      <HomeHeader IconRight={IconRight} />
       {content}
     </View>
   );

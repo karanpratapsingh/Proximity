@@ -1,3 +1,4 @@
+import HomeHeader from './headers/HomeHeader';
 import Header from './headers/Header';
 import SearchBar from './headers/SearchBar';
 import BottomSheetHeader from './headers/BottomSheetHeader';
@@ -33,6 +34,7 @@ import ConfirmationModal from './shared/ConfirmationModal';
 import DeleteCardRightActions from './shared/DeleteCardRightActions';
 
 export {
+  HomeHeader,
   Header,
   SearchBar,
   BottomSheetHeader,
