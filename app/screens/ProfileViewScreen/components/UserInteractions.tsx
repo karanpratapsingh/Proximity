@@ -78,7 +78,7 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, h
       });
 
       if (chatExists) {
-        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId });
       } else {
         const { data } = await createTemporaryChat();
         navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });

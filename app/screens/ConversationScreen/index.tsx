@@ -79,8 +79,7 @@ const ConversationScreen: React.FC = () => {
   };
 
   const onPressAvatar = () => {
-    const [participant] = filterChatParticipants(user.id, chatQueryData.chat.participants);
-    navigate(Routes.ProfileViewScreen, { userId: participant.id });
+    navigate(Routes.ProfileViewScreen, { userId: targetId });
   };
 
   let content = <ConversationScreenPlaceholder />

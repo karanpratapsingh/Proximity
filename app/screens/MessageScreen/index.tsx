@@ -46,7 +46,7 @@ const MessageScreen: React.FC = () => {
     const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
-    const { avatar, handle, lastSeen } = participant;
+    const { id, avatar, handle, lastSeen } = participant;
     const {
       id: messageId,
       author: { id: authorId },
@@ -60,6 +60,7 @@ const MessageScreen: React.FC = () => {
     return (
       <MessageCard
         chatId={chatId}
+        participantId={id}
         avatar={avatar}
         handle={handle}
         authorId={authorId}
@@ -103,7 +104,7 @@ const MessageScreen: React.FC = () => {
       // @ts-ignore
       newMessageBottomSheetRef.current.close();
       if (chatExists) {
-        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId });
       } else {
         const { data } = await createTemporaryChat();
         navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });

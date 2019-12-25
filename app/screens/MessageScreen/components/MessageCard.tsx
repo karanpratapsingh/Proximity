@@ -16,6 +16,7 @@ const { FontWeights, FontSizes } = Typography;
 
 interface MessageCardProps {
   chatId: string,
+  participantId: string,
   avatar: string,
   handle: string,
   authorId: string,
@@ -26,7 +27,7 @@ interface MessageCardProps {
   isOnline: boolean
 };
 
-const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
+const MessageCard: React.FC<MessageCardProps> = ({ chatId, participantId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
 
   const { user, theme } = useContext(AppContext);
   const { parsedTime } = parseTimeElapsed(time);
@@ -38,7 +39,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });
     }
-    navigate(Routes.ConversationScreen, { chatId, avatar, handle })
+    navigate(Routes.ConversationScreen, { chatId, avatar, handle, targetId: participantId })
   };
 
   const isHighlighted = authorId !== user.id && !seen;
