@@ -1,6 +1,6 @@
 import dateFormat from 'dateformat';
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
@@ -43,6 +43,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   title: {
     ...FontWeights.Light,
     ...FontSizes.Heading,
+    marginTop: Platform.select({ ios: 2, android: 0 }),
     color: theme.text01
   }
 });
