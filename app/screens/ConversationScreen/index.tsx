@@ -104,7 +104,7 @@ const ConversationScreen: React.FC = () => {
         onSend={onSend}
         onPressAvatar={navigateToProfile}
         user={{ _id: user.id }}
-        bottomOffset={ifIphoneX(20, -12)}
+        bottomOffset={ifIphoneX(20, -10)}
         keyboardShouldPersistTaps={null}
         listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
