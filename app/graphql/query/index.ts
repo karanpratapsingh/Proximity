@@ -33,6 +33,7 @@ export const QUERY_USER = gql`
       posts {
         id
         uri
+        createdAt
       }
     }
   }
@@ -58,6 +59,7 @@ export const QUERY_USER_EXISTS = gql`
 export const QUERY_NOTIFICATION = gql`
   query Notifications($userId: String!) {
     notifications(userId: $userId) {
+      id
       actionUser {
         id
         avatar
@@ -153,6 +155,7 @@ export const QUERY_POST = gql`
         avatar
       }
       comments {
+        id
         body
         author {
           id
@@ -191,6 +194,17 @@ export const QUERY_USER_FEED = gql`
         handle
       }
       likes
+    }
+  }
+`;
+
+export const QUERY_LIKE_USERS = gql`
+  query LikeUsers($likes: [String!]) {
+    likeUsers(likes: $likes) {
+      id
+      avatar
+      handle
+      name
     }
   }
 `;

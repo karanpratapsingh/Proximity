@@ -12,6 +12,7 @@ import { ThemeColors } from '../../types/theme';
 import AboutBottomSheet from './components/AboutBottomSheet';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
+import { sortPostsAscendingTime } from '../../utils/shared';
 
 const ProfileScreen: React.FC = () => {
 
@@ -78,13 +79,14 @@ const ProfileScreen: React.FC = () => {
 
   if (!loading && !error) {
     const { user: { avatar, name, handle, following, followers, about, posts } } = data;
+    const sortedPosts = sortPostsAscendingTime(posts);
     content = (
       <>
         <FlatGrid
           staticDimension={responsiveWidth(94)}
           ListHeaderComponent={ListHeaderComponent}
           itemDimension={150}
-          items={posts}
+          items={sortedPosts}
           ListEmptyComponent={() => <ListEmptyComponent listType='posts' spacing={30} />}
           style={styles().postGrid}
           showsVerticalScrollIndicator={false}

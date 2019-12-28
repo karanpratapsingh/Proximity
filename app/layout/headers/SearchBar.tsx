@@ -20,7 +20,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onFocus, onB
 
   return (
     <TextInput
-      autoCorrect={false}
       onFocus={onFocus}
       onBlur={onBlur}
       style={[styles(theme).container, style]}

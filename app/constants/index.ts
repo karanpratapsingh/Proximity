@@ -68,7 +68,10 @@ export const IconSizes: IconSizesType = {
   x6: 24,
   x7: 28,
   x8: 32,
-  x9: 40
+  x9: 40,
+  x10: 50,
+  x11: 60,
+  x12: 100
 };
 
 export const PostDimensions: PostDimensionsType = {
@@ -83,7 +86,7 @@ export const PollIntervals: PollIntervalsType = {
   profileView: 1000,
   postView: 2 * 1000,
   interaction: 1000,
-  notification: 4 * 1000,
+  notification: 2 * 1000,
   lastSeen: 10 * 1000
 };
 
@@ -109,5 +112,6 @@ export const Errors: ErrorsType = {
   INITIALIZE_FCM: 'INITIALIZE_FCM',
   INITIALIZE_CHAT: 'INITIALIZE_CHAT',
   UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN',
-  ASSET_UPLOAD: 'ASSET_UPLOAD'
+  ASSET_UPLOAD: 'ASSET_UPLOAD',
+  EDIT_POST: 'EDIT_POST'
 };

@@ -59,11 +59,12 @@ export const noPermissionNotification = () => showMessage({
   duration: 4000
 });
 
-export const deleteChatNotification = (onLongPress) => showMessage({
-  message: 'Delete? Long press this notification to confirm',
+export const longPressDeleteNotification = (onLongPress) => showMessage({
+  message: 'Long press this notification to delete',
   icon: 'danger',
   type: 'danger',
   duration: 4000,
+  backgroundColor: ThemeStatic.delete,
   onLongPress
 });
 
@@ -80,4 +81,19 @@ export const postReportedNotification = () => showMessage({
   type: 'info',
   backgroundColor: ThemeStatic.accent,
   duration: 4000
+});
+
+export const postUpdatedNotification = () => showMessage({
+  message: 'Post has been updated',
+  icon: 'success',
+  type: 'success',
+  duration: 2000
+});
+
+export const postDeletedNotification = () => showMessage({
+  message: 'Post has been deleted',
+  icon: 'info',
+  type: 'info',
+  backgroundColor: ThemeStatic.accent,
+  duration: 2000
 });

@@ -1,20 +1,25 @@
 import { useLazyQuery, useMutation, useSubscription } from '@apollo/react-hooks';
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { createRef, useContext, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
 import { IconSizes, LikeAction, PostDimensions, Routes } from '../../constants';
 import { AppContext } from '../../context';
-import { MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
+import { MUTATION_DELETE_POST, MUTATION_LIKE_INTERACTION } from '../../graphql/mutation';
 import { QUERY_POST } from '../../graphql/query';
 import { SUBSCRIPTION_POST } from '../../graphql/subscription';
-import { GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
+import { BounceView, ConfirmationModal, GoBackHeader, IconButton, NativeImage, PostViewScreenPlaceholder } from '../../layout';
 import { ThemeStatic, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { parseTimeElapsed, parseLikes } from '../../utils/shared';
+import { deleteFromStorage } from '../../utils/firebase';
+import { postDeletedNotification } from '../../utils/notifications';
+import { parseLikes, parseTimeElapsed } from '../../utils/shared';
 import CommentInput from './components/CommentInput';
 import Comments from './components/Comments';
+import EditPostBottomSheet from './components/EditPostBottomSheet';
+import LikeBounceAnimation from './components/LikeBounceAnimation';
+import LikesBottomSheet from './components/LikesBottomSheet';
 import PostOptionsBottomSheet from './components/PostOptionsBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
@@ -22,10 +27,11 @@ const { FontWeights, FontSizes } = Typography;
 const PostViewScreen: React.FC = () => {
 
   const { user, theme } = useContext(AppContext);
-  const { navigate } = useNavigation();
+  const { navigate, goBack } = useNavigation();
   const postId = useNavigationParam('postId');
 
   const [postData, setPostData] = useState(null);
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [lastTap, setLastTap] = useState(Date.now());
 
   const [
@@ -34,11 +40,19 @@ const PostViewScreen: React.FC = () => {
       called: postQueryCalled,
       loading: postQueryLoading,
       error: postQueryError
-    }] = useLazyQuery(QUERY_POST, { variables: { postId }, fetchPolicy: 'network-only' });
+    }] = useLazyQuery(QUERY_POST, {
+      variables: { postId },
+      fetchPolicy: 'network-only'
+    });
 
   const { data: postSubscriptionData, loading: postSubscriptionLoading } = useSubscription(SUBSCRIPTION_POST, { variables: { postId } });
+  const [deletePost] = useMutation(MUTATION_DELETE_POST);
 
+  const scrollViewRef = useRef();
   const postOptionsBottomSheetRef = useRef();
+  const editPostBottomSheetRef = useRef();
+  const likesBottomSheetRef = useRef();
+  const likeBounceAnimationRef = createRef();
 
   useEffect(() => {
     if (!postSubscriptionLoading) {
@@ -54,13 +68,32 @@ const PostViewScreen: React.FC = () => {
 
   const [likeInteraction, { loading: likeInteractionLoading }] = useMutation(MUTATION_LIKE_INTERACTION);
 
+  const confirmationToggle = () => {
+    setIsConfirmModalVisible(!isConfirmModalVisible);
+  };
+
   const navigateToProfile = (userId: string) => {
 
     if (userId === user.id) return;
     navigate(Routes.ProfileViewScreen, { userId });
   };
 
-  const handleDoubleTap = async (isLiked: boolean) => {
+  const openOptions = () => {
+    // @ts-ignore
+    postOptionsBottomSheetRef.current.open();
+  };
+
+  const closeOptions = () => {
+    // @ts-ignore
+    postOptionsBottomSheetRef.current.close();
+  };
+
+  const openLikes = () => {
+    // @ts-ignore
+    likesBottomSheetRef.current.open();
+  };
+
+  const handleDoubleTap = (isLiked: boolean) => {
     const now = Date.now();
     const DOUBLE_PRESS_DELAY = 500;
     if (now - lastTap < DOUBLE_PRESS_DELAY) {
@@ -81,9 +114,31 @@ const PostViewScreen: React.FC = () => {
 
     if (isLiked) {
       variables.action = LikeAction.UNLIKE
+    } else {
+      // @ts-ignore
+      likeBounceAnimationRef.current.animate();
     }
 
     return likeInteraction({ variables });
+  };
+
+  const onPostEdit = () => {
+    closeOptions();
+    // @ts-ignore
+    editPostBottomSheetRef.current.open();
+  };
+
+  const onPostDelete = () => {
+    closeOptions();
+    confirmationToggle();
+  };
+
+  const onDeleteConfirm = (uri: string) => {
+    confirmationToggle();
+    goBack();
+    postDeletedNotification();
+    deletePost({ variables: { postId } });
+    deleteFromStorage(uri);
   };
 
   let content = <PostViewScreenPlaceholder />;
@@ -112,15 +167,14 @@ const PostViewScreen: React.FC = () => {
 
     content = (
       <>
-        <TouchableOpacity onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
+        <TouchableOpacity activeOpacity={0.90} onPress={() => navigateToProfile(userId)} style={styles().postHeader}>
           <NativeImage uri={avatar} style={styles(theme).avatarImage} />
           <View style={{ flex: 1 }}>
             <Text style={styles(theme).handleText}>{handle}</Text>
             <Text style={styles(theme).timeText}>{readableTime}</Text>
           </View>
           <IconButton
-            // @ts-ignore
-            onPress={postOptionsBottomSheetRef.current.open}
+            onPress={openOptions}
             Icon={() => <Entypo
               name='dots-three-vertical'
               size={IconSizes.x4}
@@ -130,26 +184,72 @@ const PostViewScreen: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDoubleTap(isLiked)} activeOpacity={1}>
           <NativeImage uri={uri} style={styles(theme).postImage} />
+          <LikeBounceAnimation ref={likeBounceAnimationRef} />
         </TouchableOpacity>
         <View style={styles().likes}>
-          <IconButton
-            style={{ width: undefined }}
-            onPress={() => likeInteractionHandler(isLiked)}
-            Icon={() =>
-              <AntDesign
-                name='heart'
-                color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
-                size={IconSizes.x5}
-              />
-            }
-          />
-          <Text style={styles(theme).likesText}>{readableLikes}</Text>
+          <BounceView
+            scale={1.50}
+            onPress={() => likeInteractionHandler(isLiked)}>
+            <AntDesign
+              name='heart'
+              color={isLiked ? ThemeStatic.like : ThemeStatic.unlike}
+              size={IconSizes.x5}
+            />
+          </BounceView>
+          <Text onPress={openLikes} style={styles(theme).likesText}>{readableLikes}</Text>
         </View>
         <Text style={styles(theme).captionText}>
-          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+          <Text onPress={() => navigateToProfile(userId)} style={styles(theme).handleText}>{handle}{' '}</Text>
           {caption}
         </Text>
-        <Comments comments={comments} />
+        <Comments postId={postId} comments={comments} />
+      </>
+    );
+  }
+
+  let bottomSheets;
+
+  if (postQueryCalled && !postQueryLoading && !postQueryError && postData) {
+    const {
+      // @ts-ignore
+      post: {
+        author: {
+          id: authorId
+        },
+        uri,
+        likes,
+        caption
+      }
+    } = postData;
+
+    bottomSheets = (
+      <>
+        <PostOptionsBottomSheet
+          ref={postOptionsBottomSheetRef}
+          authorId={authorId}
+          postId={postId}
+          onPostEdit={onPostEdit}
+          onPostDelete={onPostDelete}
+        />
+        <EditPostBottomSheet
+          ref={editPostBottomSheetRef}
+          postId={postId}
+          caption={caption}
+        />
+        <ConfirmationModal
+          label='Delete'
+          title='Delete post?'
+          description={`Do you want to delete the current post? Post won't be recoverable later`}
+          color={ThemeStatic.delete}
+          isVisible={isConfirmModalVisible}
+          toggle={confirmationToggle}
+          onConfirm={() => onDeleteConfirm(uri)}
+        />
+        <LikesBottomSheet
+          ref={likesBottomSheetRef}
+          likes={likes}
+          onUserPress={navigateToProfile}
+        />
       </>
     );
   }
@@ -159,11 +259,15 @@ const PostViewScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView behavior={keyboardBehavior} keyboardVerticalOffset={20} style={styles(theme).container}>
       <GoBackHeader iconSize={IconSizes.x7} />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles().content}>
+      <ScrollView
+        // @ts-ignore
+        ref={scrollViewRef}
+        showsVerticalScrollIndicator={false}
+        style={styles().content}>
         {content}
       </ScrollView>
-      <CommentInput postId={postId} />
-      <PostOptionsBottomSheet ref={postOptionsBottomSheetRef} postId={postId} />
+      <CommentInput postId={postId} scrollViewRef={scrollViewRef} />
+      {bottomSheets}
     </KeyboardAvoidingView>
   );
 };

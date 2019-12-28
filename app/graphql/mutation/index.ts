@@ -147,3 +147,35 @@ export const MUTATION_REPORT_POST = gql`
     }
   }
 `;
+
+export const MUTATION_EDIT_POST = gql`
+  mutation EditPost($postId: String!, $caption: String!) {
+    editPost(postId: $postId, caption: $caption) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_DELETE_POST = gql`
+  mutation DeletePost($postId: String!) {
+    deletePost(postId: $postId) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_DELETE_COMMENT = gql`
+  mutation DeleteComment($postId: String!, $commentId: String!) {
+    deleteComment(postId: $postId, commentId: $commentId) {
+      id
+    }
+  }
+`;
+
+export const MUTATION_DELETE_NOTIFICATION = gql`
+  mutation DeleteNotification($notificationId: String!) {
+    deleteNotification(notificationId: $notificationId) {
+      id
+    }
+  }
+`;

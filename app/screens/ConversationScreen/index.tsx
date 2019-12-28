@@ -17,6 +17,8 @@ import CustomComposer from './components/CustomComposer';
 import CustomInputToolbar from './components/CustomInputToolbar';
 import CustomMessageText from './components/CustomMessageText';
 import CustomSend from './components/CustomSend';
+import CustomScrollToBottom from './components/CustomScrollToBottom';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 const ConversationScreen: React.FC = () => {
   const chatId = useNavigationParam('chatId');
@@ -76,9 +78,8 @@ const ConversationScreen: React.FC = () => {
     });
   };
 
-  const onPressAvatar = () => {
-    const [participant] = filterChatParticipants(user.id, chatQueryData.chat.participants);
-    navigate(Routes.ProfileViewScreen, { userId: participant.id });
+  const navigateToProfile = () => {
+    navigate(Routes.ProfileViewScreen, { userId: targetId });
   };
 
   let content = <ConversationScreenPlaceholder />
@@ -93,6 +94,7 @@ const ConversationScreen: React.FC = () => {
         inverted={false}
         maxInputLength={200}
         messages={transform}
+        scrollToBottomComponent={CustomScrollToBottom}
         textInputProps={{ disable: true }}
         renderComposer={composerProps => <CustomComposer {...composerProps} />}
         renderMessageText={CustomMessageText}
@@ -100,9 +102,9 @@ const ConversationScreen: React.FC = () => {
         renderSend={CustomSend}
         renderInputToolbar={CustomInputToolbar}
         onSend={onSend}
-        onPressAvatar={onPressAvatar}
+        onPressAvatar={navigateToProfile}
         user={{ _id: user.id }}
-        bottomOffset={-10}
+        bottomOffset={ifIphoneX(20, -10)}
         keyboardShouldPersistTaps={null}
         listViewProps={{ showsVerticalScrollIndicator: false, style: { marginBottom: 16 } }}
       />
@@ -113,8 +115,9 @@ const ConversationScreen: React.FC = () => {
     <View style={styles(theme).container}>
       <GoBackHeader
         title={handle}
+        onTitlePress={navigateToProfile}
         iconSize={IconSizes.x7}
-        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={onPressAvatar} />}
+        ContentLeft={() => <ChatHeaderAvatar avatar={avatar} onPress={navigateToProfile} />}
         titleStyle={styles().headerTitleStyle}
       />
       {content}

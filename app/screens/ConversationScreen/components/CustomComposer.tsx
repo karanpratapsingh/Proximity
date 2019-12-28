@@ -13,7 +13,6 @@ const CustomComposer: React.FC = composerProps => {
     <Composer
       {...composerProps}
       multiline
-      textInputProps={{ autoCorrect: false }}
       textInputStyle={styles(theme).inputStyle}
     />
   );

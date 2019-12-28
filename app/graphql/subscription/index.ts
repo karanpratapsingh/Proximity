@@ -26,6 +26,7 @@ export const SUBSCRIPTION_POST = gql`
         avatar
       }
       comments {
+        id
         body
         author {
           id

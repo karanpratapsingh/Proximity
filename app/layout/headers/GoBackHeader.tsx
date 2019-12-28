@@ -10,12 +10,13 @@ const { FontWeights, FontSizes } = Typography;
 
 interface GoBackHeaderProps {
   title?: string,
+  onTitlePress?: () => void,
   ContentLeft?: React.FC,
   iconSize: number,
   titleStyle?: StyleProp<TextStyle>
 };
 
-const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, ContentLeft, iconSize, titleStyle }) => {
+const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, onTitlePress, ContentLeft, iconSize, titleStyle }) => {
 
   const { theme } = useContext(AppContext);
   const { goBack } = useNavigation();
@@ -25,7 +26,7 @@ const GoBackHeader: React.FC<GoBackHeaderProps> = ({ title, ContentLeft, iconSiz
     <View style={styles(theme).container}>
       <Entypo onPress={navigateBack} name='chevron-thin-left' size={iconSize} color={theme.text01} />
       {ContentLeft && <ContentLeft />}
-      {title && <Text style={[styles(theme).title, titleStyle]}>{title}</Text>}
+      {title && <Text onPress={onTitlePress} style={[styles(theme).title, titleStyle]}>{title}</Text>}
     </View>
   );
 };

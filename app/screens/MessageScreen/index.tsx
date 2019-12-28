@@ -9,7 +9,7 @@ import { AppContext } from '../../context';
 import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '../../graphql/query';
 import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '../../layout';
 import { ThemeColors } from '../../types/theme';
-import { filterChatParticipants, isUserOnline, searchQueryFilter, sortAscendingTime } from '../../utils/shared';
+import { filterChatParticipants, isUserOnline, searchQueryFilter, sortMessageAscendingTime } from '../../utils/shared';
 import MessageCard from './components/MessageCard';
 import NewMessageBottomSheet from './components/NewMessageBottomSheet';
 
@@ -46,7 +46,7 @@ const MessageScreen: React.FC = () => {
     const [participant] = filterChatParticipants(user.id, participants);
     const [lastMessage] = messages;
 
-    const { avatar, handle, lastSeen } = participant;
+    const { id, avatar, handle, lastSeen } = participant;
     const {
       id: messageId,
       author: { id: authorId },
@@ -60,6 +60,7 @@ const MessageScreen: React.FC = () => {
     return (
       <MessageCard
         chatId={chatId}
+        participantId={id}
         avatar={avatar}
         handle={handle}
         authorId={authorId}
@@ -78,7 +79,7 @@ const MessageScreen: React.FC = () => {
     const { chats } = data;
 
     const filteredChats = searchQueryFilter(chats, user.id, chatSearch);
-    const sortedFilteredChats = sortAscendingTime(filteredChats);
+    const sortedFilteredChats = sortMessageAscendingTime(filteredChats);
 
     content = (
       <FlatGrid
@@ -95,7 +96,6 @@ const MessageScreen: React.FC = () => {
 
   const onConnectionSelect = async (targetId: string, avatar: string, handle: string) => {
     try {
-
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
         variables: { userId: user.id, targetId }
@@ -104,7 +104,7 @@ const MessageScreen: React.FC = () => {
       // @ts-ignore
       newMessageBottomSheetRef.current.close();
       if (chatExists) {
-        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId: null });
+        navigate(Routes.ConversationScreen, { chatId: chatExists.id, avatar, handle, targetId });
       } else {
         const { data } = await createTemporaryChat();
         navigate(Routes.ConversationScreen, { chatId: data.createTemporaryChat.id, avatar, handle, targetId });

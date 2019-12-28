@@ -1,53 +1,90 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AppContext } from '../../../context';
-import { NativeImage } from '../../../layout';
+import { NativeImage, DeleteCardRightActions } from '../../../layout';
 import { Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { useMutation } from '@apollo/react-hooks';
+import { MUTATION_DELETE_COMMENT } from '../../../graphql/mutation';
+import { longPressDeleteNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface CommentCardProps {
-  userId: string,
+  postId: string,
+  commentId: string,
+  authorId: string,
   avatar: string,
   handle: string,
   body: string,
   time: string
 };
 
-const CommentCard: React.FC<CommentCardProps> = ({ userId, avatar, handle, body, time }) => {
+const CommentCard: React.FC<CommentCardProps> = ({ postId, commentId, authorId, avatar, handle, body, time }) => {
 
   const { user, theme } = useContext(AppContext);
   const { navigate } = useNavigation();
   const { parsedTime } = parseTimeElapsed(time);
 
+  const [deleteComment, { loading: deleteCommentLoading, called: deleteCommentCalled }] = useMutation(MUTATION_DELETE_COMMENT);
+
+  const swipeableRef = useRef();
+
   const navigateToProfile = () => {
-    if (userId === user.id) return;
-    navigate(Routes.ProfileViewScreen, { userId });
+    if (authorId === user.id) return;
+    navigate(Routes.ProfileViewScreen, { userId: authorId });
+  };
+
+  const onDelete = () => {
+    if (!deleteCommentLoading && !deleteCommentCalled) {
+      longPressDeleteNotification(() => {
+        // @ts-ignore
+        swipeableRef.current.close();
+        deleteComment({ variables: { postId, commentId } });
+      });
+    }
+  };
+
+  const renderRightActions = (progress, dragX) => {
+    if (authorId !== user.id) return null;
+    return (
+      <DeleteCardRightActions
+        progress={progress}
+        dragX={dragX}
+        onDelete={onDelete}
+      />
+    );
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
-      <NativeImage uri={avatar} style={styles(theme).avatarImage} />
-      <View style={styles().info}>
-        <Text style={styles(theme).commentText}>
-          <Text style={styles(theme).handleText}>{handle}{' '}</Text>
-          {body}
-        </Text>
-        <Text style={styles(theme).timeText}>{parsedTime}</Text>
-      </View>
-    </TouchableOpacity>
+    // @ts-ignore
+    <Swipeable ref={swipeableRef} useNativeAnimations containerStyle={styles().swipeable} rightThreshold={-80} renderRightActions={renderRightActions}>
+      <TouchableOpacity activeOpacity={0.95} onPress={navigateToProfile} style={styles().container}>
+        <NativeImage uri={avatar} style={styles(theme).avatarImage} />
+        <View style={styles().info}>
+          <Text style={styles(theme).commentText}>
+            <Text style={styles(theme).handleText}>{handle}{' '}</Text>
+            {body}
+          </Text>
+          <Text style={styles(theme).timeText}>{parsedTime}</Text>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 };
 
 const styles = (theme = {} as ThemeColors) => StyleSheet.create({
+  swipeable: {
+    marginVertical: 5
+  },
   container: {
     flexDirection: 'row',
     borderRadius: 5,
-    marginBottom: 20
+    marginVertical: 5
   },
   avatarImage: {
     height: 40,

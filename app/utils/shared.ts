@@ -1,7 +1,7 @@
-import ImagePicker from "react-native-image-crop-picker";
-import { ThemeStatic } from "../theme";
-import { Timeouts } from "../constants";
-import { noPermissionNotification } from "./notifications";
+import ImagePicker from 'react-native-image-crop-picker';
+import { ThemeStatic } from '../theme';
+import { Timeouts } from '../constants';
+import { noPermissionNotification } from './notifications';
 
 export const createAsyncDelay = (duration: number) => {
 
@@ -107,7 +107,7 @@ export const getImageFromLibrary = async (height: number, width: number, circula
     cropperActiveWidgetColor: ThemeStatic.accent,
     cropperStatusBarColor: ThemeStatic.accent,
     cropperToolbarColor: ThemeStatic.accent,
-    compressImageQuality: 0.75,
+    compressImageQuality: 0.8,
     mediaType: 'photo'
   };
 
@@ -141,7 +141,7 @@ export const searchQueryFilter = (array, userId: string, query: string, ) =>
       .includes(query.toLocaleLowerCase());
   });
 
-export const sortAscendingTime = array =>
+export const sortMessageAscendingTime = array =>
   [...array].sort((a, b) => {
 
     const [lastMessageA] = a.messages;
@@ -158,3 +158,10 @@ export const computeUnreadMessages = (chats, userId: string) =>
 
     return !seen && author.id !== userId;
   }).length;
+
+export const sortPostsAscendingTime = array =>
+  [...array].sort((a, b) => {
+
+    // @ts-ignore
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });

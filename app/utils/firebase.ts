@@ -52,3 +52,5 @@ export const uploadToStorage = (asset: string, uri: string, userId: string) => {
 };
 
 export const getMediaType = (uri: string) => uri.split('.').slice(-1);
+
+export const deleteFromStorage = (uri: string) => storage.refFromURL(uri).delete();

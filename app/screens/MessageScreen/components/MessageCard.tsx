@@ -1,22 +1,22 @@
 import { useMutation } from '@apollo/react-hooks';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
 import { Routes } from '../../../constants';
 import { AppContext } from '../../../context';
 import { MUTATION_SEEN_MESSAGE, MUTATION_DELETE_CHAT } from '../../../graphql/mutation';
-import { NativeImage } from '../../../layout';
+import { NativeImage, DeleteCardRightActions } from '../../../layout';
 import { OnlineDotColor, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { parseTimeElapsed } from '../../../utils/shared';
-import MessageCardRightActions from './MessageCardRightActions';
-import { deleteChatNotification } from '../../../utils/notifications';
+import { longPressDeleteNotification } from '../../../utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface MessageCardProps {
   chatId: string,
+  participantId: string,
   avatar: string,
   handle: string,
   authorId: string,
@@ -27,7 +27,7 @@ interface MessageCardProps {
   isOnline: boolean
 };
 
-const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
+const MessageCard: React.FC<MessageCardProps> = ({ chatId, participantId, avatar, handle, authorId, messageId, messageBody, seen, time, isOnline }) => {
 
   const { user, theme } = useContext(AppContext);
   const { parsedTime } = parseTimeElapsed(time);
@@ -39,7 +39,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
     if (authorId !== user.id) {
       messageSeen({ variables: { messageId } });
     }
-    navigate(Routes.ConversationScreen, { chatId, avatar, handle })
+    navigate(Routes.ConversationScreen, { chatId, avatar, handle, targetId: participantId })
   };
 
   const isHighlighted = authorId !== user.id && !seen;
@@ -50,15 +50,20 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   } : null;
 
   const onlineDotColor = OnlineDotColor[isOnline as any];
+  const swipeableRef = useRef();
 
   const onDelete = () => {
     if (!deleteChatLoading && !deleteChatCalled) {
-      deleteChatNotification(() => deleteChat({ variables: { chatId } }));
+      longPressDeleteNotification(() => {
+        // @ts-ignore
+        swipeableRef.current.close();
+        deleteChat({ variables: { chatId } });
+      });
     }
   };
 
   const renderRightActions = (progress, dragX) => (
-    <MessageCardRightActions
+    <DeleteCardRightActions
       progress={progress}
       dragX={dragX}
       onDelete={onDelete}
@@ -66,8 +71,8 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
   );
 
   return (
-    <Swipeable rightThreshold={-80} renderRightActions={renderRightActions}>
-
+    // @ts-ignore
+    <Swipeable ref={swipeableRef} useNativeAnimations rightThreshold={-80} renderRightActions={renderRightActions}>
       <TouchableOpacity activeOpacity={0.90} onPress={setSeenAndNavigate} style={styles().container}>
         <View style={styles().avatar}>
           <NativeImage
@@ -76,7 +81,6 @@ const MessageCard: React.FC<MessageCardProps> = ({ chatId, avatar, handle, autho
           />
           <View style={[styles().onlineDot, { backgroundColor: onlineDotColor }]} />
         </View>
-
         <View style={styles().info}>
           <Text style={styles(theme).handleText}>{handle}{' '}</Text>
           <View style={styles(theme).content}>

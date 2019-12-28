@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useState } from 'react';
 import { Keyboard, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { IconSizes } from '../../../constants';
 import { AppContext } from '../../../context';
@@ -9,14 +10,16 @@ import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
 import { ThemeStatic, Typography } from '../../../theme';
 import { ThemeColors } from '../../../types/theme';
 import { inputLimitErrorNotification } from '../../../utils/notifications';
+import { createAsyncDelay } from '../../../utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
 interface CommentInputProps {
-  postId: string
+  postId: string,
+  scrollViewRef: React.MutableRefObject<any>
 };
 
-const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
+const CommentInput: React.FC<CommentInputProps> = ({ postId, scrollViewRef }) => {
 
   const { user, theme } = useContext(AppContext);
   const [comment, setComment] = useState('');
@@ -34,7 +37,15 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
     await addComment({ variables: { userId: user.id, postId, body: comment } });
     Keyboard.dismiss();
     setComment('');
+    await createAsyncDelay(1200);
+    scrollViewRef.current.scrollToEnd();
   };
+
+  const Icon = () =>
+    <MaterialIcons name='done'
+      size={IconSizes.x6}
+      color={ThemeStatic.accent}
+    />;
 
   let content = (
     <View style={styles().loading}>
@@ -45,11 +56,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
   if (!loading) {
     content = (
       <IconButton
-        Icon={() =>
-          <MaterialIcons name='done'
-            size={IconSizes.x6}
-            color={ThemeStatic.accent}
-          />}
+        Icon={Icon}
         onPress={postComment}
         style={styles().postButton}
       />
@@ -63,7 +70,6 @@ const CommentInput: React.FC<CommentInputProps> = ({ postId }) => {
         style={styles(theme).commentAvatarImage}
       />
       <TextInput
-        autoCorrect={false}
         style={styles(theme).commentTextInput}
         value={comment}
         placeholder={`Add a comment as ${user.handle}...`}
@@ -83,7 +89,10 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
     paddingHorizontal: 20,
     borderTopColor: ThemeStatic.translucent,
     borderTopWidth: StyleSheet.hairlineWidth,
-    backgroundColor: theme.base
+    backgroundColor: theme.base,
+    ...ifIphoneX({
+      paddingBottom: 32
+    }, {})
   },
   commentAvatarImage: {
     height: 36,

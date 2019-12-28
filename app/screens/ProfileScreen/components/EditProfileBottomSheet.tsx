@@ -154,6 +154,12 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
     );
   }
 
+  const Icon = () => <MaterialIcons
+    name='done'
+    color={ThemeStatic.white}
+    size={IconSizes.x5}
+  />;
+
   return (
     <Modalize
       //@ts-ignore
@@ -201,11 +207,7 @@ const EditProfileBottomSheet: React.FC<EditProfileBottomSheetProps> = React.forw
           characterRestriction={200}
         />
         <Button
-          Icon={() => <MaterialIcons
-            name='done'
-            color={ThemeStatic.white}
-            size={IconSizes.x5}
-          />}
+          Icon={Icon}
           label='Done'
           onPress={onDone}
           loading={isUploading}

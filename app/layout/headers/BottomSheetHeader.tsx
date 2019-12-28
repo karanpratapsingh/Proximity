@@ -14,7 +14,7 @@ interface BottomSheetHeaderProps {
 const BottomSheetHeader: React.FC<BottomSheetHeaderProps> = ({ heading, subHeading }) => {
   const { theme } = useContext(AppContext);
   return (
-    <View style={styles(theme).container}>
+    <View style={styles().container}>
       <Text style={styles(theme).heading}>{heading}</Text>
       <Text style={styles(theme).subHeading}>{subHeading}</Text>
     </View>

@@ -25,7 +25,6 @@ const FormInput: React.FC<FormInputProps> = React.forwardRef(({ label, placehold
     <TextField
       ref={ref}
       error={error}
-      autoCorrect={false}
       autoCapitalize='none'
       tintColor={theme.accent}
       baseColor={theme.accent}

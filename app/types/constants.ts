@@ -46,7 +46,10 @@ export type IconSizesType = {
   x6: number,
   x7: number,
   x8: number,
-  x9: number
+  x9: number,
+  x10: number,
+  x11: number,
+  x12: number
 };
 
 export type Dimensions = {
@@ -92,5 +95,6 @@ export type ErrorsType = {
   INITIALIZE_FCM: string,
   INITIALIZE_CHAT: string,
   UPDATE_FCM_TOKEN: string,
-  ASSET_UPLOAD: string
+  ASSET_UPLOAD: string,
+  EDIT_POST: string
 };
