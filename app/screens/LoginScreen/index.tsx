@@ -14,7 +14,7 @@ import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
 import { Button, ConfirmationModal, LoadingIndicator } from '../../layout';
-import { ThemeStatic, Typography } from '../../theme';
+import { ThemeStatic, Typography, ThemeVariant } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { handleLoginError, signOut } from '../../utils/authentication';
 import { crashlytics } from '../../utils/firebase';
@@ -26,7 +26,7 @@ import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottom
 const { FontWeights, FontSizes } = Typography;
 
 const LoginScreen: React.FC = () => {
-  const { theme, updateUser } = useContext(AppContext);
+  const { theme, themeType, updateUser } = useContext(AppContext);
   const { navigate } = useNavigation();
   const [createUser] = useMutation(MUTATION_CREATE_USER);
   const [initializing, setInitializing] = useState(true);
@@ -157,10 +157,11 @@ const LoginScreen: React.FC = () => {
         </View>
       );
     } else {
+      const buttonThemeVariant = themeType === ThemeVariant.light ? AppleButton.Style.BLACK : AppleButton.Style.WHITE; 
       appleSignInButton = (
         <AppleButton
           style={styles().appleSignIn}
-          buttonStyle={AppleButton.Style.BLACK}
+          buttonStyle={buttonThemeVariant}
           buttonType={AppleButton.Type.SIGN_IN}
           onPress={() => onAppleSignIn()}
         />
