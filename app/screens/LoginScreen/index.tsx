@@ -14,12 +14,11 @@ import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
 import { QUERY_SIGNIN, QUERY_USER_EXISTS } from '../../graphql/query';
 import { Button, ConfirmationModal, LoadingIndicator } from '../../layout';
-import { ThemeStatic, Typography, ThemeVariant } from '../../theme';
+import { ThemeStatic, ThemeVariant, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { handleLoginError, signOut } from '../../utils/authentication';
 import { crashlytics } from '../../utils/firebase';
 import { welcomeNotification } from '../../utils/notifications';
-import { generateUUID } from '../../utils/shared';
 import { loadToken, saveToken } from '../../utils/storage';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet';
 
@@ -129,13 +128,12 @@ const LoginScreen: React.FC = () => {
       const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
 
       if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
-        const token = generateUUID();
         const { email, fullName } = appleAuthRequestResponse;
         // @ts-ignore
         const { givenName, middleName, familyName } = fullName;
         const name = `${givenName} ${middleName} ${familyName}`.trim();
         // @ts-ignore
-        await processSignIn(token, '', name, email);
+        await processSignIn(email, '', name, email);
       }
     } catch ({ message }) {
       setAppleLoading(false);
