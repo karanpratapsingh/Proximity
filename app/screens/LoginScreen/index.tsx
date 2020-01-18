@@ -129,9 +129,6 @@ const LoginScreen: React.FC = () => {
       const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
 
       if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
-
-        alert(JSON.stringify(appleAuthRequestResponse));
-        return;
         const token = generateUUID();
         const { email, fullName } = appleAuthRequestResponse;
         // @ts-ignore
@@ -157,7 +154,7 @@ const LoginScreen: React.FC = () => {
         </View>
       );
     } else {
-      const buttonThemeVariant = themeType === ThemeVariant.light ? AppleButton.Style.BLACK : AppleButton.Style.WHITE; 
+      const buttonThemeVariant = themeType === ThemeVariant.light ? AppleButton.Style.BLACK : AppleButton.Style.WHITE;
       appleSignInButton = (
         <AppleButton
           style={styles().appleSignIn}
