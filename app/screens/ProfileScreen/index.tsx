@@ -12,6 +12,7 @@ import { ThemeColors } from '../../types/theme';
 import AboutBottomSheet from './components/AboutBottomSheet';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
+import BlockListBottomSheet from './components/BlockListBottomSheet';
 import { sortPostsAscendingTime } from '../../utils/shared';
 
 const ProfileScreen: React.FC = () => {
@@ -29,6 +30,7 @@ const ProfileScreen: React.FC = () => {
   const followingBottomSheetRef = useRef();
   const followersBottomSheetRef = useRef();
   const aboutBottomSheetRef = useRef();
+  const blockListBottomSheetRef = useRef();
 
   // @ts-ignore
   const onFollowingOpen = () => followingBottomSheetRef.current.open();
@@ -37,14 +39,23 @@ const ProfileScreen: React.FC = () => {
   // @ts-ignore
   const onEdit = () => editProfileBottomSheetRef.current.open();
   // @ts-ignore
-  const onSettings = () => settingsBottomSheetRef.current.open();
+  const onSettingsOpen = () => settingsBottomSheetRef.current.open();
+  // @ts-ignore
+  const onSettingsClose = () => settingsBottomSheetRef.current.close();
+  // @ts-ignore
+  const onAboutOpen = () => aboutBottomSheetRef.current.open();
+  // @ts-ignore
+  const onBlockListOpen = () => blockListBottomSheetRef.current.open();
 
-  const onAbout = () => {
-    // @ts-ignore
-    settingsBottomSheetRef.current.close()
-    // @ts-ignore
-    aboutBottomSheetRef.current.open();
-  }
+  const onBlockListPress = () => {
+    onSettingsClose();
+    onBlockListOpen();
+  };
+
+  const onAboutPress = () => {
+    onSettingsClose();
+    onAboutOpen();
+  };
 
   const ListHeaderComponent = () => {
     const { user: { avatar, following, followers, name, handle, about } } = data;
@@ -114,7 +125,7 @@ const ProfileScreen: React.FC = () => {
   }
 
   const IconRight = () => <IconButton
-    onPress={onSettings}
+    onPress={onSettingsOpen}
     Icon={() => <Entypo
       name='dots-three-vertical'
       size={IconSizes.x5}
@@ -130,7 +141,12 @@ const ProfileScreen: React.FC = () => {
       />
       {content}
       <AboutBottomSheet ref={aboutBottomSheetRef} />
-      <SettingsBottomSheet ref={settingsBottomSheetRef} onAboutPress={onAbout} />
+      <SettingsBottomSheet
+        ref={settingsBottomSheetRef}
+        onBlockListPress={onBlockListPress}
+        onAboutPress={onAboutPress}
+      />
+      <BlockListBottomSheet ref={blockListBottomSheetRef} onUnblock={() => null} />
     </View>
   );
 };
