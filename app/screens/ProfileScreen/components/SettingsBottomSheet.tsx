@@ -16,10 +16,11 @@ const { FontWeights, FontSizes } = Typography;
 
 interface SettingsBottomSheetProps {
   ref: React.Ref<any>,
-  onAboutPress: any
+  onBlockListPress: () => void,
+  onAboutPress: () => void
 };
 
-const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef(({ onAboutPress }, ref) => {
+const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef(({ onBlockListPress, onAboutPress }, ref) => {
 
   const { toggleTheme, theme, themeType } = useContext(AppContext);
   const { navigate } = useNavigation();
@@ -52,6 +53,11 @@ const SettingsBottomSheet: React.FC<SettingsBottomSheetProps> = React.forwardRef
         subHeading='Themes and options'
       />
       <View style={styles().content}>
+        <Option
+          label='Blocked users'
+          iconName='ios-list'
+          onPress={onBlockListPress}
+        />
         <Option iconName='ios-color-palette'>
           <Checkbox
             labelBefore
