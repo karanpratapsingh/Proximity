@@ -97,3 +97,11 @@ export const postDeletedNotification = () => showMessage({
   backgroundColor: ThemeStatic.accent,
   duration: 2000
 });
+
+export const userBlockedNotification = (handle: string = 'User') => showMessage({
+  message: `${handle} has been blocked, please refresh your feed`,
+  icon: 'info',
+  type: 'info',
+  backgroundColor: ThemeStatic.accent,
+  duration: 4000
+});

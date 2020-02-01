@@ -30,6 +30,7 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
     ref.current.close();
   };
 
+  let subHeading = 'Tell us what you think';
   let content = (
     <Option
       label='Report'
@@ -40,6 +41,7 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
   );
 
   if (isOwnPost) {
+    subHeading = 'Manage your post'
     content = (
       <>
         <Option
@@ -65,8 +67,8 @@ const PostOptionsBottomSheet: React.FC<PostOptionsBottomSheetProps> = React.forw
       modalStyle={styles(theme).container}
       adjustToContentHeight>
       <BottomSheetHeader
-        heading='Actions'
-        subHeading='Tell us what you think'
+        heading='Options'
+        subHeading={subHeading}
       />
       <View style={styles().content}>
         {content}
