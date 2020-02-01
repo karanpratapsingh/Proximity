@@ -12,12 +12,12 @@ import { useQuery } from '@apollo/react-hooks';
 import { QUERY_USER_CONNECTIONS } from '../../../graphql/query';
 import { Connections } from '../../../constants';
 
-interface ConnectionsBottomSheetProps {
+interface NewMessageBottomSheetProps {
   ref: React.Ref<any>,
   onConnectionSelect: (targetId: string, avatar: string, handle: string) => void
 };
 
-const ConnectionsBottomSheet: React.FC<ConnectionsBottomSheetProps> = React.forwardRef(({ onConnectionSelect }, ref) => {
+const NewMessageBottomSheet: React.FC<NewMessageBottomSheetProps> = React.forwardRef(({ onConnectionSelect }, ref) => {
 
   const { user, theme } = useContext(AppContext);
 
@@ -106,4 +106,4 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   }
 });
 
-export default ConnectionsBottomSheet;
+export default NewMessageBottomSheet;
