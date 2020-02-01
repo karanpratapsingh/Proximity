@@ -130,8 +130,8 @@ export const QUERY_CHAT_EXISTS = gql`
 `;
 
 export const QUERY_SEARCH_USERS = gql`
-  query SearchUsers($name: String!) {
-    searchUsers(name: $name) {
+  query SearchUsers($userId: String!, $name: String!) {
+    searchUsers(userId: $userId, name: $name) {
       id
       avatar
       name
@@ -173,8 +173,8 @@ export const QUERY_POST = gql`
 `;
 
 export const QUERY_POSTS = gql`
-  query Posts {
-    posts {
+  query Posts($userId: String!)  {
+    posts(userId: $userId) {
       id
       uri
     }
@@ -201,6 +201,17 @@ export const QUERY_USER_FEED = gql`
 export const QUERY_LIKE_USERS = gql`
   query LikeUsers($likes: [String!]) {
     likeUsers(likes: $likes) {
+      id
+      avatar
+      handle
+      name
+    }
+  }
+`;
+
+export const QUERY_BLOCKED_USERS = gql`
+  query BlockedUsers($userId: String!) {
+    blockedUsers(userId: $userId) {
       id
       avatar
       handle
