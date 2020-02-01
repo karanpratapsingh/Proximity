@@ -70,7 +70,8 @@ export type PollIntervalsType = {
   postView: number,
   interaction: number,
   notification: number,
-  lastSeen: number
+  lastSeen: number,
+  blockList: number
 };
 
 export type StoragePathsType = {

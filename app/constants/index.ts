@@ -87,7 +87,8 @@ export const PollIntervals: PollIntervalsType = {
   postView: 2 * 1000,
   interaction: 1000,
   notification: 2 * 1000,
-  lastSeen: 10 * 1000
+  lastSeen: 10 * 1000,
+  blockList: 1000
 };
 
 export const StoragePaths: StoragePathsType = {
