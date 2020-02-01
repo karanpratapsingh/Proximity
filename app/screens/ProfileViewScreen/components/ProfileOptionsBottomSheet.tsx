@@ -3,11 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { AppContext } from '../../../context';
 import { BottomSheetHeader, Option } from '../../../layout';
-import { ThemeColors } from '../../../types/theme';
-import { postReportedNotification } from '../../../utils/notifications';
-import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_REPORT_POST } from '../../../graphql/mutation';
 import { ThemeStatic } from '../../../theme';
+import { ThemeColors } from '../../../types/theme';
 
 interface ProfileOptionsBottomSheetProps {
   ref: React.Ref<any>,
@@ -16,7 +13,7 @@ interface ProfileOptionsBottomSheetProps {
 
 const ProfileOptionsBottomSheet: React.FC<ProfileOptionsBottomSheetProps> = React.forwardRef(({ onBlockUser }, ref) => {
 
-  const { user, theme } = useContext(AppContext);
+  const { theme } = useContext(AppContext);
 
   return (
     <Modalize
@@ -32,7 +29,7 @@ const ProfileOptionsBottomSheet: React.FC<ProfileOptionsBottomSheetProps> = Reac
       <View style={styles().content}>
         <Option
           label='Block'
-          iconName='ios-flag'
+          iconName='ios-close-circle'
           color={ThemeStatic.delete}
           onPress={onBlockUser}
         />
