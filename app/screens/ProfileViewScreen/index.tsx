@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
@@ -15,9 +15,10 @@ import { userBlockedNotification } from '../../utils/notifications';
 import { sortPostsAscendingTime } from '../../utils/shared';
 import ProfileOptionsBottomSheet from './components/ProfileOptionsBottomSheet';
 import UserInteractions from './components/UserInteractions';
+import { MUTATION_BLOCK_USER } from '../../graphql/mutation';
 
 const ProfileViewScreen: React.FC = () => {
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const { goBack } = useNavigation();
 
   const userId = useNavigationParam('userId');
@@ -29,6 +30,8 @@ const ProfileViewScreen: React.FC = () => {
     pollInterval: PollIntervals.profileView,
     fetchPolicy: 'network-only'
   });
+
+  const [blockUser] = useMutation(MUTATION_BLOCK_USER);
 
   const followingBottomSheetRef = useRef();
   const followersBottomSheetRef = useRef();
@@ -114,11 +117,11 @@ const ProfileViewScreen: React.FC = () => {
     toggleBlockConfirmationModal();
   };
 
-  const processBlockUser = () => {
+  const processBlockUser = async () => {
     const { user: { handle } } = data;
 
     toggleBlockConfirmationModal();
-    // TODO: send block request to the server
+    await blockUser({ variables: { from: user.id, to: userId } });
     goBack();
     userBlockedNotification(handle)
   };
