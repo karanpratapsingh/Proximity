@@ -179,3 +179,15 @@ export const MUTATION_DELETE_NOTIFICATION = gql`
     }
   }
 `;
+
+export const MUTATION_BLOCK_USER = gql`
+  mutation BlockUser($from: String!, $to: String!) {
+    blockUser(from: $from, to: $to)
+  }
+`;
+
+export const MUTATION_UNBLOCK_USER = gql`
+  mutation UnblockUser($from: String!, $to: String!) {
+    unblockUser(from: $from, to: $to)
+  }
+`;
