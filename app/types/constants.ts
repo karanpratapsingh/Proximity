@@ -99,3 +99,8 @@ export type ErrorsType = {
   ASSET_UPLOAD: string,
   EDIT_POST: string
 };
+
+export type AuthDefaultsType = {
+  avatar: string,
+  name: string
+};

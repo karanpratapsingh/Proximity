@@ -159,7 +159,5 @@ export const computeUnreadMessages = (chats, userId: string) =>
   }).length;
 
 export const sortPostsAscendingTime = array =>
-  [...array].sort((a, b) => {
-    // @ts-ignore
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
+  // @ts-ignore
+  [...array].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

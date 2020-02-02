@@ -11,7 +11,8 @@ import {
   StoragePathsType,
   AssetType,
   TimeoutsType,
-  ErrorsType
+  ErrorsType,
+  AuthDefaultsType
 } from '../types/constants';
 
 export const Routes: RoutesType = {
@@ -115,4 +116,9 @@ export const Errors: ErrorsType = {
   UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN',
   ASSET_UPLOAD: 'ASSET_UPLOAD',
   EDIT_POST: 'EDIT_POST'
+};
+
+export const AuthDefaults: AuthDefaultsType = {
+  avatar: 'https://firebasestorage.googleapis.com/v0/b/proximity-406e5.appspot.com/o/defaults%2Favatar-default.png?alt=media&token=23a37081-e594-4184-ba9f-c986ee9d3c41',
+  name: 'Proximity user'
 };

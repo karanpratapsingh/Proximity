@@ -8,7 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { useNavigation } from 'react-navigation-hooks';
 import GoogleLogo from '../../../assets/svg/google-logo.svg';
 import LoginBanner from '../../../assets/svg/login-banner.svg';
-import { Errors, IconSizes, Routes } from '../../constants';
+import { AuthDefaults, Errors, IconSizes, Routes } from '../../constants';
 import { AppContext } from '../../context';
 import client from '../../graphql/client';
 import { MUTATION_CREATE_USER } from '../../graphql/mutation';
@@ -82,17 +82,18 @@ const LoginScreen: React.FC = () => {
 
   const processNewUser = async () => {
     termsConfirmationToggle();
-    //@ts-ignore
+    // @ts-ignore
     const { token, avatar, name, email } = authState;
     await createUser({ variables: { token, avatar, name, email } });
     await saveTokenAndNavigate(token);
   };
 
-  const processSignIn = async (token: string, avatar: string | null, name: string | null, email: string) => {
+  const processSignIn = async (token: string, avatar: string | null, name: string, email: string) => {
     const { data: { userExists } } = await client.query({ query: QUERY_USER_EXISTS, variables: { token } });
     if (!userExists) {
       setAuthState({ token, avatar, name, email });
       termsConfirmationToggle();
+      return;
     }
     await saveTokenAndNavigate(token);
   };
@@ -106,7 +107,7 @@ const LoginScreen: React.FC = () => {
       const data = await GoogleSignin.signIn();
       const { user: { id: token, name, photo, email } } = data;
 
-      await processSignIn(token, photo, name, email);
+      await processSignIn(token, photo, name || AuthDefaults.name, email);
     } catch ({ message }) {
       setGoogleLoading(false);
       crashlytics.recordCustomError(Errors.SIGN_IN, message);
@@ -128,16 +129,17 @@ const LoginScreen: React.FC = () => {
       const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
 
       if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
-        const { email, fullName } = appleAuthRequestResponse;
+        const { user, email, fullName } = appleAuthRequestResponse;
         // @ts-ignore
-        const { givenName, middleName, familyName } = fullName;
-        const name = `${givenName} ${middleName} ${familyName}`.trim();
-        // @ts-ignore
-        await processSignIn(email, '', name, email);
+        const { givenName, familyName } = fullName;
+        const name = givenName ? `${givenName} ${familyName}` : AuthDefaults.name;
+        const generatedEmail = email || `${user}@icloud.com`;
+        await processSignIn(user, AuthDefaults.avatar, name, generatedEmail);
       }
-    } catch ({ message }) {
+    } catch (error) {
+      alert(JSON.stringify(error, null, 2));
       setAppleLoading(false);
-      crashlytics.recordCustomError(Errors.SIGN_IN, message);
+      crashlytics.recordCustomError(Errors.SIGN_IN, error);
     }
   };
 
@@ -170,7 +172,7 @@ const LoginScreen: React.FC = () => {
         <View style={styles(theme).content}>
           <Text style={styles(theme).titleText}>Proximity</Text>
           <Text style={styles(theme).subtitleText}>
-            Welcome to a open
+            Welcome to an open
             source social media where you are
             more than a statistics
         </Text>
