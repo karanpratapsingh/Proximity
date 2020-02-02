@@ -65,9 +65,10 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 * Push Notifications :fire:
 * Password less signin :smile:
 * Dark Mode :waxing_crescent_moon:
+* Block users :no_good:
+* Report post :triangular_flag_on_post:
 * Stories (coming soon)
-* Blocking user (coming soon)
-* Report post (coming soon)
+
 
 **:paperclip: Notes:** 
 I used this [Boilerplate](https://github.com/karanpratapsingh/react-native-boilerplate) which is also maintained by me, it is very scalable, try it out for your next project :smile:
