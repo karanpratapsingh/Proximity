@@ -1,10 +1,17 @@
 import React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { IconSizes } from '../../constants';
 import { ThemeStatic } from '../../theme';
 
-const DeleteCardRightActions = ({ progress, dragX, onDelete }) => {
+interface DeleteCardRightActionsProps {
+ progress: any,
+ dragX: any,
+ onDelete: () => void,
+ style?: StyleProp<ViewStyle>
+};
+
+const DeleteCardRightActions: React.FC<DeleteCardRightActionsProps> = ({ progress, dragX, onDelete, style }) => {
   const translateX = dragX.interpolate({
     inputRange: [0, 80, 100, 101],
     outputRange: [-10, 0, 0, 1]
@@ -13,7 +20,7 @@ const DeleteCardRightActions = ({ progress, dragX, onDelete }) => {
   const slideEffect = { opacity: progress, transform: [{ translateX }] };
 
   return (
-    <Animated.View style={[styles.container, slideEffect]}>
+    <Animated.View style={[styles.container, slideEffect, style]}>
       <MaterialIcons
         name='delete'
         onPress={onDelete}

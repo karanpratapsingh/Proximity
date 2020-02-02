@@ -18,7 +18,7 @@ const FadeView = posed.View({
 
 const ExploreScreen: React.FC = () => {
 
-  const { theme } = useContext(AppContext);
+  const { user, theme } = useContext(AppContext);
   const [userSearch, setUserSearch] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -34,14 +34,14 @@ const ExploreScreen: React.FC = () => {
     loading: postsQueryLoading,
     error: postsQueryError,
     refetch: postsQueryRefetch
-  }] = useLazyQuery(QUERY_POSTS, { fetchPolicy: 'network-only' });
+  }] = useLazyQuery(QUERY_POSTS, { variables: { userId: user.id }, fetchPolicy: 'network-only' });
 
   useEffect(() => {
     queryPost();
   }, []);
 
   useEffect(() => {
-    if (userSearch !== '') searchUsersQuery({ variables: { name: userSearch } });
+    if (userSearch !== '') searchUsersQuery({ variables: { userId: user.id, name: userSearch } });
     if (searchUsersQueryCalled && !searchUsersQueryLoading) {
       const { searchUsers } = searchUsersQueryData;
       setSearchResults(searchUsers);

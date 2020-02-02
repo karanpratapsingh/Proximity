@@ -70,7 +70,8 @@ export type PollIntervalsType = {
   postView: number,
   interaction: number,
   notification: number,
-  lastSeen: number
+  lastSeen: number,
+  blockList: number
 };
 
 export type StoragePathsType = {
@@ -97,4 +98,9 @@ export type ErrorsType = {
   UPDATE_FCM_TOKEN: string,
   ASSET_UPLOAD: string,
   EDIT_POST: string
+};
+
+export type AuthDefaultsType = {
+  avatar: string,
+  name: string
 };

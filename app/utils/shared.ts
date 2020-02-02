@@ -143,7 +143,6 @@ export const searchQueryFilter = (array, userId: string, query: string, ) =>
 
 export const sortMessageAscendingTime = array =>
   [...array].sort((a, b) => {
-
     const [lastMessageA] = a.messages;
     const [lastMessageB] = b.messages;
 
@@ -160,8 +159,5 @@ export const computeUnreadMessages = (chats, userId: string) =>
   }).length;
 
 export const sortPostsAscendingTime = array =>
-  [...array].sort((a, b) => {
-
-    // @ts-ignore
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
+  // @ts-ignore
+  [...array].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

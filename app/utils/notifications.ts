@@ -59,7 +59,7 @@ export const noPermissionNotification = () => showMessage({
   duration: 4000
 });
 
-export const longPressDeleteNotification = (onLongPress) => showMessage({
+export const longPressDeleteNotification = onLongPress => showMessage({
   message: 'Long press this notification to delete',
   icon: 'danger',
   type: 'danger',
@@ -96,4 +96,21 @@ export const postDeletedNotification = () => showMessage({
   type: 'info',
   backgroundColor: ThemeStatic.accent,
   duration: 2000
+});
+
+export const userBlockedNotification = (handle: string = 'User') => showMessage({
+  message: `${handle} has been blocked, please refresh your feed`,
+  icon: 'info',
+  type: 'info',
+  backgroundColor: ThemeStatic.accent,
+  duration: 4000
+});
+
+export const longPressUnblockNotification = (onLongPress, handle) => showMessage({
+  message: `Long press this notification to unblock ${handle}`,
+  icon: 'danger',
+  type: 'danger',
+  duration: 4000,
+  backgroundColor: ThemeStatic.delete,
+  onLongPress
 });

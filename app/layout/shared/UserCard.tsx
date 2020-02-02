@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { useNavigation } from 'react-navigation-hooks';
+import { Routes } from '../../constants';
 import { AppContext } from '../../context';
 import { Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
-import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../constants';
 import NativeImage from '../misc/NativeImage';
 
 const { FontWeights, FontSizes } = Typography;
