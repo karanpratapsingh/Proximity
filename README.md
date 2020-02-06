@@ -67,7 +67,7 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 * Dark Mode :waxing_crescent_moon:
 * Block users :no_good:
 * Report post :triangular_flag_on_post:
-* Stories (coming soon)
+* Stories (coming soon) 
 
 
 **:paperclip: Notes:** 
