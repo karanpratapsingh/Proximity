@@ -43,9 +43,9 @@ Earlier this year I picked up GraphQL and for a few months I was thinking about 
 
 Recently I was getting a lot into System Design and scalability stuff so I thought about implementing the classic "Instagram Clone" template but then immediately thought about the chat app I wanted to do so why not combine it and make it functional?
 
-Hence, I decided to design and implement Proximity an open source social media as a hobby project in my free time
+Hence, I decided to design and implement Proximity an open-source social media as a hobby project in my free time
 
-I decided to open source it because new comers to React Native might find it helpful
+I decided to open source it because newcomers to React Native might find it helpful
 
 PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is not perfect but I'm still improving it 😄
 
@@ -54,7 +54,7 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 <br />
 
 <p>
-  <img align="left" width="70px"  style="margin: 0px 20px 0px 0px;" src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
+  <img align="left" width="90px"  style="margin: 0px 20px 0px 0px;" src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
   <p  style="margin: 0">  
     Built and maintained with 🌮 by <a href="https://karanpratapsingh.web.app">Karan</a>
 
@@ -116,4 +116,3 @@ Want to contribute to this project? Contributions are now open for bug fixes.
 ## :lock_with_ink_pen: License 
 
 * See [LICENSE](/LICENSE)
-
