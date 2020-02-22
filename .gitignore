@@ -59,11 +59,11 @@ buck-out/
 /ios/Pods/
 
 # Firebase
-/android/app/google-services.json
-/ios/GoogleService-Info.plist
+# /android/app/google-services.json
+# /ios/GoogleService-Info.plist
 
 # Config
-/ios/Config.xcconfig
+# /ios/Config.xcconfig
 
 # App
-/app/config/index.ts
+# /app/config/index.ts
