@@ -29,9 +29,9 @@
 
 <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
 
-<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
-
 <img src="https://img.shields.io/twitter/follow/karan_6864.svg?style=social" />
+
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
 
 </p>
 
@@ -59,10 +59,9 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
     Built and maintained with 🌮 by <a href="https://karanpratapsingh.web.app">Karan</a>
 
   </p>
-  <p style="margin: 0px 10px; ">  
+  <p style="margin: 0px 10px;">  
     <a href="mailto:karan.pratapsingh686@gmail.com">💼 Hire Me</a> | 
     <a href="https://www.paypal.me/karanpratapsingh">🍺 Donate</a> 
-
   </p>
 </p> 
 
@@ -70,6 +69,7 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 
 ## :rocket: Technologies Used
 <br />
+
  <img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/typescript-logo.png"><img width="64px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/react-logo.png"><img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/nodejs-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/apollo-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/graphql-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/prisma-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/firebase-logo.png"><img width="50px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/app-center-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/heroku-logo.png">
 <br/>
 <br />
