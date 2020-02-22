@@ -14,7 +14,7 @@
   </p>
 </p>
 <p align="center">
-<a href="https://testflight.apple.com/join/HTRcfjBw">
+<a href="https://apps.apple.com/us/app/proximity-app/id1489041006">
     <img width="160px" style="margin: 10px 10px;" src="https://proximity-mobile.firebaseapp.com/images/download/download-app-store.png">
 </a>
 <a href="https://play.google.com/store/apps/details?id=com.proximity.app">
