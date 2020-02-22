@@ -28,6 +28,11 @@
 <img src="https://build.appcenter.ms/v0.1/apps/85fe31ae-1f83-4aa3-a27e-8f2c762bec9e/branches/master/badge" />
 
 <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
+
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
+
+<img src="https://img.shields.io/twitter/follow/karan_6864.svg?style=social" />
+
 </p>
 
 <br />
@@ -46,12 +51,27 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 
 **Please leave a :star: as motivation if you liked the idea :smile:**
 
+<br />
+
+<p>
+  <img align="left" width="70px"  style="margin: 10px 20px 0px 0px; " src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
+  <p  style="margin: 0">  
+    Built and maintained with 🌮 by <a href="https://karanpratapsingh.web.app">Karan</a>
+
+  </p>
+  <p style="margin: 5px 10px; ">  
+    <a href="mailto:karan.pratapsingh686@gmail.com">💼 Hire Me</a> | 
+    <a href="https://www.paypal.me/karanpratapsingh">🍺 Donate</a> 
+
+  </p>
+</p> 
+
+<br />
 
 ## :rocket: Technologies Used
 <br />
 
-
- <img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/typescript-logo.png"><img width="64px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/react-logo.png"><img width="54px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/nodejs-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/apollo-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/graphql-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/prisma-logo.png"><img width="44px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/firebase-logo.png"><img width="50px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/app-center-logo.png"><img width="60px" style="margin: 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/heroku-logo.png">
+ <img width="75px" style="margin: 10px 16px 10px 12px;" src="https://proximity-mobile.web.app/images/technologies/typescript-logo.png"><img width="85px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/react-logo.png"><img width="80px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/nodejs-logo.png"><img width="80px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/apollo-logo.png"><img width="85px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/graphql-logo.png"><img width="60px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/prisma-logo.png"><img width="60px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/firebase-logo.png"><img width="72px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/app-center-logo.png"><img width="80px" style="margin: 10px 16px;" src="https://proximity-mobile.web.app/images/technologies/heroku-logo.png">
 <br/>
 <br />
 
@@ -92,26 +112,9 @@ Also, If you're interested in how I implemented the system design then feel free
 <br />
 
 ## :raised_hands: Contributing:
-Want to contribute to this project? Please contact me if you're interested as only contributors are allowed to have sensitive keys for development which I've omitted due to use privacy risks
+Want to contribute to this project? Contributions are now open for bug fixes.
 
 ## :lock_with_ink_pen: License 
 
 * See [LICENSE](/LICENSE)
-
----
-
-<p>
-  <img align="left" width="70px"  style="margin: 0px 20px 0px 0px; " src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
-  <p  style="margin: 0">  
-    Built and maintained with 🌮 by <a href="https://karanpratapsingh.herokuapp.com">Karan</a>
-
-  </p>
-  <p style="margin: 0px 10px; ">  
-    <a href="mailto:karan.pratapsingh686@gmail.com">💼 Hire Me</a> | 
-    <a href="https://www.paypal.me/karanpratapsingh">🍺 Donate</a> 
-
-  </p>
-</p>
-
----
 
