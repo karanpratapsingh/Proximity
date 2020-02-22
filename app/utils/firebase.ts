@@ -36,14 +36,10 @@ export const uploadToStorage = (asset: string, uri: string, userId: string) => {
   const [type] = getMediaType(uri);
   let storageRef;
 
-  if (__DEV__) {
-    storageRef = `development/${generateUUID()}.${type}`;
-  } else {
-    if (asset === Asset.avatar) {
-      storageRef = `${StoragePaths.avatars}/${userId}.${type}`;
-    } else if (asset === Asset.post) {
-      storageRef = `${StoragePaths.posts}/${userId}/${generateUUID()}.${type}`;
-    }
+  if (asset === Asset.avatar) {
+    storageRef = `${StoragePaths.avatars}/${userId}.${type}`;
+  } else if (asset === Asset.post) {
+    storageRef = `${StoragePaths.posts}/${userId}/${generateUUID()}.${type}`;
   }
 
   return storage
