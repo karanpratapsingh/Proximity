@@ -54,7 +54,7 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 <br />
 
 <p>
-  <img align="left" width="70px"  style="margin: 10px 20px 0px 0px; " src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
+  <img align="left" width="70px"  style="margin: 0px 20px 0px 0px;" src="https://proximity-mobile.web.app/images/proximity-logo-round.png"> 
   <p  style="margin: 0">  
     Built and maintained with 🌮 by <a href="https://karanpratapsingh.web.app">Karan</a>
 
