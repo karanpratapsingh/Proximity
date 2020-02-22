@@ -781,6 +781,7 @@
 				DEVELOPMENT_TEAM = 2Y8SR3M2XA;
 				INFOPLIST_FILE = Proximity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -805,6 +806,7 @@
 				DEVELOPMENT_TEAM = 2Y8SR3M2XA;
 				INFOPLIST_FILE = Proximity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

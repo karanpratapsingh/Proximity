@@ -18,7 +18,7 @@ import { ThemeStatic, ThemeVariant, Typography } from '../../theme';
 import { ThemeColors } from '../../types/theme';
 import { handleLoginError, signOut } from '../../utils/authentication';
 import { crashlytics } from '../../utils/firebase';
-import { welcomeNotification } from '../../utils/notifications';
+import { welcomeNotification, somethingWentWrongErrorNotification } from '../../utils/notifications';
 import { loadToken, saveToken } from '../../utils/storage';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet';
 
@@ -137,7 +137,7 @@ const LoginScreen: React.FC = () => {
         await processSignIn(user, AuthDefaults.avatar, name, generatedEmail);
       }
     } catch (error) {
-      alert(JSON.stringify(error, null, 2));
+      somethingWentWrongErrorNotification();
       setAppleLoading(false);
       crashlytics.recordCustomError(Errors.SIGN_IN, error);
     }

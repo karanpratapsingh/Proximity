@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  Proximity
+//
+//  Created by Vertigo 101 on 30/11/19.
+//  Copyright © 2019 Facebook. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+GOOGLE_REVERSED_CLIENT_ID=com.googleusercontent.apps.649469906394-cunn0sogttuea6fhvmekebm85h70rqeq
