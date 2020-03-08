@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
-import { AppContext } from '../../context';
-import { PostDimensions } from '../../constants';
+import { AppContext } from '@app/context';
+import { PostDimensions } from '@app/constants';
 
 interface ProfileScreenPlaceholderProps {
   viewMode?: boolean

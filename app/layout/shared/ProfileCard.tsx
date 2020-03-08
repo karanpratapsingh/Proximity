@@ -1,11 +1,11 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import { ThemeColors } from '../../types/theme';
-import { Typography } from '../../theme';
-import { AppContext } from '../../context';
-import { parseConnectionsCount } from '../../utils/shared';
+import { ThemeColors } from '@app/types/theme';
+import { Typography } from '@app/theme';
+import { AppContext } from '@app/context';
+import { parseConnectionsCount } from '@app/utils/shared';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { ThemeStatic } from '../../theme';
+import { ThemeStatic } from '@app/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

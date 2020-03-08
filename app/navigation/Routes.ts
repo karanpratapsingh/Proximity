@@ -9,7 +9,7 @@ import {
   ConversationScreen,
   PostViewScreen,
   LoginScreen
-} from '../screens';
+} from '@app/screens';
 
 export const TabBarRoutes = {
   HomeScreen,

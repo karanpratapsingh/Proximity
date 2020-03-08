@@ -1,7 +1,6 @@
-import { messaging } from './firebase';
+import { messaging, crashlytics } from './firebase';
 import { StorageErrorTypes, removeToken } from './storage';
-import { crashlytics } from '../utils/firebase';
-import { Errors } from '../constants';
+import { Errors } from '@app/constants';
 
 export const handleLoginError = async (errorType: string) => {
   switch (errorType) {

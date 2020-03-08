@@ -1,5 +1,5 @@
 import { showMessage } from 'react-native-flash-message';
-import { ThemeStatic } from '../theme';
+import { ThemeStatic } from '@app/theme';
 
 export const welcomeNotification = () => showMessage({
   message: 'Welcome to Proximity',

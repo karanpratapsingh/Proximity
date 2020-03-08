@@ -3,15 +3,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes, Asset, Errors } from '../../../constants';
-import { AppContext } from '../../../context';
-import { MUTATION_UPDATE_USER } from '../../../graphql/mutation';
-import { QUERY_HANDLE_AVAILABLE } from '../../../graphql/query';
-import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '../../../layout';
-import { ThemeStatic, HandleAvailableColor } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { getImageFromLibrary } from '../../../utils/shared';
-import { uploadToStorage, crashlytics } from '../../../utils/firebase';
+import { IconSizes, Asset, Errors } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_UPDATE_USER } from '@app/graphql/mutation';
+import { QUERY_HANDLE_AVAILABLE } from '@app/graphql/query';
+import { BottomSheetHeader, Button, FormInput, LoadingIndicator } from '@app/layout';
+import { ThemeStatic, HandleAvailableColor } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { getImageFromLibrary } from '@app/utils/shared';
+import { uploadToStorage, crashlytics } from '@app/utils/firebase';
 import { inputLimitErrorNotification, showErrorNotification, uploadErrorNotification, somethingWentWrongErrorNotification } from '../../../utils/notifications';
 
 interface EditProfileBottomSheetProps {

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../constants';
-import { AppContext } from '../../context';
-import { ThemeColors } from '../../types/theme';
-import { Dimensions } from '../../types/constants';
+import { Routes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { ThemeColors } from '@app/types/theme';
+import { Dimensions } from '@app/types/constants';
 import NativeImage from '../misc/NativeImage';
 
 interface PostThumbnailProps {

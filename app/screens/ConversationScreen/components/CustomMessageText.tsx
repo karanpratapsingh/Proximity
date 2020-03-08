@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MessageText } from 'react-native-gifted-chat';
-import { Typography } from '../../../theme';
-import { ThemeStatic } from '../../../theme';
+import { Typography, ThemeStatic } from '@app/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

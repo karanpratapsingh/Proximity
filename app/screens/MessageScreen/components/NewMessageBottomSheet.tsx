@@ -3,14 +3,14 @@ import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import EmptyConnectionsBanner from '../../../../assets/svg/empty-connections.svg';
+import EmptyConnectionsBanner from '@app/../assets/svg/empty-connections.svg';
 
-import { AppContext } from '../../../context';
-import { BottomSheetHeader, SvgBanner, ConnectionsPlaceholder, UserCard } from '../../../layout';
-import { ThemeColors } from '../../../types/theme';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader, SvgBanner, ConnectionsPlaceholder, UserCard } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
 import { useQuery } from '@apollo/react-hooks';
-import { QUERY_USER_CONNECTIONS } from '../../../graphql/query';
-import { Connections } from '../../../constants';
+import { QUERY_USER_CONNECTIONS } from '@app/graphql/query';
+import { Connections } from '@app/constants';
 
 interface NewMessageBottomSheetProps {
   ref: React.Ref<any>,

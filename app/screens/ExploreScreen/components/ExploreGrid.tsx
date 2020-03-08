@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '../../../layout';
+import { ListEmptyComponent } from '@app/layout';
 import ExplorePostCard from './ExplorePostCard';
-import { ExplorePost } from '../../../types/screens';
+import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 interface ExploreGridProps {

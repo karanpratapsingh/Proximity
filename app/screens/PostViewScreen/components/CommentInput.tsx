@@ -3,14 +3,14 @@ import React, { useContext, useState } from 'react';
 import { Keyboard, Platform, StyleSheet, TextInput, View } from 'react-native';
 import { ifIphoneX } from 'react-native-iphone-x-helper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes } from '../../../constants';
-import { AppContext } from '../../../context';
-import { MUTATION_ADD_COMMENT } from '../../../graphql/mutation';
-import { IconButton, LoadingIndicator, NativeImage } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { inputLimitErrorNotification } from '../../../utils/notifications';
-import { createAsyncDelay } from '../../../utils/shared';
+import { IconSizes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_ADD_COMMENT } from '@app/graphql/mutation';
+import { IconButton, LoadingIndicator, NativeImage } from '@app/layout';
+import { ThemeStatic, Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { inputLimitErrorNotification } from '@app/utils/notifications';
+import { createAsyncDelay } from '@app/utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 

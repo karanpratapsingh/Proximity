@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Typography } from '../../theme';
-import { AppContext } from '../../context';
-import { ThemeColors } from '../../types/theme';
+import { Typography } from '@app/theme';
+import { AppContext } from '@app/context';
+import { ThemeColors } from '@app/types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

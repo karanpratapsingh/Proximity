@@ -1,6 +1,6 @@
 import ImagePicker from 'react-native-image-crop-picker';
-import { ThemeStatic } from '../theme';
-import { Timeouts } from '../constants';
+import { ThemeStatic } from '@app/theme';
+import { Timeouts } from '@app/constants';
 import { noPermissionNotification } from './notifications';
 
 export const createAsyncDelay = (duration: number) => {

@@ -2,16 +2,16 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { FollowInteraction, IconSizes, Routes, PollIntervals, Errors } from '../../../constants';
-import { AppContext } from '../../../context';
-import client from '../../../graphql/client';
-import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '../../../graphql/mutation';
-import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '../../../graphql/query';
-import { LoadingIndicator } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { crashlytics } from '../../../utils/firebase';
-import { tryAgainLaterNotification } from '../../../utils/notifications';
+import { FollowInteraction, IconSizes, Routes, PollIntervals, Errors } from '@app/constants';
+import { AppContext } from '@app/context';
+import client from '@app/graphql/client';
+import { MUTATION_CREATE_TEMPORARY_CHAT, MUTATION_UPDATE_FOLLOWING } from '@app/graphql/mutation';
+import { QUERY_CHAT_EXISTS, QUERY_DOES_FOLLOW } from '@app/graphql/query';
+import { LoadingIndicator } from '@app/layout';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { crashlytics } from '@app/utils/firebase';
+import { tryAgainLaterNotification } from '@app/utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 

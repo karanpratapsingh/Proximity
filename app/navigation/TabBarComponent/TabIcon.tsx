@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import { IconSizes } from '../../constants';
-import { AppContext } from '../../context';
+import { IconSizes } from '@app/constants';
+import { AppContext } from '@app/context';
 
 const TabIcon = ({ route, isActive }) => {
   const { theme } = useContext(AppContext);

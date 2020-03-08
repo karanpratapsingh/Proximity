@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Shine, ShineOverlay } from 'rn-placeholder';
-import { AppContext } from '../../context';
-import { ThemeVariant } from '../../theme';
+import { AppContext } from '@app/context';
+import { ThemeVariant } from '@app/theme';
 
 const AnimationBackground = {
   light: '#DFDFDF',

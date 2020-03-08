@@ -1,8 +1,8 @@
 import React from 'react';
 import { Animated, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { IconSizes } from '../../constants';
-import { ThemeStatic } from '../../theme';
+import { IconSizes } from '@app/constants';
+import { ThemeStatic } from '@app/theme';
 
 interface DeleteCardRightActionsProps {
  progress: any,

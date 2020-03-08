@@ -3,12 +3,12 @@ import { Image, Linking, StyleSheet, Text, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import ProximityLogo from '../../../../assets/images/proximity-logo.png';
-import Config from '../../../config';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader, Button } from '../../../layout';
-import { ThemeStatic, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
+import ProximityLogo from '@app/assets/images/proximity-logo.png';
+import Config from '@app/config';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader, Button } from '@app/layout';
+import { ThemeStatic, Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 const { author: { url }, repository, version } = Config;

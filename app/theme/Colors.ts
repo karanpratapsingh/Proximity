@@ -3,7 +3,7 @@
  * This contains all the color config for the application
  */
 
-import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType, DynamicStatusBarType } from '../types/theme';
+import { HandleAvailableColorType, OnlineDotColorType, ThemeStaticType, ThemeType, ThemeVariantType, DynamicStatusBarType } from '@app/types/theme';
 
 export const ThemeVariant: ThemeVariantType = {
   light: 'light',

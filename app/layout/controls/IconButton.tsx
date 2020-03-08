@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { ThemeStatic, Typography } from '../../theme';
+import { ThemeStatic, Typography } from '@app/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

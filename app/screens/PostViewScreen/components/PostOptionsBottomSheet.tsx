@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader, Option } from '../../../layout';
-import { ThemeColors } from '../../../types/theme';
-import { postReportedNotification } from '../../../utils/notifications';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader, Option } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
+import { postReportedNotification } from '@app/utils/notifications';
 import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_REPORT_POST } from '../../../graphql/mutation';
-import { ThemeStatic } from '../../../theme';
+import { MUTATION_REPORT_POST } from '@app/graphql/mutation';
+import { ThemeStatic } from '@app/theme';
 
 interface PostOptionsBottomSheetProps {
   ref: React.Ref<any>,

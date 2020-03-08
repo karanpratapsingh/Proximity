@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import UploadSvg from '../../../../assets/svg/upload.svg';
-import { IconSizes, PostDimensions } from '../../../constants';
-import { IconButton } from '../../../layout';
-import SvgBanner from '../../../layout/misc/SvgBanner';
-import { ThemeStatic } from '../../../theme';
-import { getImageFromLibrary } from '../../../utils/shared';
+import UploadSvg from '@app/assets/svg/upload.svg';
+import { IconSizes, PostDimensions } from '@app/constants';
+import { IconButton } from '@app/layout';
+import SvgBanner from '@app/layout/misc/SvgBanner';
+import { ThemeStatic } from '@app/theme';
+import { getImageFromLibrary } from '@app/utils/shared';
 
 interface UploadBannerProps {
   pickedAsset: string,

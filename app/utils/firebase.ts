@@ -1,6 +1,6 @@
 import firebase from 'react-native-firebase';
 import { generateUUID } from './shared';
-import { Asset, StoragePaths, Errors } from '../constants';
+import { Asset, StoragePaths, Errors } from '@app/constants';
 import { Platform } from 'react-native';
 
 export const storage = firebase.storage();

@@ -3,14 +3,14 @@ import React, { useContext, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from 'react-navigation-hooks';
-import { Asset, IconSizes, Routes, Errors } from '../../constants';
-import { AppContext } from '../../context';
-import { MUTATION_CREATE_POST } from '../../graphql/mutation';
-import { Button, FormInput, Header } from '../../layout';
-import { ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types/theme';
-import { uploadToStorage, crashlytics } from '../../utils/firebase';
-import { inputLimitErrorNotification, noAssetInfoNotification, postUploadedNotification, uploadErrorNotification } from '../../utils/notifications';
+import { Asset, IconSizes, Routes, Errors } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_CREATE_POST } from '@app/graphql/mutation';
+import { Button, FormInput, Header } from '@app/layout';
+import { ThemeStatic } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { uploadToStorage, crashlytics } from '@app/utils/firebase';
+import { inputLimitErrorNotification, noAssetInfoNotification, postUploadedNotification, uploadErrorNotification } from '@app/utils/notifications';
 import UploadBanner from './components/UploadBanner';
 
 const UploadScreen: React.FC = () => {

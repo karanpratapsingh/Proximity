@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Keyboard, Platform, StyleProp, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from 'react-native';
 import posed from 'react-native-pose';
-import { AppContext } from '../../context';
-import { Typography } from '../../theme';
-import { ThemeColors } from '../../types/theme';
+import { AppContext } from '@app/context';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

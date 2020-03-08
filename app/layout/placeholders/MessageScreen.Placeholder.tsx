@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
 import PlaceholderAnimation from './PlaceholderAnimation';
-import { AppContext } from '../../context';
+import { AppContext } from '@app/context';
 
 const MessageScreenPlaceholder: React.FC = () => {
   const { theme } = useContext(AppContext);

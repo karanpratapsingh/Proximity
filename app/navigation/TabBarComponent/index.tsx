@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { ThemeColors } from '../../types/theme';
+import { ThemeColors } from '@app/types/theme';
 import TabIcon from './TabIcon';
 import { TabBarRoutes } from '../Routes';
-import { AppContext } from '../../context';
+import { AppContext } from '@app/context';
 
 const TabBarComponent = ({ navigation, ...data }) => {
   const { theme } = useContext(AppContext);

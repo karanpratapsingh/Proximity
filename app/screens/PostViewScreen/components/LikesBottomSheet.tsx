@@ -4,11 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import Modalize from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import EmptyLikesBanner from '../../../../assets/svg/empty-likes.svg';
-import { AppContext } from '../../../context';
-import { QUERY_LIKE_USERS } from '../../../graphql/query';
-import { BottomSheetHeader, ConnectionsPlaceholder, SvgBanner, UserCard } from '../../../layout';
-import { ThemeColors } from '../../../types/theme';
+import EmptyLikesBanner from '@app/assets/svg/empty-likes.svg';
+import { AppContext } from '@app/context';
+import { QUERY_LIKE_USERS } from '@app/graphql/query';
+import { BottomSheetHeader, ConnectionsPlaceholder, SvgBanner, UserCard } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
 
 interface LikesBottomSheetProps {
   ref: React.Ref<any>,

@@ -5,12 +5,12 @@ import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from 'react-navigation-hooks';
-import { IconSizes, Routes } from '../../../constants';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader, Option } from '../../../layout';
-import { ThemeStatic, ThemeVariant, Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { signOut } from '../../../utils/authentication';
+import { IconSizes, Routes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader, Option } from '@app/layout';
+import { ThemeStatic, ThemeVariant, Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { signOut } from '@app/utils/authentication';
 
 const { FontWeights, FontSizes } = Typography;
 

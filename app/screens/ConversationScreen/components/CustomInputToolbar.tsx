@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { InputToolbar } from 'react-native-gifted-chat';
-import { ThemeStatic } from '../../../theme';
+import { ThemeStatic } from '@app/theme';
 
 const CustomInputToolbar: React.FC = inputToolbarProps => (
   <InputToolbar

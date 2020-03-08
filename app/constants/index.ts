@@ -13,8 +13,8 @@ import {
   TimeoutsType,
   ErrorsType,
   AuthDefaultsType
-} from '../types/constants';
-
+} from '@app/types/constants';
+x
 export const Routes: RoutesType = {
   App: 'App',
   Auth: 'Auth',
