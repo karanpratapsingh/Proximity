@@ -15,38 +15,14 @@
     "baseUrl": ".",
     "noImplicitAny": false,
     "paths": {
-      "@app/config": [
-        "./app/config"
+      "*": [
+        "./app/*",
       ],
-      "@app/context": [
-        "./app/context"
+      "@app/*": [
+        "./app/*"
       ],
-      "@app/graphql": [
-        "./app/graphql"
-      ],
-      "@app/constants": [
-        "./app/constants"
-      ],
-      "@app/layout": [
-        "./app/layout"
-      ],
-      "@app/navigation": [
-        "./app/navigation"
-      ],
-      "@app/screens": [
-        "./app/screens"
-      ],
-      "@app/theme": [
-        "./app/theme"
-      ],
-      "@app/types": [
-        "./app/types"
-      ],
-      "@app/utils": [
-        "./app/utils"
-      ],
-      "@app/assets": [
-        "./assets"
+      "@app/assets/*": [
+        "./assets/*"
       ],
     },
   },
