@@ -6,6 +6,8 @@ import ExplorePostCard from './ExplorePostCard';
 import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 
+import MasonryList from 'react-native-masonry-list';
+
 interface ExploreGridProps {
   posts: ExplorePost[],
   onRefresh: () => void,
@@ -32,6 +34,12 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
 
   return (
     <View style={styles.container}>
+      {/* <MasonryList
+        images={posts}
+        imageContainerStyle={{ height: 100, width: 100 }}
+        listContainerStyle={{ flex: 1 }}
+        containerWidth={200}
+      /> */}
       <FlatGrid
         staticDimension={responsiveWidth(92)}
         refreshControl={refreshControl()}

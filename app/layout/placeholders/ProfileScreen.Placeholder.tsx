@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   postPlaceholder: {
-    borderRadius: 10
+    borderRadius: 5
   }
 });
 

@@ -30,7 +30,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     backgroundColor: theme.placeholder,
     overflow: 'hidden',
-    borderRadius: 10
+    borderRadius: 5
   },
   thumbnailImage: {
     flex: 1

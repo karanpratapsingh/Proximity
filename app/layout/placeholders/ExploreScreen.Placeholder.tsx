@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 7
   },
   postPlaceholder: {
-    borderRadius: 10
+    borderRadius: 5
   }
 });
 
