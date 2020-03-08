@@ -23,6 +23,10 @@ export const parseTimeElapsed = (utcTime: string) => {
   const minutesInMs = secondsInMs * 60;
   const hoursInMs = minutesInMs * 60;
   const daysInMs = hoursInMs * 24;
+  const weekInMs = daysInMs * 7;
+
+  const elapsedWeeks = parseInt(difference / weekInMs as any, 10);
+  difference = difference % weekInMs;
 
   const elapsedDays = parseInt(difference / daysInMs as any, 10);
   difference = difference % daysInMs;
@@ -35,7 +39,13 @@ export const parseTimeElapsed = (utcTime: string) => {
 
   let parsedTime = '...';
 
-  if (elapsedDays >= 1) {
+  if (elapsedWeeks >= 1) {
+    if (elapsedWeeks === 1) {
+      parsedTime = `${elapsedWeeks} week`;
+    } else {
+      parsedTime = `${elapsedWeeks} weeks`;
+    }
+  } else if (elapsedDays >= 1) {
     if (elapsedDays === 1) {
       parsedTime = `${elapsedDays} day`;
     } else {
