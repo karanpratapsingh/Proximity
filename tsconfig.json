@@ -5,12 +5,50 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["es6"],
+    "lib": [
+      "es6"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "noImplicitAny": false
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "paths": {
+      "@app/config/*": [
+        "./app/config/*"
+      ],
+      "@app/context/*": [
+        "./app/context/*"
+      ],
+      "@app/graphql/*": [
+        "./app/graphql/*"
+      ],
+      "@app/constants/*": [
+        "./app/constants/*"
+      ],
+      "@app/layout/*": [
+        "./app/layout/*"
+      ],
+      "@app/navigation/*": [
+        "./app/navigation/*"
+      ],
+      "@app/screens/*": [
+        "./app/screens/*"
+      ],
+      "@app/theme/*": [
+        "./app/theme/*"
+      ],
+      "@app/types/*": [
+        "./app/types/*"
+      ],
+      "@app/utils/*": [
+        "./app/utils/*"
+      ],
+      "@app/assets/*": [
+        "./assets/*"
+      ],
+    },
   },
   "exclude": [
     "node_modules",
