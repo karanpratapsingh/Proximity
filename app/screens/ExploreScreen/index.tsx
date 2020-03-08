@@ -1,11 +1,11 @@
 import { useLazyQuery } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import SearchUsersBanner from '../../../assets/svg/search-users.svg';
-import { AppContext } from '../../context';
-import { QUERY_POSTS, QUERY_SEARCH_USERS } from '../../graphql/query';
-import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBanner } from '../../layout';
-import { ThemeColors } from '../../types/theme';
+import SearchUsersBanner from '@app/assets/svg/search-users.svg';
+import { AppContext } from '@app/context';
+import { QUERY_POSTS, QUERY_SEARCH_USERS } from '@app/graphql/query';
+import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBanner } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
 
