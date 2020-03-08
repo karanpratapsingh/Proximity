@@ -43,7 +43,7 @@
         "./app/types"
       ],
       "@app/utils": [
-        "./app/utils/*"
+        "./app/utils"
       ],
       "@app/assets": [
         "./assets"

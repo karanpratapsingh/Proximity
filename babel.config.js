@@ -26,7 +26,7 @@ module.exports = {
           '@app/screens': './app/screens',
           '@app/theme': './app/theme',
           '@app/types': './app/types',
-          '@app/utils': './app/utils/*',
+          '@app/utils': './app/utils',
           '@app/assets': './assets',
         },
       },
