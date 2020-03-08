@@ -81,6 +81,7 @@
     "@react-native-community/eslint-config": "^0.0.3",
     "appcenter-cli": "^2.3.3",
     "babel-jest": "^24.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
     "react-native-svg-transformer": "^0.14.0",
