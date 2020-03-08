@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { IconSizes, Asset, Errors } from '@app/constants';
 import { AppContext } from '@app/context';

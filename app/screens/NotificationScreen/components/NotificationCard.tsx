@@ -18,7 +18,7 @@ interface NotificationCardPros {
   avatar: string,
   handle: string,
   resourceId: string,
-  type: any, // FIXME:
+  type: keyof typeof NotificationType,
   time: string
 };
 

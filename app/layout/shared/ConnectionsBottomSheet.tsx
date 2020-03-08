@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import BottomSheetHeader from '../headers/BottomSheetHeader';

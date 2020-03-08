@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import { AppContext } from '@app/context';
 import { BottomSheetHeader, Option } from '@app/layout';
 import { ThemeColors } from '@app/types/theme';

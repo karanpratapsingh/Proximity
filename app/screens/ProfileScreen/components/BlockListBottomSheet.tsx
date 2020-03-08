@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import EmptyBlockListBanner from '@app/assets/svg/empty-blocklist.svg';

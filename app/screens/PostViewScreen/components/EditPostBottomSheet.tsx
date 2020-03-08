@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import Feather from 'react-native-vector-icons/Feather';
 import { Errors, IconSizes } from '@app/constants';
 import { AppContext } from '@app/context';

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import Checkbox from 'react-native-modest-checkbox';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
