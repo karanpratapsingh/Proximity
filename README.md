@@ -110,6 +110,25 @@ Also, If you're interested in how I implemented the system design then feel free
 <img width="205px" src="https://proximity-mobile.web.app/images/screenshots/Dark/screenshot-9-Dark.png"><img width="205px" src="https://proximity-mobile.web.app/images/screenshots/Dark/screenshot-10-Dark.png"><img width="205px" src="https://proximity-mobile.web.app/images/screenshots/Dark/screenshot-11-Dark.png">
 <br />
 
+## :running: Running the project
+
+To run the project just use the following
+
+- Android
+```
+yarn && yarn android
+```
+
+- iOS
+```
+yarn && yarn cocoapods && yarn ios
+```
+
+Note: It is recommended to use yarn if you want to run this project as npm skips few
+dependencies. I am not sure why but this reported by many developers and fixed when they switched to yarn.
+
+But if the issue persists feel free to open an issue and I'll assist you with running the app.
+
 ## :raised_hands: Contributing:
 Want to contribute to this project? Contributions are now open for bug fixes.
 
