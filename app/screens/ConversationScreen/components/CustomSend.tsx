@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Send } from 'react-native-gifted-chat';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { IconSizes } from '../../../constants';
-import { ThemeStatic } from '../../../theme';
+import { IconSizes } from '@app/constants';
+import { ThemeStatic } from '@app/theme';
 
 const CustomSend: React.FC = sendProps => (
   <Send

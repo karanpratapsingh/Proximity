@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import BottomSheetHeader from '../headers/BottomSheetHeader';
 import SvgBanner from '../misc/SvgBanner';
-import EmptyConnectionsBanner from '../../../assets/svg/empty-connections.svg';
-import { Connections } from '../../constants';
-import { AppContext } from '../../context';
-import { ThemeColors } from '../../types/theme';
+import EmptyConnectionsBanner from '@app/assets/svg/empty-connections.svg';
+import { Connections } from '@app/constants';
+import { AppContext } from '@app/context';
+import { ThemeColors } from '@app/types/theme';
 import UserCard from './UserCard';
-import { Connection } from '../../types/screens';
+import { Connection } from '@app/types/screens';
 
 interface ConnectionsBottomSheetProps {
   ref: React.Ref<any>,

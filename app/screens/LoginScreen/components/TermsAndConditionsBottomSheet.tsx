@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import Modalize from 'react-native-modalize';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
+import { Modalize } from 'react-native-modalize';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader } from '@app/layout';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const { FontWeights, FontSizes } = Typography;

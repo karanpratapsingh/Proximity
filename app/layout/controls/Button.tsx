@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import LoadingIndicator from '../misc/LoadingIndicator';
-import { ThemeStatic, Typography } from '../../theme';
+import { ThemeStatic, Typography } from '@app/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

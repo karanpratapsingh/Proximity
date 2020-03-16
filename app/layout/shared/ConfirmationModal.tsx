@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
-import { Typography } from '../../theme';
-import { AppContext } from '../../context';
-import { ThemeColors } from '../../types/theme';
+import { Typography } from '@app/theme';
+import { AppContext } from '@app/context';
+import { ThemeColors } from '@app/types/theme';
 import Button from '../controls/Button';
 
 const { FontWeights, FontSizes } = Typography;

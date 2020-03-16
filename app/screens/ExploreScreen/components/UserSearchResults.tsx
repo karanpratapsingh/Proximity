@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '../../../layout';
-import { UserCard } from '../../../layout';
-import { AppContext } from '../../../context';
-import { SearchResult } from '../../../types/screens';
+import { ListEmptyComponent } from '@app/layout';
+import { UserCard } from '@app/layout';
+import { AppContext } from '@app/context';
+import { SearchResult } from '@app/types/screens';
 
 interface UserSearchResultsProps {
   searchResults: SearchResult[]

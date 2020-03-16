@@ -1,16 +1,16 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { useContext, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import Feather from 'react-native-vector-icons/Feather';
-import { Errors, IconSizes } from '../../../constants';
-import { AppContext } from '../../../context';
-import { MUTATION_EDIT_POST } from '../../../graphql/mutation';
-import { BottomSheetHeader, Button, FormInput } from '../../../layout';
-import { ThemeStatic } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { crashlytics } from '../../../utils/firebase';
-import { postUpdatedNotification } from '../../../utils/notifications';
+import { Errors, IconSizes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_EDIT_POST } from '@app/graphql/mutation';
+import { BottomSheetHeader, Button, FormInput } from '@app/layout';
+import { ThemeStatic } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { crashlytics } from '@app/utils/firebase';
+import { postUpdatedNotification } from '@app/utils/notifications';
 
 interface EditPostBottomSheetProps {
   ref: React.Ref<any>,

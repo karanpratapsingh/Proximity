@@ -2,17 +2,17 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import React, { useContext, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import Modalize from 'react-native-modalize';
+import { Modalize } from 'react-native-modalize';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import EmptyBlockListBanner from '../../../../assets/svg/empty-blocklist.svg';
-import { AppContext } from '../../../context';
-import { MUTATION_UNBLOCK_USER } from '../../../graphql/mutation';
-import { QUERY_BLOCKED_USERS } from '../../../graphql/query';
-import { BottomSheetHeader, ConnectionsPlaceholder, DeleteCardRightActions, SvgBanner, UserCard } from '../../../layout';
-import { ThemeColors } from '../../../types/theme';
-import { longPressUnblockNotification } from '../../../utils/notifications';
-import { PollIntervals } from '../../../constants';
+import EmptyBlockListBanner from '@app/assets/svg/empty-blocklist.svg';
+import { AppContext } from '@app/context';
+import { MUTATION_UNBLOCK_USER } from '@app/graphql/mutation';
+import { QUERY_BLOCKED_USERS } from '@app/graphql/query';
+import { BottomSheetHeader, ConnectionsPlaceholder, DeleteCardRightActions, SvgBanner, UserCard } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
+import { longPressUnblockNotification } from '@app/utils/notifications';
+import { PollIntervals } from '@app/constants';
 
 interface BlockListBottomSheetProps {
   ref: React.Ref<any>,

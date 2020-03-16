@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Bubble } from 'react-native-gifted-chat';
-import { ThemeStatic } from '../../../theme';
+import { ThemeStatic } from '@app/theme';
 import posed, { Transition } from 'react-native-pose';
 
 const TransitionBubble = posed.View({

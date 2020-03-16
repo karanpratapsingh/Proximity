@@ -1,7 +1,7 @@
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { IconSizes } from '../../../constants';
-import { ThemeStatic } from '../../../theme';
+import { IconSizes } from '@app/constants';
+import { ThemeStatic } from '@app/theme';
 
 const CustomScrollToBottom = () => <Entypo
   name='chevron-down'

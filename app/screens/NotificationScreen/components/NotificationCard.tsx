@@ -3,13 +3,13 @@ import React, { useContext, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from 'react-navigation-hooks';
-import { NotificationText, NotificationType, Routes } from '../../../constants';
-import { AppContext } from '../../../context';
-import { MUTATION_DELETE_NOTIFICATION } from '../../../graphql/mutation';
-import { DeleteCardRightActions, NativeImage } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { parseTimeElapsed } from '../../../utils/shared';
+import { NotificationText, NotificationType, Routes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_DELETE_NOTIFICATION } from '@app/graphql/mutation';
+import { DeleteCardRightActions, NativeImage } from '@app/layout';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { parseTimeElapsed } from '@app/utils/shared';
 
 const { FontWeights, FontSizes } = Typography;
 
@@ -18,7 +18,7 @@ interface NotificationCardPros {
   avatar: string,
   handle: string,
   resourceId: string,
-  type: any, // FIXME:
+  type: keyof typeof NotificationType,
   time: string
 };
 

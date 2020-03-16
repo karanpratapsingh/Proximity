@@ -5,12 +5,26 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["es6"],
+    "lib": [
+      "es6"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "noImplicitAny": false
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "paths": {
+      "*": [
+        "./app/*",
+      ],
+      "@app/*": [
+        "./app/*"
+      ],
+      "@app/assets/*": [
+        "./assets/*"
+      ],
+    },
   },
   "exclude": [
     "node_modules",

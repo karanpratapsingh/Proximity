@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '../../../layout';
+import { ListEmptyComponent } from '@app/layout';
 import ExplorePostCard from './ExplorePostCard';
-import { ExplorePost } from '../../../types/screens';
+import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+
+import MasonryList from 'react-native-masonry-list';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
@@ -32,6 +34,12 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
 
   return (
     <View style={styles.container}>
+      {/* <MasonryList
+        images={posts}
+        imageContainerStyle={{ height: 100, width: 100 }}
+        listContainerStyle={{ flex: 1 }}
+        containerWidth={200}
+      /> */}
       <FlatGrid
         staticDimension={responsiveWidth(92)}
         refreshControl={refreshControl()}

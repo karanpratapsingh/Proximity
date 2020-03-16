@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { IconSizes } from '../../constants';
-import { ThemeStatic } from '../../theme';
+import { IconSizes } from '@app/constants';
+import { ThemeStatic } from '@app/theme';
 import LoadingIndicator from '../misc/LoadingIndicator';
 
 const ConversationScreenPlaceholder = () => (

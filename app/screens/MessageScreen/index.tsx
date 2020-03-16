@@ -3,22 +3,22 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import EmptyMessages from '../../../assets/svg/empty-messages.svg';
-import { PollIntervals, IconSizes, Routes, Errors } from '../../constants';
-import { AppContext } from '../../context';
-import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '../../graphql/query';
-import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '../../layout';
-import { ThemeColors } from '../../types/theme';
-import { filterChatParticipants, isUserOnline, searchQueryFilter, sortMessageAscendingTime } from '../../utils/shared';
+import EmptyMessages from '@app/assets/svg/empty-messages.svg';
+import { PollIntervals, IconSizes, Routes, Errors } from '@app/constants';
+import { AppContext } from '@app/context';
+import { QUERY_CHATS, QUERY_CHAT_EXISTS } from '@app/graphql/query';
+import { Header, MessageScreenPlaceholder, SearchBar, SvgBanner, IconButton } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
+import { filterChatParticipants, isUserOnline, searchQueryFilter, sortMessageAscendingTime } from '@app/utils/shared';
 import MessageCard from './components/MessageCard';
 import NewMessageBottomSheet from './components/NewMessageBottomSheet';
 
 import Entypo from 'react-native-vector-icons/Entypo';
-import client from '../../graphql/client';
-import { MUTATION_CREATE_TEMPORARY_CHAT } from '../../graphql/mutation';
+import client from '@app/graphql/client';
+import { MUTATION_CREATE_TEMPORARY_CHAT } from '@app/graphql/mutation';
 import { useNavigation } from 'react-navigation-hooks';
-import { crashlytics } from '../../utils/firebase';
-import { tryAgainLaterNotification } from '../../utils/notifications';
+import { crashlytics } from '@app/utils/firebase';
+import { tryAgainLaterNotification } from '@app/utils/notifications';
 
 const MessageScreen: React.FC = () => {
 

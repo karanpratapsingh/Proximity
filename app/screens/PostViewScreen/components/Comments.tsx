@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, FlatList } from 'react-native';
-import { AppContext } from '../../../context';
-import { ListEmptyComponent } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
+import { AppContext } from '@app/context';
+import { ListEmptyComponent } from '@app/layout';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 import CommentCard from './CommentCard';
-import { Comment } from '../../../types/screens';
+import { Comment } from '@app/types/screens';
 
 const { FontWeights, FontSizes } = Typography;
 

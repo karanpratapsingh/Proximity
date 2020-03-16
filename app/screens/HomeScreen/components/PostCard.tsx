@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { NativeImage } from '../../../layout';
-import { Typography, ThemeStatic } from '../../../theme';
+import { NativeImage } from '@app/layout';
+import { Typography, ThemeStatic } from '@app/theme';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes, PostDimensions, IconSizes } from '../../../constants';
-import { parseTimeElapsed, parseLikes } from '../../../utils/shared';
+import { Routes, PostDimensions, IconSizes } from '@app/constants';
+import { parseTimeElapsed, parseLikes } from '@app/utils/shared';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { AppContext } from '../../../context';
+import { AppContext } from '@app/context';
 
 const { FontWeights, FontSizes } = Typography;
 

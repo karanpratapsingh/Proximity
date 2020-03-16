@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { NativeImage } from '../../../layout';
+import { NativeImage } from '@app/layout';
 
 const ChatHeaderAvatar = ({ avatar, onPress }) => (
   <TouchableOpacity style={styles.container} activeOpacity={0.90} onPress={onPress}>

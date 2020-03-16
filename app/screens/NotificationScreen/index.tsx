@@ -3,12 +3,12 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
-import EmptyNotifications from '../../../assets/svg/empty-notifications.svg';
-import { PollIntervals } from '../../constants';
-import { AppContext } from '../../context';
-import { QUERY_NOTIFICATION } from '../../graphql/query';
-import { Header, NotificationScreenPlaceholder, SvgBanner } from '../../layout';
-import { ThemeColors } from '../../types/theme';
+import EmptyNotifications from '@app/assets/svg/empty-notifications.svg';
+import { PollIntervals } from '@app/constants';
+import { AppContext } from '@app/context';
+import { QUERY_NOTIFICATION } from '@app/graphql/query';
+import { Header, NotificationScreenPlaceholder, SvgBanner } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
 import NotificationCard from './components/NotificationCard';
 
 const NotificationScreen: React.FC = () => {

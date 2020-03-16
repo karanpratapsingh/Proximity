@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import Config from '../../config';
+import Config from '@app/config';
 
 const httpLink = new HttpLink({ uri: Config.url.https });
 

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes, PostDimensions } from '../../../constants';
-import { NativeImage } from '../../../layout';
-import { AppContext } from '../../../context';
-import { ThemeColors } from '../../../types/theme';
+import { Routes, PostDimensions } from '@app/constants';
+import { NativeImage } from '@app/layout';
+import { AppContext } from '@app/context';
+import { ThemeColors } from '@app/types/theme';
 
 interface ExplorePostCardProps {
   postId: string,
@@ -31,7 +31,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     ...PostDimensions.Small,
     overflow: 'hidden',
-    borderRadius: 10
+    borderRadius: 5
   },
   postImage: {
     flex: 1,

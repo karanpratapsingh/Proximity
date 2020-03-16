@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { IconSizes, PostDimensions } from '../../../constants';
-import { ThemeStatic } from '../../../theme';
+import { IconSizes, PostDimensions } from '@app/constants';
+import { ThemeStatic } from '@app/theme';
 
 const AnimationValues = {
   opacity: { initial: 0, final: 1 },

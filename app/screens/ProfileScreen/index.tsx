@@ -4,16 +4,16 @@ import { StyleSheet, View } from 'react-native';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { Connections, IconSizes, PollIntervals, PostDimensions } from '../../constants';
-import { AppContext } from '../../context';
-import { QUERY_USER } from '../../graphql/query';
-import { ConnectionsBottomSheet, Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
-import { ThemeColors } from '../../types/theme';
+import { Connections, IconSizes, PollIntervals, PostDimensions } from '@app/constants';
+import { AppContext } from '@app/context';
+import { QUERY_USER } from '@app/graphql/query';
+import { ConnectionsBottomSheet, Header, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
 import AboutBottomSheet from './components/AboutBottomSheet';
 import EditProfileBottomSheet from './components/EditProfileBottomSheet';
 import SettingsBottomSheet from './components/SettingsBottomSheet';
 import BlockListBottomSheet from './components/BlockListBottomSheet';
-import { sortPostsAscendingTime } from '../../utils/shared';
+import { sortPostsAscendingTime } from '@app/utils/shared';
 
 const ProfileScreen: React.FC = () => {
 

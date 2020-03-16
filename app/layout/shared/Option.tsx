@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { IconSizes } from '../../constants';
-import { AppContext } from '../../context';
-import { Typography } from '../../theme';
-import { ThemeColors } from '../../types/theme';
+import { IconSizes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 
 const { FontWeights, FontSizes } = Typography;
 

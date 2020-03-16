@@ -5,17 +5,17 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks';
-import { Connections, IconSizes, PollIntervals, PostDimensions } from '../../constants';
-import { AppContext } from '../../context';
-import { QUERY_USER } from '../../graphql/query';
-import { ConfirmationModal, ConnectionsBottomSheet, GoBackHeader, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '../../layout';
-import { ThemeStatic } from '../../theme';
-import { ThemeColors } from '../../types/theme';
-import { userBlockedNotification } from '../../utils/notifications';
-import { sortPostsAscendingTime } from '../../utils/shared';
+import { Connections, IconSizes, PollIntervals, PostDimensions } from '@app/constants';
+import { AppContext } from '@app/context';
+import { QUERY_USER } from '@app/graphql/query';
+import { ConfirmationModal, ConnectionsBottomSheet, GoBackHeader, IconButton, ListEmptyComponent, PostThumbnail, ProfileCard, ProfileScreenPlaceholder } from '@app/layout';
+import { ThemeStatic } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { userBlockedNotification } from '@app/utils/notifications';
+import { sortPostsAscendingTime } from '@app/utils/shared';
 import ProfileOptionsBottomSheet from './components/ProfileOptionsBottomSheet';
 import UserInteractions from './components/UserInteractions';
-import { MUTATION_BLOCK_USER } from '../../graphql/mutation';
+import { MUTATION_BLOCK_USER } from '@app/graphql/mutation';
 
 const ProfileViewScreen: React.FC = () => {
   const { user, theme } = useContext(AppContext);

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Modalize from 'react-native-modalize';
-import { AppContext } from '../../../context';
-import { BottomSheetHeader, Option } from '../../../layout';
-import { ThemeStatic } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
+import { Modalize } from 'react-native-modalize';
+import { AppContext } from '@app/context';
+import { BottomSheetHeader, Option } from '@app/layout';
+import { ThemeStatic } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
 
 interface ProfileOptionsBottomSheetProps {
   ref: React.Ref<any>,

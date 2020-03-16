@@ -5,14 +5,14 @@ import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { FlatGrid } from 'react-native-super-grid';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from 'react-navigation-hooks';
-import EmptyFeed from '../../../assets/svg/empty-feed.svg';
-import { Errors, IconSizes, Routes } from '../../constants';
-import { AppContext } from '../../context';
-import { MUTATION_UPDATE_FCM_TOKEN } from '../../graphql/mutation';
-import { QUERY_USER_FEED } from '../../graphql/query';
-import { HomeHeader, IconButton, PostCardPlaceholder, SvgBanner } from '../../layout';
-import { ThemeColors } from '../../types/theme';
-import { crashlytics, initializeFCM, messaging } from '../../utils/firebase';
+import EmptyFeed from '@app/assets/svg/empty-feed.svg';
+import { Errors, IconSizes, Routes } from '@app/constants';
+import { AppContext } from '@app/context';
+import { MUTATION_UPDATE_FCM_TOKEN } from '@app/graphql/mutation';
+import { QUERY_USER_FEED } from '@app/graphql/query';
+import { HomeHeader, IconButton, PostCardPlaceholder, SvgBanner } from '@app/layout';
+import { ThemeColors } from '@app/types/theme';
+import { crashlytics, initializeFCM, messaging } from '@app/utils/firebase';
 import PostCard from './components/PostCard';
 
 const HomeScreen: React.FC = () => {

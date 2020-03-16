@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { Placeholder, PlaceholderLine } from 'rn-placeholder';
-import { AppContext } from '../../context';
+import { AppContext } from '@app/context';
 import PlaceholderAnimation from './PlaceholderAnimation';
 
 const ExploreScreenPlaceholder: React.FC = () => {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 7
   },
   postPlaceholder: {
-    borderRadius: 10
+    borderRadius: 5
   }
 });
 

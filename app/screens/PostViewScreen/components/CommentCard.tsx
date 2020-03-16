@@ -1,16 +1,16 @@
 import React, { useContext, useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AppContext } from '../../../context';
-import { NativeImage, DeleteCardRightActions } from '../../../layout';
-import { Typography } from '../../../theme';
-import { ThemeColors } from '../../../types/theme';
-import { parseTimeElapsed } from '../../../utils/shared';
+import { AppContext } from '@app/context';
+import { NativeImage, DeleteCardRightActions } from '@app/layout';
+import { Typography } from '@app/theme';
+import { ThemeColors } from '@app/types/theme';
+import { parseTimeElapsed } from '@app/utils/shared';
 import { useNavigation } from 'react-navigation-hooks';
-import { Routes } from '../../../constants';
+import { Routes } from '@app/constants';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useMutation } from '@apollo/react-hooks';
-import { MUTATION_DELETE_COMMENT } from '../../../graphql/mutation';
-import { longPressDeleteNotification } from '../../../utils/notifications';
+import { MUTATION_DELETE_COMMENT } from '@app/graphql/mutation';
+import { longPressDeleteNotification } from '@app/utils/notifications';
 
 const { FontWeights, FontSizes } = Typography;
 
