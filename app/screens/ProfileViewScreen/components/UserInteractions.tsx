@@ -74,7 +74,8 @@ const UserInteractions: React.FC<UserInteractionsProps> = ({ targetId, avatar, h
     try {
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
-        variables: { userId: user.id, targetId }
+        variables: { userId: user.id, targetId },
+        fetchPolicy: 'no-cache',
       });
 
       if (chatExists) {
