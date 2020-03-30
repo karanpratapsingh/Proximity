@@ -98,7 +98,8 @@ const MessageScreen: React.FC = () => {
     try {
       const { data: { chatExists } } = await client.query({
         query: QUERY_CHAT_EXISTS,
-        variables: { userId: user.id, targetId }
+        variables: { userId: user.id, targetId },
+        fetchPolicy: 'no-cache'
       });
 
       // @ts-ignore
