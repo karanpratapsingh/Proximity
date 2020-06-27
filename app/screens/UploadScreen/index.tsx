@@ -36,11 +36,11 @@ const UploadScreen: React.FC = () => {
       inputLimitErrorNotification('Caption', 'less', 200);
       return;
     }
+
     try {
       setIsUploading(true);
       const { downloadURL: uri } = await uploadToStorage(Asset.post, pickedAsset, user.id);
 
-      // @ts-ignore
       const { data: { createPost: { id: postId } } } = await createPost({
         variables: {
           userId: user.id,
@@ -48,6 +48,7 @@ const UploadScreen: React.FC = () => {
           caption
         }
       });
+      
       setIsUploading(false);
       setPickedAsset('')
       setCaption('');

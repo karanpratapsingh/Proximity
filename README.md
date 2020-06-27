@@ -86,14 +86,19 @@ PS. UI is Heavily inspired by Instagram as I'm not a designer 🤪, The code is 
 * Dark Mode :waxing_crescent_moon:
 * Block users :no_good:
 * Report post :triangular_flag_on_post:
-* Stories (coming soon)
+* Stories (coming soon) TBD
 
 
 **:paperclip: Notes:** 
 I used this [Boilerplate](https://github.com/karanpratapsingh/react-native-boilerplate) which is also maintained by me, it is very scalable, try it out for your next project :smile:
 
-Also, If you're interested in how I implemented the system design then feel free to reach out to me on twitter or instagram (i'm most active there), tho I am thinking of writing articles for it.
+Also, If you're interested in how I implemented the system design then feel free to reach out to me on twitter or instagram (i'm most active on twitter).
 
+**:factory: Architecture:**
+
+![Proximity-System-Design](https://user-images.githubusercontent.com/29705703/85915186-05650100-b863-11ea-82d6-956957a3a826.png)
+
+For GraphQL schema please take a look at `app/graphql/schema/schema.graphql`
 <br />
 
 ## :iphone: Screenshots
