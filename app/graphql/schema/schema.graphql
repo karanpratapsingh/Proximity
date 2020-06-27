@@ -1,0 +1,175 @@
+scalar DateTime
+
+enum ConnectionsType {
+  FOLLOWING
+  FOLLOWERS
+}
+
+type Query {
+  signIn(token: String!): User!
+  user(userId: String!): User!
+  userConnections(userId: String!, type: ConnectionsType!): [User!]
+  userExists(token: String): Boolean!
+  notifications(userId: String!): [Notification!]!
+  chat(chatId: String!): Chat!
+  chats(userId: String!): [Chat!]!
+  doesFollow(userId: String!, targetId: String!): Boolean!
+  chatExists(userId: String!, targetId: String!): Chat
+  searchUsers(userId: String!, name: String!): [User!]!
+  isHandleAvailable(userId: String!, handle: String!): Boolean!
+  post(postId: String!): Post!
+  posts(userId: String!): [Post!]
+  userFeed(userId: String!): [Post!]
+  likeUsers(likes: [String!]): [User!]
+  blockedUsers(userId: String!): [User!]
+}
+
+type Mutation {
+  createUser(
+    token: String!
+    avatar: String
+    name: String!
+    email: String!
+  ): User!
+  updateUser(
+    userId: String!
+    avatar: String!
+    name: String!
+    handle: String!
+    about: String!
+  ): User!
+  createTemporaryChat: Chat!
+  connectChatToUsers(chatId: String!, userId: String!, targetId: String!): Chat!
+  addChatMessage(chatId: String!, authorId: String!, body: String!): Chat!
+  updateFollowing(
+    userId: String!
+    targetId: String!
+    action: UpdateFollowingAction!
+  ): Boolean!
+  createPost(userId: String!, uri: String!, caption: String): Post!
+  updateFcmToken(userId: String!, fcmToken: String!): User!
+  addComment(userId: String!, postId: String!, body: String!): Post!
+  likeInteraction(userId: String!, postId: String!, action: LikeAction!): Post!
+  messageSeen(messageId: String!): Message!
+  updateLastSeen(userId: String!): User!
+  deleteChat(chatId: String!): Chat!
+  reportPost(postId: String!): Post!
+  editPost(postId: String!, caption: String!): Post!
+  deletePost(postId: String!): Post!
+  deleteComment(postId: String!, commentId: String!): Post!
+  deleteNotification(notificationId: String!): Notification!
+  blockUser(from: String!, to: String!): Boolean!
+  unblockUser(from: String!, to: String!): Boolean!
+}
+
+enum LikeAction {
+  LIKE
+  UNLIKE
+}
+
+enum UpdateFollowingAction {
+  FOLLOW
+  UNFOLLOW
+}
+
+type Subscription {
+  chat(chatId: String!): Chat!
+  post(postId: String!): Post!
+  user(userId: String!): User!
+}
+
+type Comment {
+  id: ID!
+  body: String!
+  author: User!
+  createdAt: DateTime!
+}
+
+type Post {
+  id: ID!
+  caption: String
+  uri: String!
+  reports: Int!
+  author: User!
+  createdAt: DateTime!
+  comments: [Comment!]
+  likes: [String!]
+}
+
+enum NotificationType {
+  FOLLOW
+  COMMENT
+  LIKE
+}
+
+type Notification {
+  id: ID!
+  resourceId: String!
+  user: User!
+  actionUser: User!
+  createdAt: DateTime!
+  type: NotificationType!
+}
+
+type User {
+  id: ID!
+  token: String!
+  fcmToken: String
+  name: String!
+  handle: String!
+  avatar: String
+  email: String!
+  lastSeen: Float!
+  about: String
+  posts: [Post!]
+  stories: [Story!]
+  following: [User!]
+  followers: [User!]
+  chats: [Chat!]
+  notifications: [Notification!]
+}
+
+enum StoryType {
+  IMAGE
+  VIDEO
+}
+
+type Story {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  uri: String!
+  author: User!
+  views: [String!]
+  type: StoryType!
+}
+
+type Chat {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  participants: [User!]
+  messages(last: Int): [Message!]
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+}
+
+type Message {
+  id: ID!
+  type: MessageType!
+  asset: String
+  body: String
+  createdAt: DateTime!
+  seen: Boolean
+  author: User!
+}
+
+type BlockList {
+  id: ID!
+  from: String!
+  to: String!
+}
