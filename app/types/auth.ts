@@ -1,5 +1,6 @@
 export type GoogleAuthResult = {
   idToken: string | null;
+  accessToken: string | undefined;
 };
 
 export type AppleAuthResult = {

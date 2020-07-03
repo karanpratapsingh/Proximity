@@ -105,9 +105,14 @@ const LoginScreen: React.FC = () => {
 
     try {
       setGoogleLoading(true);
-      const { idToken } = await GoogleSignin.signIn();
+
+      await GoogleSignin.signIn();
+
+      const { idToken, accessToken } = await GoogleSignin.getTokens()
+
       const authResult: GoogleAuthResult = {
-        idToken
+        idToken,
+        accessToken
       };
 
       const { token, avatar, name, email } = await processSocialSignIn(authResult, SocialSignInType.GOOGLE)

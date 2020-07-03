@@ -10,8 +10,11 @@ export const notifications = firebase.notifications();
 export const crashlytics = firebase.crashlytics();
 export const auth = firebase.auth();
 
-const getGoogleCredentials = (idToken: string | null): AuthCredential =>
-  firebase.auth.GoogleAuthProvider.credential(idToken);
+const getGoogleCredentials = (
+  idToken: string | null,
+  accessToken: string | undefined,
+): AuthCredential =>
+  firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
 
 const getAppleCredentials = (
   identityToken: string | null,
@@ -26,8 +29,8 @@ export const processSocialSignIn = async (
   let credentials: AuthCredential;
 
   if (type === SocialSignInType.GOOGLE) {
-    const { idToken } = authResult;
-    credentials = getGoogleCredentials(idToken);
+    const { idToken, accessToken } = authResult;
+    credentials = getGoogleCredentials(idToken, accessToken);
   } else {
     const { identityToken, nonce } = authResult;
     credentials = getAppleCredentials(identityToken, nonce);
