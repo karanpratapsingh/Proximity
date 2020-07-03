@@ -137,6 +137,7 @@ android {
         versionCode 1
         versionName "2.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -200,6 +201,8 @@ dependencies {
     }
     // Firebase Auth [CUSTOM]
     implementation "com.google.firebase:firebase-auth:17.0.0"
+    // Enable multidex support
+    implementation 'com.android.support:multidex:1.0.3'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
