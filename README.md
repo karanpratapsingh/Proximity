@@ -23,6 +23,7 @@
 </p>
 
 <p align="center">
+<a href="https://www.codacy.com/manual/karanpratapsingh/Proximity?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=karanpratapsingh/Proximity&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/a6903376b0b446f79274bd197525a99b"/></a>
 <img src="https://build.appcenter.ms/v0.1/apps/8277c135-e249-4122-beb3-6bc00b7ec11d/branches/master/badge" />
 
 <img src="https://build.appcenter.ms/v0.1/apps/85fe31ae-1f83-4aa3-a27e-8f2c762bec9e/branches/master/badge" />
@@ -32,7 +33,6 @@
 <img src="https://img.shields.io/twitter/follow/karan_6864.svg?style=social" />
 
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
-<a href="https://www.codacy.com/manual/karanpratapsingh/Proximity?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=karanpratapsingh/Proximity&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/a6903376b0b446f79274bd197525a99b"/></a>
 
 </p>
 
@@ -40,11 +40,9 @@
 
 ## :star: Inspiration:
 
-Earlier this year I picked up GraphQL and for a few months I was thinking about making a simple chat app or something with GraphQL then kinda forgot about it due to other projects.
+Recently I was getting a lot into System Design and scalability stuff so I thought about implementing the classic social media.
 
-Recently I was getting a lot into System Design and scalability stuff so I thought about implementing the classic "Instagram Clone" template but then immediately thought about the chat app I wanted to do so why not combine it and make it functional?
-
-Hence, I decided to design and implement Proximity an open-source social media as a hobby project in my free time
+Hence, I decided to design and implement Proximity an open-source social media as a hobby project in my free time.
 
 I decided to open source it because newcomers to React Native might find it helpful
 
