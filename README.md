@@ -32,6 +32,7 @@
 <img src="https://img.shields.io/twitter/follow/karan_6864.svg?style=social" />
 
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
+<a href="https://www.codacy.com/manual/karanpratapsingh/Proximity?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=karanpratapsingh/Proximity&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/a6903376b0b446f79274bd197525a99b"/></a>
 
 </p>
 
