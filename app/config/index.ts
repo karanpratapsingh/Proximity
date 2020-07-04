@@ -23,15 +23,18 @@ const codepush = {
   })
 };
 
+const webClientId: string = '649469906394-0d9hghf2jv5n9n0t0o763e5bheer720f.apps.googleusercontent.com';
+
 const Config = {
-  author: { name, email, url },
+  author: {name, email, url},
   repository,
   version,
   codepush,
   url: {
     https: 'https://proximity-development.herokuapp.com/',
-    wss: 'wss://proximity-development.herokuapp.com/'
-  }
+    wss: 'wss://proximity-development.herokuapp.com/',
+  },
+  webClientId
 };
 
 export default Config;

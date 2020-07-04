@@ -57,6 +57,7 @@ const UploadScreen: React.FC = () => {
       postUploadedNotification();
       navigate(Routes.PostViewScreen, { postId });
     } catch ({ message }) {
+      setIsUploading(false);
       uploadErrorNotification('Post');
       crashlytics.recordCustomError(Errors.ASSET_UPLOAD, message);
     }

@@ -1,4 +1,4 @@
-import { messaging, crashlytics } from './firebase';
+import { messaging, crashlytics, auth } from './firebase';
 import { StorageErrorTypes, removeToken } from './storage';
 import { Errors } from '@app/constants';
 
@@ -20,6 +20,7 @@ export const signOut = async () => {
   try {
     await messaging.deleteToken();
     await removeToken();
+    await auth.signOut();
   } catch ({ message }) {
     crashlytics.recordCustomError(Errors.SIGN_OUT, message);
   }
