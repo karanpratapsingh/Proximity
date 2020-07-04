@@ -80,7 +80,7 @@ const ProfileScreenPlaceholder: React.FC<ProfileScreenPlaceholderProps> = ({ vie
               <PlaceholderLine
                 noMargin
                 color={theme.placeholder}
-                style={styles.postPlaceholder}
+                style={[styles.postPlaceholder, { marginRight: 10 }]}
                 width={48}
                 height={PostDimensions.Medium.height}
               />
@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
   postContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 10
   },
   postPlaceholder: {

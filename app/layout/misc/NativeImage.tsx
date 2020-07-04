@@ -9,7 +9,7 @@ interface NativeImageProps {
 
 const NativeImage: React.FC<NativeImageProps> = ({ uri, style }) => {
 
-  if (!uri) return <View style={style} />
+  if (!uri || !uri.includes('http')) return <View style={style} />;
   return <FastImage style={style} source={{ uri, priority: FastImage.priority.normal }} />
 };
 

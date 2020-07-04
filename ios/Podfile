@@ -34,9 +34,10 @@ target 'Proximity' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'Firebase/Core', '~> 6.3.0'
-  pod 'Firebase/Storage', '~> 6.3.0'
-  pod 'Firebase/Messaging', '~> 6.3.0'
+  pod 'Firebase/Core', '~> 6.13.0'
+  pod 'Firebase/Storage', '~> 6.13.0'
+  pod 'Firebase/Messaging', '~> 6.13.0'
+  pod 'Firebase/Auth', '~> 6.13.0'
   pod 'Fabric', '~> 1.10.2'
   pod 'Crashlytics', '~> 3.14.0'
   

@@ -1,14 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
-import appleAuth, { AppleAuthCredentialState, AppleAuthRequestOperation, AppleAuthRequestScope, AppleButton } from '@invertase/react-native-apple-authentication';
-import { GoogleSignin } from '@react-native-community/google-signin';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-import SplashScreen from 'react-native-splash-screen';
-import { useNavigation } from 'react-navigation-hooks';
 import GoogleLogo from '@app/assets/svg/google-logo.svg';
 import LoginBanner from '@app/assets/svg/login-banner.svg';
-import { AuthDefaults, Errors, IconSizes, Routes } from '@app/constants';
+import { Errors, IconSizes, Routes } from '@app/constants';
 import { AppContext } from '@app/context';
 import client from '@app/graphql/client';
 import { MUTATION_CREATE_USER } from '@app/graphql/mutation';
@@ -17,9 +10,17 @@ import { Button, ConfirmationModal, LoadingIndicator } from '@app/layout';
 import { ThemeStatic, ThemeVariant, Typography } from '@app/theme';
 import { ThemeColors } from '@app/types/theme';
 import { handleLoginError, signOut } from '@app/utils/authentication';
-import { crashlytics } from '@app/utils/firebase';
-import { welcomeNotification, somethingWentWrongErrorNotification } from '@app/utils/notifications';
+import { crashlytics, processSocialSignIn } from '@app/utils/firebase';
+import { somethingWentWrongErrorNotification, welcomeNotification } from '@app/utils/notifications';
 import { loadToken, saveToken } from '@app/utils/storage';
+import appleAuth, { AppleAuthRequestOperation, AppleAuthRequestScope, AppleButton } from '@invertase/react-native-apple-authentication';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import SplashScreen from 'react-native-splash-screen';
+import { useNavigation } from 'react-navigation-hooks';
+import { AppleAuthResult, GoogleAuthResult, SocialSignInType } from '@app/types/auth';
 import TermsAndConditionsBottomSheet from './components/TermsAndConditionsBottomSheet';
 
 const { FontWeights, FontSizes } = Typography;
@@ -104,10 +105,19 @@ const LoginScreen: React.FC = () => {
 
     try {
       setGoogleLoading(true);
-      const data = await GoogleSignin.signIn();
-      const { user: { id: token, name, photo, email } } = data;
 
-      await processSignIn(token, photo, name || AuthDefaults.name, email);
+      await GoogleSignin.signIn();
+
+      const { idToken, accessToken } = await GoogleSignin.getTokens()
+
+      const authResult: GoogleAuthResult = {
+        idToken,
+        accessToken
+      };
+
+      const { token, avatar, name, email } = await processSocialSignIn(authResult, SocialSignInType.GOOGLE)
+
+      await processSignIn(token, avatar, name, email);
     } catch ({ message }) {
       setGoogleLoading(false);
       crashlytics.recordCustomError(Errors.SIGN_IN, message);
@@ -126,16 +136,19 @@ const LoginScreen: React.FC = () => {
         requestedScopes: [AppleAuthRequestScope.EMAIL, AppleAuthRequestScope.FULL_NAME],
       });
 
-      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+      const { identityToken, nonce } = appleAuthRequestResponse;
 
-      if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
-        const { user, email, fullName } = appleAuthRequestResponse;
-        // @ts-ignore
-        const { givenName, familyName } = fullName;
-        const name = givenName ? `${givenName} ${familyName}` : AuthDefaults.name;
-        const generatedEmail = email || `${user}@icloud.com`;
-        await processSignIn(user, AuthDefaults.avatar, name, generatedEmail);
+      if (identityToken) {
+        const authResult: AppleAuthResult = {
+          identityToken,
+          nonce
+        };
+
+        const { token, avatar, name, email } = await processSocialSignIn(authResult, SocialSignInType.APPLE)
+
+        await processSignIn(token, avatar, name, email);
       }
+
     } catch (error) {
       somethingWentWrongErrorNotification();
       setAppleLoading(false);

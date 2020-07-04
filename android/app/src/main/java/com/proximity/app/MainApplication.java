@@ -14,6 +14,7 @@ import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new RNFirebaseMessagingPackage());
           packages.add(new RNFirebaseNotificationsPackage());
           packages.add(new RNFirebaseCrashlyticsPackage());
+          packages.add(new RNFirebaseAuthPackage());
           return packages;
         }
 

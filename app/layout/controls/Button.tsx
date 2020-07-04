@@ -17,7 +17,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ Icon, label, onPress, loading, containerStyle, labelStyle, indicatorColor }) => {
 
-  let content = <LoadingIndicator size={8} color={indicatorColor || ThemeStatic.white} />
+  let content = <LoadingIndicator size={8} color={indicatorColor || ThemeStatic.white} />;
   if (!loading) content = (
     <>
       {Icon && <Icon />}
