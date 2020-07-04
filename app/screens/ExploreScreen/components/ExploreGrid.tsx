@@ -5,7 +5,7 @@ import { ListEmptyComponent } from '@app/layout';
 import { PrimaryImageGroup, SecondaryImageGroup } from './ExplorePostCard';
 import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { parseGridImages, getSecondaryGridIndexes } from '@app/utils/shared';
+import { parseGridImages } from '@app/utils/shared';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
@@ -14,11 +14,11 @@ interface ExploreGridProps {
 };
 
 const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
-  const [gridIndexes] = useState(getSecondaryGridIndexes(posts.length))
+
   const renderItem = ({ item, index }) => {
     let content: React.ReactElement = <PrimaryImageGroup imageGroup={item} />
 
-    if (gridIndexes.includes(index)) {
+    if (index % 3 === 2) {
       content = <SecondaryImageGroup imageGroup={item} />;
     }
 
