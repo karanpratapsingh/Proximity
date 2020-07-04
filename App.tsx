@@ -18,7 +18,12 @@ import { crashlytics } from './app/utils/firebase';
 import { loadThemeType } from './app/utils/storage';
 import { computeUnreadMessages } from './app/utils/shared';
 
-GoogleSignin.configure();
+const { webClientId } = Config;
+
+GoogleSignin.configure({
+  webClientId,
+  forceConsentPrompt: true
+});
 
 const SafeAreaApp = () => {
   const { user, theme, themeType, toggleTheme, updateUnreadMessages } = useContext(AppContext);
