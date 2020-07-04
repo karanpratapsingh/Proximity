@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent } from '@app/layout';
-import ExplorePostCard from './ExplorePostCard';
+import { PrimaryImageGroup, SecondaryImageGroup } from './ExplorePostCard';
 import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-
-import MasonryList from 'react-native-masonry-list';
+import { parseGridImages, getSecondaryGridIndexes } from '@app/utils/shared';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
@@ -15,14 +14,19 @@ interface ExploreGridProps {
 };
 
 const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
+  const [gridIndexes] = useState(getSecondaryGridIndexes(posts.length))
+  const renderItem = ({ item, index }) => {
+    let content: React.ReactElement = <PrimaryImageGroup imageGroup={item} />
 
-  const renderItem = ({ item }) => {
-    const { id: postId, uri } = item;
+    if (gridIndexes.includes(index)) {
+      content = <SecondaryImageGroup imageGroup={item} />;
+    }
 
-    return <ExplorePostCard
-      postId={postId}
-      uri={uri}
-    />;
+    return (
+      <View style={styles.gridImageGroup}>
+        {content}
+      </View>
+    );
   };
 
   const refreshControl = () => (
@@ -32,20 +36,16 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
       onRefresh={onRefresh} />
   );
 
+  const parsedGridImages = parseGridImages(posts);
+
   return (
     <View style={styles.container}>
-      {/* <MasonryList
-        images={posts}
-        imageContainerStyle={{ height: 100, width: 100 }}
-        listContainerStyle={{ flex: 1 }}
-        containerWidth={200}
-      /> */}
       <FlatGrid
         staticDimension={responsiveWidth(92)}
         refreshControl={refreshControl()}
-        itemDimension={100}
+        itemDimension={responsiveWidth(92)}
         showsVerticalScrollIndicator={false}
-        items={posts}
+        items={parsedGridImages}
         ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
         spacing={6}
         renderItem={renderItem}
@@ -59,6 +59,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  gridImageGroup: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   }
 });
 

@@ -1,11 +1,15 @@
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, { Options } from 'react-native-image-crop-picker';
 import { ThemeStatic } from '@app/theme';
 import { Timeouts } from '@app/constants';
 import { noPermissionNotification } from './notifications';
+import { ExplorePost } from '@app/types/screens';
 
 export const createAsyncDelay = (duration: number) => {
-
-  return new Promise((resolve, _) => setTimeout(() => { resolve(); }, duration));
+  return new Promise((resolve, _) =>
+    setTimeout(() => {
+      resolve();
+    }, duration),
+  );
 };
 
 export const parseConnectionsCount = (connectionCount: number) => {
@@ -25,16 +29,16 @@ export const parseTimeElapsed = (utcTime: string) => {
   const daysInMs = hoursInMs * 24;
   const weekInMs = daysInMs * 7;
 
-  const elapsedWeeks = parseInt(difference / weekInMs as any, 10);
+  const elapsedWeeks = parseInt((difference / weekInMs) as any, 10);
   difference = difference % weekInMs;
 
-  const elapsedDays = parseInt(difference / daysInMs as any, 10);
+  const elapsedDays = parseInt((difference / daysInMs) as any, 10);
   difference = difference % daysInMs;
 
-  const elapsedHours = parseInt(difference / hoursInMs as any, 10);
+  const elapsedHours = parseInt((difference / hoursInMs) as any, 10);
   difference = difference % hoursInMs;
 
-  const elapsedMinutes = parseInt(difference / minutesInMs as any, 10);
+  const elapsedMinutes = parseInt((difference / minutesInMs) as any, 10);
   difference = difference % minutesInMs;
 
   let parsedTime = '...';
@@ -65,17 +69,19 @@ export const parseTimeElapsed = (utcTime: string) => {
     }
   } else if (elapsedMinutes < 1) parsedTime = 'just now';
 
-  const readableTime = parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
+  const readableTime =
+    parsedTime === 'just now' ? `${parsedTime}` : `${parsedTime} ago`;
 
   return {
     parsedTime,
-    readableTime
+    readableTime,
   };
 };
 
 export const generateUUID = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    const r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 };
@@ -86,11 +92,7 @@ export const transformMessages = messages =>
       id,
       body,
       createdAt,
-      author: {
-        id: authorId,
-        name,
-        avatar
-      }
+      author: { id: authorId, name, avatar },
     } = message;
 
     return {
@@ -100,16 +102,20 @@ export const transformMessages = messages =>
       user: {
         _id: authorId,
         name,
-        avatar
-      }
+        avatar,
+      },
     };
   });
 
 export const filterChatParticipants = (userId: string, participants) =>
   participants.filter(participant => userId !== participant.id);
 
-export const getImageFromLibrary = async (height: number, width: number, circular: boolean = false) => {
-  const options = {
+export const getImageFromLibrary = async (
+  height: number,
+  width: number,
+  circular: boolean = false,
+) => {
+  const options: Options = {
     height,
     width,
     cropperCircleOverlay: circular,
@@ -118,7 +124,8 @@ export const getImageFromLibrary = async (height: number, width: number, circula
     cropperStatusBarColor: ThemeStatic.accent,
     cropperToolbarColor: ThemeStatic.accent,
     compressImageQuality: 0.8,
-    mediaType: 'photo'
+    mediaType: 'photo',
+    writeTempFile: true
   };
 
   try {
@@ -132,23 +139,19 @@ export const getImageFromLibrary = async (height: number, width: number, circula
 };
 
 export const isUserOnline = (lastSeen: number) => {
-
-  const now = (Date.now() / 1000);
-  return (now - lastSeen) < Timeouts.online;
+  const now = Date.now() / 1000;
+  return now - lastSeen < Timeouts.online;
 };
 
 export const parseLikes = (likeCount: number) => {
   return likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`;
 };
 
-export const searchQueryFilter = (array, userId: string, query: string, ) =>
+export const searchQueryFilter = (array, userId: string, query: string) =>
   [...array].filter(({ participants }) => {
     const [participant] = filterChatParticipants(userId, participants);
     if (query === '') return true;
-    return participant
-      .handle
-      .toLowerCase()
-      .includes(query.toLocaleLowerCase());
+    return participant.handle.toLowerCase().includes(query.toLocaleLowerCase());
   });
 
 export const sortMessageAscendingTime = array =>
@@ -171,3 +174,31 @@ export const computeUnreadMessages = (chats, userId: string) =>
 export const sortPostsAscendingTime = array =>
   // @ts-ignore
   [...array].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+export const parseGridImages = (images: ExplorePost[]): ExplorePost[][] => {
+  const parsedImages: ExplorePost[][] = [];
+
+  for (let i = 0; i < images.length; i++) {
+    let imageGroup: ExplorePost[];
+
+    if (i % 3 === 0) {
+      imageGroup = images.slice(i, i + 3);
+      parsedImages.push(imageGroup);
+    }
+  }
+
+  return parsedImages;
+};
+
+export const getSecondaryGridIndexes = (range: number): number[] => {
+  const indexes: number[] = [];
+
+  for (let i = 0; i <= range; i++) {
+    if (i % 3 === 0) {
+      indexes.push(i - 1);
+    }
+  }
+
+  indexes.shift();
+  return indexes;
+};
