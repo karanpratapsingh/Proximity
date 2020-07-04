@@ -47,7 +47,7 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
         showsVerticalScrollIndicator={false}
         items={parsedGridImages}
         ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
-        spacing={6}
+        spacing={5}
         renderItem={renderItem}
       />
     </View>

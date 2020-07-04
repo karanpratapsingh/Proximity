@@ -55,7 +55,7 @@ export const SecondaryImageGroup = ({ imageGroup }: { imageGroup: ExplorePost[] 
       <View style={styles().secondaryLeftColumn}>
         {
           leftColumns.map(({ id: postId, uri }, index) => {
-            const style = index ? { marginTop: 6 } : {}
+            const style = index ? { marginTop: 5 } : {}
             return (
               <ExplorePostCard
                 key={postId}
@@ -95,7 +95,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   },
   secondaryLeftColumn: {
     flex: 1,
-    marginRight: 3
+    marginRight: 2
   },
   secondaryRightColumn: {
     flex: 2
