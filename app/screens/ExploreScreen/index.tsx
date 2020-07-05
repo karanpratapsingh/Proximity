@@ -29,7 +29,7 @@ const ExploreScreen: React.FC = () => {
     error: searchUsersQueryError
   }] = useLazyQuery(QUERY_SEARCH_USERS);
 
-  const { postsData, postsLoading, postsError, fetchMorePosts, refetchPosts} = useExploreFeed(user.id);
+  const { postsData, postsLoading, postsError, fetchMorePosts, refetchPosts } = useExploreFeed(user.id);
 
   useEffect(() => {
     if (userSearch !== '') searchUsersQuery({ variables: { userId: user.id, name: userSearch } });
@@ -57,7 +57,7 @@ const ExploreScreen: React.FC = () => {
 
   if (!postsLoading && !postsError) {
     const { posts } = postsData;
-    content = <ExploreGrid posts={posts} onRefresh={onRefresh} tintColor={theme.text02} onEndReached={onEndReached}/>;
+    content = <ExploreGrid posts={posts} onRefresh={onRefresh} tintColor={theme.text02} onEndReached={onEndReached} />;
   }
 
   if (isSearchFocused) {
