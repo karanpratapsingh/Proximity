@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SearchUsersBanner from '@app/assets/svg/search-users.svg';
 import { AppContext } from '@app/context';
-import { QUERY_POSTS, QUERY_SEARCH_USERS } from '@app/graphql/query';
+import { QUERY_SEARCH_USERS } from '@app/graphql/query';
 import { AnimatedSearchBar, ExploreScreenPlaceholder, Header, SearchUsersPlaceholder, SvgBanner } from '@app/layout';
 import { ThemeColors } from '@app/types/theme';
 import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
-
+import useExploreFeed from './hooks/useExploreFeed';
 import posed, { Transition } from 'react-native-pose';
 
 const FadeView = posed.View({
@@ -28,17 +28,8 @@ const ExploreScreen: React.FC = () => {
     called: searchUsersQueryCalled,
     error: searchUsersQueryError
   }] = useLazyQuery(QUERY_SEARCH_USERS);
-  const [queryPost, {
-    data: postsQueryData,
-    called: postsQueryCalled,
-    loading: postsQueryLoading,
-    error: postsQueryError,
-    refetch: postsQueryRefetch
-  }] = useLazyQuery(QUERY_POSTS, { variables: { userId: user.id }, fetchPolicy: 'network-only' });
 
-  useEffect(() => {
-    queryPost();
-  }, []);
+  const { postsData, postsLoading, postsError, fetchMorePosts, refetchPosts} = useExploreFeed(user.id);
 
   useEffect(() => {
     if (userSearch !== '') searchUsersQuery({ variables: { userId: user.id, name: userSearch } });
@@ -48,20 +39,25 @@ const ExploreScreen: React.FC = () => {
     }
   }, [userSearch, searchUsersQueryData, searchUsersQueryCalled, searchUsersQueryLoading]);
 
+  const onEndReached = () => {
+    fetchMorePosts();
+  };
+
   const onFocus = () => setIsSearchFocused(true);
+
   const onBlur = () => setIsSearchFocused(false);
 
   let content = <ExploreScreenPlaceholder />;
 
   const onRefresh = () => {
     try {
-      postsQueryRefetch();
+      refetchPosts();
     } catch { }
   };
 
-  if (postsQueryCalled && !postsQueryLoading && !postsQueryError) {
-    const { posts } = postsQueryData;
-    content = <ExploreGrid posts={posts} onRefresh={onRefresh} tintColor={theme.text02} />;
+  if (!postsLoading && !postsError) {
+    const { posts } = postsData;
+    content = <ExploreGrid posts={posts} onRefresh={onRefresh} tintColor={theme.text02} onEndReached={onEndReached}/>;
   }
 
   if (isSearchFocused) {

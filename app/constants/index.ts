@@ -12,7 +12,8 @@ import {
   AssetType,
   TimeoutsType,
   ErrorsType,
-  AuthDefaultsType
+  AuthDefaultsType,
+  PaginationType
 } from '@app/types/constants';
 
 export const Routes: RoutesType = {
@@ -121,4 +122,9 @@ export const Errors: ErrorsType = {
 export const AuthDefaults: AuthDefaultsType = {
   avatar: 'https://firebasestorage.googleapis.com/v0/b/proximity-406e5.appspot.com/o/defaults%2Favatar-default.png?alt=media&token=23a37081-e594-4184-ba9f-c986ee9d3c41',
   name: 'Proximity user'
+};
+
+export const Pagination: PaginationType = {
+  PAGE_SIZE: 15,
+  CURSOR_SIZE: 9
 };
