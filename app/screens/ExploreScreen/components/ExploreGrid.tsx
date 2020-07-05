@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View, RefreshControl, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { ListEmptyComponent, LoadingIndicator } from '@app/layout';
 import { PrimaryImageGroup, SecondaryImageGroup } from './ExplorePostCard';
