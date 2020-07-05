@@ -10,6 +10,7 @@ import ExploreGrid from './components/ExploreGrid';
 import UserSearchResults from './components/UserSearchResults';
 import useExploreFeed from './hooks/useExploreFeed';
 import posed, { Transition } from 'react-native-pose';
+import useDebounce from './hooks/useDebounce';
 
 const FadeView = posed.View({
   enter: { opacity: 1 },
@@ -31,13 +32,18 @@ const ExploreScreen: React.FC = () => {
 
   const { postsData, postsLoading, postsError, fetchMorePosts, refetchPosts } = useExploreFeed(user.id);
 
+  const debouncedSearchResult = useDebounce(userSearch, 400);
+
   useEffect(() => {
-    if (userSearch !== '') searchUsersQuery({ variables: { userId: user.id, name: userSearch } });
+    if (debouncedSearchResult !== '') {
+      searchUsersQuery({ variables: { userId: user.id, name: debouncedSearchResult } });
+    }
+
     if (searchUsersQueryCalled && !searchUsersQueryLoading) {
       const { searchUsers } = searchUsersQueryData;
       setSearchResults(searchUsers);
     }
-  }, [userSearch, searchUsersQueryData, searchUsersQueryCalled, searchUsersQueryLoading]);
+  }, [debouncedSearchResult, searchUsersQueryData, searchUsersQueryCalled, searchUsersQueryLoading]);
 
   const onEndReached = () => {
     fetchMorePosts();
