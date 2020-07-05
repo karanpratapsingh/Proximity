@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '@app/layout';
+import { ListEmptyComponent, LoadingIndicator } from '@app/layout';
 import { PrimaryImageGroup, SecondaryImageGroup } from './ExplorePostCard';
 import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { parseGridImages } from '@app/utils/shared';
+import { AppContext } from '@app/context';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
   onRefresh: () => void,
-  tintColor: string
+  tintColor: string,
+  onEndReached: () => void
 };
 
-const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor, onEndReached }) => {
+  const { theme } = useContext(AppContext);
 
   const renderItem = ({ item, index }) => {
     const isSecondaryImageGroup = index % 3 === 2;
@@ -34,6 +37,12 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
       onRefresh={onRefresh} />
   );
 
+  const ListFooterComponent = () => (
+    <View style={styles.listLoader}>
+      <LoadingIndicator size={4} color={theme.text02} />
+    </View>
+  );
+
   const parsedGridImages = parseGridImages(posts);
 
   return (
@@ -46,6 +55,9 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
         items={parsedGridImages}
         ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
         spacing={5}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={ListFooterComponent}
         renderItem={renderItem}
       />
     </View>
@@ -57,6 +69,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  listLoader: {
+    marginBottom: 12
   }
 });
 

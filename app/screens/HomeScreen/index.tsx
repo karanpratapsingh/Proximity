@@ -104,7 +104,7 @@ const HomeScreen: React.FC = () => {
         itemDimension={responsiveWidth(85)}
         showsVerticalScrollIndicator={false}
         items={userFeed}
-        ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder={`Let's follow someone`} />}
+        ListEmptyComponent={() => <SvgBanner Svg={EmptyFeed} spacing={20} placeholder={'No new posts'} />}
         style={styles().postList}
         spacing={20}
         renderItem={renderItem}

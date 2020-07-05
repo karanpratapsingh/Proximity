@@ -95,7 +95,7 @@ const styles = (theme = {} as ThemeColors) => StyleSheet.create({
   container: {
     ...PostDimensions.Small,
     overflow: 'hidden',
-    borderRadius: 2
+    borderRadius: 4
   },
   postImage: {
     flex: 1,
