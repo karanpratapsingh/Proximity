@@ -11,6 +11,7 @@ import UserSearchResults from './components/UserSearchResults';
 import useExploreFeed from './hooks/useExploreFeed';
 import posed, { Transition } from 'react-native-pose';
 import useDebounce from './hooks/useDebounce';
+import { Debounce } from '@app/constants';
 
 const FadeView = posed.View({
   enter: { opacity: 1 },
@@ -32,7 +33,7 @@ const ExploreScreen: React.FC = () => {
 
   const { postsData, postsLoading, postsError, fetchMorePosts, refetchPosts } = useExploreFeed(user.id);
 
-  const debouncedSearchResult = useDebounce(userSearch, 400);
+  const debouncedSearchResult = useDebounce(userSearch, Debounce.EXPLORE_SEARCH);
 
   useEffect(() => {
     if (debouncedSearchResult !== '') {

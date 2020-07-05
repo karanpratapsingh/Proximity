@@ -13,7 +13,8 @@ import {
   TimeoutsType,
   ErrorsType,
   AuthDefaultsType,
-  PaginationType
+  PaginationType,
+  DebounceType,
 } from '@app/types/constants';
 
 export const Routes: RoutesType = {
@@ -127,4 +128,8 @@ export const AuthDefaults: AuthDefaultsType = {
 export const Pagination: PaginationType = {
   PAGE_SIZE: 15,
   CURSOR_SIZE: 9
+};
+
+export const Debounce: DebounceType = {
+  EXPLORE_SEARCH: 400
 };
