@@ -189,16 +189,3 @@ export const parseGridImages = (images: ExplorePost[]): ExplorePost[][] => {
 
   return parsedImages;
 };
-
-export const getSecondaryGridIndexes = (range: number): number[] => {
-  const indexes: number[] = [];
-
-  for (let i = 0; i <= range; i++) {
-    if (i % 3 === 0) {
-      indexes.push(i - 1);
-    }
-  }
-
-  indexes.shift();
-  return indexes;
-};

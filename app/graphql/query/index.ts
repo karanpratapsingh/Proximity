@@ -173,8 +173,8 @@ export const QUERY_POST = gql`
 `;
 
 export const QUERY_POSTS = gql`
-  query Posts($userId: String!)  {
-    posts(userId: $userId) {
+  query Posts($userId: String!,$last: Int!)  {
+    posts(userId: $userId, last: $last) {
       id
       uri
     }

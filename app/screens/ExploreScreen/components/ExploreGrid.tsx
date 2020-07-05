@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, RefreshControl } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { ListEmptyComponent } from '@app/layout';
+import { ListEmptyComponent, LoadingIndicator } from '@app/layout';
 import { PrimaryImageGroup, SecondaryImageGroup } from './ExplorePostCard';
 import { ExplorePost } from '@app/types/screens';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import { parseGridImages, getSecondaryGridIndexes } from '@app/utils/shared';
+import { parseGridImages } from '@app/utils/shared';
+import { AppContext } from '@app/context';
 
 interface ExploreGridProps {
   posts: ExplorePost[],
   onRefresh: () => void,
-  tintColor: string
+  tintColor: string,
+  onEndReached: () => void
 };
 
-const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }) => {
-  const [gridIndexes] = useState(getSecondaryGridIndexes(posts.length))
-  const renderItem = ({ item, index }) => {
-    let content: React.ReactElement = <PrimaryImageGroup imageGroup={item} />
+const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor, onEndReached }) => {
+  const { theme } = useContext(AppContext);
 
-    if (gridIndexes.includes(index)) {
-      content = <SecondaryImageGroup imageGroup={item} />;
+  const renderItem = ({ item, index }) => {
+    const isSecondaryImageGroup = index % 3 === 2;
+
+    if (isSecondaryImageGroup) {
+      const reversed = index % 2 === 1;
+
+      return <SecondaryImageGroup reversed={reversed} imageGroup={item} />;
     }
 
-    return (
-      <View style={styles.gridImageGroup}>
-        {content}
-      </View>
-    );
+    return <PrimaryImageGroup imageGroup={item} />
   };
 
   const refreshControl = () => (
@@ -34,6 +35,12 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
       tintColor={tintColor}
       refreshing={false}
       onRefresh={onRefresh} />
+  );
+
+  const ListFooterComponent = () => (
+    <View style={styles.listLoader}>
+      <LoadingIndicator size={4} color={theme.text02} />
+    </View>
   );
 
   const parsedGridImages = parseGridImages(posts);
@@ -48,6 +55,9 @@ const ExploreGrid: React.FC<ExploreGridProps> = ({ posts, onRefresh, tintColor }
         items={parsedGridImages}
         ListEmptyComponent={() => <ListEmptyComponent placeholder='No posts found' spacing={60} />}
         spacing={5}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={ListFooterComponent}
         renderItem={renderItem}
       />
     </View>
@@ -60,11 +70,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  gridImageGroup: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+  listLoader: {
+    marginBottom: 12
   }
 });
 

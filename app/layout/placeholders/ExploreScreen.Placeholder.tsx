@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   postPlaceholder: {
     marginRight: 5,
-    borderRadius: 2
+    borderRadius: 4
   },
   secondaryImageGroup: {
     flexDirection: 'row',
