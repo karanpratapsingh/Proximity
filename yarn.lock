@@ -789,6 +789,13 @@
     "@types/hoist-non-react-statics" "^3.3.1"
     hoist-non-react-statics "^3.3.0"
 
+"@gorhom/sticky-item@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@gorhom/sticky-item/-/sticky-item-2.0.0.tgz#1f76dddb988a7c45f3f4a54be2beec96d39fcb5b"
+  integrity sha512-7QQOyUk8QnRhfRv0jtGRUbd9gWPm3zwdxgRUPSIoa74mZt2Sqibpv8bFSoWhkzJpLtuNfJsWtx9PZoeF+JsksA==
+  dependencies:
+    react-native-redash "^13.3.0"
+
 "@hapi/address@2.x.x":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.1.tgz#61395b5ed94c4cb19c2dc4c85969cff3d40d583f"
@@ -1426,6 +1433,11 @@ abort-controller@^3.0.0:
   integrity sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
   dependencies:
     event-target-shim "^5.0.0"
+
+abs-svg-path@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/abs-svg-path/-/abs-svg-path-0.1.1.tgz#df601c8e8d2ba10d4a76d625e236a9a39c2723bf"
+  integrity sha1-32Acjo0roQ1KdtYl4japo5wnI78=
 
 absolute-path@^0.0.0:
   version "0.0.0"
@@ -6264,6 +6276,13 @@ normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
+normalize-svg-path@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/normalize-svg-path/-/normalize-svg-path-1.0.1.tgz#6f729ad6b70bb4ca4eff2fe4b107489efe1d56fe"
+  integrity sha1-b3Ka1rcLtMpO/y/ksQdInv4dVv4=
+  dependencies:
+    svg-arc-to-cubic-bezier "^3.0.0"
+
 normalize-url@^4.1.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
@@ -6706,6 +6725,11 @@ parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
   integrity sha1-bVuTSkVpk7I9N/QKOC1vFmao5cY=
+
+parse-svg-path@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/parse-svg-path/-/parse-svg-path-0.1.2.tgz#7a7ec0d1eb06fa5325c7d3e009b859a09b5d49eb"
+  integrity sha1-en7A0esG+lMlx9PgCbhZoJtdSes=
 
 parse5@4.0.0:
   version "4.0.0"
@@ -7252,6 +7276,15 @@ react-native-reanimated@^1.7.0:
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.7.0.tgz#896db2576552ac59d288a1f6c7f00afc171f240c"
   integrity sha512-FQWSqP605eQVJumuK2HpR+7heF0ZI+qfy4jNguv3Xv8nPFHeIgZaRTXHCEQL2AcuSIj50zy8jGJf5l134QMQWQ==
 
+react-native-redash@^13.3.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-13.6.0.tgz#6f6c8d64f9fd6dc8a39a2d4320cba688c66a6958"
+  integrity sha512-E1IqTnPF64lXwlChBxr39BJcpHp1wn4f+4THK1bQ6NBJ6eNnYxTJfJJ8bdabS+4M47A8grzawhiBHWPzl5zDQw==
+  dependencies:
+    abs-svg-path "^0.1.1"
+    normalize-svg-path "^1.0.1"
+    parse-svg-path "^0.1.2"
+
 react-native-responsive-dimensions@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-native-responsive-dimensions/-/react-native-responsive-dimensions-3.0.0.tgz#da1691ca47cec4ec1ddc846c06fefcaac011352b"
@@ -7283,6 +7316,11 @@ react-native-storage@^1.0.1:
   dependencies:
     opencollective "^1.0.3"
     opencollective-postinstall "^2.0.2"
+
+react-native-story@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-story/-/react-native-story-0.1.3.tgz#5502bdafd7ebf0b4c7fd018dba6c69f21a6e1449"
+  integrity sha512-C+qJWp3mD8ZIxoh+xYBOqxzJgsEpRY1HGVLjmw+i2Vtt7PooDJCLiPRNh2lQ4KZ/UEbKWWoiDES3HoF9+vbqxg==
 
 react-native-super-grid@^3.1.1:
   version "3.1.1"
@@ -8486,6 +8524,11 @@ supports-color@^5.3.0:
   integrity sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==
   dependencies:
     has-flag "^3.0.0"
+
+svg-arc-to-cubic-bezier@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/svg-arc-to-cubic-bezier/-/svg-arc-to-cubic-bezier-3.2.0.tgz#390c450035ae1c4a0104d90650304c3bc814abe6"
+  integrity sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==
 
 svg-parser@^2.0.0:
   version "2.0.2"
